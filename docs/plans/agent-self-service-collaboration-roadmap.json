@@ -1,0 +1,268 @@
+{
+  "title": "ZAgenticOPN Agent 自服务协作",
+  "description": "阶段 0 方案与候选选择；产品实现必须等待开源对比门和 Human 明确授权。",
+  "version": 1,
+  "nodes": {
+    "1": {
+      "id": "1",
+      "label": "ZAgenticOPN Agent 自服务协作",
+      "status": "in_progress",
+      "mode": "explore",
+      "parent": null,
+      "children": [
+        "1-1",
+        "1-2",
+        "1-3",
+        "1-4"
+      ],
+      "decisions": [
+        {
+          "q": "产品归属哪里？",
+          "answer": "ZAgenticOPN 是新的产品事实源。",
+          "note": "ZAgenticLoop 是 Legacy，不继续开发，也不预设复用。"
+        },
+        {
+          "q": "当前生命周期阶段是什么？",
+          "answer": "Problem Discovery。",
+          "note": "完成候选无关方案、另一个开源方案对比和 Human A/B/C/D 决策后，才可进入 Experience Version。"
+        },
+        {
+          "q": "Agent 如何发现工作？",
+          "answer": "Human 激活 Agent 并要求检查 shared context；Agent 自行发现、选择和 claim 一个 eligible Work Item。",
+          "note": "自动发现、轮询和设备唤醒是 Deferred Feature。"
+        },
+        {
+          "q": "什么时候允许开发？",
+          "answer": "另一个开源方案完成同标准对比、Human 明确选择 A/B/C/D 并显式授权后。",
+          "note": "当前只允许文档与 Registry 导航变更。"
+        }
+      ],
+      "notes": ""
+    },
+    "1-1": {
+      "id": "1-1",
+      "label": "阶段 0：问题发现与候选方案选择",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1",
+      "children": [
+        "1-1-1",
+        "1-1-2",
+        "1-1-3",
+        "1-1-4"
+      ],
+      "decisions": [
+        {
+          "q": "前三个开源候选如何处理？",
+          "answer": "MineContext、MyContext、TencentDB-Agent-Memory 均未原生形成 R5/R6/R8，当前选择 D。",
+          "note": "TencentDB-Agent-Memory 保留为 C 类 fallback；其他候选只保留单位能力参考。"
+        },
+        {
+          "q": "比较使用什么淘汰门？",
+          "answer": "候选必须接受固定版本的 C1–C8 conformance scenarios；C1–C4 与 R5/R6/R8 是首轮淘汰门。",
+          "note": "通过后再比较完整 R1–R12、语义所有权和总所有权成本。"
+        }
+      ],
+      "notes": ""
+    },
+    "1-2": {
+      "id": "1-2",
+      "label": "阶段 1：Agent 自服务协作体验版",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1",
+      "children": [
+        "1-2-1",
+        "1-2-2",
+        "1-2-3",
+        "1-2-4"
+      ],
+      "decisions": [
+        {
+          "q": "第一条体验路径是什么？",
+          "answer": "Human 触发 Codex → WorkBuddy → Codex 的真实仓库闭环。",
+          "note": "Human 只说检查 shared context；任务特定搬运、派发和缝合必须为 0。"
+        },
+        {
+          "q": "Experience Version 允许投入什么？",
+          "answer": "只投入区分两个 Agent、最小 Work Item、discover、atomic claim、result publication、awaiting-review continuation、Git references 和 Markdown scorecard。",
+          "note": "认证、HA、Dashboard、自动发现等保持 Deferred。"
+        }
+      ],
+      "notes": ""
+    },
+    "1-3": {
+      "id": "1-3",
+      "label": "阶段 2：协作价值重复验证",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1",
+      "children": [
+        "1-3-1",
+        "1-3-2",
+        "1-3-3"
+      ],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-4": {
+      "id": "1-4",
+      "label": "Deferred：后续生命周期能力",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1",
+      "children": [
+        "1-4-1",
+        "1-4-2",
+        "1-4-3"
+      ],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-1-1": {
+      "id": "1-1-1",
+      "label": "形成目标、需求与产品假设基线",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-1-2": {
+      "id": "1-1-2",
+      "label": "完成候选无关 Spec 与技术设计",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-1-3": {
+      "id": "1-1-3",
+      "label": "对比新开源方案与当前候选基线",
+      "status": "in_progress",
+      "mode": "explore",
+      "parent": "1-1",
+      "children": [],
+      "decisions": [],
+      "notes": "等待 Human 提供另一个开源项目或方案。只做固定版本证据审计与 conformance comparison；不得开始产品实现或 PoC。"
+    },
+    "1-1-4": {
+      "id": "1-1-4",
+      "label": "Human 确认 A/B/C/D 技术决策",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-1",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1": {
+      "id": "1-2-1",
+      "label": "同设备 Codex → WorkBuddy → Codex 闭环",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-2",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-2": {
+      "id": "1-2-2",
+      "label": "跨设备双 Agent 单项目闭环",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-2",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-3": {
+      "id": "1-2-3",
+      "label": "多设备多 Agent 多项目闭环",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-2",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-4": {
+      "id": "1-2-4",
+      "label": "Agent private context 中断恢复",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-2",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-3-1": {
+      "id": "1-3-1",
+      "label": "运行人工方案 A 对照实验",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-3-2": {
+      "id": "1-3-2",
+      "label": "每道协作门连续通过 3 次",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-3-3": {
+      "id": "1-3-3",
+      "label": "基于产品健康指标判定有用性",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-4-1": {
+      "id": "1-4-1",
+      "label": "评估自动发现、通知与设备唤醒",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-4",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-4-2": {
+      "id": "1-4-2",
+      "label": "按真实失败建设生产可靠性",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-4",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-4-3": {
+      "id": "1-4-3",
+      "label": "个人闭环有效后评估团队治理",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-4",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    }
+  },
+  "metadata": {
+    "created": "2026-08-20 16:22:45",
+    "updated": "2026-08-20 16:23:58",
+    "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
+  }
+}
