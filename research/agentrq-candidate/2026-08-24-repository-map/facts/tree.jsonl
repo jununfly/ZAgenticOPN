@@ -1,0 +1,319 @@
+{"extension": ".example", "kind": "file", "language": null, "mode": 420, "path": ".env.example", "sha256": "2b9821e6412c00c34303244126c97f49d9a14147633ee08ba59e2141d2481552", "size": 9031}
+{"kind": "directory", "mode": 493, "path": ".githooks"}
+{"extension": "", "kind": "file", "language": null, "mode": 493, "path": ".githooks/pre-commit", "sha256": "38bd68857378102f4395032a42734b8021a2bfab2c444232cdb321b974b5eafc", "size": 1559}
+{"kind": "directory", "mode": 493, "path": ".github"}
+{"kind": "directory", "mode": 493, "path": ".github/workflows"}
+{"extension": ".yml", "kind": "file", "language": "yaml", "mode": 420, "path": ".github/workflows/docker-publish.yml", "sha256": "6772fabac83c4f2890cf7ba12f369e227b9bc5b172df2279a3d94ec3c2dcb215", "size": 1538}
+{"extension": ".yml", "kind": "file", "language": "yaml", "mode": 420, "path": ".github/workflows/docker-release.yml", "sha256": "abe569ecc8f581e78c878c677d44e0fadbda4bfe00ed74921486d25bcd418251", "size": 1229}
+{"extension": ".yml", "kind": "file", "language": "yaml", "mode": 420, "path": ".github/workflows/plugin-deepseek-harness.yml", "sha256": "de415b9dd8898a5968dfa9c1f83bffa2467fba208ee0727880dc57e79f8691d0", "size": 3882}
+{"extension": "", "kind": "file", "language": null, "mode": 420, "path": ".gitignore", "sha256": "407a998a365000fd13e8d9ece03dd890e331dd84fbf582cb17e19b155cc77457", "size": 663}
+{"kind": "directory", "mode": 493, "path": ".jules"}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": ".jules/sentinel.md", "sha256": "b2718bdb4e92f7e31df383bbddbd6779ab40237d1bd830694d2f7bf3832c498a", "size": 4391}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "AGENTS.md", "sha256": "a5438609146b3af005f81c24b17acde6d5f95a5670b0ae78ae33d2b70db97dd9", "size": 3404}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "ARCHITECTURE.md", "sha256": "b665d9f208f87e17079f34bf03ca126f11fab58459ef09c6be3d94333c3a320f", "size": 26412}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "CLAUDE.md", "sha256": "573138e19d3359c451b7898112a03167e4e7bf356ecd698dc87d933d37de0b96", "size": 24}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "DOCKER.md", "sha256": "647b10341126c12a00ec629cd4cc262dbf7419584c3fb3b5d1225323bbb50c7b", "size": 6267}
+{"extension": "", "kind": "file", "language": null, "mode": 420, "path": "Dockerfile", "sha256": "d35d222d7ac07b2f7c1e474d315e8f9885aacafc3c13a344ca0cfea8477ff6b2", "size": 2045}
+{"extension": "", "kind": "file", "language": null, "mode": 420, "path": "LICENSE", "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4", "size": 11357}
+{"extension": "", "kind": "file", "language": null, "mode": 420, "path": "Makefile", "sha256": "7d9b6c416197ad63b65ecee16d16728f5a59c6a19c969c61117379be3c8de900", "size": 4160}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "README.md", "sha256": "b275c8331f9053d7e2cde8e35c0ffa8e3707ce66579f93a67f3565875cb590a1", "size": 16956}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "README.zh-CN.md", "sha256": "3255b99c215cdab76cbff9de37cc82c507b202f123725fe375e6a0c7accdb0cc", "size": 13534}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "ROADMAP.md", "sha256": "3bbaf2c07c0820afc8f25081c77fdb942eaea2a5a30135351c39afbf6b8a7017", "size": 1959}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "SETUP.md", "sha256": "5fd7ae2567130c8756b20dd1ed85040bbc862a1744470d2a0f470aef09aa02f8", "size": 14972}
+{"kind": "directory", "mode": 493, "path": "backend"}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "backend/AGENTS.md", "sha256": "4d472798ad65840970df2b6a45c59bbe8a20cd5c154746e11751a9bf8f4fa221", "size": 8754}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "backend/CLAUDE.md", "sha256": "573138e19d3359c451b7898112a03167e4e7bf356ecd698dc87d933d37de0b96", "size": 24}
+{"kind": "directory", "mode": 493, "path": "backend/cmd"}
+{"kind": "directory", "mode": 493, "path": "backend/cmd/server"}
+{"kind": "directory", "mode": 493, "path": "backend/cmd/server/_config"}
+{"extension": ".example", "kind": "file", "language": null, "mode": 420, "path": "backend/cmd/server/_config/.env.example", "sha256": "375aa70f34c5b45fdc8a1e21f517dc4edeb87feb19cab09db20d5c078367efd2", "size": 1734}
+{"extension": ".yaml", "kind": "file", "language": "yaml", "mode": 420, "path": "backend/cmd/server/_config/base.yaml", "sha256": "712bc3050f51094f226f934ed0e6682c562d3a18e91005b5473fd282aeeaa332", "size": 2672}
+{"extension": ".yaml", "kind": "file", "language": "yaml", "mode": 420, "path": "backend/cmd/server/_config/development.yaml", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "size": 0}
+{"extension": ".yaml", "kind": "file", "language": "yaml", "mode": 420, "path": "backend/cmd/server/_config/production.yaml", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "size": 0}
+{"kind": "directory", "mode": 493, "path": "backend/cmd/server/_storage"}
+{"extension": ".png", "kind": "file", "language": null, "mode": 420, "path": "backend/cmd/server/_storage/logo.png", "sha256": "21c15c4de2466f0e77be5b4d869d781b1733404b4a1c0b360bb9194ca0371cf2", "size": 2361}
+{"extension": ".svg", "kind": "file", "language": null, "mode": 420, "path": "backend/cmd/server/_storage/logo.svg", "sha256": "b0d346d9cfcde4f3482f26ac357ea81924f32e72104cb260a7c87865cfee3785", "size": 401}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/cmd/server/main.go", "sha256": "6c05173c472cfad9479960ffd2fd5d61782509e1f0c8394be973b348b6b1896d", "size": 2063}
+{"kind": "directory", "mode": 493, "path": "backend/cmd/server/public"}
+{"extension": ".ico", "kind": "file", "language": null, "mode": 420, "path": "backend/cmd/server/public/favicon.ico", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "size": 0}
+{"extension": ".html", "kind": "file", "language": null, "mode": 420, "path": "backend/cmd/server/public/index.html", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "size": 0}
+{"extension": ".mod", "kind": "file", "language": null, "mode": 420, "path": "backend/go.mod", "sha256": "827a9e20e7a6baec8ea42643bb2c615ce178949788c5e67424900bfdd591daf6", "size": 2963}
+{"extension": ".sum", "kind": "file", "language": null, "mode": 420, "path": "backend/go.sum", "sha256": "de2832c3c641123626e3d24017dd8360acf4118007ad2aeda3a68b98efd55150", "size": 23358}
+{"kind": "directory", "mode": 493, "path": "backend/internal"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/app"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/app/app.go", "sha256": "7b6ac60de2110c09b7fc2045bff9e297f52bd0cb220c2269fd889bb877a45d9e", "size": 35128}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/crud"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/common_test.go", "sha256": "61a50216096eaf12167d5508fbb21581068fcbaf0bb904a25c72cd1d0b5a6049", "size": 1824}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/crud.go", "sha256": "e5371ab9d7abea1cea562930a72d99c36df5cea0bde90819229526ea9fa62a7b", "size": 5004}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/dup_name_test.go", "sha256": "4f7a4a0e1a42b15a2cb5c6e63f6642a2e10eba07f25fb3190c8ec99aa78c7d28", "size": 3806}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/event.go", "sha256": "0860c5243d8c7640e6de79274f3b485fb4ab3e3d4e11a0a649397f6cd34c26ea", "size": 11268}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/event_test.go", "sha256": "b94482d72818de8491b925a35c0dd70fba513caa20c87c6e7d1a687e8fcf538a", "size": 18166}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/task.go", "sha256": "d6ca11c035c69c2f6ef535e9a169449648163a48ff62aed2598980389189306f", "size": 26982}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/task_test.go", "sha256": "a29fe46ab45e7a0431fe3baa176c1eed2866bbd4c140ca3c08390baf56445797", "size": 48116}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/telemetry.go", "sha256": "68ecace51fccf4d5ef9c9c40f6e0ebaf563a3b54a1805659b57e5a74323aeeab", "size": 1832}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/telemetry_test.go", "sha256": "61c7e4c8fa173714ab9718a05f801be41e2486838e59e5a73cdc506d390e9772", "size": 6362}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/user.go", "sha256": "fccc28ea7e4a2552436a68397eef8a5d19595e1306b687c469e906b97d76953b", "size": 3338}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/user_test.go", "sha256": "f686f960cca1dd7f10c2464bc68135925e9ab5b51445bdd1b34962ff8d65972a", "size": 3459}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workflow.go", "sha256": "60df66db7959de79b66e51bf80672247dac84384e7f0d7b281ec9ac1de870c15", "size": 10988}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workflow_test.go", "sha256": "05602ed176a53749a215ed45c6b1316eeb9e819502302431ee03b260396e18d1", "size": 3145}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workflow_text.go", "sha256": "30f3d599b8abd3dc11a23ffbced10e9e19e729eca8f406f3f31c6e92b4f5675e", "size": 10659}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workflow_text_controller.go", "sha256": "60906f240d9b44e190687efe09ca49e49ef4a6e8f87d0f3c16cff94d5e2c0673", "size": 7519}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workflow_text_test.go", "sha256": "ef23552a32f471f15e8e2352627cd1d7cdb6746400250e8c8389d55d2356f949", "size": 12027}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workspace.go", "sha256": "5f5601e4ab3f806936b194139af7b9e10de211693976191cc523b954da2c9c56", "size": 9653}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workspace_idor_test.go", "sha256": "7f9e213dbd7ca385ae63f4f177923fbd29517393c8b47149e770fa6dad9a9608", "size": 889}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/crud/workspace_test.go", "sha256": "19ba7f069cfc7bfd0f69a2fbc5e1ab131cca30165bd4e51fbc374493b83a73a7", "size": 6954}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/event"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/event/event.go", "sha256": "76a4b8496d3551a45e1b7d103dfa6508538faa2fd020e562c167993ecf277d77", "size": 10047}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/event/event_test.go", "sha256": "6d27a11f2ba7a06310284ea95736d522af7466d5bfa1dada46d18dceea631dac", "size": 13635}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/mcp"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/autoallow.go", "sha256": "2599564a7c33f754a4a08c619fc0ee511c2681d204f2d64bf095b4cd47dd036b", "size": 5186}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/autoallow_test.go", "sha256": "1cceea581a2d88bc8635febce3beddd4fd16bf317abd81cdbf29a8c8efa8bb71", "size": 8916}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/client_identity.go", "sha256": "7ff8942c4002e9d71228b2dc86c674a9063991b3afcf0fea99a221ae5083fece", "size": 2583}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/event.go", "sha256": "615c749a519d9976b6992e517682241cfc30ec3ef9c0897d691aa86b98a190ce", "size": 1125}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/lifecycle_test.go", "sha256": "e94b8675b8adfd1edbdbf55e7a2b90ab982b2a4e322dd748cbff686046395c09", "size": 1304}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/manager.go", "sha256": "b0892d44d51dce1893d42d79ba18f6d587e63fa6a867a42091534ea5d54e8dc7", "size": 2562}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/manager_test.go", "sha256": "5506dcb38cfeb51250880c5235f1f468aad218acca5e574e091ce48c828ec2d0", "size": 1788}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/protocol_version_test.go", "sha256": "a81c4b6ba02a8ecada60779bf20734061a0c285473a9ac437e492e06da3da796", "size": 14436}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/server.go", "sha256": "b10c817ac04183bbb9c9d1f37eb7888424783b692cccc88c2581e8636c8fbcbe", "size": 59786}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/mcp/server_test.go", "sha256": "6f6c4aed923f7061f7b01d8e9de230a3036e58301ef2ca6705decb28793d751e", "size": 26680}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/notification"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/notification/email.go", "sha256": "384804c11f387e5d6f9e1ccd1960c5d7c39849c60c9dcd60953834c2a57d435a", "size": 4886}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/notification/email_test.go", "sha256": "72dbc161fb718a03cc74b338cd74ca3fd6932cc399e2ccde358b3a07374b651e", "size": 3329}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/notification/notification.go", "sha256": "09bc7be3357deb276aa76aef27d2de0043aed4bc58a1c1d7df4a1b0353c448c5", "size": 6786}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/notification/notification_test.go", "sha256": "432237140809a7eadeaf95b66b400c8b9282a5da7f691eeaf6775244b3548f89", "size": 3728}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/pub"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/pub/stats.go", "sha256": "f183771600db7a7737a08be479401e05c8346d78504b0be62b11918ecce5f66b", "size": 7242}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/push"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/push/push.go", "sha256": "4eaa5b4c816af4dcadf7e40c1e5f642938403421029af213b2cc79bb36efdef1", "size": 7979}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/push/push_test.go", "sha256": "2cea2b897b8881f473d57700522a663b8dd8737c0921a82d6cb3f81f78cf3f93", "size": 17431}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/slack"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/slack/slack.go", "sha256": "d44d140b07ad91a9878becc1f79034fac3c18b1194a7b84759f1677233981718", "size": 37235}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/slack/slack_test.go", "sha256": "9030d2e443bbb3e05a935b88dc7d26d9fa94327f0b572cf0476dbb9e5550bb55", "size": 37471}
+{"kind": "directory", "mode": 493, "path": "backend/internal/controller/telemetry"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/telemetry/close_test.go", "sha256": "b84aec2c292633607674319969cd15d5bafea6b9ca1ac4737b10ce459911d2f8", "size": 1454}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/telemetry/telemetry.go", "sha256": "85b36445481ef0a1e8e3212359debfbdb001e1698c914ac4d92147a268de314e", "size": 7158}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/controller/telemetry/telemetry_test.go", "sha256": "4b077d1bda07a6bff76bbfa41b7b44e1ba30cbc97f74677314cf744c90102642", "size": 8193}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data/entity"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data/entity/crud"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/data/entity/crud/entity.go", "sha256": "38a88feccdd3b65af6c392e180670c136914fa393e567739dc0bdee5257088f3", "size": 20454}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data/entity/err"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/data/entity/err/error.go", "sha256": "d9721e2f17b7d02a1df31602f491594e56ff8a80ffe7656b459a7a8913305008", "size": 2929}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data/model"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/data/model/model.go", "sha256": "6cc7c126b7e8fa9d63cf27ee14b4b6fd9c5c77b554665cc342ba9ab884cf89ee", "size": 12839}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data/view"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/data/view/api"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/data/view/api/view.go", "sha256": "bb4d6e96a4d414c06dc0bf09d7f3fc6f4f6bf2ee40612d426ee4ef34225b51c5", "size": 13801}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/api"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/api.go", "sha256": "aed697034cda455fa9124cfbcbd9156781b23119d7fcc83eec9b7286c0a3ad15", "size": 26652}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/api_test.go", "sha256": "3c24e3a0886f52320a47ec8258470218d06803ea15f023f365c4899119dc1ca7", "size": 11894}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/event.go", "sha256": "ad4b7d6730e1b99968277d3d7a6e6e7f2defe4fd5851bd7a4079b068b8a864b6", "size": 8196}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/event_test.go", "sha256": "34e937dbd32a90ba94bee71f56becdbd328371f57cf438e9f6e683a83f1924d1", "size": 23078}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/api/middleware"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/api/middleware/ddos"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/middleware/ddos/ddos.go", "sha256": "29d3c85310d798953cb538e3879c0fe399088585bb7940e68b64452513a3ff13", "size": 2968}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/api/middleware/ratelimit"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/middleware/ratelimit/ratelimit.go", "sha256": "097b5d89857a17fe64731ddd12b627cbb47f75500c1d4cdb78a091df478fa5eb", "size": 5656}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/push.go", "sha256": "aaecc1f25934acb43345e5188bb75c5c0d4cfbb77c6d8e305c28a7e078dadca6", "size": 5400}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/push_test.go", "sha256": "26d77cd4a52c372db54938b071b50fb9c68c59b8d3707d6426b89d67cf0fbbfd", "size": 9458}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/task.go", "sha256": "a1753936213cf4a60d6ca9c2ae7b70f33e0718ac9349a250a09bea224c92305a", "size": 22124}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/telemetry.go", "sha256": "381322f81c2e91c170bb1e9d18e935e8297c1ce4f747b8e6175aa9678cac4abd", "size": 1666}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/telemetry_test.go", "sha256": "d02f9fd440793de484258e2ad9fc3e8ac860388f267ebf28d961fdc7b24c1f38", "size": 4727}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/api/workflow.go", "sha256": "123554a0921e89b93df848cb71ffa28884df229d8d729c69a2f2a581ed542f1b", "size": 9462}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/coremcp"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/coremcp/coremcp.go", "sha256": "e4d3444685ea5ca991058158e6a2c762b49ec19427a77c75be761a2b24b5ec6e", "size": 20874}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/coremcp/oauth_authorize_test.go", "sha256": "a0d11d5bb00c90bdbb7e53320b3a2dc1633b71ce20337beba1a1349e85e6e32a", "size": 5276}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/coremcp/oauth_metadata_test.go", "sha256": "30414f8b6bc922ca0c14581588103a79c3cba81cb1b5701413a242ee24827187", "size": 3629}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/coremcp/server.go", "sha256": "0256e3d5b56243781d590b16df4649c5fa73c7a11e2562de66f838a3b6c45888", "size": 20405}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/mcp"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/mcp/mcp.go", "sha256": "75fafbeb9a0cfeb489936cbfbdc5baab6f2243bc8782a10270d8ad6c7b01f0c5", "size": 25359}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/mcp/mcp_test.go", "sha256": "bdcc2bf210f1d00b2abf51f4fe3be92145a78044838f97f151bd46fcc98a2f60", "size": 8537}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/mcp/oauth_client_binding_test.go", "sha256": "3c6059b8efd1d151a9ede3dca218297436122321c8827247af6644ceb2a6acfd", "size": 17787}
+{"kind": "directory", "mode": 493, "path": "backend/internal/handler/slack"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/handler/slack/slack.go", "sha256": "229ba840d6a92020562351f5527af565e053c6b0789637c9218c97500c597428", "size": 9009}
+{"kind": "directory", "mode": 493, "path": "backend/internal/mapper"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/mapper/api"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/error.go", "sha256": "1b2ae2afd32e0fb401b64eb203f74f450ba029d7b273f1b2915efd9c71c652a4", "size": 1266}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/event.go", "sha256": "6a2d5d8042850991cd58168518f3fce88810840ebe460376ad06ffffcc3e1a82", "size": 7928}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/push.go", "sha256": "aac5b040f8e97755dd01bed7931b77feed8a45c882f9627c7926b929063075c5", "size": 2203}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/task.go", "sha256": "8fd469763af91f936b8be087c64a7c7b3c01cd3f05ee5574b28c5ca30e3be93c", "size": 15815}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/telemetry.go", "sha256": "0a1cd13a4d1fc3fba775a59dba0ae76113120754b3fcf18af9e95332939ba093", "size": 1126}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/workflow.go", "sha256": "1fb2c2373d26513b44b353a2a6e3646b3ad6ecb2e5ac2de3f3a62420ecc53c18", "size": 10303}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/mapper/api/workspace.go", "sha256": "974919ba2592f66818b31b2214ffbcab9a6c186aa54f99fdd6ec3d11a38cfd39", "size": 6457}
+{"kind": "directory", "mode": 493, "path": "backend/internal/repository"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/repository/base"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/base/dequeue_index_test.go", "sha256": "8b96a5e2a5f533fe036b33202352c4b6ed79407286a47a6da446fdb5cb471273", "size": 1311}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/base/repository.go", "sha256": "f1948d412185c360f85d94f4646ca0f4c239be930ea3a080243f6d131698d2ac", "size": 43021}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/base/repository_test.go", "sha256": "364b9e288f153fee702a2fe407a7d36e84259df1494693174503d2d4f6d8fe55", "size": 20582}
+{"kind": "directory", "mode": 493, "path": "backend/internal/repository/dbconn"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/dbconn/dbconn.go", "sha256": "6f1581366654b7df566b482128d09c4dcdb128eb9d4b7172f4503d4153f91ad9", "size": 335}
+{"kind": "directory", "mode": 493, "path": "backend/internal/repository/postgres"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/postgres/postgres.go", "sha256": "d6431ba0ce35e9a5799a90be63de8a1b3e8ffa0fd18ccee9593889daecde2ef9", "size": 1830}
+{"kind": "directory", "mode": 493, "path": "backend/internal/repository/sqlite"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/sqlite/sqlite.go", "sha256": "71b46b447ab8927fc3910125f5f81cb58945d382131477fc65d4bfde9b3d0662", "size": 2801}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/repository/sqlite/sqlite_pragmas_test.go", "sha256": "d643ffd0998ae1a25b63f860bd215a09130c85f5912bc9795a0fa5b46efd1f24", "size": 1768}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service"}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/auth"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/auth.go", "sha256": "e247ed5cac202883b7566eb6577bac4ad63b4459c8e651fa8832ac1be9326076", "size": 324}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/auth_test.go", "sha256": "9cceb48f78b8c2bc2a70705d800dc157623a6116e47a01ce0a7fd7389c1cfaa1", "size": 1035}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/cimd.go", "sha256": "747d3bf1a7c48150cad2b49a029c4dd37809d1c209fc4f1d3b6a9c0c14582143", "size": 12294}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/cimd_test.go", "sha256": "59843d2c4fe04cb3fa019ccabfcb659cda4c6e4170385de52cf916ed3029d85a", "size": 10747}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/github.go", "sha256": "3b853338684170a60acdd03f4d49ea793fd259c15bc0a46ba440b30d522a77f4", "size": 2882}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/github_test.go", "sha256": "610a3ad4af860974c38e13bcc2a12262b5f2a39e9a37d8fea97cee5507d307f2", "size": 868}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/google.go", "sha256": "5ce0e6e242bd1cc9f01f6c95ca2fb7929b2bb7564c165f5517031c7a0d474df1", "size": 1394}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/jwt.go", "sha256": "02a4026024b02c286eea16923abe8306f4560fdd4de474308406175169a5d6bb", "size": 7429}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/jwt_test.go", "sha256": "f570d8f864c4e8efcebf8e96b9ca00182a836d88db18d44f98900f021a25908b", "size": 5318}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/redirect_match.go", "sha256": "38ff4a223dd1d759e8d4b545153aacd7f4b466a5174204fbb669f0c71f78627d", "size": 3008}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/redirect_match_test.go", "sha256": "f856faec43aa752898a75007194cc3d40a94d1dc433fd4667019dbe5f84fb5ed", "size": 4245}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/auth/redirect_scheme.go", "sha256": "5995d0fac0c98f46e49b130995be8dc8a244b6d57a5897d9615c73e8f6fdf903", "size": 1574}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/cleanup"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/cleanup/cleanup.go", "sha256": "50ddd8b9261548be6713a4cc71b7d824b8e1531b3b562555a2f75f767cfab343", "size": 3057}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/cleanup/cleanup_test.go", "sha256": "81c4d12bcfd9f2327f404a17e218e607a1c10c1e7f4a7b570b460147c017a64c", "size": 3573}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/config"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/config/config.go", "sha256": "f7e38b33d429325fa1da876baf767d10e95b05a56b593014929ccfa6ca68f6aa", "size": 3384}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/config/config_test.go", "sha256": "c04643b16c17eba31db838dcdf09b9b2b458d1210cf92cde5148cc1ae36bb0a3", "size": 3463}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/eventbus"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/eventbus/eventbus.go", "sha256": "44d2295b477aad69c40b580cbd6b2e10b81407f1e1b2d4fa038f1cec1986a4b0", "size": 2466}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/eventbus/eventbus_test.go", "sha256": "f48b7804fe86f3867b51ff210099c613e1fb7612cff036bd8b671842199d9860", "size": 1109}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/eventinstruction"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/eventinstruction/eventinstruction.go", "sha256": "956a1478be719deb5cd6d3e93e05ebf7a2c4f57ce844c946a99fde9c08c96c59", "size": 2893}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/eventinstruction/eventinstruction_test.go", "sha256": "c34e791a458eda0923b8c2ccd72d3530eb08b524a20a446784484ab1fa115461", "size": 2916}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/idgen"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/idgen/idgen.go", "sha256": "3cfe9ce785076188636a287da4ca54828b5c46649d79eb1590ad594aa8038f04", "size": 371}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/idgen/idgen_test.go", "sha256": "b656d88e66f52fadad49860bea212b764f60d6c176c7287a7f352a624e59ba64", "size": 352}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/image"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/image/image.go", "sha256": "75e028b3bbb4fbac9596299fbb060b2eb40f78df4c9e04200550f4c20898dab7", "size": 1789}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/image/image_test.go", "sha256": "d9c7b19fb17d8e90d8bdf2c02943443288b79cd02fb895a220bb868bd52c9449", "size": 1638}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/log"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/log/log.go", "sha256": "d3887b4a717baf32349d4b98f41341aa9fe2acc43d53b8beaa9fb0fdbd07489f", "size": 580}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/memq"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/memq/memq.go", "sha256": "15d76925c5aa591ec7a039661581da4201cb1fbe755931622ae86fdc4a1d7e4f", "size": 4020}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/memq/memq_test.go", "sha256": "b28f0af5b4285252c352a4740c9fd9b37ee0bfbe24108a46be315d270634d770", "size": 3317}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/pubsub"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/pubsub/entity.go", "sha256": "357f59a92d84617b3998534d6951eece35e22953002736fb774c5a657b0c6dbf", "size": 442}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/pubsub/pubsub.go", "sha256": "e0b07d97b31768511bdb23797e660233f23a646c05f5820b7411e5f6d7f18b1d", "size": 6356}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/ratelimit"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/ratelimit/ratelimit.go", "sha256": "320b5b5a62b93e59134bdd387316b8a70dba87354d7040a03328691b05b43dbc", "size": 2820}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/ratelimit/ratelimit_test.go", "sha256": "26c1839b7681347012602775037832e567158694b868a2f6c1ca96ae25275db9", "size": 5365}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/schedule"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/schedule/cron.go", "sha256": "9ba0d01dc2672440225f574099ee0a9ce04472695a81e1c6e9bbce794a77102e", "size": 1453}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/schedule/cron_test.go", "sha256": "e0369d7a1fa8e2ed000c29ac38a6facf626b04964bc14c64b7eaa40f97fcce0a", "size": 1524}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/scheduler"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/scheduler/scheduler.go", "sha256": "c4fa1bfd3f07ddd17442129ac2942094d0e30101558a085d8188a7e7f663cdd5", "size": 5391}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/scheduler/scheduler_test.go", "sha256": "bdaf8a74920a6ea785808b859c3e34461db10b274032760209856b1372070f2f", "size": 6504}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/security"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/security/security.go", "sha256": "8a5416ad361437a5b6960f8cc192d1ceedfef98eeb626bcec42cd3c95dbbf33b", "size": 2379}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/security/security_test.go", "sha256": "8108fc36e9ee545a4960b6cfe23ee8e039c132a285d36db9832627c96b397f07", "size": 2303}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/server"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/server/server.go", "sha256": "e7ca12e94928bff0cbd7ba1f5886ac3d4f5294451faab35da8a62c28126273f7", "size": 11530}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/server/server_test.go", "sha256": "294e942f40a61570014217eeceb8e24084243ca1f8f505bde3924224a6c41d32", "size": 3692}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/slack"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/slack/slack.go", "sha256": "3cbf046545a0f5b6e3440873f17e5c749abded2806260d53e12a0fce97fdb7e2", "size": 12968}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/smtp"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/smtp/smtp.go", "sha256": "b4007fc1098147854e4d90bb032ed31beb449fa77a2b29495560f9783e3f773d", "size": 2474}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/smtp/smtp_test.go", "sha256": "f5f5494e4a26668c0c5291c8b1c165ec69a49cbf8cf8834a27fd2161f3ddf1f8", "size": 1217}
+{"kind": "directory", "mode": 493, "path": "backend/internal/service/storage"}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/storage/path_traversal_test.go", "sha256": "54487a8a1a5a475649c1c6f225a9aa0803419dc75a29ebae2b2b2e5df0eee458", "size": 1511}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/storage/storage.go", "sha256": "3417e9d324c93e4528ef9658aee117f0b2d6ada561912453c0868e28089bd926", "size": 1873}
+{"extension": ".go", "kind": "file", "language": "go", "mode": 420, "path": "backend/internal/service/storage/storage_test.go", "sha256": "e1e14eccd688967da94ac0d173c3245a8262c60c3fa2655381882dbecb20e2fd", "size": 1594}
+{"extension": ".yaml", "kind": "file", "language": "yaml", "mode": 420, "path": "backend/openapi.yaml", "sha256": "dfe48628b5ad9ab91f4f093bc05ce7e11958482be2bfeaf1cefcd70788d73c36", "size": 10834}
+{"extension": ".yml", "kind": "file", "language": "yaml", "mode": 420, "path": "docker-compose.yml", "sha256": "d675d90ccab12697f052ba040e25322b2e9ed95602ca3e02d1324787e5df415d", "size": 4125}
+{"kind": "directory", "mode": 493, "path": "docs"}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "docs/SETUP_PRODUCTION.md", "sha256": "9dafd2e9a01f2163b1544cffb9043b30263e9ffcedb60cb8dd6bf504bc6c94ee", "size": 4506}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "docs/SETUP_QUICK_START.md", "sha256": "127bd434e1f1d64ff0e8a1af46ff04250c5dbe9d33bad737f9d95457ae541227", "size": 2225}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "docs/SETUP_TROUBLESHOOTING.md", "sha256": "2f79f85ae820732d70b48d1569c645d4057cb67d7ea99cacec6bf57b751638d6", "size": 4326}
+{"kind": "directory", "mode": 493, "path": "frontend"}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "frontend/AGENTS.md", "sha256": "254487918c3be17f5086a87a985b4a38c63104872dce6642e66127eb1ce53bfb", "size": 2412}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "frontend/CLAUDE.md", "sha256": "573138e19d3359c451b7898112a03167e4e7bf356ecd698dc87d933d37de0b96", "size": 24}
+{"extension": ".txt", "kind": "file", "language": null, "mode": 420, "path": "frontend/build_output.txt", "sha256": "f4a184e1f69214a84f3ae46999c670aae66cd59621a47e1004fefa698aca917d", "size": 1995}
+{"extension": ".html", "kind": "file", "language": null, "mode": 420, "path": "frontend/index.html", "sha256": "75c90774cce059917d0261c5542a69f187d9ad6dd475b2bde936f06eba84c45a", "size": 876}
+{"extension": ".json", "kind": "file", "language": null, "mode": 420, "path": "frontend/package-lock.json", "sha256": "f3d627f931deb2359da555cee1f9c97f96bc17d5c69ac9c45f0a66f655e99c21", "size": 278349}
+{"extension": ".json", "kind": "file", "language": null, "mode": 420, "path": "frontend/package.json", "sha256": "6ee11e407dffabb13bfbb9f3d4bd2d520eff6849a908e01c039d0af6a2d617c1", "size": 794}
+{"kind": "directory", "mode": 493, "path": "frontend/public"}
+{"extension": ".png", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/agentrq.png", "sha256": "22646dc2c633f47d6ab1b20f95a8f8adf17ba02426068db27806ec38f669be14", "size": 17212}
+{"extension": ".ico", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/favicon.ico", "sha256": "47b504898738c5f43be496db1f5b19868df78049c1721c91e722f1e31666ef24", "size": 4286}
+{"extension": ".svg", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/favicon.svg", "sha256": "1051b6475bba150e2c1b9afb57391fbf006312cf8db2e7979f60b1313948db58", "size": 761}
+{"extension": ".png", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/large-icon.png", "sha256": "756603cc1e1d4c92055ed4251e005455c24bb63e81a01825a17ad180c1d01d69", "size": 24662}
+{"extension": ".png", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/pwa-192x192.png", "sha256": "d63ec38fbb9db92a092c80c3f8ad6f17e9aac1a23c50cb70fd25b110172163d2", "size": 2646}
+{"extension": ".png", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/pwa-512x512.png", "sha256": "2486194e791785c86bba23ec82aa90d3f591b3b3b7aeb4afd6c3363f3fa6402a", "size": 16649}
+{"extension": ".txt", "kind": "file", "language": null, "mode": 420, "path": "frontend/public/robots.txt", "sha256": "16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95", "size": 23}
+{"kind": "directory", "mode": 493, "path": "frontend/src"}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/App.vue", "sha256": "abf5091590fcf300645e9d7d86df76f7d74c3ad7ac16ddb73c82abaae0eaaa74", "size": 30051}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/api.js", "sha256": "49c0f6cb811c75edeb5ed1b969f043bb7b109fe02dabe4518be57636b1ebaecb", "size": 19277}
+{"kind": "directory", "mode": 493, "path": "frontend/src/components"}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/ArchiveModal.vue", "sha256": "fd6e034421611252f19e878c895ff0b246d84070cfa322237134a3fbb9f981fa", "size": 4143}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/ChartSVG.vue", "sha256": "ea5bedbda41ca3462f049c8771aa4a8aeaeda48a952577b89817c0fbf8e85fb3", "size": 8595}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/ContextMenu.vue", "sha256": "145d756459cbd4b6c139320b3ac7b64214e6eb8b4b833ea4b717c8d431c436dc", "size": 1487}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/DeleteModal.vue", "sha256": "c62249dd8221e9b83e1a3a78450209e8d3beb99089cfaa4a05e6505f8fde15ca", "size": 4372}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/HeatmapChart.vue", "sha256": "eb6a47841520880aaa3ceed3a246f5a86a446684b15c4e6d1f92040aeefc3772", "size": 7651}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/LoadingState.vue", "sha256": "a19860cd15f9d8bf0190de04b36d5ef3ab6c5a20ff0f7c3145f3f4aca588d720", "size": 595}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/MoveTaskModal.vue", "sha256": "5328ee912992a291294a98b97a2d2aae40354aebc10a8086ce1fae83e616fe82", "size": 6060}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/Sparkline.vue", "sha256": "91049ef1fcc96362c252314375dfde87b86a3f2ba073fe413cac0a59ffcf9346", "size": 2360}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/TaskFeed.vue", "sha256": "7f0cf13935bd9aca3568c9a0e9a71e5a745711005e39c586b707a7d647415d10", "size": 29242}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/Toast.vue", "sha256": "3bc11c8b0f7c1f004f5a96ed3037691470ad623d70d4afb4a05bb43da3ebe21e", "size": 4694}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/TrajectoryPanel.vue", "sha256": "cc109e29444881dd5d9ea3b4549753f6f723e1b2fa2a0927d737e5357bc5454f", "size": 15333}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/components/WorkspaceStats.vue", "sha256": "41db61302265679d259490d911d5571cc4015eb4f6bdc18368634d08b63074a5", "size": 12086}
+{"kind": "directory", "mode": 493, "path": "frontend/src/composables"}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/useAutoTitle.js", "sha256": "8c448d68f0797ffcd9ce9db284a50fc204f183e5ad87bdb30c39015a531d927c", "size": 3099}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/useCron.js", "sha256": "b55ea097ce440c6cdafcfdb4d8c383a04e8d37c9944a7fce4e5cdd2eee5dab74", "size": 4557}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/useFormat.js", "sha256": "fe7e7e96ec356ed512d34681eb3ef94413cb663fde9ccee321022d51ddcafa6c", "size": 432}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/usePushNotifications.js", "sha256": "63c1c2efaefa3871b739db0a51ee5cb03b6e3ee3683a2e4342c70ead828fbb10", "size": 4632}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/useSpeechToText.js", "sha256": "788a2ba5b9950d899f518f5c5f1597402a236668e704766958a583c8cf1bac95", "size": 9509}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/useToasts.js", "sha256": "20ebeb365f27f2bc4aeb8629e51857500ad7be3a6d448e0e143df64b4dbcedef", "size": 886}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/composables/useViewport.js", "sha256": "319f462f28932f2144346f772a8e59b8ceff9b1ddac3d444cb7b062e3dfa330f", "size": 641}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/main.js", "sha256": "bddb2399a0b64ac0d6c6b3570c6439ad6b9e71905f46ebdc461250e1b402b6d6", "size": 2711}
+{"kind": "directory", "mode": 493, "path": "frontend/src/stores"}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/stores/themeStore.js", "sha256": "3c98c2cb0fbd084f0256a793696e80c41fed49af49377ec3b8b3c41d8f18c615", "size": 1229}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/stores/tooltipStore.js", "sha256": "5273158088eccbee3b9946142674984c02388ecce525dbf7ff3a09bf5dfe1537", "size": 1033}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/stores/workspaceStore.js", "sha256": "25b8467a98ddadd14d88e812e13457c8f46559bda49279a42f6097d20c993bee", "size": 1324}
+{"extension": ".css", "kind": "file", "language": "css", "mode": 420, "path": "frontend/src/style.css", "sha256": "b761acdef756debf5e8012e0e195ff52eedd36dae837436a703e2a5e612a158b", "size": 1471}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/sw.js", "sha256": "e1d207a6b82ed04ae93e7d1902465269768e33dd6988063d6a4083ab5cf10ba7", "size": 1489}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/useEventBus.js", "sha256": "e3fe8abc31399fee1ef5d671751e5c3d70c7846ce2cd54bd4e1c3fe5254e6f81", "size": 2413}
+{"kind": "directory", "mode": 493, "path": "frontend/src/utils"}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/utils/markdown.js", "sha256": "fe5336455d51434113ba8a4c440dcd14c2eae8988548d5ed0f8dbf3845bd83fc", "size": 798}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/utils/whisperLanguages.js", "sha256": "140781bc916dd92b452145524fd3dce1b5b1846b76086255679c156377065d40", "size": 1953}
+{"kind": "directory", "mode": 493, "path": "frontend/src/views"}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/EventDetailView.vue", "sha256": "1f1bb5f88a564fe89121ecbefda4a05f042dc8b88bfc3f24e0ff900d6a87e379", "size": 31343}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/EventsView.vue", "sha256": "12a7198607515ffa6b2a5ecd6cffe32ff5ec93ae631c178baabd990489a72b05", "size": 10636}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/KanbanBoardView.vue", "sha256": "c4fa6337e607b3ef882d92429b4463c36e09bf3d30412ef9c64dc0c740627e51", "size": 14668}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/LoginView.vue", "sha256": "3ea18ca3bf89cd46fb3f24abadd0d2d0974fc55b011c6688d876e498dcc74c36", "size": 8121}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/ScheduledTaskInstancesView.vue", "sha256": "5e9c03f6babb02b1310c704bf4990c4a66456a0a54ab4d76e3a495768609e938", "size": 14253}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/TaskDetailView.vue", "sha256": "b81eeb59c4a46844281d998c87c212ac04596967873ebc8b9991ffe1840f28ea", "size": 59064}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/TaskFormView.vue", "sha256": "a96faf34bd3a7a09f16d967d923fceae34c0bb541babed90fd2a0b64cf4e65cf", "size": 38588}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/TaskListView.vue", "sha256": "08020aba8fa3503d19991d389e5f6e452c06fce4d15d82400c9fdd5c93cb2984", "size": 26345}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/WorkflowDetailView.vue", "sha256": "cb4420c186c21424b6c60c1ec5589f9e9282166aedac59541dac0ca98aff00af", "size": 56304}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/WorkflowsView.vue", "sha256": "0e65133e86ed69f49dcb22c261a3495deccf576f524182ca227cb3e9c207d280", "size": 11570}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/WorkspaceAnalyticsView.vue", "sha256": "6537f4c4a33012e70304137c5ebc82bcefa0b129883b98aff0cf493f203e5f68", "size": 514}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/WorkspaceDetailView.vue", "sha256": "02b265bd8ab042ee4ba601c384422b4830c9841ed2c836e39e511ff55316c709", "size": 18380}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/WorkspaceSettingsView.vue", "sha256": "116a2ba9ad863d6ed824ecf6eba955a00523b1da59893b7dacc23f2278cfc1d6", "size": 75592}
+{"extension": ".vue", "kind": "file", "language": null, "mode": 420, "path": "frontend/src/views/WorkspaceView.vue", "sha256": "d31a15dfcd8a40610b4fc47dd4ee5b2216e0adc5c3e70342f3b10c8ec09daa06", "size": 23555}
+{"kind": "directory", "mode": 493, "path": "frontend/src/workers"}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/workers/titleWorker.js", "sha256": "29b0f5fb57d1fa8a7ea4fb3f94246c98feefbf3a55a293d6c39ee8edb8f5c32f", "size": 1859}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/src/workers/whisperWorker.js", "sha256": "58417862233f34db95d43d41aa5950a2faa804619dae4e26ab7cb2a857082271", "size": 2704}
+{"extension": ".js", "kind": "file", "language": "javascript", "mode": 420, "path": "frontend/vite.config.js", "sha256": "840dbf5e6fb27fe48d7a540e151428b53108893e6aceaeea43e2d4f3c1f3cf22", "size": 1692}
+{"kind": "directory", "mode": 493, "path": "integrations"}
+{"kind": "directory", "mode": 493, "path": "integrations/slack"}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "integrations/slack/README.md", "sha256": "44b4a83eed2638c31e26f871b502a8c97017a16fd1407c6f2f70d10eb312dea5", "size": 4965}
+{"kind": "directory", "mode": 493, "path": "plugins"}
+{"kind": "directory", "mode": 493, "path": "plugins/deepseek-harness"}
+{"extension": "", "kind": "file", "language": null, "mode": 420, "path": "plugins/deepseek-harness/.gitignore", "sha256": "9b927196f44f7ded24394f3bc2e9da3553d29998ceaa3859e5e95a303d75c7fa", "size": 37}
+{"extension": "", "kind": "file", "language": null, "mode": 420, "path": "plugins/deepseek-harness/LICENSE", "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4", "size": 11357}
+{"extension": ".md", "kind": "file", "language": "markdown", "mode": 420, "path": "plugins/deepseek-harness/README.md", "sha256": "d1f44cf0fb99dd430abdb7f7347a24d737e1062e1e1da3441575cfc0e8551110", "size": 23179}
+{"extension": ".yml", "kind": "file", "language": "yaml", "mode": 420, "path": "plugins/deepseek-harness/cordis.patch.yml", "sha256": "91fa8dc08aa06eb35b35ef093c682aa4e4f2da3f7ebdbbb253adf32f3b9f9ca3", "size": 826}
+{"extension": ".json", "kind": "file", "language": null, "mode": 420, "path": "plugins/deepseek-harness/package.json", "sha256": "ae4fa41ec7a2f77b0c7f620b63a62bec44d9ea26e4ac17f832b04ded489cba7b", "size": 2744}
+{"kind": "directory", "mode": 493, "path": "plugins/deepseek-harness/src"}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/src/client.ts", "sha256": "d8b2603d021d68ec6a8722a22715d2e47b5dbedb58cff4209a64c6723cc206f2", "size": 12506}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/src/config.ts", "sha256": "583f45a7a7f3a91eb86df53e52e64a2b8ca4a175fbc557de9fdd30e8f784d174", "size": 5057}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/src/index.ts", "sha256": "8e2309a2414cfab2fa4dafcb8a83ca8a96407c752bd23d365fc18b9ee1684f03", "size": 4695}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/src/prompt.ts", "sha256": "5adfca2789fd54212c631ee6f150861f4043b50e4d2a1ac28b13bc09bd94309c", "size": 4251}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/src/sessions.ts", "sha256": "afd67e2b096d49436eba86a1c2cfb85d3879065f2a5372139ed87bd8d3d8c4b3", "size": 22852}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/src/tools.ts", "sha256": "1d34ab0b337cc5ea67c73b546c489cf2ef42f9d50bb52f49644a0e0d31440ef1", "size": 4528}
+{"kind": "directory", "mode": 493, "path": "plugins/deepseek-harness/test"}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/test/parse.test.ts", "sha256": "b05ab4d48d4d72b9057910efac1d3f29be1beaf97e91174da983cc0836ddf297", "size": 6063}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/test/sessions.test.ts", "sha256": "7086c521ba4efc2236bd3d7d6c7a9151777c2f304d5fdd1a45248fbcf2cb5014", "size": 30178}
+{"extension": ".json", "kind": "file", "language": null, "mode": 420, "path": "plugins/deepseek-harness/tsconfig.json", "sha256": "abc4690a41f7f703976b6b4b78c6cdfbb9413956012550987c9c5b3e4ef4884e", "size": 522}
+{"extension": ".ts", "kind": "file", "language": "typescript", "mode": 420, "path": "plugins/deepseek-harness/tsdown.config.ts", "sha256": "1036ef858ca7e260678187ff157714794b5bd41d3d1a6c122f0ff4be770019da", "size": 553}
+{"kind": "directory", "mode": 493, "path": "scripts"}
+{"extension": ".sh", "kind": "file", "language": "shell", "mode": 420, "path": "scripts/setup.sh", "sha256": "f602b80e8d710f6fd5d261265586e538f762e6c80b0bbe97470d418daf70ff6d", "size": 6078}

@@ -1,0 +1,293 @@
+{
+  "schema": "zj-repository-map-targets/v1",
+  "snapshotId": "map-e78e86f960834f8d16835d9b",
+  "targets": [
+    {
+      "id": "target-2a4dd15828b73efda8c6",
+      "kind": "integration",
+      "label": "Dockerfile",
+      "path": "Dockerfile",
+      "reason": "integration-surface-file"
+    },
+    {
+      "id": "target-8fad9090ff4d364781d0",
+      "kind": "integration",
+      "label": "backend/internal/data/view/api",
+      "path": "backend/internal/data/view/api",
+      "reason": "integration-named-directory"
+    },
+    {
+      "id": "target-37b3594bbb62af88c137",
+      "kind": "integration",
+      "label": "backend/internal/handler/api",
+      "path": "backend/internal/handler/api",
+      "reason": "integration-named-directory"
+    },
+    {
+      "id": "target-e0d162979b5076b992ec",
+      "kind": "integration",
+      "label": "backend/internal/mapper/api",
+      "path": "backend/internal/mapper/api",
+      "reason": "integration-named-directory"
+    },
+    {
+      "id": "target-dc25d9c2fcd2858681ad",
+      "kind": "integration",
+      "label": "backend/openapi.yaml",
+      "path": "backend/openapi.yaml",
+      "reason": "integration-surface-file"
+    },
+    {
+      "id": "target-522007bacccd37ace379",
+      "kind": "integration",
+      "label": "docker-compose.yml",
+      "path": "docker-compose.yml",
+      "reason": "integration-surface-file"
+    },
+    {
+      "id": "target-5f1cafe841c438a37bf2",
+      "kind": "integration",
+      "label": "integrations",
+      "path": "integrations",
+      "reason": "integration-named-directory"
+    },
+    {
+      "id": "target-fd3a0826632280228510",
+      "kind": "integration",
+      "label": "integrations/slack/README.md",
+      "path": "integrations/slack/README.md",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-32c224421614a71f1cfd",
+      "kind": "integration",
+      "label": "plugins",
+      "path": "plugins",
+      "reason": "integration-named-directory"
+    },
+    {
+      "id": "target-63e367254c1015505cab",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/.gitignore",
+      "path": "plugins/deepseek-harness/.gitignore",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-5d7225a558819a95627a",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/LICENSE",
+      "path": "plugins/deepseek-harness/LICENSE",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-c4a7051d57dce7105044",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/README.md",
+      "path": "plugins/deepseek-harness/README.md",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-89b7a856412f6b4cd963",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/cordis.patch.yml",
+      "path": "plugins/deepseek-harness/cordis.patch.yml",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-c501810bceaa90869320",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/package.json",
+      "path": "plugins/deepseek-harness/package.json",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-93bbb6752921d316ec53",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/src/client.ts",
+      "path": "plugins/deepseek-harness/src/client.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-9f51e4b52473756c1373",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/src/config.ts",
+      "path": "plugins/deepseek-harness/src/config.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-04ddec65eb9222dbd325",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/src/index.ts",
+      "path": "plugins/deepseek-harness/src/index.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-54e7d4f1c3724f60e850",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/src/prompt.ts",
+      "path": "plugins/deepseek-harness/src/prompt.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-fa9fe04523110df9677a",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/src/sessions.ts",
+      "path": "plugins/deepseek-harness/src/sessions.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-f1dda38def4564c62f24",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/src/tools.ts",
+      "path": "plugins/deepseek-harness/src/tools.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-ce12fced4fcf2018b733",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/test/parse.test.ts",
+      "path": "plugins/deepseek-harness/test/parse.test.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-8f71e66ad172ba990f13",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/test/sessions.test.ts",
+      "path": "plugins/deepseek-harness/test/sessions.test.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-f58a1c1eade12c2c5d7c",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/tsconfig.json",
+      "path": "plugins/deepseek-harness/tsconfig.json",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-12552dff43945ec76969",
+      "kind": "integration",
+      "label": "plugins/deepseek-harness/tsdown.config.ts",
+      "path": "plugins/deepseek-harness/tsdown.config.ts",
+      "reason": "inside-integration-directory"
+    },
+    {
+      "id": "target-3574910e24890bfd97f0",
+      "kind": "package",
+      "label": "github.com/agentrq/agentrq/backend",
+      "path": "backend/go.mod",
+      "reason": "go package manifest"
+    },
+    {
+      "id": "target-2db77c71907a0f4d2881",
+      "kind": "package",
+      "label": "agentrq-frontend",
+      "path": "frontend/package.json",
+      "reason": "node package manifest"
+    },
+    {
+      "id": "target-8c9ba474d78e348dc1d1",
+      "kind": "package",
+      "label": "@agentrq/dsh-plugin-agentrq",
+      "path": "plugins/deepseek-harness/package.json",
+      "reason": "node package manifest"
+    },
+    {
+      "id": "target-dc49e3da832c13c8b6ea",
+      "kind": "root",
+      "label": "Repository root",
+      "path": ".",
+      "reason": "map orientation"
+    },
+    {
+      "id": "target-e211c91a69a49875ad3c",
+      "kind": "top-level",
+      "label": ".githooks",
+      "path": ".githooks",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-6f7c2e5d9d203a09a221",
+      "kind": "top-level",
+      "label": ".github",
+      "path": ".github",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-97d9a27971ba6a9f8950",
+      "kind": "top-level",
+      "label": ".jules",
+      "path": ".jules",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-fefc3bed0aa4dd233e1a",
+      "kind": "top-level",
+      "label": "backend",
+      "path": "backend",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-4f4d6dd5a8681b190fb5",
+      "kind": "top-level",
+      "label": "docs",
+      "path": "docs",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-666d189fb4c04af41ccf",
+      "kind": "top-level",
+      "label": "frontend",
+      "path": "frontend",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-cc14f6cc9c0f40196f4c",
+      "kind": "top-level",
+      "label": "integrations",
+      "path": "integrations",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-4c62253f2ffdee8d9c5f",
+      "kind": "top-level",
+      "label": "plugins",
+      "path": "plugins",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-217784d793ea0b5778de",
+      "kind": "top-level",
+      "label": "scripts",
+      "path": "scripts",
+      "reason": "top-level structure"
+    },
+    {
+      "id": "target-bee1f5955ddaa5af9f4b",
+      "kind": "workflow",
+      "label": ".github/workflows/docker-publish.yml",
+      "path": ".github/workflows/docker-publish.yml",
+      "reason": "recognized-workflow-surface"
+    },
+    {
+      "id": "target-64714fb864d3bf1c003d",
+      "kind": "workflow",
+      "label": ".github/workflows/docker-release.yml",
+      "path": ".github/workflows/docker-release.yml",
+      "reason": "recognized-workflow-surface"
+    },
+    {
+      "id": "target-ec35f7ed98f7e825ee70",
+      "kind": "workflow",
+      "label": ".github/workflows/plugin-deepseek-harness.yml",
+      "path": ".github/workflows/plugin-deepseek-harness.yml",
+      "reason": "recognized-workflow-surface"
+    },
+    {
+      "id": "target-e0e07e56d7c540286fe7",
+      "kind": "workflow",
+      "label": "Makefile",
+      "path": "Makefile",
+      "reason": "recognized-workflow-surface"
+    }
+  ]
+}

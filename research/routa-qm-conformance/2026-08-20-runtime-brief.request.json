@@ -1,0 +1,26 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "ZAgenticOPN Experience Version runtime/API/test evidence refresh: Routa versus qm",
+    "criteria": [
+      {"id": "c1-publish-discover", "question": "Which source, API or test proves that one Agent can publish available work and another Agent can discover it after a task-agnostic Human trigger, without the Human naming a Work Item or copying context?", "critical": true, "keywords": ["kanban", "handoff", "delegation", "coordination", "automation", "shared"]},
+      {"id": "c2-competing-claim", "question": "Which source, API or test proves atomic competing claim semantics so concurrent Agents cannot both obtain execution authority or execute the same Work Item?", "critical": true, "keywords": ["claim", "lock", "transaction", "reservation", "concurrency", "queue"]},
+      {"id": "c3-result-publication", "question": "Which source, API or test proves an executing Agent can publish result summary, acceptance status, next action, blocker and canonical Git references for another Agent to read?", "critical": true, "keywords": ["artifact", "evidence", "handoff", "git", "result", "changes"]},
+      {"id": "c4-review-continuation", "question": "Which source, API or test proves a reviewer Agent can discover and atomically claim awaiting review, verify the referenced result and complete review without Human context supplementation?", "critical": true, "keywords": ["review", "handoff", "continuation", "session", "approval", "verify"]},
+      {"id": "c5-no-eligible-work", "question": "Which source, API or test proves the system reports no eligible work and filter reasons instead of inventing work or requiring the Human to select a Work Item?", "critical": true, "keywords": ["eligible", "filter", "query", "scope", "workspace", "board"]},
+      {"id": "c6-context-defect", "question": "Which source, API or test proves missing acceptance, result or references become an observable classified defect rather than a successful handoff?", "critical": true, "keywords": ["validation", "error", "schema", "contract", "diagnostic", "missing"]},
+      {"id": "c7-scope-isolation", "question": "Which source, API or test proves default coordination queries are isolated by project or workspace while explicit cross-project navigation is allowed only when permitted?", "critical": true, "keywords": ["scope", "workspace", "project", "tenant", "identity", "permission"]},
+      {"id": "c8-private-recovery", "question": "Which source, API or test proves Agent-private recovery context is separated from shared coordination facts and that an Agent can recover after interruption?", "critical": true, "keywords": ["memory", "context", "checkpoint", "recovery", "session", "private"]},
+      {"id": "product-semantics-and-ownership", "question": "Which source describes the candidate's product semantics, state model, identity boundaries, acceptance rules and lifecycle responsibilities that would remain owned by ZAgenticOPN versus the candidate?", "critical": true, "keywords": ["architecture", "state", "identity", "lifecycle", "ownership", "workspace"]},
+      {"id": "experience-fit-and-change-cost", "question": "Which source, API, example or test shows how the candidate can support the narrow Experience Version and what adapter, deployment, upgrade, license or maintenance costs it introduces?", "critical": true, "keywords": ["quickstart", "example", "api", "test", "deployment", "license"]}
+    ],
+    "repositories": [
+      {"owner": "phodal", "name": "routa"},
+      {"owner": "yc-software", "name": "qm"}
+    ],
+    "policyVersion": "zagenticopn-experience-version-runtime-refresh/v1",
+    "budget": {"maxFiles": 200, "maxBytes": 8000000, "deadlineMs": 480000}
+  }
+}

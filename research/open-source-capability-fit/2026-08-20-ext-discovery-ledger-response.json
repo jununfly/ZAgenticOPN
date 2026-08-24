@@ -1,0 +1,22 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "result": {
+    "schema": "zj-verified-evidence-ledger/v1",
+    "compilerVersion": "research/v1",
+    "briefFingerprint": "5773db108d00674914879548a1681de8ec8227f483cd2826b688ea4f4481c159",
+    "policyVersion": "agent-self-service-capability-fit/v1",
+    "observedAt": "2026-08-20T08:48:18.895Z",
+    "repositories": [],
+    "candidates": [],
+    "evidence": [],
+    "unknownCriteria": [],
+    "navigation": [],
+    "collection": {
+      "filesRead": 0,
+      "sourceBytesRead": 0,
+      "durationMs": 781,
+      "cacheHit": false
+    }
+  }
+}

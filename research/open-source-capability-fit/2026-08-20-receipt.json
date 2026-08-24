@@ -1,0 +1,29 @@
+{
+  "markdownPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/open-source-capability-fit/2026-08-20-draft.md",
+  "htmlPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/open-source-capability-fit/2026-08-20-draft.html",
+  "reportHash": "df4f239358e2bb3dbbbc83a2311fd018f2720b05c2e5d2ffc7f93505d3e2d1bc",
+  "publishCount": 1,
+  "evaluation": {
+    "reportHash": "df4f239358e2bb3dbbbc83a2311fd018f2720b05c2e5d2ffc7f93505d3e2d1bc",
+    "reportFamily": "zj-draft/v1",
+    "compilerVersion": "research/v1",
+    "healthy": true,
+    "correctness": {
+      "revisionPinned": true,
+      "provenanceComplete": true,
+      "criticalClaimsEvidence": true,
+      "scoringAxesSeparated": true,
+      "publishExactlyOnce": true,
+      "receiptConsistent": true
+    },
+    "evidenceCount": 42,
+    "unknownCount": 0,
+    "navigationFailureCount": 0,
+    "collection": {
+      "filesRead": 84,
+      "sourceBytesRead": 621276,
+      "durationMs": 53246,
+      "cacheHit": false
+    }
+  }
+}

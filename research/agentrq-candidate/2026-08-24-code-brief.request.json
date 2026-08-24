@@ -1,0 +1,18 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "AgentRQ exact implementation paths for queue claim and MCP continuation",
+    "criteria": [
+      {"id":"queue-implementation","question":"Read the pinned repository.go, model.go and repository tests. Report the exact GetNextTask/dequeue query, task fields, indexes, status transition and concurrency/claim transaction behavior.","critical":true,"keywords":["repository.go","model.go","repository_test.go","dequeue_index_test.go","GetNextTask","idx_tasks_dequeue"]},
+      {"id":"mcp-implementation","question":"Read the pinned server.go, app.go, mcp.go and MCP tests. Report the exact getTask, updateTaskStatus, reply, session mapping, channel notification and workspace scope behavior.","critical":true,"keywords":["server.go","app.go","mcp.go","server_test.go","mcp_test.go","handleGetTask","handleReply","sessionTasks"]},
+      {"id":"event-task-implementation","question":"Read the pinned event.go, task.go and event/task tests. Report event/workflow task creation, result/message publication, status transitions and any reviewer continuation semantics.","critical":true,"keywords":["event.go","task.go","event_test.go","task_test.go","publishEvent","awaiting","review"]},
+      {"id":"identity-telemetry-implementation","question":"Read the pinned client_identity.go, model.go, telemetry.go and stats.go paths. Report persisted identity, telemetry and whether they constitute AgentInstance claim provenance.","critical":true,"keywords":["client_identity.go","telemetry.go","stats.go","MCPClient","Telemetry"]},
+      {"id":"harness-bridge-implementation","question":"Read the pinned index.ts, sessions.ts, client.ts, tools.ts and plugin tests. Report task push delivery, session lifecycle, reconnect, catch-up, duplicate suppression and workspace profile isolation.","critical":true,"keywords":["index.ts","sessions.ts","client.ts","tools.ts","sessions.test.ts","autopull","catchUpOnStart"]}
+    ],
+    "repositories":[{"owner":"agentrq","name":"agentrq"}],
+    "policyVersion":"agent-self-service-capability-fit/v2-code-paths",
+    "budget":{"maxFiles":220,"maxBytes":12000000,"deadlineMs":420000}
+  }
+}

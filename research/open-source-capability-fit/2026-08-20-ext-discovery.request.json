@@ -1,0 +1,64 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Agent self-service collaboration control plane for multi-device multi-agent co-design and co-work",
+    "criteria": [
+      {
+        "id": "self-service-loop",
+        "question": "Does the project support publishing available work, discovering eligible work, claiming a work item, publishing a result, and handing review to another Agent?",
+        "critical": true,
+        "keywords": ["frontier", "claim", "lease", "handoff", "review", "task"]
+      },
+      {
+        "id": "context-model",
+        "question": "How are private and shared Agent context separated, persisted, and referenced?",
+        "critical": true,
+        "keywords": ["private", "shared", "context", "workspace", "provenance"]
+      },
+      {
+        "id": "identity-and-scope",
+        "question": "How are Agent identity, project scope, ownership, and access boundaries represented?",
+        "critical": true,
+        "keywords": ["identity", "agent", "project", "scope", "permission"]
+      },
+      {
+        "id": "cross-device-runtime",
+        "question": "What service, transport, storage, deployment, and recovery model supports heterogeneous Agents across devices?",
+        "critical": true,
+        "keywords": ["gateway", "server", "sync", "multi-device", "API", "recovery"]
+      },
+      {
+        "id": "observability",
+        "question": "What product-health and coordination observability is provided?",
+        "critical": true,
+        "keywords": ["health", "metrics", "event", "telemetry", "observability"]
+      },
+      {
+        "id": "integration-and-change",
+        "question": "What protocols, SDKs, CLI or MCP interfaces, extension seams, licenses, and upgrade responsibilities are provided?",
+        "critical": true,
+        "keywords": ["MCP", "SDK", "CLI", "plugin", "extension", "license", "migration"]
+      },
+      {
+        "id": "experience-fit",
+        "question": "What evidence shows the project can support a narrow first Experience Version?",
+        "critical": true,
+        "keywords": ["example", "quickstart", "demo", "test", "fixture", "minimal"]
+      }
+    ],
+    "repositories": [],
+    "discovery": {
+      "query": "multi-agent collaboration shared context task claim handoff coordination",
+      "limit": 10,
+      "topicKeywords": ["agent", "multi-agent", "collaboration", "workflow", "context", "coordination", "task"]
+    },
+    "policyVersion": "agent-self-service-capability-fit/v1",
+    "budget": {
+      "maxFiles": 20,
+      "maxBytes": 800000,
+      "deadlineMs": 180000
+    }
+  }
+}

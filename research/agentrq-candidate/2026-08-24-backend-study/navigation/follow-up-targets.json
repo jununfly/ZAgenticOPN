@@ -1,0 +1,326 @@
+{
+  "schema": "zj-architecture-study-followups/v1",
+  "snapshotId": "study-f38629515739d222b059772e",
+  "targets": [
+    {
+      "id": "followup-31bb8d105d080487fdc3",
+      "kind": "decision",
+      "label": "Dockerfile",
+      "path": "Dockerfile",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-4ba039cf8b6c3188116d",
+      "kind": "decision",
+      "label": "backend/internal/data/view/api",
+      "path": "backend/internal/data/view/api",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-0bad8ec1d80ca46f0d65",
+      "kind": "decision",
+      "label": "backend/internal/handler/api",
+      "path": "backend/internal/handler/api",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-89055988f3a2939c4592",
+      "kind": "decision",
+      "label": "backend/internal/mapper/api",
+      "path": "backend/internal/mapper/api",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-f4b7613538dab81e597d",
+      "kind": "decision",
+      "label": "backend/openapi.yaml",
+      "path": "backend/openapi.yaml",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-7b4a0fc3369136081c79",
+      "kind": "decision",
+      "label": "docker-compose.yml",
+      "path": "docker-compose.yml",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-d6fedca9f7f8336423fa",
+      "kind": "decision",
+      "label": "integrations",
+      "path": "integrations",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-5a7eb775d13e5eded65c",
+      "kind": "decision",
+      "label": "integrations/slack/README.md",
+      "path": "integrations/slack/README.md",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-7c85bcc65b631870f259",
+      "kind": "decision",
+      "label": "plugins",
+      "path": "plugins",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-82c5d66622e8ed9ee0c2",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/.gitignore",
+      "path": "plugins/deepseek-harness/.gitignore",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-dfd56e6783ea9700edc6",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/LICENSE",
+      "path": "plugins/deepseek-harness/LICENSE",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-d3db2799a26e2a62e689",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/README.md",
+      "path": "plugins/deepseek-harness/README.md",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-52eae9e840a57a2e727a",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/cordis.patch.yml",
+      "path": "plugins/deepseek-harness/cordis.patch.yml",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-96118c8823b502aeda31",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/package.json",
+      "path": "plugins/deepseek-harness/package.json",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-6e01c1c600850b12958d",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/src/client.ts",
+      "path": "plugins/deepseek-harness/src/client.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-a98e423011861094a746",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/src/config.ts",
+      "path": "plugins/deepseek-harness/src/config.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-81f65c49b906e9036068",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/src/index.ts",
+      "path": "plugins/deepseek-harness/src/index.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-39fd8cf5797778aa8eae",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/src/prompt.ts",
+      "path": "plugins/deepseek-harness/src/prompt.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-53809a84741496e54320",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/src/sessions.ts",
+      "path": "plugins/deepseek-harness/src/sessions.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-146bd4f1b665e4ca80de",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/src/tools.ts",
+      "path": "plugins/deepseek-harness/src/tools.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-c36f46a9ff77177ffa9c",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/test/parse.test.ts",
+      "path": "plugins/deepseek-harness/test/parse.test.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-f2f2a4ac4889d152b2fa",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/test/sessions.test.ts",
+      "path": "plugins/deepseek-harness/test/sessions.test.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-6da86156e3232931b8cd",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/tsconfig.json",
+      "path": "plugins/deepseek-harness/tsconfig.json",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-488f581b2e6e7a933242",
+      "kind": "decision",
+      "label": "plugins/deepseek-harness/tsdown.config.ts",
+      "path": "plugins/deepseek-harness/tsdown.config.ts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "integration"
+    },
+    {
+      "id": "followup-0118f7a25cc13e6beafb",
+      "kind": "decision",
+      "label": "github.com/agentrq/agentrq/backend",
+      "path": "backend/go.mod",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "package"
+    },
+    {
+      "id": "followup-ba85d9866610d010a090",
+      "kind": "decision",
+      "label": "agentrq-frontend",
+      "path": "frontend/package.json",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "package"
+    },
+    {
+      "id": "followup-452b5bc85c2c35a9928c",
+      "kind": "decision",
+      "label": "@agentrq/dsh-plugin-agentrq",
+      "path": "plugins/deepseek-harness/package.json",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "package"
+    },
+    {
+      "id": "followup-c39778634e4a2f401079",
+      "kind": "decision",
+      "label": "Repository root",
+      "path": ".",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "root"
+    },
+    {
+      "id": "followup-ba9536608da64cefd085",
+      "kind": "decision",
+      "label": ".githooks",
+      "path": ".githooks",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-186ffd8a359d1fc178f4",
+      "kind": "decision",
+      "label": ".github",
+      "path": ".github",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-e3867c4c075998afce95",
+      "kind": "decision",
+      "label": ".jules",
+      "path": ".jules",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-3a8b84a56043eb219bdc",
+      "kind": "decision",
+      "label": "docs",
+      "path": "docs",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-42d942d7524d830c0f46",
+      "kind": "decision",
+      "label": "frontend",
+      "path": "frontend",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-a5a6e16185804f23f6e8",
+      "kind": "decision",
+      "label": "integrations",
+      "path": "integrations",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-2ffe531cdc1bd7c04d95",
+      "kind": "decision",
+      "label": "plugins",
+      "path": "plugins",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-dfc0fc2d0ee9ee812974",
+      "kind": "decision",
+      "label": "scripts",
+      "path": "scripts",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "top-level"
+    },
+    {
+      "id": "followup-09e0a9dd9259f1d1d46b",
+      "kind": "decision",
+      "label": ".github/workflows/docker-publish.yml",
+      "path": ".github/workflows/docker-publish.yml",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "workflow"
+    },
+    {
+      "id": "followup-2caae844f09d25565731",
+      "kind": "decision",
+      "label": ".github/workflows/docker-release.yml",
+      "path": ".github/workflows/docker-release.yml",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "workflow"
+    },
+    {
+      "id": "followup-d6004127eafb2cb6ce49",
+      "kind": "decision",
+      "label": ".github/workflows/plugin-deepseek-harness.yml",
+      "path": ".github/workflows/plugin-deepseek-harness.yml",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "workflow"
+    },
+    {
+      "id": "followup-ea7ba075154ac9775f62",
+      "kind": "decision",
+      "label": "Makefile",
+      "path": "Makefile",
+      "reason": "map target not selected for this bounded study",
+      "targetKind": "workflow"
+    }
+  ]
+}

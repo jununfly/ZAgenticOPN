@@ -1,12 +1,12 @@
 # Agent 自服务协作候选无关技术设计
 
-状态：Problem Discovery baseline
+状态：Experience Version implementation baseline
 
 对应 Spec：[Agent 自服务协作](../prds/agent-self-service-collaboration.md)
 
 ## 设计目的
 
-本设计定义开源候选必须承载的产品语义和黑盒验证方式，不指定数据库、编程语言或最终部署。它用于比较候选和约束 Experience Version，不授权开发。
+本设计定义产品语义、黑盒验证方式和 Experience Version 的职责分界。它不指定生产部署；当前已授权的实现只覆盖同设备单项目最小纵向切片。
 
 ## 系统边界
 
@@ -261,5 +261,5 @@ Owned responsibility = missing semantics + adapters + composition
 1. 解释 Feature 1 与方案 A 的差别；
 2. 用 C1–C8 测试任意候选；
 3. 区分原生能力、适配能力和 ZAgenticOPN 自有责任；
-4. 知道 comparison gate 前不得开始实现；
+4. 知道当前授权只覆盖同设备单项目最小纵向切片；
 5. 生成可复核的 A/B/C/D 推荐。

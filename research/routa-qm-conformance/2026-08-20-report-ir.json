@@ -1,0 +1,81 @@
+{
+  "schema": "zj-research-report-ir/v1",
+  "family": "technical-c4/v1",
+  "title": "ZAgenticOPN Experience Version：Routa 与 qm 的 C1–C8 conformance 对比",
+  "summary": "本轮对 phodal/routa（ext）与 yc-software/qm（ref）运行同一份 Experience Version C1–C8 brief。Routa 的固定版本明确呈现 workspace-first multi-agent coordination platform 定位，qm 的固定版本呈现 task-focused 工程维护、memory notebook、sweeper 与 fresh-context review 习惯；但 20 条 sealed evidence 全部来自 AGENTS.md，尚不足以证明任一候选通过 C1–C4 的自服务协作闭环。当前决策不是 A/B/C 采用，而是 D：补采真实 runtime/API/test 证据；ZAgenticOPN 继续拥有 Work Item、claim、结果发布、review、scope 与 private/shared context 语义。",
+  "ledgerFingerprint": "cf516aac71b245c5e285fd649958630c132d63f41bc9fc3f390789401ca30048",
+  "concepts": [
+    {"key": "experience-version", "value": "用 C1–C8 和 R5/R6/R8 约束一个可重复的 Agent 自服务协作最小闭环；它是产品 conformance 门，不是候选项目 feature 清单。"},
+    {"key": "evidence-status", "value": "native、adapted、absent、unknown 必须分开；本轮主要是 unverified，不能把采集缺口写成 absent。"},
+    {"key": "routa-role", "value": "routa 是 ext 候选：其 workspace-first 多 Agent 产品定位值得深读，但不能仅凭定位继承产品语义。"},
+    {"key": "qm-role", "value": "qm 是 ref 候选：它是已知产品形态参照与工程实践参照，不自动成为 ZAgenticOPN 的实现底座。"},
+    {"key": "base-ownership", "value": "ZAgenticOPN 保持 Work Item eligibility、原子 claim、结果/审查状态、scope isolation、private recovery 和 Git provenance 的最终所有权。"},
+    {"key": "decision-model", "value": "A 整体复用；B 基于开源薄适配；C 自有语义主导并选择性抽取单位能力；D 补证据或继续搜索。当前为 D，未来可能落到 C。"}
+  ],
+  "diagrams": [
+    {
+      "title": "Experience Version conformance landscape",
+      "kind": "landscape",
+      "mermaid": "flowchart LR\n  H[Human trigger] --> E[Experience Version C1-C8]\n  E --> B[ZAgenticOPN base semantics]\n  E --> R[routa ext]\n  E --> Q[qm ref]\n  R --> U1[workspace-first coordination surface]\n  Q --> U2[task-focused engineering surface]\n  B --> G[Git artifact and review gates]\n  R -. evidence gap .-> X[not yet proven]\n  Q -. evidence gap .-> X"
+    },
+    {
+      "title": "从产品定位到可验证单位能力",
+      "kind": "container",
+      "mermaid": "flowchart TB\n  S[Same C1-C8 brief] --> C[Collect commit-pinned evidence]\n  C --> P[Positioning and maintenance facts]\n  C --> T[Runtime API and test facts]\n  P --> D{Decision gate}\n  T --> D\n  D -->|C1-C4 proven and low ownership| B[B thin adapter]\n  D -->|mixed fit or semantic mismatch| C2[C base-led selective reuse]\n  D -->|evidence missing| D2[D refresh evidence or search]\n  C2 --> O[ZAgenticOPN owns product semantics]"
+    }
+  ],
+  "candidates": [
+    {
+      "repository": {"owner": "phodal", "name": "routa"},
+      "stars": 1796,
+      "topicMatch": 8,
+      "evidenceIds": ["5f6c0af9de319315df194133", "da576d41544fabf2b46a6468", "d4b3e81f0bb3e3d983475d8a", "ce96724ffd76bd270dee59a7", "69c79a5f946680cdb21ca7e5", "8dc54dceb6cca35467ee0546", "f7900a311173fe47c0999657", "c42d538a3ffe24a11d582cf3", "659a60bf8959c2e457df44f8", "eb07cbf8f00d98aec5e1a8de"]
+    },
+    {
+      "repository": {"owner": "yc-software", "name": "qm"},
+      "stars": 13980,
+      "topicMatch": 2,
+      "evidenceIds": ["387b5cda01cdc0cb5f97409e", "4e66c9a7c2c53c129f478c58", "84f989f13374ac678ee8d13d", "4af8857b635f3c44a9ac44f6", "110c60e2cabf92f6b5a28919", "7fc2fac0ea5a4afd2cb93c1b", "115b755f7fe511ce2b030251", "5a40174ed9eead1c519acf5b", "24d4444fd0bb617e24b8bfb9", "6cd9c3a9266e48117e2cffd5"]
+    }
+  ],
+  "cards": [
+    {"title": "phodal/routa（ext）", "summary": "Routa 的固定版本将自己定位为 workspace-first multi-agent coordination platform，并区分 Web 与 Desktop/Axum runtime；它是当前更值得做产品表面与协作数据模型深读的 ext 候选。当前主要缺口是 C1–C4 的 Work Item、claim、结果发布与 reviewer continuation 证据，本轮证据强度为 positioning-only。", "claimIds": ["routa-positioning", "routa-conformance-gap"]},
+    {"title": "yc-software/qm（ref）", "summary": "qm 的固定版本提供 task-focused 工程维护参照，涉及 shared helpers、memory notebook、sweeper 与 fresh-context review；它适合作为已知产品形态和工程实践的 ref。当前主要缺口是跨 Agent shared coordination 的 C1–C4 运行证据，本轮证据强度为 maintenance-surface-only。", "claimIds": ["qm-maintenance", "qm-conformance-gap"]}
+  ],
+  "claims": [
+    {"id": "routa-positioning", "text": "Routa 的固定版本 AGENTS.md 将项目描述为 workspace-first multi-agent coordination platform，并区分 Web 与 Desktop/Axum runtime surface。", "critical": true, "evidenceIds": ["5f6c0af9de319315df194133", "f7900a311173fe47c0999657", "659a60bf8959c2e457df44f8"]},
+    {"id": "routa-maintenance", "text": "Routa 的维护规则把 routing、lifecycle、persistence 与 recovery characterization tests 作为重要维护关注面。", "critical": false, "evidenceIds": ["c42d538a3ffe24a11d582cf3"]},
+    {"id": "routa-conformance-gap", "text": "本轮 Routa 证据没有证明 C1 task-agnostic publish/discover、C2 原子 competing claim、C3 结构化结果发布或 C4 reviewer continuation；因此这些能力状态为 unverified，而不是 absent。", "critical": true, "evidenceIds": ["5f6c0af9de319315df194133", "da576d41544fabf2b46a6468", "d4b3e81f0bb3e3d983475d8a", "ce96724ffd76bd270dee59a7"]},
+    {"id": "qm-maintenance", "text": "qm 的固定版本 AGENTS.md 体现 task-focused 工程维护、shared helper 分层、memory notebook、周期 sweeper 与 fresh-context review 习惯。", "critical": true, "evidenceIds": ["387b5cda01cdc0cb5f97409e", "4e66c9a7c2c53c129f478c58", "7fc2fac0ea5a4afd2cb93c1b", "4af8857b635f3c44a9ac44f6"]},
+    {"id": "qm-conformance-gap", "text": "本轮 qm 证据没有证明 C1–C4 的跨 Agent Work Item 发布、原子 claim、结构化结果发布和 review continuation；fresh-context review 规则不能替代 reviewer Agent 的产品闭环。", "critical": true, "evidenceIds": ["387b5cda01cdc0cb5f97409e", "4e66c9a7c2c53c129f478c58", "84f989f13374ac678ee8d13d", "4af8857b635f3c44a9ac44f6"]},
+    {"id": "evidence-quality", "text": "本轮 20 条 sealed evidence 的 path 全部是 AGENTS.md；unknownCriteria 为空只代表每个候选/标准有采集记录，不代表每项能力已被 runtime 或 test 证明。", "critical": true, "evidenceIds": ["5f6c0af9de319315df194133", "387b5cda01cdc0cb5f97409e"]},
+    {"id": "scores-are-context", "text": "sealed ledger 将 Stars 与 topicMatch 分开记录：Routa 为 1,796/8，qm 为 13,980/2；这些数值不能替代语义拟合度、可组合性或所有权成本。", "critical": false, "evidenceIds": ["5f6c0af9de319315df194133", "387b5cda01cdc0cb5f97409e"]},
+    {"id": "base-semantics", "text": "ZAgenticOPN 必须继续拥有 Experience Version 的 Work Item eligibility、原子 claim、结果/审查状态、scope isolation、private recovery 与 Git provenance；候选只能在 conformance 通过后提供可替换单位能力。", "critical": false, "evidenceIds": []},
+    {"id": "decision-state", "text": "由于 C1–C4 与 R5/R6/R8 尚未获得 runtime/API/test 证据，本轮不能作 A 整体复用、B 薄适配或 C 选择性抽取的实现决策。", "critical": true, "evidenceIds": ["5f6c0af9de319315df194133", "387b5cda01cdc0cb5f97409e"]}
+  ],
+  "comparisons": [
+    {"id": "comparison-product-positioning", "text": "约束：需要跨设备/跨 Agent 自服务协作产品面。选项：Routa 的 workspace-first 协作定位 vs qm 的 task-focused 工程参照。证据：Routa 有明确协作产品定位，qm 本轮主要暴露工程维护规则。取舍：Routa 更值得优先深读产品数据模型，但定位本身不能证明闭环；qm 仍保留 ref 价值。决策：两者都保留，暂不整体采用。", "claimIds": ["routa-positioning", "qm-maintenance"]},
+    {"id": "comparison-c1-c4", "text": "约束：C1–C4 是硬门。选项：把定位/维护文档当作能力证明，或补采 runtime/API/test。证据：两候选的 C1–C4 均只有 AGENTS.md 级证据。取舍：直接判通过会制造错误产品决策；补采成本可控且能复用同一 brief。决策：D，先补证据。", "claimIds": ["routa-conformance-gap", "qm-conformance-gap", "evidence-quality"]},
+    {"id": "comparison-ownership", "text": "约束：不能把候选的全产品生命周期责任带入 Experience Version。选项：A 整体复用、B 薄适配、C base-led selective reuse。证据：当前没有任何候选证明完整 C1–C4，也没有证明 private/shared context 与 Git provenance 的语义一致。取舍：A/B 均过早，C 只应在单位能力通过 conformance 后使用。决策：ZAgenticOPN 保留产品语义所有权。", "claimIds": ["base-semantics", "decision-state"]},
+    {"id": "comparison-evidence-strength", "text": "约束：报告必须区分 unknown 与 absent。选项：把 unknownCriteria=0 解读为全覆盖，或按 evidence path 与运行行为分层。证据：20 条记录全部来自 AGENTS.md。取舍：前者会把文档存在误读成能力存在；后者保守但可复现。决策：将 C1–C4、R5/R6/R8 标为 unverified。", "claimIds": ["evidence-quality"]},
+    {"id": "comparison-next-gate", "text": "约束：在 Human A/B/C/D 决策前必须有可重复的黑盒 conformance。选项：直接进入实现，或为 Routa/qm 补 Work Item/schema、claim transaction、review transition、scope filter、private checkpoint 与 tests。证据：现有记录不足以进入实现。决策：完成同一套 C1–C8 证据补采后再回到 1-1-4。", "claimIds": ["decision-state", "routa-conformance-gap", "qm-conformance-gap"]}
+  ],
+  "recommendations": [
+    {"id": "recommendation-d-refresh-evidence", "text": "当前技术决策选 D：不开始产品 runtime，不把 Routa 或 qm 判为通过；先用同一 C1–C8 brief 补采固定 commit 的真实 source、API/schema、transaction 与 unit/integration/e2e tests。", "comparisonIds": ["comparison-c1-c4", "comparison-next-gate"]},
+    {"id": "recommendation-routa-deep-read", "text": "优先深读 Routa 的 Work Item/任务状态、workspace scope、claim/locking、result/review transition、recovery 与对应测试；只有找到 C1–C4 的可重放证据，才讨论 B 或 C。", "comparisonIds": ["comparison-product-positioning", "comparison-next-gate"]},
+    {"id": "recommendation-qm-deep-read", "text": "保留 qm 作为 ref，补采其产品运行入口、memory/task/control API、跨 Agent 共享机制和 review continuation 测试；不要把 fresh-context review 工程规则等同于产品协作闭环。", "comparisonIds": ["comparison-product-positioning", "comparison-c1-c4"]},
+    {"id": "recommendation-base-ownership", "text": "无论后续选择 A/B/C，ZAgenticOPN 都保留 Work Item eligibility、原子 claim、结果发布、review 状态、scope isolation、private recovery 与 Git provenance 的最终所有权。", "comparisonIds": ["comparison-ownership"]},
+    {"id": "recommendation-human-gate", "text": "完成证据补采和 conformance report 后，再回到 roadmap 1-1-4，由 Human 明确选择 A 整体复用、B 薄适配、C 选择性抽取或 D 继续搜索；Agent 不替 Human 做该方向性决策。", "comparisonIds": ["comparison-ownership", "comparison-next-gate"]},
+    {"id": "recommendation-known-limit", "text": "已知限制：本轮 evidence 质量不足以判断部署、license、安全隔离、升级/回滚和跨设备可用性；这些不是当前否定结论，而是下一轮必须显式验证的 gaps。", "comparisonIds": ["comparison-evidence-strength"]}
+  ],
+  "metrics": [
+    {"key": "c1-publish-discover-pass-rate", "definition": "满足 task-agnostic Human trigger 后由 Agent 发布并由另一 Agent 发现 Work Item 的场景数除以总场景数", "unit": "%", "method": "固定 fixture 连续运行三次，记录发布、发现和 Human 是否补充 Work Item ID", "condition": "C1 fixture；必须 0 次任务特定 Human intervention", "expected": "100%"},
+    {"key": "c2-competing-claim-conflict-rate", "definition": "同一 Work Item 被两个 Agent 同时获得执行权或执行的场景数除以竞争场景数", "unit": "%", "method": "并发启动两个 claim 请求并核对持久化状态与 Git provenance", "condition": "C2 fixture；每次使用相同 Work Item", "expected": "0%"},
+    {"key": "c3-result-schema-completeness", "definition": "包含 result_summary、next_action、acceptance_status、blocker 与 references 的结果发布数除以完成发布数", "unit": "%", "method": "解析 shared coordination record 并逐字段校验", "condition": "C3 fixture；失败结果也必须结构化", "expected": "100%"},
+    {"key": "c4-review-continuation-rate", "definition": "reviewer Agent 无 Human context supplementation 完成 awaiting review 的场景数除以进入 review 的场景数", "unit": "%", "method": "独立 reviewer 激活，记录发现、claim、验证、完成四个事件", "condition": "C4 fixture；Human 不复制上下文", "expected": "100%"},
+    {"key": "evidence-runtime-coverage", "definition": "C1–C8 中至少有一条 source/API/schema/test 证据的 criteria 数除以总 criteria 数", "unit": "%", "method": "按 evidence path 类型分类并去重 criterion", "condition": "正式 A/B/C/D 决策前", "expected": "100%；C1–C4 必须含 test 或可重放 runtime evidence"},
+    {"key": "human-intervention-time", "definition": "Experience Version 完成一次闭环所需的 Human 补充时间", "unit": "minutes", "method": "记录 trigger、补充上下文、重试、review 和发布的 Human 时间", "condition": "与方案 A 同一真实任务、连续三次", "expected": "不明显劣于方案 A"},
+    {"key": "git-artifact-provenance-completeness", "definition": "结果中可追溯到 canonical Git commit、路径和状态的 artifact 数除以结果声明 artifact 数", "unit": "%", "method": "由 reviewer 独立解析 references 并与 Git 查询比对", "condition": "所有 completed Work Item", "expected": "100%"},
+    {"key": "coordination-ownership-surface", "definition": "由 ZAgenticOPN 自有代码/规则负责的产品语义项数量与被候选隐式接管的语义项数量", "unit": "count", "method": "按 eligibility、claim、result、review、scope、recovery、provenance 建立 ownership matrix", "condition": "任何候选接入设计评审", "expected": "7 项核心语义均由 ZAgenticOPN 明确拥有"}
+  ]
+}

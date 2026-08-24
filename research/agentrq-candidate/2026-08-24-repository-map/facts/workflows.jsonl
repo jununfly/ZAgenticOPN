@@ -1,0 +1,4 @@
+{"id": "workflow-8fb1996cb9408acd885a", "kind": "automation", "path": ".github/workflows/docker-publish.yml", "reason": "recognized-workflow-surface"}
+{"id": "workflow-14ed8b4f46d217bdf211", "kind": "automation", "path": ".github/workflows/docker-release.yml", "reason": "recognized-workflow-surface"}
+{"id": "workflow-79948edf16214ba9ed4f", "kind": "automation", "path": ".github/workflows/plugin-deepseek-harness.yml", "reason": "recognized-workflow-surface"}
+{"id": "workflow-e647019071e1aeb2d3a2", "kind": "automation", "path": "Makefile", "reason": "recognized-workflow-surface"}

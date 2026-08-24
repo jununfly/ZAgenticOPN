@@ -1,0 +1,14 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Avernet current community work-item implementation",
+    "criteria": [
+      {"id": "work-item-noop", "question": "Read the exact current pinned source and test for the community work-item implementation. Report the concrete observable behavior when list, get and create are called.", "critical": true, "keywords": ["noop_impl.py", "NoopWorkItemService", "NotImplementedError", "501", "unsupported"]}
+    ],
+    "repositories": [{"owner": "inclusionAI", "name": "Avernet"}],
+    "policyVersion": "zagenticopn-avernet-work-item-noop-current/v1",
+    "budget": {"maxFiles": 40, "maxBytes": 3000000, "deadlineMs": 180000}
+  }
+}

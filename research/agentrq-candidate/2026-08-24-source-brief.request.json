@@ -1,0 +1,55 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "AgentRQ pinned source paths for ZAgenticOPN C-route conformance",
+    "criteria": [
+      {
+        "id": "task-queue-and-claim-source",
+        "question": "Read the pinned backend/internal/repository/base/repository.go, backend/internal/data/model/model.go, backend/internal/controller/crud/task.go and backend/internal/app/app.go paths. Report the task queue selection, status transition, assignment, persistence transaction and any atomic claim/lease semantics; keep concurrent claim behavior unknown when not proven.",
+        "critical": true,
+        "keywords": ["repository/base/repository.go", "data/model/model.go", "controller/crud/task.go", "internal/app/app.go", "GetNextTask", "UpdateTaskStatus", "idx_tasks_dequeue", "transaction"]
+      },
+      {
+        "id": "mcp-workspace-tools",
+        "question": "Read the pinned backend/internal/controller/mcp/server.go and backend/internal/handler/mcp/mcp.go paths. Report the externally callable MCP tools, workspace/user scope, session mapping, get-next-task behavior, status update, reply and channel notification behavior.",
+        "critical": true,
+        "keywords": ["controller/mcp/server.go", "handler/mcp/mcp.go", "handleGetTask", "handleUpdateTaskStatus", "handleReply", "SendChannelNotification", "getNextTask", "sessionTasks"]
+      },
+      {
+        "id": "event-and-review-source",
+        "question": "Read the pinned backend/internal/controller/event/event.go, backend/internal/handler/api/task.go and related task/reply tests. Report event/workflow fan-out, result/message publication, reviewer or next-agent continuation states, and reproducible tests; do not equate Human replies with Agent review.",
+        "critical": true,
+        "keywords": ["controller/event/event.go", "handler/api/task.go", "task_test.go", "event_test.go", "review", "awaiting", "publishEvent", "reply"]
+      },
+      {
+        "id": "gateway-and-extension-source",
+        "question": "Read the pinned README.md, README.zh-CN.md, SETUP.md and plugins/deepseek-harness/README.md paths. Report the MCP, Claude Channel, ACP gateway, Codex gateway, notification, reconnect, profile/workspace and credential setup surfaces relevant to heterogeneous Agent activation.",
+        "critical": true,
+        "keywords": ["README.md", "README.zh-CN.md", "SETUP.md", "deepseek-harness/README.md", "Codex Gateway", "ACP Gateway", "claude/channel", "reconnect", "workspace MCP"]
+      },
+      {
+        "id": "security-license-runtime-source",
+        "question": "Read the pinned LICENSE, docker-compose.yml, backend/go.mod, backend/internal/service/auth and backend/internal/controller/mcp permission paths. Report license, authentication, credential, permission, dangerous-operation and runtime/deployment responsibilities.",
+        "critical": true,
+        "keywords": ["LICENSE", "docker-compose.yml", "backend/go.mod", "service/auth", "permission", "AllowAllCommands", "OAuth", "JWT"]
+      },
+      {
+        "id": "health-and-telemetry-source",
+        "question": "Read the pinned telemetry, stats, event bus and MCP client identity source/test paths. Report whether eligible discovery, claim conflict, handoff continuation, context defects and Human intervention can be measured, and distinguish client telemetry from AgentInstance provenance.",
+        "critical": true,
+        "keywords": ["telemetry", "stats", "eventbus", "client_identity.go", "MCPClient", "task counts", "conformance"]
+      }
+    ],
+    "repositories": [
+      {"owner": "agentrq", "name": "agentrq"}
+    ],
+    "policyVersion": "agent-self-service-capability-fit/v2-source-paths",
+    "budget": {
+      "maxFiles": 180,
+      "maxBytes": 9000000,
+      "deadlineMs": 360000
+    }
+  }
+}

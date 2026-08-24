@@ -1,0 +1,3 @@
+{"ecosystem": "go", "id": "package-0910c7b36979fd8b0a86", "manifest": "go.mod", "name": "github.com/agentrq/agentrq/backend", "parseStatus": "parsed", "path": "backend/go.mod"}
+{"ecosystem": "node", "id": "package-0758fd6e5909c01ad524", "manifest": "package.json", "name": "agentrq-frontend", "parseStatus": "parsed", "path": "frontend/package.json"}
+{"ecosystem": "node", "id": "package-7983aaf78e9be67d4e31", "manifest": "package.json", "name": "@agentrq/dsh-plugin-agentrq", "parseStatus": "parsed", "path": "plugins/deepseek-harness/package.json"}

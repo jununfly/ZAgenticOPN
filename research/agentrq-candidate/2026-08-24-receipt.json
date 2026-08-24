@@ -1,0 +1,63 @@
+{
+  "markdownPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/agentrq-candidate/2026-08-24-draft.md",
+  "htmlPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/agentrq-candidate/2026-08-24-draft.html",
+  "reportHash": "3454aa6973c71dfae58c2073b926f27540446e33de417caa110f5a5b61a22373",
+  "publishCount": 1,
+  "evaluation": {
+    "reportHash": "3454aa6973c71dfae58c2073b926f27540446e33de417caa110f5a5b61a22373",
+    "reportFamily": "technical-c4/v1",
+    "compilerVersion": "research/v1",
+    "healthy": true,
+    "correctness": {
+      "revisionPinned": true,
+      "provenanceComplete": true,
+      "criticalClaimsEvidence": true,
+      "scoringAxesSeparated": true,
+      "publishExactlyOnce": true,
+      "receiptConsistent": true
+    },
+    "evidenceCount": 7,
+    "unknownCount": 0,
+    "navigationFailureCount": 0,
+    "collection": {
+      "filesRead": 5,
+      "sourceBytesRead": 20740,
+      "durationMs": 5905,
+      "cacheHit": false
+    }
+  },
+  "qualityGate": {
+    "healthy": true,
+    "schema": "technical-research-quality-gate/v1",
+    "briefSchema": "technical-decision-brief/v1",
+    "reportFamily": "technical-c4/v1",
+    "checks": {
+      "decisionFrame": true,
+      "diagramCoverage": true,
+      "candidateScoresFromLedger": true,
+      "criticalClaimsEvidence": true,
+      "comparisonTraceability": true,
+      "recommendationTraceability": true,
+      "metricCoverage": true,
+      "unknownsSurfaced": true
+    },
+    "counts": {
+      "concepts": 5,
+      "candidates": 1,
+      "cards": 1,
+      "claims": 6,
+      "comparisons": 5,
+      "recommendations": 6,
+      "metrics": 5,
+      "ledgerEvidence": 7,
+      "ledgerUnknownCriteria": 0
+    },
+    "brief": {
+      "schema": "technical-decision-brief/v1",
+      "stage": "experience-version",
+      "constraintCount": 5,
+      "optionCount": 4,
+      "goalCount": 4
+    }
+  }
+}

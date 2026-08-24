@@ -1,0 +1,28 @@
+{
+  "classification": "observed-failure",
+  "entrypoint": "scripts/activate_agent.py",
+  "work_item_id_input": false,
+  "scenarios": [
+    {
+      "name": "workbuddy_execution_activation",
+      "status": "PASS",
+      "observation": "External subprocess discovered and claimed an eligible Work Item without a Work Item id."
+    },
+    {
+      "name": "codex_review_activation",
+      "status": "PASS",
+      "observation": "External subprocess discovered and claimed awaiting_agent_review without copied context."
+    },
+    {
+      "name": "same_device_smoke",
+      "status": "PASS",
+      "observation": "Codex -> WorkBuddy -> Codex completed through the activation entrypoint."
+    }
+  ],
+  "tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "passed": 9,
+    "failed": 0
+  },
+  "evidence_boundary": "Project-local activation seam and subprocess only; real WorkBuddy UI/runtime rerun and three consecutive value experiments remain pending."
+}

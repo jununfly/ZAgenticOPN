@@ -1,0 +1,61 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "AgentRQ as a new candidate for the ZAgenticOPN Experience Version C-route",
+    "criteria": [
+      {
+        "id": "r5-self-service-discovery",
+        "question": "Does AgentRQ let a Human-triggered heterogeneous Agent discover eligible shared work without receiving a task-specific work-item handoff?",
+        "critical": true,
+        "keywords": ["MCP", "getTask", "not started", "dequeue", "workspace", "assigned"]
+      },
+      {
+        "id": "r6-unique-claim",
+        "question": "What state transition, assignment, dequeue, or persistence semantics prevent two Agents from concurrently executing the same Work Item, and what is proven versus unknown?",
+        "critical": true,
+        "keywords": ["claim", "dequeue", "assignee", "status", "transaction", "concurrency", "SQLite", "GORM"]
+      },
+      {
+        "id": "r8-handoff-continuation",
+        "question": "Can a second Agent discover awaiting review, results, blockers, or next work from shared state and continue without Human context supplementation?",
+        "critical": true,
+        "keywords": ["completed", "blocked", "reply", "conversation", "notification", "event", "workflow", "handoff"]
+      },
+      {
+        "id": "product-semantics-and-ownership",
+        "question": "Which task, workspace, identity, permission, status, event, and provenance semantics would remain owned by ZAgenticOPN versus be inherited or adapted from AgentRQ?",
+        "critical": true,
+        "keywords": ["workspace", "task", "human", "agent", "permission", "history", "audit", "Git"]
+      },
+      {
+        "id": "integration-and-activation",
+        "question": "What MCP, Codex gateway, ACP gateway, HTTP, SSE, CLI, and notification seams could address the observed Agent activation/routing failure, and what setup or credential responsibilities do they add?",
+        "critical": true,
+        "keywords": ["Codex gateway", "MCP", "ACP", "SSE", "notifications", "token", "OAuth", "gateway"]
+      },
+      {
+        "id": "experience-version-fit",
+        "question": "Can a narrow same-device single-project C-route slice use AgentRQ without importing deferred scheduling, automatic discovery, production operations, or a full workflow platform?",
+        "critical": true,
+        "keywords": ["self-hosting", "Docker", "local", "SQLite", "minimal", "workflow", "schedule", "poller"]
+      },
+      {
+        "id": "security-license-ownership",
+        "question": "What license, authentication, authorization, credential, sandbox, dangerous-operation, upgrade, and rollback responsibilities are explicit in the pinned source?",
+        "critical": true,
+        "keywords": ["Apache-2.0", "OAuth", "JWT", "token", "permission", "allow_all_commands", "security", "rollback"]
+      }
+    ],
+    "repositories": [
+      {"owner": "agentrq", "name": "agentrq"}
+    ],
+    "policyVersion": "agent-self-service-capability-fit/v2",
+    "budget": {
+      "maxFiles": 96,
+      "maxBytes": 3500000,
+      "deadlineMs": 240000
+    }
+  }
+}

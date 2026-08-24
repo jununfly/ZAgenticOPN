@@ -1,0 +1,48 @@
+{
+  "schema": "technical-decision-brief/v1",
+  "user": {
+    "actor": "ZAgenticOPN Human",
+    "job": "决定是否需要重做既有开源项目研究，并判断 AgentRQ 是否值得作为当前 Experience Version C 路线的候选单位能力来源，尤其用于分析已观察到的 Agent activation/claim 路由失败。"
+  },
+  "baseline": {
+    "workflow": "当前产品以 ZAgenticOPN 为语义 owner，Human 激活 Agent 并要求检查 shared context；Agent 应自行发现、claim、执行、发布结果，另一 Agent 再接续 review。当前同设备 Codex → WorkBuddy → Codex smoke 中，WorkBuddy 能读到 shared store，但没有执行本次 discover/atomic claim，仍把选择回传 Human。",
+    "failureModes": [
+      "activation adapter 没有把任务无关的检查指令路由到 discover + claim",
+      "候选项目可能只有 dequeue 或消息能力，没有原子 Claim 和 reviewer continuation",
+      "整体引入候选会把 poller、scheduler、deployment、authentication 和未验证状态语义带入 Experience Version"
+    ]
+  },
+  "targetOutcome": "获得足以决定‘保留当前 C 路线并修 activation adapter’或‘对 AgentRQ 的某个单位能力做受控 conformance 实验’的证据；不提前改变产品语义 owner、生命周期阶段或 Deferred 边界。",
+  "goals": [
+    "固定 AgentRQ commit 并完成 R5/R6/R8、身份/范围、集成与生命周期适配的证据链",
+    "用 Repository Map + Architecture Study 找到任务 dequeue、状态更新、消息/事件接续和 MCP gateway 的真实源码路径",
+    "区分 native、adapted、absent、unknown，并显式记录 claim/concurrency 和 reviewer continuation 的未知",
+    "给出最小验证门，而不是以 Stars、README 长度或功能数做能力评分"
+  ],
+  "nonGoals": [
+    "不重新无差别研究 research/ 中全部旧候选",
+    "不把 AgentRQ 整个平台接入 ZAgenticOPN",
+    "不建设自动发现、后台唤醒、生产认证 ACL、HA、部署运维或完整 workflow platform",
+    "不修改 roadmap JSON 或其渲染 Markdown"
+  ],
+  "constraints": [
+    {"id": "lifecycle", "statement": "当前阶段为 Experience Version；当前纵向切片是同设备 Codex → WorkBuddy → Codex 单项目闭环。"},
+    {"id": "ownership", "statement": "ZAgenticOPN 必须保有 Work Item eligibility、原子 Claim、结果/review 状态、scope、private context 和 Git provenance 语义。"},
+    {"id": "hard-gates", "statement": "R5、R6、R8 是开源候选的核心淘汰门；文档或 dequeue surface 不能替代可重放的并发/接续证据。"},
+    {"id": "security", "statement": "不把真实凭证写入仓库，不运行未经授权的远程任务；AgentRQ 的 token/OAuth/permission 责任必须与当前实验边界分开。"},
+    {"id": "evidence", "statement": "正式 technical-c4/v1 发布需要 zj-research sealed ledger；本次公共 GitHub API 限流时不得用未封存数据伪造报告收据。"}
+  ],
+  "assumptions": [
+    "当前 active Spec 和 roadmap 中关于开源比较门完成、C 路线已获 Human 授权的记录仍有效。",
+    "AgentRQ pinned commit 45c87390fdb535066a05c0592e8183b1b461689b 是本次代码研究的 source identity。",
+    "是否对 AgentRQ 做下一步黑盒 fixture 需要在当前 findings 基础上再由 Human 接受；本次研究本身不授权产品接入。"
+  ],
+  "stage": "experience-version",
+  "decisionScope": "当前同设备单项目 vertical slice 的候选单位能力/集成适配边界，不是全产品替代或生产部署选型。",
+  "options": [
+    {"id": "retain-zagenticopn-c-route", "name": "保留 ZAgenticOPN 主导架构，仅修 activation adapter"},
+    {"id": "agentrq-selective-mcp-gateway", "name": "选择性复用 AgentRQ MCP/通知/gateway 单位能力"},
+    {"id": "agentrq-thin-adapter-with-owned-claim", "name": "以 ZAgenticOPN 自有 Claim 包住 AgentRQ queue/message transport"},
+    {"id": "agentrq-whole-platform", "name": "整体采用 AgentRQ 作为协作控制面"}
+  ]
+}

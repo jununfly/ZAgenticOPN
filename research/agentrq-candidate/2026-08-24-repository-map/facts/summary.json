@@ -1,0 +1,55 @@
+{
+  "inventory": {
+    "bytes": 2348547,
+    "directories": 79,
+    "extensions": {
+      ".css": 1,
+      ".example": 2,
+      ".go": 128,
+      ".html": 2,
+      ".ico": 2,
+      ".js": 19,
+      ".json": 4,
+      ".md": 18,
+      ".mod": 1,
+      ".png": 5,
+      ".sh": 1,
+      ".sum": 1,
+      ".svg": 2,
+      ".ts": 9,
+      ".txt": 2,
+      ".vue": 27,
+      ".yaml": 4,
+      ".yml": 5
+    },
+    "files": 240,
+    "languages": {
+      "css": 1,
+      "go": 128,
+      "javascript": 19,
+      "markdown": 18,
+      "shell": 1,
+      "typescript": 9,
+      "yaml": 9
+    },
+    "symlinks": 0
+  },
+  "schema": "zj-repository-map-summary/v1",
+  "scope": {
+    "exclusions": [
+      ".git"
+    ],
+    "root": "."
+  },
+  "snapshotId": "map-e78e86f960834f8d16835d9b",
+  "source": {
+    "commit": "45c87390fdb535066a05c0592e8183b1b461689b",
+    "identity": "commit-plus-working-tree",
+    "ref": "main",
+    "repository": "https://github.com/agentrq/agentrq.git",
+    "state": "clean",
+    "statusEntries": 0,
+    "workingTreeFingerprint": "e32ec0a519d9e5df06a54f87cb41ade0ceb445170efc1e57849581d61a3520ca"
+  },
+  "unknowns": []
+}

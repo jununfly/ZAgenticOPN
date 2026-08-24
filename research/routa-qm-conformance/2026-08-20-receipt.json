@@ -1,0 +1,29 @@
+{
+  "markdownPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/routa-qm-conformance/2026-08-20-draft.md",
+  "htmlPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/routa-qm-conformance/2026-08-20-draft.html",
+  "reportHash": "bc4a270e18099b9da81b3c38581475adc2104d6ec515b133cd07a56ff51bda2f",
+  "publishCount": 1,
+  "evaluation": {
+    "reportHash": "bc4a270e18099b9da81b3c38581475adc2104d6ec515b133cd07a56ff51bda2f",
+    "reportFamily": "technical-c4/v1",
+    "compilerVersion": "research/v1",
+    "healthy": true,
+    "correctness": {
+      "revisionPinned": true,
+      "provenanceComplete": true,
+      "criticalClaimsEvidence": true,
+      "scoringAxesSeparated": true,
+      "publishExactlyOnce": true,
+      "receiptConsistent": true
+    },
+    "evidenceCount": 20,
+    "unknownCount": 0,
+    "navigationFailureCount": 0,
+    "collection": {
+      "filesRead": 54,
+      "sourceBytesRead": 294013,
+      "durationMs": 32350,
+      "cacheHit": false
+    }
+  }
+}

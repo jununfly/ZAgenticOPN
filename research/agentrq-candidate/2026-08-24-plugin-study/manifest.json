@@ -1,0 +1,95 @@
+{
+  "immutable": true,
+  "kind": "architecture-study",
+  "mapBinding": {
+    "manifestSha256": "9f7d26ee08e5516eca86a4441c0c012d9741dc5680a145f76581f1e212e22681",
+    "snapshotId": "map-e78e86f960834f8d16835d9b",
+    "targetIds": [
+      "target-32c224421614a71f1cfd"
+    ],
+    "used": true
+  },
+  "recordKinds": [
+    "decision",
+    "inferred",
+    "observed",
+    "unknown"
+  ],
+  "schema": "zj-architecture-study-manifest/v1",
+  "scope": {
+    "path": "facts/scope.json",
+    "targetCount": 1
+  },
+  "shards": [
+    {
+      "bytes": 15383,
+      "path": "facts/claims.jsonl",
+      "sha256": "7d9566850f33523e436d6b269b7edb44846564456e5f3e9f7ad47c70ac79730c"
+    },
+    {
+      "bytes": 6982,
+      "path": "facts/diagrams.jsonl",
+      "sha256": "acdf4abd8f110a1ee80ec0d2a3d4b23a77b7cdc9c7033f09b82a153a49ecc482"
+    },
+    {
+      "bytes": 110819,
+      "path": "facts/evidence.jsonl",
+      "sha256": "e9d54a05bae3ee4505d44bde18bcb23a6c48398421c47085160c1219ca322aac"
+    },
+    {
+      "bytes": 9180,
+      "path": "facts/flows.jsonl",
+      "sha256": "b143a0a831bc54147ddb608389c540c4efe1fad84cadf1e179985efba8dae6db"
+    },
+    {
+      "bytes": 10769,
+      "path": "facts/relationships.jsonl",
+      "sha256": "31cf59b43ca6156fee64b7e4aa0047f8e7d527ae239643a631b4753e44b8f7ba"
+    },
+    {
+      "bytes": 1123,
+      "path": "facts/risks.jsonl",
+      "sha256": "1a5689bffea0d87b20cb57bcafd445408b8ecb498c3c7160fac197a7fcabf829"
+    },
+    {
+      "bytes": 938,
+      "path": "facts/scope.json",
+      "sha256": "ee1db87cb0216345de2fc0cf1a2d91a9b87e29102ba273ae78cf5ea401812bcc"
+    },
+    {
+      "bytes": 0,
+      "path": "facts/unknowns.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 10958,
+      "path": "navigation/follow-up-targets.json",
+      "sha256": "15bddc8ef664aa44f751f503f4e8b8c636431ea9ea2bdf08a0cf47377ae89c6c"
+    }
+  ],
+  "snapshotId": "study-5647e5ef5f84055c4a0fe87e",
+  "source": {
+    "commit": "45c87390fdb535066a05c0592e8183b1b461689b",
+    "identity": "commit-plus-working-tree",
+    "ref": "main",
+    "repository": "https://github.com/agentrq/agentrq.git",
+    "state": "clean",
+    "statusEntries": 0,
+    "workingTreeFingerprint": "e32ec0a519d9e5df06a54f87cb41ade0ceb445170efc1e57849581d61a3520ca"
+  },
+  "views": {
+    "artifacts": [
+      {
+        "bytes": 19328,
+        "path": "views/study.html",
+        "sha256": "0fb7dcd736e1f8afd278ee7dc76e1c6716d86d5d986465629e2e054fae9de23c"
+      },
+      {
+        "bytes": 17884,
+        "path": "views/study.md",
+        "sha256": "6d7c4feafd1d2d4118dc10cd04fd7bdc047834c7323d55d96b0717b829c0ce99"
+      }
+    ],
+    "defaultLimit": 100
+  }
+}

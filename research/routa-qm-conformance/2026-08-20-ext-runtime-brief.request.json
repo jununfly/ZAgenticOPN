@@ -1,0 +1,23 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "ZAgenticOPN ext candidate runtime/API/test deep read: MCP Agent Mail Rust and Avernet",
+    "criteria": [
+      {"id": "c1-publish-discover", "question": "Identify the canonical runtime command, HTTP/MCP endpoint or test that lets one Agent publish available work and another Agent discover eligible work after a generic activation. Follow source and test references; do not infer from product descriptions.", "critical": true, "keywords": ["serve-http", "serve-stdio", "MCP", "HTTP", "SSE", "inbox", "search", "task", "work", "discover"]},
+      {"id": "c2-competing-claim", "question": "Identify the exposed API or source/test that gives one Agent exclusive execution authority over a shared work item, including concurrent conflict behavior.", "critical": true, "keywords": ["claim", "reserve", "reservation", "lock", "conflict", "concurrency", "atomic", "lease"]},
+      {"id": "c3-result-publication", "question": "Identify the exposed API or source/test for publishing and reading a structured result containing summary, acceptance, next action, blocker and canonical references across Agents.", "critical": true, "keywords": ["result", "artifact", "evidence", "message", "delivery", "reference", "git", "schema"]},
+      {"id": "c4-review-continuation", "question": "Identify the exposed API or source/test for a reviewer Agent to discover, claim, verify and complete an awaiting-review work item without copied Human context.", "critical": true, "keywords": ["review", "approval", "verify", "handoff", "continuation", "status", "complete"]},
+      {"id": "transport-and-runtime", "question": "What exact runtime entrypoint, transport, port, authentication and persistence setup is required for a black-box fixture? Cite README, CLI help, server code or integration harness.", "critical": true, "keywords": ["serve-http", "serve-stdio", "listen", "port", "token", "auth", "sqlite", "database", "Docker", "quickstart"]},
+      {"id": "identity-and-scope", "question": "Which source or test defines Agent identity, project/workspace scope, authorization and isolation for shared coordination?", "critical": true, "keywords": ["agent", "identity", "project", "workspace", "scope", "permission", "authorization", "tenant"]},
+      {"id": "tests-and-fixtures", "question": "Which executable tests or fixtures can be run at the pinned commit to validate the candidate's coordination behavior and external API?", "critical": true, "keywords": ["integration", "e2e", "fixture", "semantic_conformance", "http_surface", "test", "snapshot"]}
+    ],
+    "repositories": [
+      {"owner": "Dicklesworthstone", "name": "mcp_agent_mail_rust"},
+      {"owner": "inclusionAI", "name": "Avernet"}
+    ],
+    "policyVersion": "zagenticopn-experience-version-ext-runtime/v1",
+    "budget": {"maxFiles": 320, "maxBytes": 10000000, "deadlineMs": 480000}
+  }
+}

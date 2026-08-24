@@ -1,0 +1,66 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Agent self-service collaboration control plane for multi-device multi-agent co-design and co-work",
+    "criteria": [
+      {
+        "id": "self-service-loop",
+        "question": "Does the project support the Human-triggered Agent self-service loop: publish available work, discover eligible work, claim exactly one work item, publish result or blocker, and let another Agent continue review?",
+        "critical": true,
+        "keywords": ["docs", "multiplayer", "workspace-first", "coordination", "handoff", "reservation", "review", "collaborate"]
+      },
+      {
+        "id": "context-model",
+        "question": "How are Agent-private context and permission-scoped shared coordination context separated, persisted, and referenced without replacing Git as the durable engineering fact source?",
+        "critical": true,
+        "keywords": ["docs", "private", "shared", "workspace", "memory", "artifact", "scope", "Git"]
+      },
+      {
+        "id": "identity-and-scope",
+        "question": "How are Human, device, Agent instance, project or initiative scope, ownership, and access boundaries represented?",
+        "critical": true,
+        "keywords": ["docs", "identity", "device", "organization", "permission", "ownership", "heterogeneous"]
+      },
+      {
+        "id": "cross-device-runtime",
+        "question": "What central service, transport, storage, recovery, and deployment model enables multiple devices and heterogeneous Agents to access shared coordination state?",
+        "critical": true,
+        "keywords": ["docs", "gateway", "server", "sync", "multi-device", "SQLite", "Postgres", "desktop", "deployment", "persistence"]
+      },
+      {
+        "id": "observability",
+        "question": "Can the project expose product-health facts such as eligible discovery, claim conflict, handoff continuation, context defects, blockers, and Human intervention?",
+        "critical": true,
+        "keywords": ["docs", "health", "metrics", "telemetry", "observability", "audit", "trace", "evidence", "status"]
+      },
+      {
+        "id": "integration-and-change",
+        "question": "What protocols, SDKs, CLI or MCP interfaces, extension seams, licenses, release practices, and upgrade responsibilities affect integration into a new base project?",
+        "critical": true,
+        "keywords": ["docs", "MCP", "SDK", "CLI", "plugin", "extension", "license", "release", "migration", "provider"]
+      },
+      {
+        "id": "experience-fit",
+        "question": "What evidence shows that the project can support a narrow first Experience Version without requiring a full workflow platform or production-grade reliability program?",
+        "critical": true,
+        "keywords": ["docs", "example", "quickstart", "demo", "workflow", "minimal", "production", "reproducible"]
+      }
+    ],
+    "repositories": [
+      {"owner": "jununfly", "name": "ZAgenticOPN"},
+      {"owner": "yc-software", "name": "qm"},
+      {"owner": "jununfly", "name": "ZAgenticLoop"},
+      {"owner": "phodal", "name": "routa"},
+      {"owner": "Dicklesworthstone", "name": "mcp_agent_mail_rust"},
+      {"owner": "inclusionAI", "name": "Avernet"}
+    ],
+    "policyVersion": "agent-self-service-capability-fit/v1",
+    "budget": {
+      "maxFiles": 84,
+      "maxBytes": 3000000,
+      "deadlineMs": 240000
+    }
+  }
+}

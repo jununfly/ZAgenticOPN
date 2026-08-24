@@ -1,0 +1,1934 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "result": {
+    "schema": "zj-verified-evidence-ledger/v1",
+    "compilerVersion": "research/v1",
+    "briefFingerprint": "8840cf323ecfbcd5b5cdf420bc56a6bdf3332739a32c60b8c736e0e6bb0e6934",
+    "policyVersion": "agent-self-service-capability-fit/v2-code-paths",
+    "observedAt": "2026-08-24T09:12:58.118Z",
+    "repositories": [
+      {
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        },
+        "revision": {
+          "sha": "45c87390fdb535066a05c0592e8183b1b461689b",
+          "branch": "main",
+          "url": "https://github.com/agentrq/agentrq/commit/45c87390fdb535066a05c0592e8183b1b461689b"
+        },
+        "tree": [
+          {
+            "path": ".env.example",
+            "sha": "87facebdb526afe51ac14e5c14ac969b47d51016",
+            "type": "blob",
+            "size": 9031
+          },
+          {
+            "path": ".githooks",
+            "sha": "e79c96f3519cbfee8feb771fcfe9084a77671d68",
+            "type": "tree"
+          },
+          {
+            "path": ".githooks/pre-commit",
+            "sha": "e37f58b79f377145acfce6fd30c4fbbe8f868f81",
+            "type": "blob",
+            "size": 1559
+          },
+          {
+            "path": ".github",
+            "sha": "21c94279661786d14fecd2b5a392ce76d76ac94c",
+            "type": "tree"
+          },
+          {
+            "path": ".github/workflows",
+            "sha": "5df7f6f9938d823f30c57f78631d15c80543b4cc",
+            "type": "tree"
+          },
+          {
+            "path": ".github/workflows/docker-publish.yml",
+            "sha": "1611082cfbfbdf06e19ac16d93f328dbff339232",
+            "type": "blob",
+            "size": 1538
+          },
+          {
+            "path": ".github/workflows/docker-release.yml",
+            "sha": "8fc8d40aa6867fd47c403f06f98694c1946649f9",
+            "type": "blob",
+            "size": 1229
+          },
+          {
+            "path": ".github/workflows/plugin-deepseek-harness.yml",
+            "sha": "1b2d885ed3c0206c52d7fead516eacd7aa5c15d0",
+            "type": "blob",
+            "size": 3882
+          },
+          {
+            "path": ".gitignore",
+            "sha": "b31c7302e7ef8f6fe96cfe0d78999a5f7e62d1c2",
+            "type": "blob",
+            "size": 663
+          },
+          {
+            "path": ".jules",
+            "sha": "47908b1213d47204d65f11ead8299be869379cc9",
+            "type": "tree"
+          },
+          {
+            "path": ".jules/sentinel.md",
+            "sha": "2f10eaa21438ceb8a21dfef21450a9c09add43d2",
+            "type": "blob",
+            "size": 4391
+          },
+          {
+            "path": "AGENTS.md",
+            "sha": "082f5f48aef6415686c1c6ba918151c73a366c0d",
+            "type": "blob",
+            "size": 3404
+          },
+          {
+            "path": "ARCHITECTURE.md",
+            "sha": "ad7605fc753a9c29d69dae9233931c70c3bbd137",
+            "type": "blob",
+            "size": 26412
+          },
+          {
+            "path": "CLAUDE.md",
+            "sha": "f6aa6c02628c3cda86119f8555a85c0e4040bad2",
+            "type": "blob",
+            "size": 24
+          },
+          {
+            "path": "DOCKER.md",
+            "sha": "b1ffc7c7ef468aaf941ba11227d7e3e61deb82e6",
+            "type": "blob",
+            "size": 6267
+          },
+          {
+            "path": "Dockerfile",
+            "sha": "26c5ebeb5d1faa9cac3d7d6fc3258dd41778dfa8",
+            "type": "blob",
+            "size": 2045
+          },
+          {
+            "path": "LICENSE",
+            "sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+            "type": "blob",
+            "size": 11357
+          },
+          {
+            "path": "Makefile",
+            "sha": "8e5f3156a7dd80b0a9203288d32245800cbe7007",
+            "type": "blob",
+            "size": 4160
+          },
+          {
+            "path": "README.md",
+            "sha": "f5d209666a8d854f74ef87304d9cc5d8417d2346",
+            "type": "blob",
+            "size": 16956
+          },
+          {
+            "path": "README.zh-CN.md",
+            "sha": "c060e3374cdc16b5e3be6a11867e5ed25a0b3dc3",
+            "type": "blob",
+            "size": 13534
+          },
+          {
+            "path": "ROADMAP.md",
+            "sha": "5e0350e672e3677659c82fd91b2a0cd6205c0880",
+            "type": "blob",
+            "size": 1959
+          },
+          {
+            "path": "SETUP.md",
+            "sha": "dc6ce3b83789799d11c6d01dc4ef9811795235f7",
+            "type": "blob",
+            "size": 14972
+          },
+          {
+            "path": "backend",
+            "sha": "f49ecc65141c9ffd3d7278ca6770d2878f2f9cef",
+            "type": "tree"
+          },
+          {
+            "path": "backend/AGENTS.md",
+            "sha": "bd1cfb7f06b9b6483a6612998941372b41fda344",
+            "type": "blob",
+            "size": 8754
+          },
+          {
+            "path": "backend/CLAUDE.md",
+            "sha": "f6aa6c02628c3cda86119f8555a85c0e4040bad2",
+            "type": "blob",
+            "size": 24
+          },
+          {
+            "path": "backend/cmd",
+            "sha": "192f09abddf995feb87627361f1d7306ff951678",
+            "type": "tree"
+          },
+          {
+            "path": "backend/cmd/server",
+            "sha": "e97b903baebef152369a85cd68af6e69a25ada61",
+            "type": "tree"
+          },
+          {
+            "path": "backend/cmd/server/_config",
+            "sha": "6f81a6bd3468437c044020b8ca34c60378b78e5a",
+            "type": "tree"
+          },
+          {
+            "path": "backend/cmd/server/_config/.env.example",
+            "sha": "6c76787907ed99d2b0b83e2b5ec2cb3eb2471f90",
+            "type": "blob",
+            "size": 1734
+          },
+          {
+            "path": "backend/cmd/server/_config/base.yaml",
+            "sha": "9b6c00223cc2b5abb7726c254629f2c83715aa00",
+            "type": "blob",
+            "size": 2672
+          },
+          {
+            "path": "backend/cmd/server/_config/development.yaml",
+            "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+            "type": "blob",
+            "size": 0
+          },
+          {
+            "path": "backend/cmd/server/_config/production.yaml",
+            "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+            "type": "blob",
+            "size": 0
+          },
+          {
+            "path": "backend/cmd/server/_storage",
+            "sha": "8dece6d47ee4e1b3a1fa4a18559fab59292fcdb5",
+            "type": "tree"
+          },
+          {
+            "path": "backend/cmd/server/_storage/logo.png",
+            "sha": "7952683ab6d7fefbb362d505bba79ff0602ce85d",
+            "type": "blob",
+            "size": 2361
+          },
+          {
+            "path": "backend/cmd/server/_storage/logo.svg",
+            "sha": "ee5c6b6586d175504d0c8e53bc83dd846dd99950",
+            "type": "blob",
+            "size": 401
+          },
+          {
+            "path": "backend/cmd/server/main.go",
+            "sha": "86463938fae582914ebed3060dea8b4a60ddea98",
+            "type": "blob",
+            "size": 2063
+          },
+          {
+            "path": "backend/cmd/server/public",
+            "sha": "1bc79525ac7ad4a47c247f457b5151bb2cb349a2",
+            "type": "tree"
+          },
+          {
+            "path": "backend/cmd/server/public/favicon.ico",
+            "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+            "type": "blob",
+            "size": 0
+          },
+          {
+            "path": "backend/cmd/server/public/index.html",
+            "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+            "type": "blob",
+            "size": 0
+          },
+          {
+            "path": "backend/go.mod",
+            "sha": "3e1dc6f39af898fa25932c97c82bf08919dabbbe",
+            "type": "blob",
+            "size": 2963
+          },
+          {
+            "path": "backend/go.sum",
+            "sha": "170f2ad96b1ed912ea7e85e979c59e0a48d1c0fe",
+            "type": "blob",
+            "size": 23358
+          },
+          {
+            "path": "backend/internal",
+            "sha": "b8a327acb4559ec20809b10351c8f0cda58fe1e8",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/app",
+            "sha": "35c8aea2b6cf50516d09a34de7685ffa8cddd7ae",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/app/app.go",
+            "sha": "a8552493e36ff4185cabb5416cfbf1d66cce4f5e",
+            "type": "blob",
+            "size": 35128
+          },
+          {
+            "path": "backend/internal/controller",
+            "sha": "3c1d2af52bcbae06a92a88214787137d1f250f79",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/crud",
+            "sha": "7c8df365a631539dfc138e9e076d3a37155db96c",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/crud/common_test.go",
+            "sha": "5bb91ac2f789e4c9a747d744282c9832900cc87b",
+            "type": "blob",
+            "size": 1824
+          },
+          {
+            "path": "backend/internal/controller/crud/crud.go",
+            "sha": "705ebe8fee98efad2be1e6ba65ffd7d9f1a6b7b6",
+            "type": "blob",
+            "size": 5004
+          },
+          {
+            "path": "backend/internal/controller/crud/dup_name_test.go",
+            "sha": "8fd7da3e84f633936bcc1239461ac44a0a7f3126",
+            "type": "blob",
+            "size": 3806
+          },
+          {
+            "path": "backend/internal/controller/crud/event.go",
+            "sha": "1093bd8b13f18d9ca86d3cad0e8f3bc9bf5f7dec",
+            "type": "blob",
+            "size": 11268
+          },
+          {
+            "path": "backend/internal/controller/crud/event_test.go",
+            "sha": "e530e8d7ed35d82328a6361cf8c3a30b98ccf1a3",
+            "type": "blob",
+            "size": 18166
+          },
+          {
+            "path": "backend/internal/controller/crud/task.go",
+            "sha": "63c58dfab8fb4996060139782fbd450093b272d9",
+            "type": "blob",
+            "size": 26982
+          },
+          {
+            "path": "backend/internal/controller/crud/task_test.go",
+            "sha": "fa1bc21ba138995a405af501249648fe874988c0",
+            "type": "blob",
+            "size": 48116
+          },
+          {
+            "path": "backend/internal/controller/crud/telemetry.go",
+            "sha": "17e837c34c1c65c3d4cf9f80d4db7e5f8008e1b2",
+            "type": "blob",
+            "size": 1832
+          },
+          {
+            "path": "backend/internal/controller/crud/telemetry_test.go",
+            "sha": "7895156f1792f4c6f837abe86796e3b1a646a810",
+            "type": "blob",
+            "size": 6362
+          },
+          {
+            "path": "backend/internal/controller/crud/user.go",
+            "sha": "8f30a22fc9e515b315c8ceee6742fa68013ea427",
+            "type": "blob",
+            "size": 3338
+          },
+          {
+            "path": "backend/internal/controller/crud/user_test.go",
+            "sha": "85f6ac51447838e16966a3744f51311e8c19ce8f",
+            "type": "blob",
+            "size": 3459
+          },
+          {
+            "path": "backend/internal/controller/crud/workflow.go",
+            "sha": "4bbe2dfa607b880c1eea94ef9658450a76c2d162",
+            "type": "blob",
+            "size": 10988
+          },
+          {
+            "path": "backend/internal/controller/crud/workflow_test.go",
+            "sha": "6ad9d3e6146b461172b2cd709354a4d0a08aca5c",
+            "type": "blob",
+            "size": 3145
+          },
+          {
+            "path": "backend/internal/controller/crud/workflow_text.go",
+            "sha": "7dbad587294f1c860168790fb1fffebea87254ae",
+            "type": "blob",
+            "size": 10659
+          },
+          {
+            "path": "backend/internal/controller/crud/workflow_text_controller.go",
+            "sha": "09b04a7d6446a327fada79ed9669dce792148dad",
+            "type": "blob",
+            "size": 7519
+          },
+          {
+            "path": "backend/internal/controller/crud/workflow_text_test.go",
+            "sha": "cd2ea5e80487cc489514ba488057161768d47789",
+            "type": "blob",
+            "size": 12027
+          },
+          {
+            "path": "backend/internal/controller/crud/workspace.go",
+            "sha": "bf17db2f7588e73f419d6fabffdeec111c962444",
+            "type": "blob",
+            "size": 9653
+          },
+          {
+            "path": "backend/internal/controller/crud/workspace_idor_test.go",
+            "sha": "908dde8a4815d11970127fbb6daa16a119ad3e04",
+            "type": "blob",
+            "size": 889
+          },
+          {
+            "path": "backend/internal/controller/crud/workspace_test.go",
+            "sha": "44bc202ead700708c5986db8d78a2c17cbc7c385",
+            "type": "blob",
+            "size": 6954
+          },
+          {
+            "path": "backend/internal/controller/event",
+            "sha": "2ed28d106bd87534f98089f83ad32d215b5ca1ec",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/event/event.go",
+            "sha": "b0a7a5fe99b69ca6c562f82f9d682076c1b74647",
+            "type": "blob",
+            "size": 10047
+          },
+          {
+            "path": "backend/internal/controller/event/event_test.go",
+            "sha": "02e9ce02110a4afdedf180758e3dc86b79b2a1d8",
+            "type": "blob",
+            "size": 13635
+          },
+          {
+            "path": "backend/internal/controller/mcp",
+            "sha": "639f6c633df33bd173a9d56e82d5e26874ba9924",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/mcp/autoallow.go",
+            "sha": "1b551f5b326a168e7583ce782202f0c00e7bae1d",
+            "type": "blob",
+            "size": 5186
+          },
+          {
+            "path": "backend/internal/controller/mcp/autoallow_test.go",
+            "sha": "58ccbadb0d66874cf940509ce2375c13a3151ec7",
+            "type": "blob",
+            "size": 8916
+          },
+          {
+            "path": "backend/internal/controller/mcp/client_identity.go",
+            "sha": "9193a4a5e4a295d91ff947899e6b08046b1e77b7",
+            "type": "blob",
+            "size": 2583
+          },
+          {
+            "path": "backend/internal/controller/mcp/event.go",
+            "sha": "a96759dcd551845d5766c22945e3de302bcd2c79",
+            "type": "blob",
+            "size": 1125
+          },
+          {
+            "path": "backend/internal/controller/mcp/lifecycle_test.go",
+            "sha": "3a1147bc9191cf150ab1ac30c6db35d666d88f6b",
+            "type": "blob",
+            "size": 1304
+          },
+          {
+            "path": "backend/internal/controller/mcp/manager.go",
+            "sha": "ec6e6791396a2acefe5e4c9e3fd146bd3ccd07ab",
+            "type": "blob",
+            "size": 2562
+          },
+          {
+            "path": "backend/internal/controller/mcp/manager_test.go",
+            "sha": "8cba52d13c1082ecee3f14ba4cc97d82649a686e",
+            "type": "blob",
+            "size": 1788
+          },
+          {
+            "path": "backend/internal/controller/mcp/protocol_version_test.go",
+            "sha": "74f755ff5d75de6388e2e2243ac812b47c16a8a8",
+            "type": "blob",
+            "size": 14436
+          },
+          {
+            "path": "backend/internal/controller/mcp/server.go",
+            "sha": "e71ea9605b8c0831f596ce2487d6b964d6a572c7",
+            "type": "blob",
+            "size": 59786
+          },
+          {
+            "path": "backend/internal/controller/mcp/server_test.go",
+            "sha": "fc7b05ecaed74fac3cad7adf1c257c65239d442d",
+            "type": "blob",
+            "size": 26680
+          },
+          {
+            "path": "backend/internal/controller/notification",
+            "sha": "1aa174dcf62c2726719b99b804142a00abf17ef3",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/notification/email.go",
+            "sha": "a74b382f83a2bc105e7b97acdf5ecd15bfccc138",
+            "type": "blob",
+            "size": 4886
+          },
+          {
+            "path": "backend/internal/controller/notification/email_test.go",
+            "sha": "c219ac3a5f4891c7e828e55c1eb1aec2ce995ce7",
+            "type": "blob",
+            "size": 3329
+          },
+          {
+            "path": "backend/internal/controller/notification/notification.go",
+            "sha": "9274147deecf8a17a8da61aac230d452579877d0",
+            "type": "blob",
+            "size": 6786
+          },
+          {
+            "path": "backend/internal/controller/notification/notification_test.go",
+            "sha": "f03447c9f7ef3e43b6f6bc43ca78425694290147",
+            "type": "blob",
+            "size": 3728
+          },
+          {
+            "path": "backend/internal/controller/pub",
+            "sha": "e0ee7a43818ecf05b6e6010f46ba568ca7b87ce5",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/pub/stats.go",
+            "sha": "bba11fe54780ef98fb58d3bf554ab34643c84b6b",
+            "type": "blob",
+            "size": 7242
+          },
+          {
+            "path": "backend/internal/controller/push",
+            "sha": "6ea2fa6cbd1e49eb66df03651e57e89d2df98356",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/push/push.go",
+            "sha": "157e35731cd0ace0f96f2bd4f4483664c1eb437a",
+            "type": "blob",
+            "size": 7979
+          },
+          {
+            "path": "backend/internal/controller/push/push_test.go",
+            "sha": "71344a115db5e728ca7037b7d00f68882ce88fc0",
+            "type": "blob",
+            "size": 17431
+          },
+          {
+            "path": "backend/internal/controller/slack",
+            "sha": "95e1e818a47bd7027498e2e75530bd20f128ee20",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/slack/slack.go",
+            "sha": "960637c066f41b12e330dec82ff23f30542fface",
+            "type": "blob",
+            "size": 37235
+          },
+          {
+            "path": "backend/internal/controller/slack/slack_test.go",
+            "sha": "75e8d7a848a3d6aca8acd808355ce4428286efea",
+            "type": "blob",
+            "size": 37471
+          },
+          {
+            "path": "backend/internal/controller/telemetry",
+            "sha": "3278c728b9a5205f079e5c369eceb7d9926cadd4",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/controller/telemetry/close_test.go",
+            "sha": "db982523e33d41c2861a27077aac5fe115b714af",
+            "type": "blob",
+            "size": 1454
+          },
+          {
+            "path": "backend/internal/controller/telemetry/telemetry.go",
+            "sha": "7f71bc4e4b09dce7dfe5e5d563389d142da3c005",
+            "type": "blob",
+            "size": 7158
+          },
+          {
+            "path": "backend/internal/controller/telemetry/telemetry_test.go",
+            "sha": "d9c57977453e483b97144ac1adc1ed5eb9242f57",
+            "type": "blob",
+            "size": 8193
+          },
+          {
+            "path": "backend/internal/data",
+            "sha": "d6f657f3de3924f2385788fa0ebfbf010bbb3f78",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/entity",
+            "sha": "c4ff8384da226f184fc58d2832540791062ed2e4",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/entity/crud",
+            "sha": "c758d1b5bfdba3dd208e6eabc98c195e33f0f54f",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/entity/crud/entity.go",
+            "sha": "da0f6caa420749656b61dbe74178605a9afbd12d",
+            "type": "blob",
+            "size": 20454
+          },
+          {
+            "path": "backend/internal/data/entity/err",
+            "sha": "3c760b7d66a3c19dca020677acec82e4d5f4b00e",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/entity/err/error.go",
+            "sha": "1517ff19e3188ecb61f67e23216d358db4bb09f9",
+            "type": "blob",
+            "size": 2929
+          },
+          {
+            "path": "backend/internal/data/model",
+            "sha": "049dfaca982c919c76bfd8b9787be5d6a7f46412",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/model/model.go",
+            "sha": "95b0825d7a1342bcbb9e101d8a637bf7457e893b",
+            "type": "blob",
+            "size": 12839
+          },
+          {
+            "path": "backend/internal/data/view",
+            "sha": "31dbd3a20975a483ada833f1aca4954e49cf9d10",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/view/api",
+            "sha": "eb3c46f1ee780c5d4ab23cace21009c830d415f8",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/data/view/api/view.go",
+            "sha": "95cd83574c53e3ece197752c13b072629e88817e",
+            "type": "blob",
+            "size": 13801
+          },
+          {
+            "path": "backend/internal/handler",
+            "sha": "20aa18026d596f61d9bb6dcdb9769488fb287878",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/api",
+            "sha": "8f545ebb1f1842d6caa18107eec5b0b0086125bb",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/api/api.go",
+            "sha": "4afdeb78bf1945c0b2f97de411e783648974d544",
+            "type": "blob",
+            "size": 26652
+          },
+          {
+            "path": "backend/internal/handler/api/api_test.go",
+            "sha": "08ea77ff78f452db43d3ed05d8f2a5819e557ac0",
+            "type": "blob",
+            "size": 11894
+          },
+          {
+            "path": "backend/internal/handler/api/event.go",
+            "sha": "318cb01a45dd41093863c8763f525ee182cb8154",
+            "type": "blob",
+            "size": 8196
+          },
+          {
+            "path": "backend/internal/handler/api/event_test.go",
+            "sha": "9c786a6ccad9f9ac1b876bb2bad49cfa46cf791a",
+            "type": "blob",
+            "size": 23078
+          },
+          {
+            "path": "backend/internal/handler/api/middleware",
+            "sha": "cdf3cd4492417bd537801125a880936786621a7f",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/api/middleware/ddos",
+            "sha": "d8038a72abd5e0dfd0275017a97cbbb88b95da6c",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/api/middleware/ddos/ddos.go",
+            "sha": "32193431cefc9902a9fd4901c337604fffd494cd",
+            "type": "blob",
+            "size": 2968
+          },
+          {
+            "path": "backend/internal/handler/api/middleware/ratelimit",
+            "sha": "6d561a9af9b576d193508b54a4a2d3b9c7feaa5a",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/api/middleware/ratelimit/ratelimit.go",
+            "sha": "aac96ac297e4297b9e859fb257ae8f3dd38b76ca",
+            "type": "blob",
+            "size": 5656
+          },
+          {
+            "path": "backend/internal/handler/api/push.go",
+            "sha": "064a0d259ba1312fca9f2e917796ff19f7030a6f",
+            "type": "blob",
+            "size": 5400
+          },
+          {
+            "path": "backend/internal/handler/api/push_test.go",
+            "sha": "c7ffff91053f5b724d03e4f0493b95fa92304380",
+            "type": "blob",
+            "size": 9458
+          },
+          {
+            "path": "backend/internal/handler/api/task.go",
+            "sha": "c6e34519dbb2815c87d5907195fa5dc8ec47ebdd",
+            "type": "blob",
+            "size": 22124
+          },
+          {
+            "path": "backend/internal/handler/api/telemetry.go",
+            "sha": "44e8103dd07b3b1f5ff0b8be5e4062dbf47dc3ce",
+            "type": "blob",
+            "size": 1666
+          },
+          {
+            "path": "backend/internal/handler/api/telemetry_test.go",
+            "sha": "262f4806061f54e39b6e545602bcc9c97f7d1951",
+            "type": "blob",
+            "size": 4727
+          },
+          {
+            "path": "backend/internal/handler/api/workflow.go",
+            "sha": "3a14e90a4ccc1bc0ebc792e7ddd1f7e501ad709d",
+            "type": "blob",
+            "size": 9462
+          },
+          {
+            "path": "backend/internal/handler/coremcp",
+            "sha": "c51d4f613697b6f510ff77515c2774d387a78dd5",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/coremcp/coremcp.go",
+            "sha": "3ddb047a20c7fc22433b016b2b1e5d383967744c",
+            "type": "blob",
+            "size": 20874
+          },
+          {
+            "path": "backend/internal/handler/coremcp/oauth_authorize_test.go",
+            "sha": "fd9912183ac54a09e3b5c2b11fed34da699ace32",
+            "type": "blob",
+            "size": 5276
+          },
+          {
+            "path": "backend/internal/handler/coremcp/oauth_metadata_test.go",
+            "sha": "cec3cfe13b72c85b11a827ff1413f15be5d4287b",
+            "type": "blob",
+            "size": 3629
+          },
+          {
+            "path": "backend/internal/handler/coremcp/server.go",
+            "sha": "16360e6ebd5f2b349820196fe15df34bb876a308",
+            "type": "blob",
+            "size": 20405
+          },
+          {
+            "path": "backend/internal/handler/mcp",
+            "sha": "3a04bdcd2da0e63de198deb3099a61d99e704529",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/mcp/mcp.go",
+            "sha": "2f4cd663a6f7b5384c06285a4b39924fc2f50ae2",
+            "type": "blob",
+            "size": 25359
+          },
+          {
+            "path": "backend/internal/handler/mcp/mcp_test.go",
+            "sha": "ff8f3658d0facc8011cd328e969a4a197a463634",
+            "type": "blob",
+            "size": 8537
+          },
+          {
+            "path": "backend/internal/handler/mcp/oauth_client_binding_test.go",
+            "sha": "0ef485b803910d08e02daba114a590d7bef8df00",
+            "type": "blob",
+            "size": 17787
+          },
+          {
+            "path": "backend/internal/handler/slack",
+            "sha": "21d3328f03caa7aaad3dbbc95526ad7256f11b0d",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/handler/slack/slack.go",
+            "sha": "302fbc43a49c03074bff75bfa335914d7a59b2a0",
+            "type": "blob",
+            "size": 9009
+          },
+          {
+            "path": "backend/internal/mapper",
+            "sha": "03e3eac8805e1682847040fb4507d2cfcf34165f",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/mapper/api",
+            "sha": "1dade443c6f4ecb6e8372e5bfa69d7af9a9115aa",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/mapper/api/error.go",
+            "sha": "8d8f8e1d36d8af1789664448fd72ed2daceb5ce4",
+            "type": "blob",
+            "size": 1266
+          },
+          {
+            "path": "backend/internal/mapper/api/event.go",
+            "sha": "0b2760d34bbbbec84a7e2f010f94bdbfa4bbe640",
+            "type": "blob",
+            "size": 7928
+          },
+          {
+            "path": "backend/internal/mapper/api/push.go",
+            "sha": "cc9271d5830c64e7e8a782a8b71c8c7f19aea9a4",
+            "type": "blob",
+            "size": 2203
+          },
+          {
+            "path": "backend/internal/mapper/api/task.go",
+            "sha": "9407b6ae632a05000ed061647600e909ac0cf2cd",
+            "type": "blob",
+            "size": 15815
+          },
+          {
+            "path": "backend/internal/mapper/api/telemetry.go",
+            "sha": "5d582e7837a3fec07fd67c3f4500581fd9a661a6",
+            "type": "blob",
+            "size": 1126
+          },
+          {
+            "path": "backend/internal/mapper/api/workflow.go",
+            "sha": "e2deafda2bb4c7e63b9bf721de27599b79e3015f",
+            "type": "blob",
+            "size": 10303
+          },
+          {
+            "path": "backend/internal/mapper/api/workspace.go",
+            "sha": "e52dbc17c2ba43ea15c99bb7767251d34d489ca2",
+            "type": "blob",
+            "size": 6457
+          },
+          {
+            "path": "backend/internal/repository",
+            "sha": "ab95bd796189bb5703efecd5a5835ef83f4b0a3c",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/repository/base",
+            "sha": "0473f29dddadddfcf79be52d4b7b57f8c2edf33d",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/repository/base/dequeue_index_test.go",
+            "sha": "6d79a3fb08e772a4248f8fdde013b74da1da9e57",
+            "type": "blob",
+            "size": 1311
+          },
+          {
+            "path": "backend/internal/repository/base/repository.go",
+            "sha": "e1473f30ee5c83e3af6c56a4f454aa6c537e4a49",
+            "type": "blob",
+            "size": 43021
+          },
+          {
+            "path": "backend/internal/repository/base/repository_test.go",
+            "sha": "66d75dc39ff513e37be0b07715a7cdb45fd44612",
+            "type": "blob",
+            "size": 20582
+          },
+          {
+            "path": "backend/internal/repository/dbconn",
+            "sha": "04448e7fc1e5ed7805b5896ff68b04956324ba55",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/repository/dbconn/dbconn.go",
+            "sha": "b0ad06ffb7f3cd93df6e9b6b6c947ef6cc7419e9",
+            "type": "blob",
+            "size": 335
+          },
+          {
+            "path": "backend/internal/repository/postgres",
+            "sha": "ae971f86533c073b5d5983a98800872bf3458541",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/repository/postgres/postgres.go",
+            "sha": "c5349a0f90a76aa36f06a9826e6df17ff983531e",
+            "type": "blob",
+            "size": 1830
+          },
+          {
+            "path": "backend/internal/repository/sqlite",
+            "sha": "d40262c0c90386cb4ad793237ac416a5046693c5",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/repository/sqlite/sqlite.go",
+            "sha": "5f8b64dfe76ed412a1c557543abb7e2988b1b554",
+            "type": "blob",
+            "size": 2801
+          },
+          {
+            "path": "backend/internal/repository/sqlite/sqlite_pragmas_test.go",
+            "sha": "171801238176df91a77cd2e8fc09acbd0a99dad5",
+            "type": "blob",
+            "size": 1768
+          },
+          {
+            "path": "backend/internal/service",
+            "sha": "52947d58cf62062baaf46482dc5a945774b7abc0",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/auth",
+            "sha": "761259006baafedcdb601ab8e4241c2726ff4052",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/auth/auth.go",
+            "sha": "4bd92abfc0313a3b3a19b40c955830adecc489df",
+            "type": "blob",
+            "size": 324
+          },
+          {
+            "path": "backend/internal/service/auth/auth_test.go",
+            "sha": "7c340b1a3873844f46d7fa41c2ea91e2e0b2313d",
+            "type": "blob",
+            "size": 1035
+          },
+          {
+            "path": "backend/internal/service/auth/cimd.go",
+            "sha": "46c971ccb5fa029f66faf69060b2276618920db2",
+            "type": "blob",
+            "size": 12294
+          },
+          {
+            "path": "backend/internal/service/auth/cimd_test.go",
+            "sha": "c1979b336f9eaba90d96959bcfc5dd56a7d4672d",
+            "type": "blob",
+            "size": 10747
+          },
+          {
+            "path": "backend/internal/service/auth/github.go",
+            "sha": "0310af9b8c537dd881f023b2321dbc76d346d5bb",
+            "type": "blob",
+            "size": 2882
+          },
+          {
+            "path": "backend/internal/service/auth/github_test.go",
+            "sha": "6086a6ac9e1e3491d79e7f7680605dc8adc7632c",
+            "type": "blob",
+            "size": 868
+          },
+          {
+            "path": "backend/internal/service/auth/google.go",
+            "sha": "09a442ac2f7708054f100f85cb37113adeb06b40",
+            "type": "blob",
+            "size": 1394
+          },
+          {
+            "path": "backend/internal/service/auth/jwt.go",
+            "sha": "9dad973d503f64000e93be5359a8ac57a2c60eb3",
+            "type": "blob",
+            "size": 7429
+          },
+          {
+            "path": "backend/internal/service/auth/jwt_test.go",
+            "sha": "ad0e4ba898ea41b3b26309950002957dc7a2de26",
+            "type": "blob",
+            "size": 5318
+          },
+          {
+            "path": "backend/internal/service/auth/redirect_match.go",
+            "sha": "51b62f419b60e0ddc85fd67537ee211952a65269",
+            "type": "blob",
+            "size": 3008
+          },
+          {
+            "path": "backend/internal/service/auth/redirect_match_test.go",
+            "sha": "c1f099099165234b7a888e34b0daa50f28ea63d2",
+            "type": "blob",
+            "size": 4245
+          },
+          {
+            "path": "backend/internal/service/auth/redirect_scheme.go",
+            "sha": "3fff6938ca4f43a587f285d42292eef7a642ff78",
+            "type": "blob",
+            "size": 1574
+          },
+          {
+            "path": "backend/internal/service/cleanup",
+            "sha": "e166ae90543afcfe546615fd3578de620c948926",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/cleanup/cleanup.go",
+            "sha": "0d6eb04188afd903880f7d8d2de272f74c12140a",
+            "type": "blob",
+            "size": 3057
+          },
+          {
+            "path": "backend/internal/service/cleanup/cleanup_test.go",
+            "sha": "4e911fbce90b5bc05a0f1fe54e5bd95fc4c477ef",
+            "type": "blob",
+            "size": 3573
+          },
+          {
+            "path": "backend/internal/service/config",
+            "sha": "c2bffcbbc1fd67a75cc5ad6d1939261e09160999",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/config/config.go",
+            "sha": "2d13078bedabd56c3b7555a17e5f1e125a0c3ef2",
+            "type": "blob",
+            "size": 3384
+          },
+          {
+            "path": "backend/internal/service/config/config_test.go",
+            "sha": "bd46951c7b81380e8e31ea14ff3f0fd84094b88f",
+            "type": "blob",
+            "size": 3463
+          },
+          {
+            "path": "backend/internal/service/eventbus",
+            "sha": "baa7c2b8447d42324cbeb7f8952412e867306abc",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/eventbus/eventbus.go",
+            "sha": "fc36cfb922dec717e61a3a5eab138236495c701b",
+            "type": "blob",
+            "size": 2466
+          },
+          {
+            "path": "backend/internal/service/eventbus/eventbus_test.go",
+            "sha": "c3da3cfe4e612e99b1e9257e7925f152ffe3b06b",
+            "type": "blob",
+            "size": 1109
+          },
+          {
+            "path": "backend/internal/service/eventinstruction",
+            "sha": "a313066050a2294f2c5f749d2764da1323d880e3",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/eventinstruction/eventinstruction.go",
+            "sha": "ae76e1c764b0a2ceba1ebd8fa218c75c33f7e161",
+            "type": "blob",
+            "size": 2893
+          },
+          {
+            "path": "backend/internal/service/eventinstruction/eventinstruction_test.go",
+            "sha": "6c192dbc664a15c7aaeb94ca1883d034b9f7b760",
+            "type": "blob",
+            "size": 2916
+          },
+          {
+            "path": "backend/internal/service/idgen",
+            "sha": "8e75b9b5bfc330cc1d0bfebeef02b70353306c8b",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/idgen/idgen.go",
+            "sha": "5120e73b5a7afcf9918a70516360455a3c726d0d",
+            "type": "blob",
+            "size": 371
+          },
+          {
+            "path": "backend/internal/service/idgen/idgen_test.go",
+            "sha": "cd2a176c431d0469296b1b5cf5ac982f742646d6",
+            "type": "blob",
+            "size": 352
+          },
+          {
+            "path": "backend/internal/service/image",
+            "sha": "8a4c81ad2650151d3c14496b6d90a7d7e8828d4d",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/image/image.go",
+            "sha": "be07c34541f77d367739dfd49fe61a0a2bdb3658",
+            "type": "blob",
+            "size": 1789
+          },
+          {
+            "path": "backend/internal/service/image/image_test.go",
+            "sha": "9ade30e798bf4423a2fa77fb8b5c101e59fd05c0",
+            "type": "blob",
+            "size": 1638
+          },
+          {
+            "path": "backend/internal/service/log",
+            "sha": "cfd85c5951161cbd049c35762149494aa219a3bc",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/log/log.go",
+            "sha": "4f4f2bea9149504715348f88df961509730c612d",
+            "type": "blob",
+            "size": 580
+          },
+          {
+            "path": "backend/internal/service/memq",
+            "sha": "0016387a0a53beb585f1afbe9762e25c2f31f752",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/memq/memq.go",
+            "sha": "ac24be68d1e72bfe18cc9318f06845c3c982a565",
+            "type": "blob",
+            "size": 4020
+          },
+          {
+            "path": "backend/internal/service/memq/memq_test.go",
+            "sha": "b4005b5281b0c953b5f52243b44e8ac742b458a3",
+            "type": "blob",
+            "size": 3317
+          },
+          {
+            "path": "backend/internal/service/pubsub",
+            "sha": "44e1be37c2379e671a29eccd755ce1df1394771d",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/pubsub/entity.go",
+            "sha": "b992bb51188a6c37cec3d007111c244efacf745f",
+            "type": "blob",
+            "size": 442
+          },
+          {
+            "path": "backend/internal/service/pubsub/pubsub.go",
+            "sha": "9dc3d587c91f01a291cb0089816b07213b42df61",
+            "type": "blob",
+            "size": 6356
+          },
+          {
+            "path": "backend/internal/service/ratelimit",
+            "sha": "1ea46568b2ea6f8bea2a6e0380696c2caa2b9c51",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/ratelimit/ratelimit.go",
+            "sha": "960e6d03da02f5fe2333799add32efa90b838773",
+            "type": "blob",
+            "size": 2820
+          },
+          {
+            "path": "backend/internal/service/ratelimit/ratelimit_test.go",
+            "sha": "9e207a11b36d00ef30fcdb9b9b4c81e8657463b6",
+            "type": "blob",
+            "size": 5365
+          },
+          {
+            "path": "backend/internal/service/schedule",
+            "sha": "8fdc80247912d54d4ace736b6d331bc07cd94bcb",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/schedule/cron.go",
+            "sha": "8dfa001c20ca10ad51990f310115a070d5937dec",
+            "type": "blob",
+            "size": 1453
+          },
+          {
+            "path": "backend/internal/service/schedule/cron_test.go",
+            "sha": "cdce728f8248e8a49a5f38fb1db87f76c0b1379e",
+            "type": "blob",
+            "size": 1524
+          },
+          {
+            "path": "backend/internal/service/scheduler",
+            "sha": "2cf791b3f67b6e70920de15305ae1de4d20be02b",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/scheduler/scheduler.go",
+            "sha": "c4fc85ba726f62a7091a5273dace76a0d62f4a6e",
+            "type": "blob",
+            "size": 5391
+          },
+          {
+            "path": "backend/internal/service/scheduler/scheduler_test.go",
+            "sha": "1668ca56783fbb2f5e47058daadd6ee303b86356",
+            "type": "blob",
+            "size": 6504
+          },
+          {
+            "path": "backend/internal/service/security",
+            "sha": "9e131ad2c9c3184b6396b736efdd2675358f321a",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/security/security.go",
+            "sha": "dcda465efab99529b130972050d58e53a020e117",
+            "type": "blob",
+            "size": 2379
+          },
+          {
+            "path": "backend/internal/service/security/security_test.go",
+            "sha": "6a8b87031ec5be784181d2cdf7f8b80f052db8d6",
+            "type": "blob",
+            "size": 2303
+          },
+          {
+            "path": "backend/internal/service/server",
+            "sha": "5311a8f1af912e32e62fd6cebeccc60284006c11",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/server/server.go",
+            "sha": "3401d7db63837b88a0f51c692117d9a700f9382a",
+            "type": "blob",
+            "size": 11530
+          },
+          {
+            "path": "backend/internal/service/server/server_test.go",
+            "sha": "59637213bcc82bd229879b24e02325593f528d2e",
+            "type": "blob",
+            "size": 3692
+          },
+          {
+            "path": "backend/internal/service/slack",
+            "sha": "55a612ef3255cb09e2b87afc6571de00516a3cc5",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/slack/slack.go",
+            "sha": "f741e4e4e0f31a8087b8f4858f3d0e811429905b",
+            "type": "blob",
+            "size": 12968
+          },
+          {
+            "path": "backend/internal/service/smtp",
+            "sha": "3db13e0cc02ea0337b6424144382cd91f30b82d4",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/smtp/smtp.go",
+            "sha": "9296dfc369745c04575551027c81dc73fb4855f7",
+            "type": "blob",
+            "size": 2474
+          },
+          {
+            "path": "backend/internal/service/smtp/smtp_test.go",
+            "sha": "025580ffdd5b67d48d8f90161ecfa7b9a4c8bf58",
+            "type": "blob",
+            "size": 1217
+          },
+          {
+            "path": "backend/internal/service/storage",
+            "sha": "fb5f95433692f304a7021276c444301af3dcd7aa",
+            "type": "tree"
+          },
+          {
+            "path": "backend/internal/service/storage/path_traversal_test.go",
+            "sha": "b1901d49076cffde17dbb3c2ddebab0c11026c83",
+            "type": "blob",
+            "size": 1511
+          },
+          {
+            "path": "backend/internal/service/storage/storage.go",
+            "sha": "6bcf75f795a36de4bac1c9bb80f140e5468354e9",
+            "type": "blob",
+            "size": 1873
+          },
+          {
+            "path": "backend/internal/service/storage/storage_test.go",
+            "sha": "f09b823fa7624f034df15fedb64f40cdc2a44a06",
+            "type": "blob",
+            "size": 1594
+          },
+          {
+            "path": "backend/openapi.yaml",
+            "sha": "1f605069e05a44668eaa0f4a5467382bb9b0919e",
+            "type": "blob",
+            "size": 10834
+          },
+          {
+            "path": "docker-compose.yml",
+            "sha": "dfcc47fc366243afc051484f47ba129c57995034",
+            "type": "blob",
+            "size": 4125
+          },
+          {
+            "path": "docs",
+            "sha": "1e7eedcea30acc387a67ec5c4422ea4b76517235",
+            "type": "tree"
+          },
+          {
+            "path": "docs/SETUP_PRODUCTION.md",
+            "sha": "9489b33baa2e379b8a5f58669161b5f772f68ac2",
+            "type": "blob",
+            "size": 4506
+          },
+          {
+            "path": "docs/SETUP_QUICK_START.md",
+            "sha": "3ea4e643781c6508772d0eda76a0ba77cc8077da",
+            "type": "blob",
+            "size": 2225
+          },
+          {
+            "path": "docs/SETUP_TROUBLESHOOTING.md",
+            "sha": "50870545233a3f239e5951ca63c64220f42023f0",
+            "type": "blob",
+            "size": 4326
+          },
+          {
+            "path": "frontend",
+            "sha": "b639a979dc067b9241c8ebad59e4c4e3af9766d1",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/AGENTS.md",
+            "sha": "9c02d1e65073f29ba3120cec57b831522eca8c63",
+            "type": "blob",
+            "size": 2412
+          },
+          {
+            "path": "frontend/CLAUDE.md",
+            "sha": "f6aa6c02628c3cda86119f8555a85c0e4040bad2",
+            "type": "blob",
+            "size": 24
+          },
+          {
+            "path": "frontend/build_output.txt",
+            "sha": "1bc9c31057c4e579b99d7a23cc7b5eaf107f3b81",
+            "type": "blob",
+            "size": 1995
+          },
+          {
+            "path": "frontend/index.html",
+            "sha": "cff7a7050638424b315fc3dc45ce17b5bf194fb0",
+            "type": "blob",
+            "size": 876
+          },
+          {
+            "path": "frontend/package-lock.json",
+            "sha": "b326f9ad31442291cef1a0f0069bca430151b229",
+            "type": "blob",
+            "size": 278349
+          },
+          {
+            "path": "frontend/package.json",
+            "sha": "cc30985e4ad2ee9cdfa2bfae698f9a8a44d8ee9a",
+            "type": "blob",
+            "size": 794
+          },
+          {
+            "path": "frontend/public",
+            "sha": "f1eedf2f89de2f8cb4acf37436f633997279354c",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/public/agentrq.png",
+            "sha": "7f18bb1363e7e1bed29d0dced61cd681a51cc064",
+            "type": "blob",
+            "size": 17212
+          },
+          {
+            "path": "frontend/public/favicon.ico",
+            "sha": "f435003334f8d0972aeb2a50ee4131f929aafeff",
+            "type": "blob",
+            "size": 4286
+          },
+          {
+            "path": "frontend/public/favicon.svg",
+            "sha": "9669ba2821848f0fa3119c44dbda86f31b288249",
+            "type": "blob",
+            "size": 761
+          },
+          {
+            "path": "frontend/public/large-icon.png",
+            "sha": "827f6a50e594a9ccd4204e2530dd4b7d84f33a4d",
+            "type": "blob",
+            "size": 24662
+          },
+          {
+            "path": "frontend/public/pwa-192x192.png",
+            "sha": "9256277ec09614d33f4cf710a61c9584780e2649",
+            "type": "blob",
+            "size": 2646
+          },
+          {
+            "path": "frontend/public/pwa-512x512.png",
+            "sha": "54fd10f656a17290975c634b8e663c4c5c21697f",
+            "type": "blob",
+            "size": 16649
+          },
+          {
+            "path": "frontend/public/robots.txt",
+            "sha": "c2a49f4fb82f19ffa9089fcf8630e5a2870d3feb",
+            "type": "blob",
+            "size": 23
+          },
+          {
+            "path": "frontend/src",
+            "sha": "378cc40452e5f19493567eba4b9855a8de7d153c",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha": "54177be06b77beff22ea952efedd603beaf2a2f7",
+            "type": "blob",
+            "size": 30051
+          },
+          {
+            "path": "frontend/src/api.js",
+            "sha": "702501049fd4114b81c9422123d0dd5d08e4c9b0",
+            "type": "blob",
+            "size": 19277
+          },
+          {
+            "path": "frontend/src/components",
+            "sha": "0a2c1cc0ef57d959f7686e8c964bca1be965a0d2",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/components/ArchiveModal.vue",
+            "sha": "c9eb29433a77503bc1e7b2dab2807eec63e33edd",
+            "type": "blob",
+            "size": 4143
+          },
+          {
+            "path": "frontend/src/components/ChartSVG.vue",
+            "sha": "259c2914f7179af59f0aa580b13144607b88a91d",
+            "type": "blob",
+            "size": 8595
+          },
+          {
+            "path": "frontend/src/components/ContextMenu.vue",
+            "sha": "08e014adfb18cc769457486e0da069ac88487cbb",
+            "type": "blob",
+            "size": 1487
+          },
+          {
+            "path": "frontend/src/components/DeleteModal.vue",
+            "sha": "2717e3bde1874a63db403c801892df9954669c7b",
+            "type": "blob",
+            "size": 4372
+          },
+          {
+            "path": "frontend/src/components/HeatmapChart.vue",
+            "sha": "09b8882ba05b79a817c75c802d1c49f50d07919a",
+            "type": "blob",
+            "size": 7651
+          },
+          {
+            "path": "frontend/src/components/LoadingState.vue",
+            "sha": "34717826728e7cde3499499d2c88d129397b452a",
+            "type": "blob",
+            "size": 595
+          },
+          {
+            "path": "frontend/src/components/MoveTaskModal.vue",
+            "sha": "c4942755996aad1fe00adee2a7c5295aa42432ff",
+            "type": "blob",
+            "size": 6060
+          },
+          {
+            "path": "frontend/src/components/Sparkline.vue",
+            "sha": "05fd307f341706625941d1744dd1c05488033416",
+            "type": "blob",
+            "size": 2360
+          },
+          {
+            "path": "frontend/src/components/TaskFeed.vue",
+            "sha": "a7220e857b77ce9b6fa9fa3bb044286025859654",
+            "type": "blob",
+            "size": 29242
+          },
+          {
+            "path": "frontend/src/components/Toast.vue",
+            "sha": "f5ec7e9623080d7f483d4b822fa04850181e41fa",
+            "type": "blob",
+            "size": 4694
+          },
+          {
+            "path": "frontend/src/components/TrajectoryPanel.vue",
+            "sha": "5f1b3557a2860a587e91cf69b2024f54218b2cb7",
+            "type": "blob",
+            "size": 15333
+          },
+          {
+            "path": "frontend/src/components/WorkspaceStats.vue",
+            "sha": "e7c2b80df00439009cfedfded3f6f4774b77caab",
+            "type": "blob",
+            "size": 12086
+          },
+          {
+            "path": "frontend/src/composables",
+            "sha": "4970be0fb2936b41afcf0b5d100947d918a01629",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/composables/useAutoTitle.js",
+            "sha": "301adb060ddcec982d79c71c3a9f1c9682f5523c",
+            "type": "blob",
+            "size": 3099
+          },
+          {
+            "path": "frontend/src/composables/useCron.js",
+            "sha": "f063993b56a16fb5335c85873bab357085054e10",
+            "type": "blob",
+            "size": 4557
+          },
+          {
+            "path": "frontend/src/composables/useFormat.js",
+            "sha": "d2ddd45518b0848ccb87ad485c503e6008f0a614",
+            "type": "blob",
+            "size": 432
+          },
+          {
+            "path": "frontend/src/composables/usePushNotifications.js",
+            "sha": "4afff2f7bac3957453a09a7b9ae5d82650560221",
+            "type": "blob",
+            "size": 4632
+          },
+          {
+            "path": "frontend/src/composables/useSpeechToText.js",
+            "sha": "0000cab7653b953f8892763bc6cc950433e9cd84",
+            "type": "blob",
+            "size": 9509
+          },
+          {
+            "path": "frontend/src/composables/useToasts.js",
+            "sha": "b84e3583d8cc526ad41d4d51ec6467db42fd97ba",
+            "type": "blob",
+            "size": 886
+          },
+          {
+            "path": "frontend/src/composables/useViewport.js",
+            "sha": "fb98d5c0c9c7b555faee5db496c63cc75b314642",
+            "type": "blob",
+            "size": 641
+          },
+          {
+            "path": "frontend/src/main.js",
+            "sha": "60d09038cd11b2a9bccc5ccff492c5dfe3fa2bd4",
+            "type": "blob",
+            "size": 2711
+          },
+          {
+            "path": "frontend/src/stores",
+            "sha": "e0bdc8447806507465314215d8451bb0fd91e021",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/stores/themeStore.js",
+            "sha": "dcc798270d122c564cb212b4b05722c320f07f3b",
+            "type": "blob",
+            "size": 1229
+          },
+          {
+            "path": "frontend/src/stores/tooltipStore.js",
+            "sha": "1d7ea8fa77701c177c9b44d8d95d19c860d3e1ff",
+            "type": "blob",
+            "size": 1033
+          },
+          {
+            "path": "frontend/src/stores/workspaceStore.js",
+            "sha": "7c5a08ae909e90be0a9b7ff2c4090d2d6d4ed393",
+            "type": "blob",
+            "size": 1324
+          },
+          {
+            "path": "frontend/src/style.css",
+            "sha": "d8efb2e771f94159124c1ccdbc135f1aa4c4736a",
+            "type": "blob",
+            "size": 1471
+          },
+          {
+            "path": "frontend/src/sw.js",
+            "sha": "8b8bab8e2449df9786d747170b1d26d2fb21b0de",
+            "type": "blob",
+            "size": 1489
+          },
+          {
+            "path": "frontend/src/useEventBus.js",
+            "sha": "80206c080edd0e4fc26c510b247400d71e1b4c5a",
+            "type": "blob",
+            "size": 2413
+          },
+          {
+            "path": "frontend/src/utils",
+            "sha": "f8fa47cfa5c108a3b851a081dee7d9d1c69d6328",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/utils/markdown.js",
+            "sha": "ba5de29232b6bf337b9cefecc3c63f0796fe607f",
+            "type": "blob",
+            "size": 798
+          },
+          {
+            "path": "frontend/src/utils/whisperLanguages.js",
+            "sha": "fcb7a6a354b4362029942312b7476c29acfde413",
+            "type": "blob",
+            "size": 1953
+          },
+          {
+            "path": "frontend/src/views",
+            "sha": "9564b6d20d2e271a1466e29567a25d6a60ca95ef",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/views/EventDetailView.vue",
+            "sha": "0a2e9a4b2f6faf35a5fa0053132ba07ca36302f2",
+            "type": "blob",
+            "size": 31343
+          },
+          {
+            "path": "frontend/src/views/EventsView.vue",
+            "sha": "4d1bd9cc0169b4f35e96b57c688ca3f76af48aa5",
+            "type": "blob",
+            "size": 10636
+          },
+          {
+            "path": "frontend/src/views/KanbanBoardView.vue",
+            "sha": "939ee5e299c3e5dc16ffc81ca5eb9909d00d5c47",
+            "type": "blob",
+            "size": 14668
+          },
+          {
+            "path": "frontend/src/views/LoginView.vue",
+            "sha": "63132779d65904b6de4fdcc5719dddfb67d1a08a",
+            "type": "blob",
+            "size": 8121
+          },
+          {
+            "path": "frontend/src/views/ScheduledTaskInstancesView.vue",
+            "sha": "3418e67d3fb29e677ea01e556f07c86ab186891a",
+            "type": "blob",
+            "size": 14253
+          },
+          {
+            "path": "frontend/src/views/TaskDetailView.vue",
+            "sha": "03fa7bdeac7bad00e790622818919938debbb4d4",
+            "type": "blob",
+            "size": 59064
+          },
+          {
+            "path": "frontend/src/views/TaskFormView.vue",
+            "sha": "c785a5fc9965828c3a4fcd9fafc2d96e7ac05e2b",
+            "type": "blob",
+            "size": 38588
+          },
+          {
+            "path": "frontend/src/views/TaskListView.vue",
+            "sha": "a4d9e96064de4579d584aacda56eac8e97f21ef0",
+            "type": "blob",
+            "size": 26345
+          },
+          {
+            "path": "frontend/src/views/WorkflowDetailView.vue",
+            "sha": "6047d4c9a382ad7b63840d71c1078d4b4f18e57a",
+            "type": "blob",
+            "size": 56304
+          },
+          {
+            "path": "frontend/src/views/WorkflowsView.vue",
+            "sha": "52c4ea3c5d80818e5c1fdf20dbf59d5855b69794",
+            "type": "blob",
+            "size": 11570
+          },
+          {
+            "path": "frontend/src/views/WorkspaceAnalyticsView.vue",
+            "sha": "9ae09d90546926ad2e7999bc8fd44d668fadcc37",
+            "type": "blob",
+            "size": 514
+          },
+          {
+            "path": "frontend/src/views/WorkspaceDetailView.vue",
+            "sha": "4357d050728b768abdf10147debb177ace021494",
+            "type": "blob",
+            "size": 18380
+          },
+          {
+            "path": "frontend/src/views/WorkspaceSettingsView.vue",
+            "sha": "ff65ce4d392efaa0f6f0dcef351f0941ac87cf95",
+            "type": "blob",
+            "size": 75592
+          },
+          {
+            "path": "frontend/src/views/WorkspaceView.vue",
+            "sha": "152d1868d525f13fcea3f5e5abfbadb5891d0b42",
+            "type": "blob",
+            "size": 23555
+          },
+          {
+            "path": "frontend/src/workers",
+            "sha": "1ea304d05106e1db4dff40b10f33db324f688332",
+            "type": "tree"
+          },
+          {
+            "path": "frontend/src/workers/titleWorker.js",
+            "sha": "a258f4d528f2e3b80c2ba379b053a8cdb8251f03",
+            "type": "blob",
+            "size": 1859
+          },
+          {
+            "path": "frontend/src/workers/whisperWorker.js",
+            "sha": "51642aeca80ec378dd687a28bf1228de32d7c364",
+            "type": "blob",
+            "size": 2704
+          },
+          {
+            "path": "frontend/vite.config.js",
+            "sha": "65a6e14183907d44437b7fc352670dce839a6c8d",
+            "type": "blob",
+            "size": 1692
+          },
+          {
+            "path": "integrations",
+            "sha": "8bf6fe881d7bc932877074e95e90c83aa3b1be0f",
+            "type": "tree"
+          },
+          {
+            "path": "integrations/slack",
+            "sha": "4c953c72562ba1f44ab5095da034b378508fd373",
+            "type": "tree"
+          },
+          {
+            "path": "integrations/slack/README.md",
+            "sha": "fde572713cc1258c8ebd1699c19d317ad4e78963",
+            "type": "blob",
+            "size": 4965
+          },
+          {
+            "path": "plugins",
+            "sha": "34daf8fc6d6ebd5f81c6c3ebcf95dcecf5726e35",
+            "type": "tree"
+          },
+          {
+            "path": "plugins/deepseek-harness",
+            "sha": "3b45549e3969ea2f77fc7ea0e47597b430a59e1e",
+            "type": "tree"
+          },
+          {
+            "path": "plugins/deepseek-harness/.gitignore",
+            "sha": "4aa659d355c00ac5fd7744d8ef99e1b72eebf53e",
+            "type": "blob",
+            "size": 37
+          },
+          {
+            "path": "plugins/deepseek-harness/LICENSE",
+            "sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+            "type": "blob",
+            "size": 11357
+          },
+          {
+            "path": "plugins/deepseek-harness/README.md",
+            "sha": "abe46fec6e321ac9b21b30138fc08285d707e745",
+            "type": "blob",
+            "size": 23179
+          },
+          {
+            "path": "plugins/deepseek-harness/cordis.patch.yml",
+            "sha": "d02f95f86fa0ec23fb27187cdcc8b0607291c022",
+            "type": "blob",
+            "size": 826
+          },
+          {
+            "path": "plugins/deepseek-harness/package.json",
+            "sha": "41a79498ae1d68e8a2c488a90e2b01eed74f1099",
+            "type": "blob",
+            "size": 2744
+          },
+          {
+            "path": "plugins/deepseek-harness/src",
+            "sha": "4bd59ef71b718c44f8dbe9a96fe64de07c828d3a",
+            "type": "tree"
+          },
+          {
+            "path": "plugins/deepseek-harness/src/client.ts",
+            "sha": "c77dc55c2d2b6b113bcfc25c2e2e3f641e9e6c0a",
+            "type": "blob",
+            "size": 12506
+          },
+          {
+            "path": "plugins/deepseek-harness/src/config.ts",
+            "sha": "d4f6a75475410f10bd1bcd4537b85306ee179cd7",
+            "type": "blob",
+            "size": 5057
+          },
+          {
+            "path": "plugins/deepseek-harness/src/index.ts",
+            "sha": "453023542d0e292d492fff8ea1ae975489f85c0f",
+            "type": "blob",
+            "size": 4695
+          },
+          {
+            "path": "plugins/deepseek-harness/src/prompt.ts",
+            "sha": "2352f55935a2a372ee7ec0ec41ed9d648c2c5951",
+            "type": "blob",
+            "size": 4251
+          },
+          {
+            "path": "plugins/deepseek-harness/src/sessions.ts",
+            "sha": "cf5d0559b5b7d4fe11895f7c20f11630de70e753",
+            "type": "blob",
+            "size": 22852
+          },
+          {
+            "path": "plugins/deepseek-harness/src/tools.ts",
+            "sha": "63a4596627856a5886dae5bd77aa91e2288080ad",
+            "type": "blob",
+            "size": 4528
+          },
+          {
+            "path": "plugins/deepseek-harness/test",
+            "sha": "a2664f40e079534a2b6f7a06aa55ed588c71c91c",
+            "type": "tree"
+          },
+          {
+            "path": "plugins/deepseek-harness/test/parse.test.ts",
+            "sha": "5d4cb3e35a34e0914426c58bf9d875ba3fe18b36",
+            "type": "blob",
+            "size": 6063
+          },
+          {
+            "path": "plugins/deepseek-harness/test/sessions.test.ts",
+            "sha": "969b07a34025dcc097a86e19714132430afa41e4",
+            "type": "blob",
+            "size": 30178
+          },
+          {
+            "path": "plugins/deepseek-harness/tsconfig.json",
+            "sha": "e0598e46a8201e26a9fc7d29b0e5f571191a3f95",
+            "type": "blob",
+            "size": 522
+          },
+          {
+            "path": "plugins/deepseek-harness/tsdown.config.ts",
+            "sha": "7e37af7f9ccf247751c9a0517cc895aa01afe6b9",
+            "type": "blob",
+            "size": 553
+          },
+          {
+            "path": "scripts",
+            "sha": "54bf53dbabe3a2bff45de3a389b674c3ecb3a583",
+            "type": "tree"
+          },
+          {
+            "path": "scripts/setup.sh",
+            "sha": "ddf5412c6cabdfa15f5624b4e0ca67f82fa31e3f",
+            "type": "blob",
+            "size": 6078
+          }
+        ]
+      }
+    ],
+    "candidates": [
+      {
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        },
+        "stars": 1088,
+        "topicMatch": 0,
+        "origin": "explicit"
+      }
+    ],
+    "evidence": [],
+    "unknownCriteria": [
+      {
+        "criterionId": "queue-implementation",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        }
+      },
+      {
+        "criterionId": "mcp-implementation",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        }
+      },
+      {
+        "criterionId": "event-task-implementation",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        }
+      },
+      {
+        "criterionId": "identity-telemetry-implementation",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        }
+      },
+      {
+        "criterionId": "harness-bridge-implementation",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        }
+      }
+    ],
+    "navigation": [
+      {
+        "adapter": "heuristic",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        },
+        "status": "used"
+      },
+      {
+        "adapter": "heuristic",
+        "repository": {
+          "owner": "agentrq",
+          "name": "agentrq"
+        },
+        "status": "used"
+      }
+    ],
+    "collection": {
+      "filesRead": 1,
+      "sourceBytesRead": 16956,
+      "durationMs": 4175,
+      "cacheHit": false
+    }
+  }
+}

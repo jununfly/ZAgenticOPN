@@ -1,0 +1,65 @@
+{
+  "schema": "zj-research-report-ir/v1",
+  "family": "technical-c4/v1",
+  "title": "ZAgenticOPN Experience Version：Routa 与 qm 的 runtime/API/test 证据补采",
+  "summary": "D 决策后的证据补采已从纯 AGENTS.md 推进到 Routa 架构文档、qm 真实 CLI E2E README 与 qm 的 ClaimStore 接口。Routa 暴露 durable tasks、Kanban queue、workspace scope、artifact/persistence 表面；qm 暴露真实二进制 E2E、隔离 pool/identity 测试和一个 claimFirst 接口。它们仍没有证明 C1–C4 的完整跨 Agent Work Item 闭环，因此 D 继续有效：补采固定 commit 的具体 API/schema 与并发、结果、review tests，暂不开始产品 runtime。",
+  "ledgerFingerprint": "fd607011d3a5c11868db69bad5868c0ba96faa71b26849ae9905d6cca43aa013",
+  "concepts": [
+    {"key": "evidence-refresh", "value": "D 阶段只补采 runtime/API/test 证据，不把候选实现接入 ZAgenticOPN。"},
+    {"key": "routa-runtime-signal", "value": "Routa 的 durable tasks、Kanban queue、workspace boundary 与 artifact stores 是候选单位能力信号，不是 C1–C4 conformance 结论。"},
+    {"key": "qm-runtime-signal", "value": "qm 的真实 CLI E2E、隔离 pool/identity 测试与 ClaimStore 接口提高证据强度，但 claimFirst 的语义仍需追到 Work Item 使用方。"},
+    {"key": "hard-gates", "value": "C1 publish/discover、C2 competing claim、C3 result publication、C4 review continuation 仍是硬门。"},
+    {"key": "base-ownership", "value": "ZAgenticOPN 继续拥有 eligibility、claim、结果/审查状态、scope、private recovery 与 Git provenance 语义。"},
+    {"key": "decision-state", "value": "当前仍为 D：补采固定 commit 的 API/schema/test；A/B/C 只有在硬门通过后才进入 Human 决策。"}
+  ],
+  "diagrams": [
+    {"title": "Runtime evidence refresh landscape", "kind": "landscape", "mermaid": "flowchart LR\n  D[D evidence refresh] --> R[routa ext]\n  D --> Q[qm ref]\n  R --> R1[durable tasks and Kanban queue]\n  R --> R2[workspace boundary and artifact stores]\n  Q --> Q1[real CLI E2E]\n  Q --> Q2[ClaimStore and identity tests]\n  R1 -. C1-C4 not proven .-> G[hard gates]\n  R2 -. C1-C4 not proven .-> G\n  Q1 -. C1-C4 not proven .-> G\n  Q2 -. C1-C4 not proven .-> G\n  G --> Z[ZAgenticOPN remains semantic owner]"},
+    {"title": "从候选信号到 conformance 决策门", "kind": "container", "mermaid": "flowchart TB\n  S[Known source paths] --> A[Canonical API/schema reads]\n  S --> T[Reproducible concurrency/result/review tests]\n  A --> C{C1-C4 hard gates}\n  T --> C\n  C -->|all proven| H[Human chooses A/B/C]\n  C -->|any unverified| D[D continue evidence refresh]\n  D --> N[No product runtime]\n  H --> O[ZAgenticOPN owns product semantics]"}
+  ],
+  "candidates": [
+    {"repository": {"owner": "phodal", "name": "routa"}, "stars": 1796, "topicMatch": 8, "evidenceIds": ["14c2641f93a68d845626987c", "a7bfbf014a952100eeb1c4b7", "dd9041dea1e3e5e9d1af040c", "04870f0cd9fe2641b42ba8f6", "d4494fe4f8f272399ceefb35", "c0d7076b2c8d5b0af8a48211", "9d2c7ce28c570504c510429f", "e6ff385f424cd394cc3c6b70", "ce4296f3a1dec544efd818c3", "217ae4ab5b0fe61e873788aa"]},
+    {"repository": {"owner": "yc-software", "name": "qm"}, "stars": 13980, "topicMatch": 0, "evidenceIds": ["e9620292ac1afb3908251092", "99a6dfd32873e7c97661d8e6", "3a8a1dd70646dea905417b4d", "723e2028610d53fdb9afebcd", "a52ae49edc686dbcaf618f35", "4a6967334c1f9ead174eff56", "1270989568d4203c8d554e66", "2527b63cbb2b75f3b6cff78f", "51cb2bc56f3b791c1d28d392", "ba0dc47d5722293f8963155a"]}
+  ],
+  "cards": [
+    {"title": "phodal/routa（ext）", "summary": "Routa 的架构证据已显示 durable tasks、Kanban queue、workspace boundary、dual backend 与 artifact/persistence stores。其 per-board concurrency 是 C2 的候选机制信号，但本轮没有跨 Agent Work Item claim transaction 或 C1/C3/C4 测试；状态为 signal-rich, conformance-unverified。", "claimIds": ["routa-runtime", "routa-gates"]},
+    {"title": "yc-software/qm（ref）", "summary": "qm 的证据已显示真实 CLI E2E 会验证客观副作用、隔离 pool/identity 场景以及 ClaimStore.claimFirst 接口。claimFirst 当前位于 auth broker，尚未证明是 Work Item 执行权；状态为 test-rich, semantic-fit-unverified。", "claimIds": ["qm-runtime", "qm-gates"]}
+  ],
+  "claims": [
+    {"id": "routa-runtime", "text": "Routa 的固定架构文档把 Tasks 定义为 durable work units，Kanban 驱动 lane automation/queueing，并描述 per-board concurrency 与 stale auto-run 防护。", "critical": true, "evidenceIds": ["a7bfbf014a952100eeb1c4b7"]},
+    {"id": "routa-stores", "text": "Routa 的架构文档列出 workspace、task、session、artifact 等 stores/registries，以及 Postgres、SQLite、in-memory、JSONL traces、Docker 和 filesystem runtime。", "critical": false, "evidenceIds": ["dd9041dea1e3e5e9d1af040c"]},
+    {"id": "routa-scope", "text": "Routa 将 workspace 作为 sessions、tasks、boards、codebases、worktrees 与 memories 的协调边界，并要求双后端语义一致。", "critical": true, "evidenceIds": ["04870f0cd9fe2641b42ba8f6", "9d2c7ce28c570504c510429f"]},
+    {"id": "routa-gates", "text": "Routa 的 durable task、queue、artifact 与 workspace 证据没有证明 C1 publish/discover、C2 跨 Agent 原子 claim、C3 五字段结果发布或 C4 reviewer continuation；这些能力仍 unverified。", "critical": true, "evidenceIds": ["a7bfbf014a952100eeb1c4b7", "dd9041dea1e3e5e9d1af040c", "04870f0cd9fe2641b42ba8f6"]},
+    {"id": "qm-runtime", "text": "qm 的 E2E README 说明测试驱动真实 qm binary，并验证真实文件、容器、flyctl 与部署 teardown 等客观结果，而不是只检查文字输出。", "critical": true, "evidenceIds": ["e9620292ac1afb3908251092", "a52ae49edc686dbcaf618f35"]},
+    {"id": "qm-claim", "text": "qm 的 plugins/chassis/src/claims.ts 声明 ClaimStore.claimFirst(ids, expiresAtMs)，但当前固定路径为 auth broker claim；尚未证明它是 Work Item 执行权的原子 claim。", "critical": true, "evidenceIds": ["ba0dc47d5722293f8963155a"]},
+    {"id": "qm-isolation", "text": "qm E2E 材料包含 isolated pool store、identity 与 stale manifest 检查，说明存在隔离和身份测试材料，但未证明 Agent shared coordination scope。", "critical": false, "evidenceIds": ["3a8a1dd70646dea905417b4d", "723e2028610d53fdb9afebcd"]},
+    {"id": "qm-memory", "text": "qm onboarding 文档描述 memory-first onboarding 并持久化 profile，但这不是 Agent-private recovery context 与 shared coordination facts 的分层证明。", "critical": false, "evidenceIds": ["4a6967334c1f9ead174eff56", "51cb2bc56f3b791c1d28d392"]},
+    {"id": "qm-gates", "text": "qm 的真实 E2E 与 ClaimStore 证据没有证明 C1 publish/discover、C3 五字段结果发布或 C4 reviewer continuation；这些能力仍 unverified。", "critical": true, "evidenceIds": ["e9620292ac1afb3908251092", "ba0dc47d5722293f8963155a", "4a6967334c1f9ead174eff56"]},
+    {"id": "navigation-limit", "text": "本轮 DeepWiki 导航两次超时并回退 heuristic；导航诊断不构成能力结论，后续应直接读取已知固定路径的 canonical source/test。", "critical": true, "evidenceIds": ["14c2641f93a68d845626987c", "e9620292ac1afb3908251092"]},
+    {"id": "base-semantics", "text": "ZAgenticOPN 继续拥有 eligibility、原子 claim、结果/审查状态、scope、private recovery 与 Git provenance 的产品语义。", "critical": false, "evidenceIds": []},
+    {"id": "decision-state", "text": "由于 C1–C4 仍未被完整 runtime/API/test 证据证明，本轮 D 决策继续有效，不进入产品 runtime，也不作 A/B/C 采用决策。", "critical": true, "evidenceIds": ["a7bfbf014a952100eeb1c4b7", "e9620292ac1afb3908251092", "ba0dc47d5722293f8963155a"]}
+  ],
+  "comparisons": [
+    {"id": "comparison-runtime-surface", "text": "约束：候选必须有可运行、可追踪的协作基础。Routa 的 durable tasks/queue/workspace/artifact 表面更接近协作产品；qm 的真实 CLI E2E 与隔离/identity 测试更接近可验证运行基础。取舍：Routa 优先查协作数据模型，qm 优先查 claim 使用方；两者都不能直接替代 ZAgenticOPN 语义。", "claimIds": ["routa-runtime", "routa-stores", "qm-runtime", "qm-isolation"]},
+    {"id": "comparison-c1-c4", "text": "约束：C1–C4 是硬门。Routa 的 queue 防护与 qm 的 claimFirst 都只是候选机制信号，缺少跨 Agent Work Item 闭环测试。决策：C1–C4 继续 unverified，D 不变。", "claimIds": ["routa-gates", "qm-claim", "qm-gates"]},
+    {"id": "comparison-scope-recovery", "text": "约束：需要 scope isolation 与 private recovery。Routa 有 workspace boundary 和 memory/runtime 表面；qm 有 isolated pool、identity 与 memory-first onboarding。取舍：均需继续追 source/test 才能证明 Experience Version 语义。", "claimIds": ["routa-scope", "qm-isolation", "qm-memory"]},
+    {"id": "comparison-evidence-path", "text": "约束：证据必须来自固定 commit 的 canonical source/test。DeepWiki 只能选路径且本轮超时；因此下一轮直接读取已知路径比等待导航更可靠。", "claimIds": ["navigation-limit"]},
+    {"id": "comparison-ownership", "text": "约束：不能因候选有局部机制就转移产品语义所有权。选项 A/B/C 仍需等待硬门；当前保持 ZAgenticOPN base-led，候选只提供待验证单位能力。", "claimIds": ["base-semantics", "decision-state"]}
+  ],
+  "recommendations": [
+    {"id": "recommendation-d-continue", "text": "继续 D：不开始产品 runtime，不把 Routa 或 qm 判为通过；直接补采固定 commit 的 Work Item/schema、claim 使用方、result/review transition、scope filter、private checkpoint 与对应测试。", "comparisonIds": ["comparison-c1-c4", "comparison-evidence-path"]},
+    {"id": "recommendation-routa-paths", "text": "Routa 下一轮优先读取 kanban、handoffs、tasks、review API 与 Rust/TypeScript integration tests，验证 durable task 是否真的提供 C1–C4 所需状态转移。", "comparisonIds": ["comparison-runtime-surface", "comparison-c1-c4"]},
+    {"id": "recommendation-qm-paths", "text": "qm 下一轮优先追 ClaimStore.claimFirst 的所有使用方、web-ui active-run/continuable routes、memory service 与对应 tests，判断它是否构成 Work Item claim/review 机制。", "comparisonIds": ["comparison-runtime-surface", "comparison-c1-c4"]},
+    {"id": "recommendation-base-ownership", "text": "无论候选后续落到 A/B/C，ZAgenticOPN 保留 eligibility、claim、result/review、scope、private recovery 与 Git provenance 的最终所有权。", "comparisonIds": ["comparison-ownership", "comparison-scope-recovery"]},
+    {"id": "recommendation-human-gate", "text": "完成下一轮 canonical source/test 补采后，再回到 roadmap 1-1-4 复核 A/B/C/D；Agent 不替 Human 把局部机制信号升级为产品采用决策。", "comparisonIds": ["comparison-c1-c4", "comparison-ownership"]}
+  ],
+  "metrics": [
+    {"key": "c1-publish-discover-pass-rate", "definition": "另一 Agent 在 task-agnostic Human trigger 后发现并可执行 Work Item 的场景数除以总场景数", "unit": "%", "method": "固定 fixture 连续三次，记录 publish/discover 与 Human 是否补充 Work Item ID", "condition": "C1；Human 不指定 Work Item", "expected": "100%"},
+    {"key": "c2-competing-claim-conflict-rate", "definition": "两个 Agent 同时获得同一 Work Item 执行权或实际执行的场景数除以竞争场景数", "unit": "%", "method": "并发 claim 并核对持久化状态、执行日志和 Git provenance", "condition": "C2；相同 Work Item", "expected": "0%"},
+    {"key": "c3-result-schema-completeness", "definition": "包含 result_summary、next_action、acceptance_status、blocker、references 的结果数除以发布结果数", "unit": "%", "method": "解析 shared coordination record 并逐字段校验", "condition": "C3；成功和失败结果均检查", "expected": "100%"},
+    {"key": "c4-review-continuation-rate", "definition": "reviewer Agent 无 Human context supplementation 完成 review 的场景数除以 review 场景数", "unit": "%", "method": "记录发现、claim、验证、完成四个事件", "condition": "C4；独立 reviewer 激活", "expected": "100%"},
+    {"key": "canonical-runtime-evidence-coverage", "definition": "C1–C8 中至少一条 source/API/schema/test 证据的 criteria 数除以总 criteria 数", "unit": "%", "method": "按证据 path 类型和 criterion 去重统计", "condition": "A/B/C/D 复核前；C1–C4 必须含 test 或可重放 runtime evidence", "expected": "100%"},
+    {"key": "deepwiki-navigation-timeout-rate", "definition": "DeepWiki 导航超时请求数除以 DeepWiki 请求总数", "unit": "%", "method": "读取 sealed ledger navigation diagnostics", "condition": "每轮 research collect", "expected": "0%；超时必须可预测回退并保留诊断"},
+    {"key": "human-intervention-time", "definition": "完成一次 Experience Version 闭环所需 Human 补充时间", "unit": "minutes", "method": "与方案 A 同一真实任务连续三次记录 Human 操作时间", "condition": "不含初始目标下达", "expected": "不明显劣于方案 A"},
+    {"key": "git-artifact-provenance-completeness", "definition": "可追溯到 canonical Git commit、路径和状态的结果 artifact 数除以声明 artifact 数", "unit": "%", "method": "reviewer 独立解析 references 并与 Git 查询比对", "condition": "所有 completed Work Item", "expected": "100%"}
+  ]
+}

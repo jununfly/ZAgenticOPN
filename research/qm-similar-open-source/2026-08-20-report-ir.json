@@ -1,0 +1,98 @@
+{
+  "schema": "zj-research-report-ir/v1",
+  "family": "zj-draft/v1",
+  "title": "与 qm 方向相近的 GitHub 开源项目全景比较",
+  "summary": "qm 应继续作为产品形态 benchmark，而不是被 Stars 排名替代。当前最有价值的视角不是寻找一个“更好的 qm”，而是把候选拆成四类：OpenHands 代表可交付的 coding-agent 产品面，Goose 代表本地可扩展执行 harness，LangGraph/AutoGen/CrewAI 代表状态与编排底座，TaskWeaver 与 Aider 代表专业任务和极简 UX 单位能力。基于本轮固定 commit 的证据，暂不推荐整体复用任何候选；下一步应围绕 scope、sandbox、durable context、后台工作和 extension seams 做同一组黑盒 conformance，并以单位能力组合而不是产品搬运作为技术路线。",
+  "ledgerFingerprint": "027cac7d47443e5461caa53696a5c89e954ff40e2cb33dc9929249f426138fd3",
+  "concepts": [
+    {"key": "qm-benchmark", "value": "以 qm 的多人 Agent 工作产品形态作为比较锚点；本轮不把它的 Stars 或维护文档当成能力分数。"},
+    {"key": "product-proximity", "value": "候选是否同时覆盖 scoped work、可执行 Agent、持久上下文、协作入口、部署和运营，而不是单点能力。"},
+    {"key": "capability-family", "value": "完整工作产品、执行 harness、状态/编排底座、专业任务与 UX、记忆平台是不同的能力族，不应混成一个总榜。"},
+    {"key": "effective-fit", "value": "有效拟合度 = 需求覆盖 × 语义匹配 × 可组合性 × 证据强度；Stars 与 topicMatch 只作背景信号。"},
+    {"key": "ownership-cost", "value": "总所有权成本包括集成、状态翻译、部署、升级、安全、运行和退出责任；引入完整平台通常意味着引入其全部责任。"},
+    {"key": "decision", "value": "A 整体采用；B 薄适配；C 自有语义主导、选择性复用；D 继续搜索或补证据。当前结论是 C/D 混合。"}
+  ],
+  "diagrams": [
+    {
+      "title": "qm 相似项目能力族谱",
+      "kind": "landscape",
+      "mermaid": "flowchart LR\n  Q[qm benchmark\\nmultiplayer work harness] --> P[Product surface]\n  Q --> H[Execution harness]\n  Q --> O[Orchestration and state]\n  Q --> S[Specialist UX]\n  Q --> M[Memory and context]\n  P --> OH[OpenHands]\n  H --> G[Goose]\n  H --> A[Aider]\n  O --> LG[LangGraph]\n  O --> AG[AutoGen]\n  O --> CR[CrewAI]\n  S --> TW[TaskWeaver]\n  M --> LT[Letta\\nmain is retired landing page]\n  P -. low evidence .-> OP[OpenCode / AutoGPT]\n  O -. low evidence .-> AS[AgentScope / Pydantic AI]"
+    },
+    {
+      "title": "从产品比较到单位能力组合",
+      "kind": "container",
+      "mermaid": "flowchart TB\n  R[QM-like requirements] --> G{Product gates}\n  G -->|scope + execution + context + ops| C[Run same conformance fixtures]\n  G -->|only one capability| U[Classify as unit capability]\n  C --> D{Evidence and semantic fit}\n  D -->|high fit, low ownership| B[B thin adapter]\n  D -->|mixed fit or platform mismatch| S[ C base-led selective reuse ]\n  D -->|low evidence or retired source| X[D defer, refresh evidence, or exclude]\n  U --> S\n  S --> Z[Preserve qm-like product semantics in own base]"
+    }
+  ],
+  "candidates": [
+    {"repository": {"owner": "yc-software", "name": "qm"}, "stars": 13978, "topicMatch": 3, "evidenceIds": ["fda2e563d1e368c2bd37224d", "e17665fcb2d429a8094b819a", "b0167b8a495789769c514513", "a784b8ef0fa65d574d45a180", "5b5605c6f66e29b9730e0fd7", "05b8496b76d09bcd89daac9b", "abc6323c1409ada7810b2173", "921684cc00ec378acbe4f1dd", "aefaec0374f72b9e81ade71b"]},
+    {"repository": {"owner": "OpenHands", "name": "OpenHands"}, "stars": 84552, "topicMatch": 3, "evidenceIds": ["2b92eeca52b2e775b2a34780", "43e8740529cabcdd135c9d4f", "e1aa7e102504a35400d8cb47", "dd5ccafc0649546e3dcac4c9", "35ffdb85c7fd2a2f4f9dcb4b", "d2c97e98509c1edaac30c7bc", "e1ae258557be109606e90199", "9a393669a76cf0f43d94ed6e", "74f9c13b327b70362191487e"]},
+    {"repository": {"owner": "aaif-goose", "name": "goose"}, "stars": 53038, "topicMatch": 4, "evidenceIds": ["6a00c995a3a95425022cf6b5", "c03f47ffca21e4aa5e7eded4", "3d8c78c54e5844d30270d48d", "ea2783fcb9fa4c8f5d185038", "ccca347bb938f98a1abd5fe3", "cdc726d56dd8a221c5d85f70", "a99b1a37b1bfc12bc048a132", "8716319714bda53e7b43ac6c", "36f268b3e103c3d13a567993"]},
+    {"repository": {"owner": "anomalyco", "name": "opencode"}, "stars": 199377, "topicMatch": 2, "evidenceIds": ["66a8a418bf2494cea4638124", "8eb8e3ed18312721fb3f2195", "18474f018f20b445a91d19e4", "d83446f052c2c9121a518f71", "4ed95fa8a51022b85680ea17", "43dfa804594d31974d6a14d7", "68017e7f886e70f18c05c19f", "e629c97b69b199f53b6ca88b", "67b176c7f9b76126ff033ac5"]},
+    {"repository": {"owner": "Aider-AI", "name": "aider"}, "stars": 48340, "topicMatch": 1, "evidenceIds": ["0da05726323c81b5e77537ce", "44f094d6daa8f438abb564ea", "51d51a551d8d0349cee57dcf", "79b2049aaaad0a9ac2ad99d2", "0076b819347a7a828a589d10", "a22e730db049defbfa7389d7", "a15d4c1344dd0b8512430917", "e791589b62ae8821fdeea240", "b35f28f1cc9ad0d5ddd416ce"]},
+    {"repository": {"owner": "Significant-Gravitas", "name": "AutoGPT"}, "stars": 186693, "topicMatch": 6, "evidenceIds": ["0105594b9bd744c71b450a10", "7447e96569ef9ac301c34b2a", "35c311bc1801956153d45e67", "db1693087e20941e610d53b4", "236feb182bca3e2aaeaf29aa", "16e27d8d0eaeddb7c06c3901", "f2b14f16e946e869c73f3d6f", "e6cba238617aaa8e7000d51c", "2df073da6312ac4696b15b69"]},
+    {"repository": {"owner": "langchain-ai", "name": "langgraph"}, "stars": 40082, "topicMatch": 1, "evidenceIds": ["1266c49589267df774dee5e9", "61d9bd40020edae8d891a9a0", "a97b98b1f8491fb18806826f", "995977232918e95bc4f7968d", "0583f30e11cd3e9e7eb2d1ad", "06bfa6645b43d686af376096", "bc964b8b7a425b0856ceaa62", "b0d8c30c76244540d9c60d81", "09c0abfe50c9608bad5ef4b6"]},
+    {"repository": {"owner": "crewAIInc", "name": "crewAI"}, "stars": 57365, "topicMatch": 3, "evidenceIds": ["b5d54cbfdc50b01b54c3fd64", "71333c76e7055360b395d506", "0f04b7a5abc8473a44abd49b", "8d1d0c4a4107c6f4353118f2", "689aaa8b0235503c4672445b", "5c8fb1c00d0195d5ff98b195", "a6336ee26621cc1feb2e1aa4", "7ee4cb844c380161b8030952", "02b8e8d72aabd3c80fd5598d"]},
+    {"repository": {"owner": "letta-ai", "name": "letta"}, "stars": 24310, "topicMatch": 2, "evidenceIds": ["7d8b401002779723f1f57127", "548f48f69558fdef11bbf292", "a4e9c9a6f76693d87213fc4f", "f1c7e86a57be2e1665207fad", "3b19d68e1d4e0318e2a9b894", "198e6031d31ad180fc9bf87d", "99cd2b7f6052a560270f1424", "8c3178b5238aad1db8aa4550", "93b0ce437f76876a50fe0a73"]},
+    {"repository": {"owner": "microsoft", "name": "autogen"}, "stars": 60535, "topicMatch": 2, "evidenceIds": ["b0768f285b6386b3766c303d", "dca952c3546f1b27bad94ff4", "b729a6970400fe68d7c56c6a", "75e442270a45d62febe84f32", "4c45dc0282236cf8456ef085", "576203d060741d1c914c50f1", "ec0005bb40c32374d4df87ce", "6867ddc092eda10b00bef823", "2c9820f43fd5c689c0856c16"]},
+    {"repository": {"owner": "agentscope-ai", "name": "agentscope"}, "stars": 29092, "topicMatch": 5, "evidenceIds": ["4f7686c3c463beb71b58e245", "467a43c03b93558545317940", "5c75d1ec2d5daa9cd67a023c", "a3936808905bdd608779697f", "d17f3f47f097eaf980b34090", "f9e7778a594300cebdc79f85", "47cde65a5f8788ef16a35004", "c6bbc26438ad91902238577f", "513f266b383c3d2bd87f5f8a"]},
+    {"repository": {"owner": "pydantic", "name": "pydantic-ai"}, "stars": 19409, "topicMatch": 4, "evidenceIds": ["fa702490983b8750148dcfaa", "9e0f275285995f6cd39f9446", "2badfa5db9ce1ab26fb575fe", "e129cc055f7335ad614bdd06", "bdac007c49e073b4806957eb", "f8146b7434bee60e0fec98f4", "b1488fc3381c181f6feb9157", "c8b8d82d2ed0ec537f3b56c0", "0535f3bff78ee49d9219ba61"]},
+    {"repository": {"owner": "microsoft", "name": "TaskWeaver"}, "stars": 6174, "topicMatch": 3, "evidenceIds": ["c7c5ee02eaee84241e6720e1", "ed64a86a4fd96aefbdf38dcf", "870f5474fc9e91405d0d3a7f", "f3a7d099974059eb4b170a7e", "f44b7728365a4d556f3dd38a", "2ad05b34df506a868e031502", "50a188005c41d5bb8f30dbe8", "e0b7b37acf918229c4327b4e", "99b141e2051eb7b44054fd5b"]}
+  ],
+  "cards": [
+    {"title": "yc-software/qm / benchmark", "summary": "产品比较锚点；本轮直接证据偏维护面，产品能力需用用户已知形态和下一轮 canonical docs/black-box evidence 补强。", "claimIds": ["qm-evidence-boundary", "evidence-quality"]},
+    {"title": "OpenHands / product surface", "summary": "最接近可交付 coding-agent 产品面：typed client、agent-server、skills、settings、Cloud/device seams、telemetry 和 CI。", "claimIds": ["openhands-product", "openhands-gap"]},
+    {"title": "Goose / execution harness", "summary": "Rust agent framework，CLI/Electron、devcontainer、MCP integration 和维护规约值得拆成执行与扩展单位能力。", "claimIds": ["goose-harness"]},
+    {"title": "OpenCode / coding harness", "summary": "本轮只有 glossary 证据，不能从高 Stars 推断多人工作、sandbox 或部署能力。", "claimIds": ["low-evidence"]},
+    {"title": "Aider / coding UX", "summary": "以 LLM 结对编程为核心，模型接入面广，适合作为极简 coding UX 和 provider seam 参照。", "claimIds": ["aider-ux"]},
+    {"title": "AutoGPT / product platform", "summary": "主题相关性较高，但本轮证据落在通用前端维护规约，产品运行能力仍需补采。", "claimIds": ["low-evidence"]},
+    {"title": "LangGraph / state and orchestration", "summary": "checkpoint、Postgres/SQLite、CLI 与 SDK 组成清晰的状态/服务单位能力，不是完整工作产品。", "claimIds": ["langgraph-state"]},
+    {"title": "CrewAI / role orchestration", "summary": "多 Agent framework 方向明确，适合研究角色与任务编排，不直接覆盖 qm 的 scope、sandbox 和运营面。", "claimIds": ["crewai-orchestration"]},
+    {"title": "Letta / memory platform", "summary": "当前 main 明确不是可用的 Letta 实现；runtime 和 App Server 已转到 letta-code。", "claimIds": ["letta-caveat"]},
+    {"title": "AutoGen / multi-agent framework", "summary": "README 与 devcontainer 支持其作为 framework/可复现环境参照，产品级 scope 与运营能力未在本轮闭环。", "claimIds": ["autogen-framework"]},
+    {"title": "AgentScope / framework", "summary": "README 提供 docs、中文主页与 roadmap 入口，但本轮没有足够运行证据支持产品选型。", "claimIds": ["low-evidence"]},
+    {"title": "Pydantic AI / typed framework", "summary": "本轮主要看到 CI reviewer/维护自动化，不能据此推导 qm 级产品能力。", "claimIds": ["low-evidence"]},
+    {"title": "TaskWeaver / specialist workflow", "summary": "code-first 数据分析 Agent，保留 chat/code/in-memory history，是专业任务状态与插件函数的清晰参照。", "claimIds": ["taskweaver-specialist"]}
+  ],
+  "claims": [
+    {"id": "qm-evidence-boundary", "text": "本轮 qm 的直接 sealed evidence 主要是 AGENTS.md 维护与测试规约，不能独立证明完整多人产品闭环；qm 产品形态应作为 benchmark 继续用 canonical README、部署文档和黑盒场景验证。", "critical": true, "evidenceIds": ["fda2e563d1e368c2bd37224d", "921684cc00ec378acbe4f1dd"]},
+    {"id": "openhands-product", "text": "OpenHands 证据显示前端通过 typed client 访问 agent-server 的 conversation、event、git 和 skills 服务，并存在 LLM/provider、settings、Cloud/device、skills catalog、telemetry 与 CI 表面。", "critical": true, "evidenceIds": ["2b92eeca52b2e775b2a34780", "43e8740529cabcdd135c9d4f", "35ffdb85c7fd2a2f4f9dcb4b", "d2c97e98509c1edaac30c7bc", "9a393669a76cf0f43d94ed6e"]},
+    {"id": "openhands-gap", "text": "OpenHands 的本轮证据更接近 coding-agent 产品面；它是否覆盖 qm 的组织 scope、Slack/web 同身份、后台 cron/watch/webhook 和多租户权限仍未验证。", "critical": true, "evidenceIds": ["35ffdb85c7fd2a2f4f9dcb4b", "d2c97e98509c1edaac30c7bc"]},
+    {"id": "goose-harness", "text": "Goose 的仓库规约把它定义为 Rust agent framework，并维护 CLI、Electron desktop、devcontainer、MCP integration test 和 issue-driven upstream workflow；它适合执行与扩展单位能力参考。", "critical": true, "evidenceIds": ["6a00c995a3a95425022cf6b5", "c03f47ffca21e4aa5e7eded4", "36f268b3e103c3d13a567993", "ccca347bb938f98a1abd5fe3"]},
+    {"id": "aider-ux", "text": "Aider 的 README 将产品定位为与 LLM 结对编程，并强调云端和本地 LLM 接入；这使它更适合作为极简 coding UX 与 provider seam 参照，而非多人工作平台。", "critical": true, "evidenceIds": ["0da05726323c81b5e77537ce", "44f094d6daa8f438abb564ea", "51d51a551d8d0349cee57dcf"]},
+    {"id": "langgraph-state", "text": "LangGraph 的仓库地图明确列出 stateful multi-actor agent、checkpoint、Postgres/SQLite checkpoint、CLI 以及 Python/TypeScript SDK，适合作为 durable state、恢复和服务接口单位能力参考。", "critical": true, "evidenceIds": ["1266c49589267df774dee5e9", "06bfa6645b43d686af376096", "bc964b8b7a425b0856ceaa62"]},
+    {"id": "crewai-orchestration", "text": "CrewAI 维护规约把项目定义为 Python agentic systems framework，并要求公共 API、复杂逻辑与 docs 一起维护；本轮没有直接证明它具有 qm 级持久 scope、sandbox 或多人产品层。", "critical": true, "evidenceIds": ["71333c76e7055360b395d506", "02b8e8d72aabd3c80fd5598d", "5c8fb1c00d0195d5ff98b195"]},
+    {"id": "autogen-framework", "text": "AutoGen 的 README 与 Docker devcontainer 证据支持其作为 agent framework 和可复现开发环境参照，但没有从本轮证据推出 qm 的组织、身份和部署闭环。", "critical": true, "evidenceIds": ["6867ddc092eda10b00bef823", "75e442270a45d62febe84f32", "576203d060741d1c914c50f1"]},
+    {"id": "taskweaver-specialist", "text": "TaskWeaver 的 README 明确是 code-first agent framework，保留 chat history、code execution history 和 in-memory data，并以插件函数执行数据分析；它是专业任务状态与插件函数的清晰单位能力参考。", "critical": true, "evidenceIds": ["ed64a86a4fd96aefbdf38dcf", "e0b7b37acf918229c4327b4e"]},
+    {"id": "letta-caveat", "text": "Letta 当前 main 明确是 landing page；旧 V1 server、Docker image 与 Python server 已 retired，当前 harness、terminal UI、App Server、channels 和 runtime 位于 letta-code，因此不能直接复用本仓库 main 或 archive。", "critical": true, "evidenceIds": ["548f48f69558fdef11bbf292", "a4e9c9a6f76693d87213fc4f", "3b19d68e1d4e0318e2a9b894"]},
+    {"id": "low-evidence", "text": "OpenCode、AutoGPT、AgentScope 和 Pydantic AI 的本轮证据主要落在 glossary、前端维护规范、README 入口或 CI reviewer 配置；低证据不能解释为能力不存在，也不能按 Stars 直接选型。", "critical": true, "evidenceIds": ["66a8a418bf2494cea4638124", "0105594b9bd744c71b450a10", "4f7686c3c463beb71b58e245", "fa702490983b8750148dcfaa"]},
+    {"id": "evidence-quality", "text": "本轮 13 个候选和 9 个统一标准均获得 sealed evidence，但 evidenceCount=117 与 unknownCriteria=0 只说明采集覆盖，不等于每个候选的关键闭环已被运行验证；必须把证据强度作为独立评分轴。", "critical": true, "evidenceIds": ["fda2e563d1e368c2bd37224d", "2b92eeca52b2e775b2a34780", "1266c49589267df774dee5e9"]}
+  ],
+  "comparisons": [
+    {"id": "role-families", "text": "qm-like 方向不是一个单一产品类别：OpenHands 更接近可交付工作产品，Goose/Aider 更接近执行 harness，LangGraph/AutoGen/CrewAI 更接近编排底座，TaskWeaver 是专业任务产品，Letta 是当前仓库不可直接复用的记忆方向。", "claimIds": ["qm-evidence-boundary", "openhands-product", "goose-harness", "langgraph-state", "taskweaver-specialist", "letta-caveat"]},
+    {"id": "product-proximity", "text": "若目标是复刻 qm 的用户体验和组织协作，OpenHands 是最值得做产品面 conformance 的候选；但现有证据仍缺少 qm 的 scope/Slack/web/background 交叉闭环，不能判 A。", "claimIds": ["openhands-product", "openhands-gap", "evidence-quality"]},
+    {"id": "unit-capability-map", "text": "最有价值的组合不是把某一项目整体搬入，而是把 OpenHands 的 typed client/skills seam、Goose 的 MCP/desktop/执行 seam、LangGraph 的 checkpoint/SDK、TaskWeaver 的 code/data history、Aider 的 coding UX 分别作为候选单位能力。", "claimIds": ["openhands-product", "goose-harness", "langgraph-state", "taskweaver-specialist", "aider-ux"]},
+    {"id": "ownership-risk", "text": "整体采用会同时继承候选的状态模型、权限模型、部署组件、升级节奏和安全假设；以自有产品语义为主、对单位能力做可移除适配，能把所有权责任限制在已验证的闭环。", "claimIds": ["openhands-gap", "crewai-orchestration", "autogen-framework", "evidence-quality"]},
+    {"id": "evidence-quality-axis", "text": "Stars 与 topicMatch 不能替代证据强度：Letta 的负面维护事实比高 Stars 更有决策价值，OpenCode/AutoGPT/Pydantic AI 的低证据应触发补采而不是乐观推断。", "claimIds": ["letta-caveat", "low-evidence", "evidence-quality"]}
+  ],
+  "recommendations": [
+    {"id": "overall-choice", "text": "当前不推荐整体复用任何候选；推荐 C/D 混合：保留 qm-like 用户需求和产品语义为事实源，先补证据，再以单位能力选择性组合。", "comparisonIds": ["role-families", "product-proximity", "unit-capability-map", "ownership-risk"]},
+    {"id": "openhands-path", "text": "第一优先对 OpenHands 做产品面 conformance：scope isolation、conversation handoff、skills grant、sandbox/credential boundary、multi-device identity、background work 和 operator recovery。", "comparisonIds": ["product-proximity", "unit-capability-map"]},
+    {"id": "goose-path", "text": "第二优先研究 Goose 的 MCP、desktop/CLI、provider、sandbox 与 upstream workflow；只在其接口可被 ZAgenticOPN 或未来 base 以窄 adapter 包住时吸收。", "comparisonIds": ["unit-capability-map", "ownership-risk"]},
+    {"id": "state-path", "text": "把 LangGraph checkpoint/SDK 作为 durable state 与恢复的专项对照，把 AutoGen/CrewAI 作为 delegation/role orchestration 对照；不要把它们直接升级为完整工作产品。", "comparisonIds": ["role-families", "unit-capability-map"]},
+    {"id": "specialist-path", "text": "把 TaskWeaver 的 chat/code/in-memory history 与插件函数作为专业任务单位能力实验，把 Aider 的低摩擦 coding UX 作为 Human intervention reduction 对照。", "comparisonIds": ["unit-capability-map"]},
+    {"id": "letta-path", "text": "不复用 letta-ai/letta 当前 main 或 archive；若记忆能力仍是需求，应把 letta-code 作为独立的新候选重新固定版本并按同一标准采集。", "comparisonIds": ["evidence-quality-axis", "ownership-risk"]},
+    {"id": "low-evidence-path", "text": "OpenCode、AutoGPT、AgentScope、Pydantic AI 先进入 fog/unverified 队列；下一轮优先补 canonical README、核心状态模型、部署、安全和可运行示例。", "comparisonIds": ["evidence-quality-axis"]},
+    {"id": "base-preservation", "text": "无论后续选择何种单位能力，都应保持 qm-like 的 scope、identity、durable context、human control、audit 与退出条件在自有 base 中定义；候选只能通过 conformance fixture 进入。", "comparisonIds": ["product-proximity", "ownership-risk"]}
+  ],
+  "metrics": [
+    {"key": "qm-product-coverage", "definition": "候选对 personal/shared scope、workspace、channel/project、background work、admin/security、deployment 的覆盖程度", "unit": "0-4 ordinal", "method": "固定场景矩阵逐项检查 native/adapter/unverified/absent", "condition": "缺少 scope 或 execution 的候选不得判为完整产品替代", "expected": "关键用户路径至少 3/4"},
+    {"key": "harness-replaceability", "definition": "模型、Agent harness、provider、session 与 runtime 是否可以替换而不改写产品语义", "unit": "0-4 ordinal", "method": "替换 provider/harness 后运行同一 transcript 与 tool fixture", "condition": "适配层拥有核心状态机时降为 C", "expected": "至少 3/4 且接口可移除"},
+    {"key": "scope-isolation", "definition": "用户、Agent、设备、项目、房间或组织之间的 context/files/credentials 隔离强度", "unit": "scenario pass rate", "method": "跨 scope 读取、写入、grant、revoke 和恢复测试", "condition": "任一越权读取为硬失败", "expected": "100% negative cases pass"},
+    {"key": "sandbox-policy", "definition": "代码执行、审批、凭据和危险操作策略能否被明确配置且可审计", "unit": "scenario pass rate", "method": "strict/auto/no-approval、credential leak、destructive command fixtures", "condition": "安全能力不能用 README 宣称替代运行证据", "expected": "所有高风险 fixture 有明确结果"},
+    {"key": "context-durability", "definition": "session、memory、files、artifacts、checkpoint 和 code/data history 的持久化与恢复能力", "unit": "recovery success rate", "method": "重启、断网、Agent handoff 和版本升级后恢复同一工作项", "condition": "Git 或 canonical artifact provenance 不可丢失", "expected": "关键恢复场景 100%"},
+    {"key": "coordination-closure", "definition": "Human trigger、discover、claim/delegate、execute、review、background continuation 的闭环覆盖", "unit": "count/7 scenarios", "method": "同一多设备多 Agent fixture，分别记录 native/adapter/unverified", "condition": "只支持对话消息不等于共享 Work Item 闭环", "expected": "至少 6/7 才进入产品面候选"},
+    {"key": "composition-cost", "definition": "接入一个单位能力新增的 adapter、状态翻译、运行组件、迁移和上游跟踪责任", "unit": "work items + components", "method": "列出可移除边界与 owner，估算首次集成和季度维护", "condition": "复制主体状态机或部署平台时降为整体平台责任", "expected": "可拆除且不超过一个窄 adapter"},
+    {"key": "evidence-strength", "definition": "固定 commit 的 canonical source、运行测试、黑盒 conformance 和 operator evidence 的强度", "unit": "0-4 ordinal", "method": "source quality × behavior proof × revision pinning", "condition": "低证据候选不得因 stars/topicMatch 进入 A/B", "expected": "关键候选至少 3/4"}
+  ]
+}

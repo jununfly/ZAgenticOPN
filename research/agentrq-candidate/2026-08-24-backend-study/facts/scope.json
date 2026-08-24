@@ -1,0 +1,41 @@
+{
+  "decisions": [
+    {
+      "decision": "bounded-file-selection",
+      "id": "decision-scope-file-limit",
+      "kind": "decision",
+      "reason": "read the first 120 files in deterministic path order"
+    }
+  ],
+  "exclusions": [
+    ".git"
+  ],
+  "mapBinding": {
+    "manifestSha256": "9f7d26ee08e5516eca86a4441c0c012d9741dc5680a145f76581f1e212e22681",
+    "snapshotId": "map-e78e86f960834f8d16835d9b",
+    "targetIds": [
+      "target-fefc3bed0aa4dd233e1a"
+    ],
+    "used": true
+  },
+  "schema": "zj-architecture-study-scope/v1",
+  "snapshotId": "study-f38629515739d222b059772e",
+  "source": {
+    "commit": "45c87390fdb535066a05c0592e8183b1b461689b",
+    "identity": "commit-plus-working-tree",
+    "ref": "main",
+    "repository": "https://github.com/agentrq/agentrq.git",
+    "state": "clean",
+    "statusEntries": 0,
+    "workingTreeFingerprint": "e32ec0a519d9e5df06a54f87cb41ade0ceb445170efc1e57849581d61a3520ca"
+  },
+  "targets": [
+    {
+      "id": "target-fefc3bed0aa4dd233e1a",
+      "kind": "top-level",
+      "label": "backend",
+      "path": "backend",
+      "reason": "top-level structure"
+    }
+  ]
+}

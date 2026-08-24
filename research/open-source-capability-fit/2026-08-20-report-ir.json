@@ -1,0 +1,80 @@
+{
+  "schema": "zj-research-report-ir/v1",
+  "family": "zj-draft/v1",
+  "title": "ZAgenticOPN 的开源能力拟合与 merge 目标分析",
+  "summary": "建议把 ZAgenticOPN 保持为 base 和最终 merge 目标，采用 C 类的 base-led selective reuse：吸收经过 conformance 验证的单位能力，不直接把任何 ref、legacy 或 ext 项目当作产品架构。qm 是当前最有价值的 ref，产品形态和部署控制面值得重点对比，但本轮 sealed evidence 尚未证明 C1–C4 协作闭环；Routa 是最值得优先验证的 ext，MCP Agent Mail 适合作为消息、预留和审计单位能力参考，Avernet 更偏分布式协作网络。ZAgenticLoop 保持 legacy，不迁移代码。",
+  "ledgerFingerprint": "f9d84e01c0dccfa762f603d501b5fa050bede21256dfc50e3e42ed2a314caeba",
+  "concepts": [
+    {"key": "base", "value": "承担最终产品语义、协议和 merge 的目标项目；当前是 ZAgenticOPN。"},
+    {"key": "ref", "value": "已知拟合度较高的参照项目；当前是 yc-software/qm，用来校准产品形态和技术能力，不自动成为依赖。"},
+    {"key": "legacy", "value": "已有但停止继续开发的项目；当前是 ZAgenticLoop，只在当前需求证明价值时重新评估单位能力。"},
+    {"key": "ext", "value": "通过统一 GitHub brief 发现的未知外部项目；当前包括 Routa、MCP Agent Mail 和 Avernet。"},
+    {"key": "effective-fit", "value": "有效拟合度 = 功能覆盖 × 语义匹配 × 可组合性；R5/R6/R8 是协作闭环的关键淘汰门。"},
+    {"key": "ownership-cost", "value": "总所有权成本 = 初始开发 + 集成 + 维护 + 上游变化适配 + 运行运维 + 安全与数据治理。"},
+    {"key": "decision", "value": "A 直接采用；B 薄层扩展；C 自有架构主导、选择性复用；D 继续搜索。"}
+  ],
+  "diagrams": [
+    {
+      "title": "Base、Ref、Legacy、Ext 关系",
+      "kind": "landscape",
+      "mermaid": "flowchart LR\n  H[Human product goal] --> B[ZAgenticOPN base]\n  B --> R[qm ref]\n  B --> L[ZAgenticLoop legacy]\n  B --> E1[Routa ext]\n  B --> E2[MCP Agent Mail ext]\n  B --> E3[Avernet ext]\n  R -.reference and conformance.-> B\n  L -.only proven units.-> B\n  E1 -.candidate capability.-> B\n  E2 -.candidate capability.-> B\n  E3 -.candidate capability.-> B"
+    },
+    {
+      "title": "能力拟合决策流程",
+      "kind": "container",
+      "mermaid": "flowchart TB\n  R[Target requirements R1-R12] --> G[Critical gates C1-C4 and R5/R6/R8]\n  C[Candidate evidence at pinned commit] --> M[Coverage x semantic match x composition]\n  G --> D{Gate passes?}\n  M --> D\n  D -->|yes| O[Estimate owned responsibility and lifecycle cost]\n  D -->|no| X[D: keep searching or retain as unit reference]\n  O --> A{A/B/C classification}\n  A -->|A/B| P[Candidate-led adoption or thin adapter]\n  A -->|C| Q[ZAgenticOPN-owned architecture with selective reuse]"
+    }
+  ],
+  "candidates": [
+    {"repository": {"owner": "jununfly", "name": "ZAgenticOPN"}, "stars": 0, "topicMatch": 0, "evidenceIds": ["248dd286d0a5994e898f5fc5", "72ba0eabeb0b67e6c7caff83", "8645d2d15464edc74469f69e", "aa369628ba70de644fbccba1", "5b5e5fc70b277763c2584295", "9c5489915f28cd3f04c077dd", "052a6cdf5683367d14b3b2cf"]},
+    {"repository": {"owner": "yc-software", "name": "qm"}, "stars": 13973, "topicMatch": 2, "evidenceIds": ["83f71d8234a3ba87d34ae162", "bb3b05ad73f6c0bd6e7c5fc4", "33821318a967434e5fc2572c", "8f64ff6b548597119cd1db1f", "054928294dd46b2045e40381", "69fd7836527af1dae18e8170", "5e10194ba57a2dc644f3d951"]},
+    {"repository": {"owner": "jununfly", "name": "ZAgenticLoop"}, "stars": 0, "topicMatch": 2, "evidenceIds": ["4f89caf87331730755571281", "05857a65672ee68383f51551", "7fc62bc4ac780e8901a16e02", "af0e459932f05173728580e7", "4429cf19abc4bbf507b4b17e", "9acb07dda4c0d758ae37d1ad", "5f2c1a432b852dd040ff6ea2"]},
+    {"repository": {"owner": "phodal", "name": "routa"}, "stars": 1796, "topicMatch": 11, "evidenceIds": ["441319c03a0880423d40787a", "71f6367891ce9960ff4e8871", "cb6b87292ac81496c8bfe28e", "752c79e5a1d94ce54ea336c0", "4648eb03b09bbbf627f31135", "805bad2827279015d5b4ceca", "7ae0279a3d13d64382c5fada"]},
+    {"repository": {"owner": "Dicklesworthstone", "name": "mcp_agent_mail_rust"}, "stars": 130, "topicMatch": 9, "evidenceIds": ["1e8cd2fe3eac1caea2d12053", "9839ec7cde776a9d67756bda", "fa18773776db6a2c6e8c0b56", "913ec4235f3b383b910e665d", "2bb97f078ad08c2dab307fb1", "1542c4d2630a7205854408e3", "6f335553105b3698ae660997"]},
+    {"repository": {"owner": "inclusionAI", "name": "Avernet"}, "stars": 502, "topicMatch": 2, "evidenceIds": ["fbf02a7c1a5b401e41e20f80", "9f81b2f4ec7489436093c275", "526c6161733e9cf47f90bb49", "4c0ed4c17987f2540dd87334", "8058044f682d749c016128f8", "0b02c9150e6d41270d5ca596", "92a9b624edc7228a06da45ba"]}
+  ],
+  "cards": [
+    {"title": "ZAgenticOPN / base", "summary": "候选无关的窄职责协作控制面设计，拥有 private/shared context、Work Item、唯一 Claim、review continuation、Git provenance 和 comparison gate。它有最高语义匹配和最高自有责任，但当前没有运行时实现。", "claimIds": ["base-boundary", "base-context", "base-gate"]},
+    {"title": "yc-software/qm / ref", "summary": "已发布的 deployment-first Agent harness 参照；本轮证据确认它有规范化部署目录、安全与生命周期 runbook，但 C1-C4 语义需要专门验证。", "claimIds": ["qm-deployment", "qm-unverified-loop"]},
+    {"title": "ZAgenticLoop / legacy", "summary": "有 Quickstart、readiness audit、loop-sync 和 MCP package 等成熟表面，但项目不再继续开发；只保留经验参照，不预设代码抽取。", "claimIds": ["loop-governance", "loop-legacy"]},
+    {"title": "phodal/routa / ext", "summary": "最接近完整软件交付协作表面的 ext：workspace、session、task、Kanban、workflow、review、team coordination 和桌面/Web 双运行面。需要验证其 claim 与 Human-triggered pull 语义。", "claimIds": ["routa-surface", "routa-gap"]},
+    {"title": "MCP Agent Mail / ext", "summary": "消息、工具、conformance fixtures、错误 envelope、outage 检查和 Agent 文件 reservation 值得抽取；它不是已证明的 shared Work Item frontier。", "claimIds": ["mail-conformance", "mail-gap"]},
+    {"title": "Avernet / ext", "summary": "面向异构 Agent 网络、Bot Provider 接入和协议治理；公开文档适合研究跨 runtime 接入，但 shared context、memory、orchestration 和 evaluation 仍需验证。", "claimIds": ["avernet-network", "avernet-gap"]}
+  ],
+  "claims": [
+    {"id": "base-boundary", "text": "ZAgenticOPN 把产品边界定义为窄职责 collaboration control plane，管理 private collaboration context、shared coordination facts 和 Work Item 生命周期。", "critical": true, "evidenceIds": ["248dd286d0a5994e898f5fc5"]},
+    {"id": "base-context", "text": "ZAgenticOPN 把 Agent private context、shared fact 和 canonical Git fact 分层，并要求显式 publish 才能把私有观察升级为共享事实。", "critical": true, "evidenceIds": ["72ba0eabeb0b67e6c7caff83", "5b5e5fc70b277763c2584295"]},
+    {"id": "base-gate", "text": "ZAgenticOPN 当前公开快照提供 Product Spec、candidate-neutral design 和 roadmap 文档入口；本报告不把这些文档入口解释为已有运行时实现或可直接复用的产品。", "critical": true, "evidenceIds": ["052a6cdf5683367d14b3b2cf"]},
+    {"id": "qm-deployment", "text": "qm 的部署 CLI 将部署目录中的 security guarantees、target behavior、lifecycle 和 agent-consumable package runbook 作为规范化交付面。", "critical": true, "evidenceIds": ["83f71d8234a3ba87d34ae162", "8f64ff6b548597119cd1db1f"]},
+    {"id": "qm-unverified-loop", "text": "本轮 sealed evidence 尚未证明 qm 已覆盖 Human-triggered publish → discover → unique claim → result → Agent review continuation 的 C1-C4 闭环；该结论是 unverified，不是 absent。", "critical": true, "evidenceIds": ["bb3b05ad73f6c0bd6e7c5fc4", "33821318a967434e5fc2572c", "5e10194ba57a2dc644f3d951"]},
+    {"id": "loop-governance", "text": "ZAgenticLoop 的公开 Quickstart 强调 report-only、no auto-fix、no auto-merge，并提供 readiness audit 与 Route Table 约束。", "critical": true, "evidenceIds": ["05857a65672ee68383f51551", "7fc62bc4ac780e8901a16e02", "9acb07dda4c0d758ae37d1ad"]},
+    {"id": "loop-legacy", "text": "ZAgenticLoop 已有可发布的 loop-sync、MCP server 和 goal-audit package 表面，但这些事实不证明首个体验版完成，也不构成 ZAgenticOPN 的默认依赖。", "critical": true, "evidenceIds": ["5f2c1a432b852dd040ff6ea2", "4429cf19abc4bbf507b4b17e"]},
+    {"id": "routa-surface", "text": "Routa 的 CLI 暴露 workspace、session、task、ACP、specialist、Kanban、workflow、review、scan 和 team-coordination 能力，并存在桌面运行面。", "critical": true, "evidenceIds": ["805bad2827279015d5b4ceca", "71f6367891ce9960ff4e8871", "752c79e5a1d94ce54ea336c0"]},
+    {"id": "routa-gap", "text": "Routa 的本轮证据证明了交付协作表面，却没有证明其 Work Item claim、Human-triggered pull 和跨 Agent review 与 ZAgenticOPN 语义完全一致。", "critical": true, "evidenceIds": ["805bad2827279015d5b4ceca", "7ae0279a3d13d64382c5fada"]},
+    {"id": "mail-conformance", "text": "MCP Agent Mail 的公开仓库包含独立的 mcp-agent-mail-conformance package，并列出 docs_drift_ci 测试入口；这支持把 conformance 与文档漂移检查作为可参考单位能力，但不证明完整行为覆盖。", "critical": true, "evidenceIds": ["913ec4235f3b383b910e665d", "1542c4d2630a7205854408e3", "6f335553105b3698ae660997"]},
+    {"id": "mail-gap", "text": "MCP Agent Mail 的本轮证据更接近消息、Agent 检测、数据库共享与 guard 组件；必须额外验证它能否表达 shared Work Item frontier、唯一 claim 和 review continuation。", "critical": true, "evidenceIds": ["1e8cd2fe3eac1caea2d12053", "fa18773776db6a2c6e8c0b56", "913ec4235f3b383b910e665d"]},
+    {"id": "avernet-network", "text": "Avernet 的公开架构规则覆盖 contracts、dependency direction、plugin behavior、配置组装和变更后的 conformance 检查；这些规则适合参考异构 runtime 接入的治理方式。", "critical": true, "evidenceIds": ["fbf02a7c1a5b401e41e20f80", "526c6161733e9cf47f90bb49", "0b02c9150e6d41270d5ca596"]},
+    {"id": "avernet-gap", "text": "Avernet 本轮可核验的证据主要是架构规则与契约检查，不能直接证明 shared context、memory、orchestration 和 evaluation 已经以可复用运行时能力交付。", "critical": true, "evidenceIds": ["9f81b2f4ec7489436093c275", "4c0ed4c17987f2540dd87334", "8058044f682d749c016128f8", "92a9b624edc7228a06da45ba"]}
+  ],
+  "comparisons": [
+    {"id": "fit-model", "text": "应先用 C1-C4 与 R5/R6/R8 作为关键闭环淘汰门，再用功能覆盖、语义匹配和可组合性计算有效拟合度；不能用 Stars、功能数量或 README 丰富度替代闭环证据。", "claimIds": ["base-boundary", "qm-unverified-loop", "routa-gap", "mail-gap", "avernet-gap"]},
+    {"id": "role-comparison", "text": "ZAgenticOPN 是最终语义和 merge 目标；qm 是产品形态与部署控制面 ref；ZAgenticLoop 是 legacy 经验来源；Routa、MCP Agent Mail、Avernet 是不同方向的 ext 候选。角色不同，不能放在同一“谁最好”排序里。", "claimIds": ["base-boundary", "qm-deployment", "loop-legacy", "routa-surface", "mail-conformance", "avernet-network"]},
+    {"id": "capability-comparison", "text": "Routa 的交付协作 surface 最接近 C1-C4，qm 的产品形态和 deployment/control surface 最值得作为 ref，MCP Agent Mail 的消息与 reservation 单位能力最清晰，Avernet 的异构网络接入最突出；但当前没有任何 ref/ext 证据足以取代 ZAgenticOPN 的 base 语义。", "claimIds": ["qm-deployment", "routa-surface", "mail-conformance", "avernet-network", "base-context"]},
+    {"id": "ownership-comparison", "text": "直接采用任何候选都会把其未验证的状态语义、数据模型、部署方式和升级责任引入 base。更稳妥的路径是让 ZAgenticOPN 保有核心状态机和验收协议，只对通过黑盒 conformance 的单位能力做选择性 merge。", "claimIds": ["base-gate", "qm-unverified-loop", "routa-gap", "mail-gap", "avernet-gap"]}
+  ],
+  "recommendations": [
+    {"id": "overall-choice", "text": "当前推荐 C：以 ZAgenticOPN 为 base-led architecture，选择性吸收 qm、ZAgenticLoop 或 ext 项目中通过 C1-C4 与 R5/R6/R8 conformance 的单位能力；不直接采用任何候选作为整体产品架构。", "comparisonIds": ["fit-model", "role-comparison", "ownership-comparison"]},
+    {"id": "qm-ref-path", "text": "把 qm 作为第一优先 ref：先做一次针对根 README、核心状态模型、共享 scope、claim/review、部署和 sandbox 的定向证据补采，再运行同一 C1-C4 与 R5/R6/R8 黑盒场景；通过后优先评估 B1 adapter 或 C 类 selective reuse。", "comparisonIds": ["capability-comparison", "ownership-comparison"]},
+    {"id": "routa-ext-path", "text": "把 Routa 作为第一优先 ext conformance 候选，因为其公开 surface 最接近 workspace/task/review/team coordination；先验证 claim、frontier、跨 Agent review 和 Human-triggered pull，再评估其是否带来非线性平台责任。", "comparisonIds": ["capability-comparison", "fit-model"]},
+    {"id": "mail-ext-path", "text": "将 MCP Agent Mail 限定为消息、reservation、conformance fixture、错误与 outage 处理的候选单位能力；不要把消息线程直接当作 Work Item 状态机。", "comparisonIds": ["capability-comparison", "ownership-comparison"]},
+    {"id": "legacy-path", "text": "ZAgenticLoop 保持 legacy，不继续开发，不建立运行时依赖，也不预先抽取代码；只有当前 Experience Version 的具体失败证明某个单位能力值得抽取时，才重新评估该能力。", "comparisonIds": ["role-comparison", "ownership-comparison"]},
+    {"id": "base-preservation", "text": "保持 ZAgenticOPN 的 private/shared context、Work Item、唯一 Claim、review continuation、Git provenance 和 lifecycle gate 为事实源；候选项目只能通过证据矩阵进入 base，不能反向改写产品目标。", "comparisonIds": ["fit-model", "role-comparison"]}
+  ],
+  "metrics": [
+    {"key": "critical-loop-coverage", "definition": "候选在 C1-C4 与 R5/R6/R8 上通过的关键场景数", "unit": "count/7", "method": "固定 commit、同一 fixture、同一 Human-triggered protocol 逐项执行", "condition": "任一关键场景失败则不得判 A；失败原因分 native/adapter/absent/unverified", "expected": "7/7 才能进入 A/B；否则只能 C 或 D"},
+    {"key": "semantic-match", "definition": "候选状态、身份、scope、provenance 与 ZAgenticOPN Spec 的语义一致程度", "unit": "ordinal 0-4", "method": "逐项对照 R1-R12 和最小数据字典，由 Human 复核证据", "condition": "不以功能数量替代语义匹配", "expected": "关键需求均为 3 或 4"},
+    {"key": "composition-feasibility", "definition": "候选能力接入 base 时接口、数据模型、生命周期和部署组合的可控程度", "unit": "ordinal 0-4", "method": "记录 adapter、状态翻译、数据迁移和运行组件数量", "condition": "适配层拥有主体状态机时降级为 C", "expected": "无主体状态机复制且可移除"},
+    {"key": "owned-responsibility", "definition": "由 ZAgenticOPN 长期承担的新增语义、代码、运行和升级责任", "unit": "work items + lifecycle review", "method": "列出缺失能力、adapter、运维、上游变化和治理责任", "condition": "需要自建存储、ACL、同步或完整 workflow 时不得判 B1", "expected": "可解释、可拆除、与当前阶段退出证据直接相关"},
+    {"key": "human-intervention-reduction", "definition": "相对人工方案 A，任务特定提示、上下文搬运、派发和结果缝合的减少量", "unit": "count/time", "method": "至少三次同场景对照实验记录 Human actions 和总介入时间", "condition": "只把任务无关 Agent 激活单独记录，不伪装成零成本", "expected": "任务特定搬运、派发和缝合为 0，且总介入成本下降"}
+  ]
+}

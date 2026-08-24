@@ -1,0 +1,19 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Pinned exposed runtime surface paths",
+    "criteria": [
+      {"id": "mcp-serve-help", "question": "Read the exact pinned help fixtures for am serve-http and am serve-stdio plus any directly named server transport test. Report only the command flags, listen address, protocol, authentication and externally callable surface shown by those files.", "critical": true, "keywords": ["am_serve-http_help", "am_serve-stdio_help", "http_transport_harness"]},
+      {"id": "mcp-message-reservation", "question": "Read the exact pinned source/test paths for fetch_inbox_events and reservations.rs. Report only the message inbox and file reservation operations and conflict semantics shown by those files; do not call them Work Items unless named as such.", "critical": true, "keywords": ["fetch_inbox_events", "reservations.rs", "check_file_reservation_conflicts"]},
+      {"id": "avernet-quickstart", "question": "Read the exact pinned docs/quick-start.md, docs/bot-provider-integration.md and docker-compose.yml paths. Report the documented runtime start, transport and integration surface; do not infer Work Item semantics.", "critical": true, "keywords": ["quick-start.md", "bot-provider-integration.md", "docker-compose.yml"]}
+    ],
+    "repositories": [
+      {"owner": "Dicklesworthstone", "name": "mcp_agent_mail_rust"},
+      {"owner": "inclusionAI", "name": "Avernet"}
+    ],
+    "policyVersion": "zagenticopn-experience-version-ext-runtime-surface/v1",
+    "budget": {"maxFiles": 100, "maxBytes": 6000000, "deadlineMs": 300000}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Pinned Avernet work item source and tests",
+    "criteria": [
+      {"id": "work-item-models", "question": "Read the exact pinned src/engine/src/engine/community/tests/unit/work_item_models.py and the nearest source model it exercises. Report fields, lifecycle states, owner/claim semantics and whether it is an externally callable Agent coordination Work Item.", "critical": true, "keywords": ["work_item_models.py"]},
+      {"id": "work-item-router", "question": "Read the exact pinned src/engine/src/engine/community/tests/unit/work_item_router.py and the nearest router source it exercises. Report endpoints, methods, identity/scope checks, claim behavior and review transitions.", "critical": true, "keywords": ["work_item_router.py"]},
+      {"id": "work-item-noop", "question": "Read the exact pinned src/engine/src/engine/community/tests/unit/test_work_item_noop_and_di.py and the nearest implementation it exercises. Report whether the Work Item surface is real, disabled/no-op, or only a contract fixture.", "critical": true, "keywords": ["test_work_item_noop_and_di.py"]}
+    ],
+    "repositories": [{"owner": "inclusionAI", "name": "Avernet"}],
+    "policyVersion": "zagenticopn-avernet-work-item-source/v1",
+    "budget": {"maxFiles": 60, "maxBytes": 5000000, "deadlineMs": 240000}
+  }
+}

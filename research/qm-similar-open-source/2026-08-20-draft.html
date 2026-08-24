@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Technical Research Report</title>
+<style>:root{color-scheme:light dark;font-family:Inter,ui-sans-serif,system-ui,sans-serif;line-height:1.6}body{max-width:1100px;margin:0 auto;padding:40px 28px}h1,h2,h3{line-height:1.25}table{border-collapse:collapse;width:100%;display:block;overflow:auto}th,td{border:1px solid #8886;padding:8px 10px;text-align:left}pre{overflow:auto;padding:16px;border-radius:8px;background:#8882}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}blockquote{border-left:4px solid #8888;margin-left:0;padding-left:16px;color:#666}a{color:#0969da}.mermaid{text-align:center;background:transparent}@media print{body{max-width:none;padding:0}a{color:inherit}}</style>
+</head>
+<body>
+<main>
+<h1>与 qm 方向相近的 GitHub 开源项目全景比较</h1>
+<h2>1. Executive summary</h2>
+<p>qm 应继续作为产品形态 benchmark，而不是被 Stars 排名替代。当前最有价值的视角不是寻找一个“更好的 qm”，而是把候选拆成四类：OpenHands 代表可交付的 coding-agent 产品面，Goose 代表本地可扩展执行 harness，LangGraph/AutoGen/CrewAI 代表状态与编排底座，TaskWeaver 与 Aider 代表专业任务和极简 UX 单位能力。基于本轮固定 commit 的证据，暂不推荐整体复用任何候选；下一步应围绕 scope、sandbox、durable context、后台工作和 extension seams 做同一组黑盒 conformance，并以单位能力组合而不是产品搬运作为技术路线。</p>
+<ul>
+<li>当前不推荐整体复用任何候选；推荐 C/D 混合：保留 qm-like 用户需求和产品语义为事实源，先补证据，再以单位能力选择性组合。</li>
+<li>第一优先对 OpenHands 做产品面 conformance：scope isolation、conversation handoff、skills grant、sandbox/credential boundary、multi-device identity、background work 和 operator recovery。</li>
+<li>第二优先研究 Goose 的 MCP、desktop/CLI、provider、sandbox 与 upstream workflow；只在其接口可被 ZAgenticOPN 或未来 base 以窄 adapter 包住时吸收。</li>
+<li>把 LangGraph checkpoint/SDK 作为 durable state 与恢复的专项对照，把 AutoGen/CrewAI 作为 delegation/role orchestration 对照；不要把它们直接升级为完整工作产品。</li>
+<li>把 TaskWeaver 的 chat/code/in-memory history 与插件函数作为专业任务单位能力实验，把 Aider 的低摩擦 coding UX 作为 Human intervention reduction 对照。</li>
+<li>不复用 letta-ai/letta 当前 main 或 archive；若记忆能力仍是需求，应把 letta-code 作为独立的新候选重新固定版本并按同一标准采集。</li>
+<li>OpenCode、AutoGPT、AgentScope、Pydantic AI 先进入 fog/unverified 队列；下一轮优先补 canonical README、核心状态模型、部署、安全和可运行示例。</li>
+<li>无论后续选择何种单位能力，都应保持 qm-like 的 scope、identity、durable context、human control、audit 与退出条件在自有 base 中定义；候选只能通过 conformance fixture 进入。</li>
+</ul>
+<h2>2. Key findings</h2>
+<ul>
+<li>本轮 qm 的直接 sealed evidence 主要是 AGENTS.md 维护与测试规约，不能独立证明完整多人产品闭环；qm 产品形态应作为 benchmark 继续用 canonical README、部署文档和黑盒场景验证。 <a href="https://github.com/yc-software/qm/blob/568252bd4e6da5288b239573abef972f3e16b3f9/AGENTS.md">[1]</a> <a href="https://github.com/yc-software/qm/blob/568252bd4e6da5288b239573abef972f3e16b3f9/AGENTS.md">[2]</a></li>
+<li>OpenHands 证据显示前端通过 typed client 访问 agent-server 的 conversation、event、git 和 skills 服务，并存在 LLM/provider、settings、Cloud/device、skills catalog、telemetry 与 CI 表面。 <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[3]</a> <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[4]</a> <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[5]</a> <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[6]</a> <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[7]</a></li>
+<li>OpenHands 的本轮证据更接近 coding-agent 产品面；它是否覆盖 qm 的组织 scope、Slack/web 同身份、后台 cron/watch/webhook 和多租户权限仍未验证。 <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[5]</a> <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[6]</a></li>
+<li>Goose 的仓库规约把它定义为 Rust agent framework，并维护 CLI、Electron desktop、devcontainer、MCP integration test 和 issue-driven upstream workflow；它适合执行与扩展单位能力参考。 <a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/.devcontainer/Dockerfile">[8]</a> <a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/.devcontainer/Dockerfile">[9]</a> <a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/AGENTS.md">[11]</a> <a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/AGENTS.md">[10]</a></li>
+<li>Aider 的 README 将产品定位为与 LLM 结对编程，并强调云端和本地 LLM 接入；这使它更适合作为极简 coding UX 与 provider seam 参照，而非多人工作平台。 <a href="https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md">[13]</a> <a href="https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md">[14]</a> <a href="https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md">[15]</a></li>
+<li>LangGraph 的仓库地图明确列出 stateful multi-actor agent、checkpoint、Postgres/SQLite checkpoint、CLI 以及 Python/TypeScript SDK，适合作为 durable state、恢复和服务接口单位能力参考。 <a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">[17]</a> <a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">[18]</a> <a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">[19]</a></li>
+<li>CrewAI 维护规约把项目定义为 Python agentic systems framework，并要求公共 API、复杂逻辑与 docs 一起维护；本轮没有直接证明它具有 qm 级持久 scope、sandbox 或多人产品层。 <a href="https://github.com/crewAIInc/crewAI/blob/0c2bcb510c8b15d077e45e34513cc3631cb366c1/AGENTS.md">[20]</a> <a href="https://github.com/crewAIInc/crewAI/blob/0c2bcb510c8b15d077e45e34513cc3631cb366c1/AGENTS.md">[22]</a> <a href="https://github.com/crewAIInc/crewAI/blob/0c2bcb510c8b15d077e45e34513cc3631cb366c1/AGENTS.md">[21]</a></li>
+<li>AutoGen 的 README 与 Docker devcontainer 证据支持其作为 agent framework 和可复现开发环境参照，但没有从本轮证据推出 qm 的组织、身份和部署闭环。 <a href="https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/README.md">[28]</a> <a href="https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/.devcontainer/docker-compose.yml">[26]</a> <a href="https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/.devcontainer/docker-compose.yml">[27]</a></li>
+<li>TaskWeaver 的 README 明确是 code-first agent framework，保留 chat history、code execution history 和 in-memory data，并以插件函数执行数据分析；它是专业任务状态与插件函数的清晰单位能力参考。 <a href="https://github.com/microsoft/TaskWeaver/blob/d44ddef23f90059fb17999d3095db4240e98f955/README.md">[31]</a> <a href="https://github.com/microsoft/TaskWeaver/blob/d44ddef23f90059fb17999d3095db4240e98f955/README.md">[32]</a></li>
+<li>Letta 当前 main 明确是 landing page；旧 V1 server、Docker image 与 Python server 已 retired，当前 harness、terminal UI、App Server、channels 和 runtime 位于 letta-code，因此不能直接复用本仓库 main 或 archive。 <a href="https://github.com/letta-ai/letta/blob/87fd37aab68c7bdd0d66fe63751553756f6af3e5/AGENTS.md">[23]</a> <a href="https://github.com/letta-ai/letta/blob/87fd37aab68c7bdd0d66fe63751553756f6af3e5/AGENTS.md">[24]</a> <a href="https://github.com/letta-ai/letta/blob/87fd37aab68c7bdd0d66fe63751553756f6af3e5/AGENTS.md">[25]</a></li>
+<li>OpenCode、AutoGPT、AgentScope 和 Pydantic AI 的本轮证据主要落在 glossary、前端维护规范、README 入口或 CI reviewer 配置；低证据不能解释为能力不存在，也不能按 Stars 直接选型。 <a href="https://github.com/anomalyco/opencode/blob/b155b15694dbcc6768f11d2f25cc2bdd1f738ab4/.opencode/glossary/README.md">[12]</a> <a href="https://github.com/Significant-Gravitas/AutoGPT/blob/601093ddfe23a3d58a9c8f4a208bd49b203ee612/.claude/skills/vercel-react-best-practices/AGENTS.md">[16]</a> <a href="https://github.com/agentscope-ai/agentscope/blob/8810473ad432c1eb5a069eb948cd35f89d81cadb/README.md">[29]</a> <a href="https://github.com/pydantic/pydantic-ai/blob/53aad1d0fd51b3909ff03f0bbd42d395bc80af81/.github/workflows/AGENTS.md">[30]</a></li>
+<li>本轮 13 个候选和 9 个统一标准均获得 sealed evidence，但 evidenceCount=117 与 unknownCriteria=0 只说明采集覆盖，不等于每个候选的关键闭环已被运行验证；必须把证据强度作为独立评分轴。 <a href="https://github.com/yc-software/qm/blob/568252bd4e6da5288b239573abef972f3e16b3f9/AGENTS.md">[1]</a> <a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">[3]</a> <a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">[17]</a></li>
+</ul>
+<h2>3. Analysis &amp; synthesis</h2>
+<h3>role-families</h3>
+<p>qm-like 方向不是一个单一产品类别：OpenHands 更接近可交付工作产品，Goose/Aider 更接近执行 harness，LangGraph/AutoGen/CrewAI 更接近编排底座，TaskWeaver 是专业任务产品，Letta 是当前仓库不可直接复用的记忆方向。</p>
+<h3>product-proximity</h3>
+<p>若目标是复刻 qm 的用户体验和组织协作，OpenHands 是最值得做产品面 conformance 的候选；但现有证据仍缺少 qm 的 scope/Slack/web/background 交叉闭环，不能判 A。</p>
+<h3>unit-capability-map</h3>
+<p>最有价值的组合不是把某一项目整体搬入，而是把 OpenHands 的 typed client/skills seam、Goose 的 MCP/desktop/执行 seam、LangGraph 的 checkpoint/SDK、TaskWeaver 的 code/data history、Aider 的 coding UX 分别作为候选单位能力。</p>
+<h3>ownership-risk</h3>
+<p>整体采用会同时继承候选的状态模型、权限模型、部署组件、升级节奏和安全假设；以自有产品语义为主、对单位能力做可移除适配，能把所有权责任限制在已验证的闭环。</p>
+<h3>evidence-quality-axis</h3>
+<p>Stars 与 topicMatch 不能替代证据强度：Letta 的负面维护事实比高 Stars 更有决策价值，OpenCode/AutoGPT/Pydantic AI 的低证据应触发补采而不是乐观推断。</p>
+<h3>3.7 Recommendation</h3>
+<ul>
+<li>当前不推荐整体复用任何候选；推荐 C/D 混合：保留 qm-like 用户需求和产品语义为事实源，先补证据，再以单位能力选择性组合。</li>
+<li>第一优先对 OpenHands 做产品面 conformance：scope isolation、conversation handoff、skills grant、sandbox/credential boundary、multi-device identity、background work 和 operator recovery。</li>
+<li>第二优先研究 Goose 的 MCP、desktop/CLI、provider、sandbox 与 upstream workflow；只在其接口可被 ZAgenticOPN 或未来 base 以窄 adapter 包住时吸收。</li>
+<li>把 LangGraph checkpoint/SDK 作为 durable state 与恢复的专项对照，把 AutoGen/CrewAI 作为 delegation/role orchestration 对照；不要把它们直接升级为完整工作产品。</li>
+<li>把 TaskWeaver 的 chat/code/in-memory history 与插件函数作为专业任务单位能力实验，把 Aider 的低摩擦 coding UX 作为 Human intervention reduction 对照。</li>
+<li>不复用 letta-ai/letta 当前 main 或 archive；若记忆能力仍是需求，应把 letta-code 作为独立的新候选重新固定版本并按同一标准采集。</li>
+<li>OpenCode、AutoGPT、AgentScope、Pydantic AI 先进入 fog/unverified 队列；下一轮优先补 canonical README、核心状态模型、部署、安全和可运行示例。</li>
+<li>无论后续选择何种单位能力，都应保持 qm-like 的 scope、identity、durable context、human control、audit 与退出条件在自有 base 中定义；候选只能通过 conformance fixture 进入。</li>
+</ul>
+<h2>4. Information gaps &amp; next steps</h2>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Nature</th>
+<th>Next step</th>
+</tr>
+</thead>
+</table>
+<h2>6. Source list</h2>
+<ol>
+<li><a href="https://github.com/yc-software/qm/blob/568252bd4e6da5288b239573abef972f3e16b3f9/AGENTS.md">yc-software/qm@568252bd4e6da5288b239573abef972f3e16b3f9:AGENTS.md</a> — Evidence <code>fda2e563d1e368c2bd37224d</code></li>
+<li><a href="https://github.com/yc-software/qm/blob/568252bd4e6da5288b239573abef972f3e16b3f9/AGENTS.md">yc-software/qm@568252bd4e6da5288b239573abef972f3e16b3f9:AGENTS.md</a> — Evidence <code>921684cc00ec378acbe4f1dd</code></li>
+<li><a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">OpenHands/OpenHands@7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a:AGENTS.md</a> — Evidence <code>2b92eeca52b2e775b2a34780</code></li>
+<li><a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">OpenHands/OpenHands@7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a:AGENTS.md</a> — Evidence <code>43e8740529cabcdd135c9d4f</code></li>
+<li><a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">OpenHands/OpenHands@7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a:AGENTS.md</a> — Evidence <code>35ffdb85c7fd2a2f4f9dcb4b</code></li>
+<li><a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">OpenHands/OpenHands@7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a:AGENTS.md</a> — Evidence <code>d2c97e98509c1edaac30c7bc</code></li>
+<li><a href="https://github.com/OpenHands/OpenHands/blob/7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a/AGENTS.md">OpenHands/OpenHands@7a9aacb7b69eef80c15f49230e27bbd2b3c6f41a:AGENTS.md</a> — Evidence <code>9a393669a76cf0f43d94ed6e</code></li>
+<li><a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/.devcontainer/Dockerfile">aaif-goose/goose@cd23a1ed409eed6405da0b521af42186eaa32336:.devcontainer/Dockerfile</a> — Evidence <code>6a00c995a3a95425022cf6b5</code></li>
+<li><a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/.devcontainer/Dockerfile">aaif-goose/goose@cd23a1ed409eed6405da0b521af42186eaa32336:.devcontainer/Dockerfile</a> — Evidence <code>c03f47ffca21e4aa5e7eded4</code></li>
+<li><a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/AGENTS.md">aaif-goose/goose@cd23a1ed409eed6405da0b521af42186eaa32336:AGENTS.md</a> — Evidence <code>ccca347bb938f98a1abd5fe3</code></li>
+<li><a href="https://github.com/aaif-goose/goose/blob/cd23a1ed409eed6405da0b521af42186eaa32336/AGENTS.md">aaif-goose/goose@cd23a1ed409eed6405da0b521af42186eaa32336:AGENTS.md</a> — Evidence <code>36f268b3e103c3d13a567993</code></li>
+<li><a href="https://github.com/anomalyco/opencode/blob/b155b15694dbcc6768f11d2f25cc2bdd1f738ab4/.opencode/glossary/README.md">anomalyco/opencode@b155b15694dbcc6768f11d2f25cc2bdd1f738ab4:.opencode/glossary/README.md</a> — Evidence <code>66a8a418bf2494cea4638124</code></li>
+<li><a href="https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md">Aider-AI/aider@5dc9490bb35f9729ef2c95d00a19ccd30c26339c:README.md</a> — Evidence <code>0da05726323c81b5e77537ce</code></li>
+<li><a href="https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md">Aider-AI/aider@5dc9490bb35f9729ef2c95d00a19ccd30c26339c:README.md</a> — Evidence <code>44f094d6daa8f438abb564ea</code></li>
+<li><a href="https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md">Aider-AI/aider@5dc9490bb35f9729ef2c95d00a19ccd30c26339c:README.md</a> — Evidence <code>51d51a551d8d0349cee57dcf</code></li>
+<li><a href="https://github.com/Significant-Gravitas/AutoGPT/blob/601093ddfe23a3d58a9c8f4a208bd49b203ee612/.claude/skills/vercel-react-best-practices/AGENTS.md">Significant-Gravitas/AutoGPT@601093ddfe23a3d58a9c8f4a208bd49b203ee612:.claude/skills/vercel-react-best-practices/AGENTS.md</a> — Evidence <code>0105594b9bd744c71b450a10</code></li>
+<li><a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">langchain-ai/langgraph@f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f:AGENTS.md</a> — Evidence <code>1266c49589267df774dee5e9</code></li>
+<li><a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">langchain-ai/langgraph@f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f:AGENTS.md</a> — Evidence <code>06bfa6645b43d686af376096</code></li>
+<li><a href="https://github.com/langchain-ai/langgraph/blob/f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f/AGENTS.md">langchain-ai/langgraph@f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f:AGENTS.md</a> — Evidence <code>bc964b8b7a425b0856ceaa62</code></li>
+<li><a href="https://github.com/crewAIInc/crewAI/blob/0c2bcb510c8b15d077e45e34513cc3631cb366c1/AGENTS.md">crewAIInc/crewAI@0c2bcb510c8b15d077e45e34513cc3631cb366c1:AGENTS.md</a> — Evidence <code>71333c76e7055360b395d506</code></li>
+<li><a href="https://github.com/crewAIInc/crewAI/blob/0c2bcb510c8b15d077e45e34513cc3631cb366c1/AGENTS.md">crewAIInc/crewAI@0c2bcb510c8b15d077e45e34513cc3631cb366c1:AGENTS.md</a> — Evidence <code>5c8fb1c00d0195d5ff98b195</code></li>
+<li><a href="https://github.com/crewAIInc/crewAI/blob/0c2bcb510c8b15d077e45e34513cc3631cb366c1/AGENTS.md">crewAIInc/crewAI@0c2bcb510c8b15d077e45e34513cc3631cb366c1:AGENTS.md</a> — Evidence <code>02b8e8d72aabd3c80fd5598d</code></li>
+<li><a href="https://github.com/letta-ai/letta/blob/87fd37aab68c7bdd0d66fe63751553756f6af3e5/AGENTS.md">letta-ai/letta@87fd37aab68c7bdd0d66fe63751553756f6af3e5:AGENTS.md</a> — Evidence <code>548f48f69558fdef11bbf292</code></li>
+<li><a href="https://github.com/letta-ai/letta/blob/87fd37aab68c7bdd0d66fe63751553756f6af3e5/AGENTS.md">letta-ai/letta@87fd37aab68c7bdd0d66fe63751553756f6af3e5:AGENTS.md</a> — Evidence <code>a4e9c9a6f76693d87213fc4f</code></li>
+<li><a href="https://github.com/letta-ai/letta/blob/87fd37aab68c7bdd0d66fe63751553756f6af3e5/AGENTS.md">letta-ai/letta@87fd37aab68c7bdd0d66fe63751553756f6af3e5:AGENTS.md</a> — Evidence <code>3b19d68e1d4e0318e2a9b894</code></li>
+<li><a href="https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/.devcontainer/docker-compose.yml">microsoft/autogen@027ecf0a379bcc1d09956d46d12d44a3ad9cee14:.devcontainer/docker-compose.yml</a> — Evidence <code>75e442270a45d62febe84f32</code></li>
+<li><a href="https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/.devcontainer/docker-compose.yml">microsoft/autogen@027ecf0a379bcc1d09956d46d12d44a3ad9cee14:.devcontainer/docker-compose.yml</a> — Evidence <code>576203d060741d1c914c50f1</code></li>
+<li><a href="https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/README.md">microsoft/autogen@027ecf0a379bcc1d09956d46d12d44a3ad9cee14:README.md</a> — Evidence <code>6867ddc092eda10b00bef823</code></li>
+<li><a href="https://github.com/agentscope-ai/agentscope/blob/8810473ad432c1eb5a069eb948cd35f89d81cadb/README.md">agentscope-ai/agentscope@8810473ad432c1eb5a069eb948cd35f89d81cadb:README.md</a> — Evidence <code>4f7686c3c463beb71b58e245</code></li>
+<li><a href="https://github.com/pydantic/pydantic-ai/blob/53aad1d0fd51b3909ff03f0bbd42d395bc80af81/.github/workflows/AGENTS.md">pydantic/pydantic-ai@53aad1d0fd51b3909ff03f0bbd42d395bc80af81:.github/workflows/AGENTS.md</a> — Evidence <code>fa702490983b8750148dcfaa</code></li>
+<li><a href="https://github.com/microsoft/TaskWeaver/blob/d44ddef23f90059fb17999d3095db4240e98f955/README.md">microsoft/TaskWeaver@d44ddef23f90059fb17999d3095db4240e98f955:README.md</a> — Evidence <code>ed64a86a4fd96aefbdf38dcf</code></li>
+<li><a href="https://github.com/microsoft/TaskWeaver/blob/d44ddef23f90059fb17999d3095db4240e98f955/README.md">microsoft/TaskWeaver@d44ddef23f90059fb17999d3095db4240e98f955:README.md</a> — Evidence <code>e0b7b37acf918229c4327b4e</code></li>
+</ol>
+
+</main>
+</body>
+</html>

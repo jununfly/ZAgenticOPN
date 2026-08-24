@@ -1,0 +1,16 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Avernet current default branch work-item public profile",
+    "criteria": [
+      {"id": "work-item-models", "question": "Read the current pinned WorkItem models and protocol source/test files. Report the fields, lifecycle states, owner/claim semantics and whether the public profile provides a real implementation.", "critical": true, "keywords": ["work_item", "WorkItem", "WorkItemCreate", "WorkItemService", "space_ref", "staff_id"]},
+      {"id": "work-item-router", "question": "Read the current pinned work-item router source/tests. Report the externally callable paths, methods, identity/scope inputs, claim behavior and review transitions.", "critical": true, "keywords": ["api/work_item", "work-items", "list_work_items", "create_work_item", "get_work_item"]},
+      {"id": "work-item-noop", "question": "Read the current pinned community work-item implementation and tests. Report whether calls return data, HTTP 501, NotImplementedError, or another observable behavior.", "critical": true, "keywords": ["noop_impl", "NoopWorkItemService", "NotImplementedError", "not supported on this engine profile"]}
+    ],
+    "repositories": [{"owner": "inclusionAI", "name": "Avernet"}],
+    "policyVersion": "zagenticopn-avernet-work-item-current/v1",
+    "budget": {"maxFiles": 80, "maxBytes": 5000000, "deadlineMs": 240000}
+  }
+}

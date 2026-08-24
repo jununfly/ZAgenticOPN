@@ -1,0 +1,1179 @@
+{
+  "protocol": "zagenticopn-c1-c4-black-box/v1",
+  "generated_at": "2026-08-20T14:34:57Z",
+  "candidate": "qm",
+  "runs_requested": 3,
+  "runs": [
+    {
+      "run_id": "qm-run-1-83a51ee2",
+      "candidate": "yc-software/qm",
+      "candidate_class": "ref",
+      "candidate_commit": "568252bd4e6da5288b239573abef972f3e16b3f9",
+      "base_url": "http://127.0.0.1:18080",
+      "agent_ids": {
+        "producer": "agent-a",
+        "discoverer_reviewer": "agent-b"
+      },
+      "device_ids": {
+        "agent-a": "fixture-device-a",
+        "agent-b": "fixture-device-b"
+      },
+      "workspace_id": "org:fixture",
+      "human_events": [
+        {
+          "event": "human.activate",
+          "text": "检查 shared context",
+          "agent_id": "agent-b"
+        }
+      ],
+      "canonical_git_references": {
+        "repository": "https://github.com/jununfly/ZAgenticOPN",
+        "fixture_protocol": "research/routa-qm-conformance/2026-08-20-conformance-fixture-mapping.md",
+        "candidate_evidence": "https://github.com/yc-software/qm/tree/568252bd4e6da5288b239573abef972f3e16b3f9"
+      },
+      "fixtures": {
+        "C1": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "human_work_item_id": null,
+            "shared_memory_publish": true,
+            "shared_memory_discover": true,
+            "api_catalog_has_work_item_route": false,
+            "strict_gap": "shared memory fact discovery is not a typed eligible Work Item API"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "GET",
+              "path": "/v1/work-items",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "GET",
+              "path": "/v1/coordination/work-items",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        },
+        "C2": {
+          "status": "conformance_fail",
+          "strict_pass": false,
+          "observations": {
+            "concurrent_claim_responses": [
+              403,
+              403
+            ],
+            "evidence_status": "unsupported_on_exposed_surface",
+            "winner": null,
+            "loser": null,
+            "duplicate_execution": null,
+            "strict_gap": "no Work Item claim endpoint is exposed; memory writes do not establish execution authority"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-qm-qm-run-1-83a51ee2/claim",
+              "actor_id": "agent-a",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-qm-qm-run-1-83a51ee2/claim",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        },
+        "C3": {
+          "status": "pass",
+          "strict_pass": true,
+          "observations": {
+            "shared_memory_publish": true,
+            "consumer_can_read_result": true,
+            "required_fields": {
+              "result_summary": true,
+              "next_action": true,
+              "acceptance_status": true,
+              "blocker": true,
+              "references": true
+            },
+            "strict_gap": null
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            }
+          ]
+        },
+        "C4": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "reviewer_activation": "agent-b",
+            "shared_memory_review_discover": true,
+            "review_claim_endpoint_exposed": false,
+            "review_completed": false,
+            "strict_gap": "shared memory discovery has no reviewer claim, reference verification, or completion transition"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-result-qm-run-1-83a51ee2/review/claim",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-result-qm-run-1-83a51ee2/review/complete",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/reviews",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        }
+      },
+      "health_ok": true,
+      "http_transcript": [
+        {
+          "method": "GET",
+          "path": "/healthz",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "ok": true
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/apis",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": "{\"actorId\": \"agent-a\", \"admin\": {\"isAdmin\": false}, \"endpoints\": [{\"method\": \"GET\", \"path\": \"/v1/apis\", \"summary\": \"this list — every endpoint your token can call right now, plus whether the user is an org admin\"}, {\"method\": \"GET\", \"path\": \"/v1/runtime-config\", \"summary\": \"read this scope's effective harness/model, approved choices, override, and whether the org recommends an upgrade\"}, {\"method\": \"PUT\", \"path\": \"/v1/runtime-config\", \"summary\": \"set this scope's default with {harnessId,modelId}, follow the org with {inherit:true}, or keep the current override while acknowledging the recommendation with {keep:true}\"}, {\"method\": \"GET\", \"path\": \"/v1/channel-header-pin\", \"summary\": \"read whether this channel scope shows the pinned model header in Slack\"}, {\"method\": \"PUT\", \"path\": \"/v1/channel-header-pin\", \"summary\": \"override the pinned Slack header for this channel scope with {on: boolean}; {on: null} reverts to the org default\"}, {\"method\": \"GET\", \"path\": \"/v1/projects\", \"summary\": \"list every project the asking person belongs to\"}, {\"method\": \"POST\", \"path\": \"/v1/projects\", \"summary\": \"create a project owned by the asking person — body {name}\"}, {\"method\": \"PATCH\", \"path\": \"/v1/projects/:id\", \"summary\": \"rename a project the asking person owns — body {name}\"}, {\"method\": \"POST\", \"path\": \"/v1/projects/:id/members\", \"summary\": \"add an internal directory member to a project the asking person belongs to — body {memberId}\"}, {\"method\": \"DELETE\", \"path\": \"/v1/projects/:id/members/:memberId\", \"summary\": \"remove a member from a project the asking person owns\"}, {\"method\": \"PUT\", \"path\": \"/v1/projects/:id/slack-channel\", \"summary\": \"link a project to its Slack home channel — body {channel} (name or id; the asking person must be in the project and able to see the channel — public, or a private one they belong to; a channel that already has its own agent workspace is rejected with 409). Everyone in the channel joins the project, and the roster follows the channel from then on; the channel becomes the project's default delivery audience for crons and report-outs.\"}, {\"method\": \"DELETE\", \"path\": \"/v1/projects/:id/slack-channel\", \"summary\": \"unlink a project's Slack home channel — members who joined via the channel leave the project\"}, {\"method\": \"POST\", \"path\": \"/v1/triggers/:id/consent\", \"summary\": \"accept or decline a standing trigger's deliveries to you (a teammate's cron/webhook/watch that DMs you) — body {decision:\\\"accept\\\"|\\\"decline\\\"}; reversible; recipient-only\"}, {\"method\": \"GET\", \"path\": \"/v1/conversations\", \"summary\": \"list the asking person's own conversations (id, title, archived, pinned, lastActivityAt) — the same list their web sidebar shows\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations/:id\", \"summary\": \"update one of the asking person's conversations — body {archived?, pinned?, title?, color?}; archive/unarchive, pin/unpin, rename (null title clears), or set the sidebar color (#rrggbb; null clears). Per-person and reversible; 404 for a conversation not on their list\"}, {\"method\": \"GET\", \"path\": \"/v1/conversations/:id?tailTurns=20\", \"summary\": \"read the bounded transcript of one of the asking person's conversations; defaults to the last 20 turns and supports older paging with tailTurns and beforeSeq; returns 404 for a conversation they cannot see\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations\", \"summary\": \"start a FRESH conversation in this scope (no inherited transcript) — body {text, title?}; text becomes its first message and a run begins there asynchronously. Unlike /fork, the new session starts with only what you put in text. Human-attended turns only — refused (403) from crons and other automations\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations/:id/fork\", \"summary\": \"fork one of the asking person's conversations into a new conversation — body optionally {upToSeq}; returns 404 for a conversation they cannot see\"}, {\"method\": \"GET\", \"path\": \"/v1/files\", \"summary\": \"list files the asking person can reach across their contexts, split into owned and shared files; use limit and cursor query parameters to page…"
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"eligibility\": {\"role\": \"producer\", \"scope\": \"default\"}, \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"status\": \"available\", \"title\": \"C1-C4 candidate-neutral black-box fixture\", \"work_item_id\": \"fixture-qm-qm-run-1-83a51ee2\", \"workspace_id\": \"default\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"eligibility\": {\"role\": \"producer\", \"scope\": \"default\"}, \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"status\": \"available\", \"title\": \"C1-C4 candidate-neutral black-box fixture\", \"work_item_id\": \"fixture-qm-qm-run-1-83a51ee2\", \"workspace_id\": \"default\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-qm-qm-run-1-83a51ee2",
+            "limit": 10
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/work-items",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/coordination/work-items",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-qm-qm-run-1-83a51ee2/claim",
+          "actor_id": "agent-a",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-a"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-qm-qm-run-1-83a51ee2/claim",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-1-83a51ee2\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-1-83a51ee2\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-result-qm-run-1-83a51ee2",
+            "limit": 10
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"reviewer_role\": \"reviewer\", \"status\": \"awaiting_review\", \"work_item_id\": \"fixture-result-qm-run-1-83a51ee2\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-1-83a51ee2\"}"
+              },
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"reviewer_role\": \"reviewer\", \"status\": \"awaiting_review\", \"work_item_id\": \"fixture-result-qm-run-1-83a51ee2\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-result-qm-run-1-83a51ee2",
+            "limit": 10
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-result-qm-run-1-83a51ee2/review/claim",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-result-qm-run-1-83a51ee2/review/complete",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/reviews",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "qm-run-2-af31b06f",
+      "candidate": "yc-software/qm",
+      "candidate_class": "ref",
+      "candidate_commit": "568252bd4e6da5288b239573abef972f3e16b3f9",
+      "base_url": "http://127.0.0.1:18080",
+      "agent_ids": {
+        "producer": "agent-a",
+        "discoverer_reviewer": "agent-b"
+      },
+      "device_ids": {
+        "agent-a": "fixture-device-a",
+        "agent-b": "fixture-device-b"
+      },
+      "workspace_id": "org:fixture",
+      "human_events": [
+        {
+          "event": "human.activate",
+          "text": "检查 shared context",
+          "agent_id": "agent-b"
+        }
+      ],
+      "canonical_git_references": {
+        "repository": "https://github.com/jununfly/ZAgenticOPN",
+        "fixture_protocol": "research/routa-qm-conformance/2026-08-20-conformance-fixture-mapping.md",
+        "candidate_evidence": "https://github.com/yc-software/qm/tree/568252bd4e6da5288b239573abef972f3e16b3f9"
+      },
+      "fixtures": {
+        "C1": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "human_work_item_id": null,
+            "shared_memory_publish": true,
+            "shared_memory_discover": true,
+            "api_catalog_has_work_item_route": false,
+            "strict_gap": "shared memory fact discovery is not a typed eligible Work Item API"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "GET",
+              "path": "/v1/work-items",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "GET",
+              "path": "/v1/coordination/work-items",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        },
+        "C2": {
+          "status": "conformance_fail",
+          "strict_pass": false,
+          "observations": {
+            "concurrent_claim_responses": [
+              403,
+              403
+            ],
+            "evidence_status": "unsupported_on_exposed_surface",
+            "winner": null,
+            "loser": null,
+            "duplicate_execution": null,
+            "strict_gap": "no Work Item claim endpoint is exposed; memory writes do not establish execution authority"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-qm-qm-run-2-af31b06f/claim",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-qm-qm-run-2-af31b06f/claim",
+              "actor_id": "agent-a",
+              "status": 403
+            }
+          ]
+        },
+        "C3": {
+          "status": "pass",
+          "strict_pass": true,
+          "observations": {
+            "shared_memory_publish": true,
+            "consumer_can_read_result": true,
+            "required_fields": {
+              "result_summary": true,
+              "next_action": true,
+              "acceptance_status": true,
+              "blocker": true,
+              "references": true
+            },
+            "strict_gap": null
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            }
+          ]
+        },
+        "C4": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "reviewer_activation": "agent-b",
+            "shared_memory_review_discover": true,
+            "review_claim_endpoint_exposed": false,
+            "review_completed": false,
+            "strict_gap": "shared memory discovery has no reviewer claim, reference verification, or completion transition"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-result-qm-run-2-af31b06f/review/claim",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-result-qm-run-2-af31b06f/review/complete",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/reviews",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        }
+      },
+      "health_ok": true,
+      "http_transcript": [
+        {
+          "method": "GET",
+          "path": "/healthz",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "ok": true
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/apis",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": "{\"actorId\": \"agent-a\", \"admin\": {\"isAdmin\": false}, \"endpoints\": [{\"method\": \"GET\", \"path\": \"/v1/apis\", \"summary\": \"this list — every endpoint your token can call right now, plus whether the user is an org admin\"}, {\"method\": \"GET\", \"path\": \"/v1/runtime-config\", \"summary\": \"read this scope's effective harness/model, approved choices, override, and whether the org recommends an upgrade\"}, {\"method\": \"PUT\", \"path\": \"/v1/runtime-config\", \"summary\": \"set this scope's default with {harnessId,modelId}, follow the org with {inherit:true}, or keep the current override while acknowledging the recommendation with {keep:true}\"}, {\"method\": \"GET\", \"path\": \"/v1/channel-header-pin\", \"summary\": \"read whether this channel scope shows the pinned model header in Slack\"}, {\"method\": \"PUT\", \"path\": \"/v1/channel-header-pin\", \"summary\": \"override the pinned Slack header for this channel scope with {on: boolean}; {on: null} reverts to the org default\"}, {\"method\": \"GET\", \"path\": \"/v1/projects\", \"summary\": \"list every project the asking person belongs to\"}, {\"method\": \"POST\", \"path\": \"/v1/projects\", \"summary\": \"create a project owned by the asking person — body {name}\"}, {\"method\": \"PATCH\", \"path\": \"/v1/projects/:id\", \"summary\": \"rename a project the asking person owns — body {name}\"}, {\"method\": \"POST\", \"path\": \"/v1/projects/:id/members\", \"summary\": \"add an internal directory member to a project the asking person belongs to — body {memberId}\"}, {\"method\": \"DELETE\", \"path\": \"/v1/projects/:id/members/:memberId\", \"summary\": \"remove a member from a project the asking person owns\"}, {\"method\": \"PUT\", \"path\": \"/v1/projects/:id/slack-channel\", \"summary\": \"link a project to its Slack home channel — body {channel} (name or id; the asking person must be in the project and able to see the channel — public, or a private one they belong to; a channel that already has its own agent workspace is rejected with 409). Everyone in the channel joins the project, and the roster follows the channel from then on; the channel becomes the project's default delivery audience for crons and report-outs.\"}, {\"method\": \"DELETE\", \"path\": \"/v1/projects/:id/slack-channel\", \"summary\": \"unlink a project's Slack home channel — members who joined via the channel leave the project\"}, {\"method\": \"POST\", \"path\": \"/v1/triggers/:id/consent\", \"summary\": \"accept or decline a standing trigger's deliveries to you (a teammate's cron/webhook/watch that DMs you) — body {decision:\\\"accept\\\"|\\\"decline\\\"}; reversible; recipient-only\"}, {\"method\": \"GET\", \"path\": \"/v1/conversations\", \"summary\": \"list the asking person's own conversations (id, title, archived, pinned, lastActivityAt) — the same list their web sidebar shows\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations/:id\", \"summary\": \"update one of the asking person's conversations — body {archived?, pinned?, title?, color?}; archive/unarchive, pin/unpin, rename (null title clears), or set the sidebar color (#rrggbb; null clears). Per-person and reversible; 404 for a conversation not on their list\"}, {\"method\": \"GET\", \"path\": \"/v1/conversations/:id?tailTurns=20\", \"summary\": \"read the bounded transcript of one of the asking person's conversations; defaults to the last 20 turns and supports older paging with tailTurns and beforeSeq; returns 404 for a conversation they cannot see\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations\", \"summary\": \"start a FRESH conversation in this scope (no inherited transcript) — body {text, title?}; text becomes its first message and a run begins there asynchronously. Unlike /fork, the new session starts with only what you put in text. Human-attended turns only — refused (403) from crons and other automations\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations/:id/fork\", \"summary\": \"fork one of the asking person's conversations into a new conversation — body optionally {upToSeq}; returns 404 for a conversation they cannot see\"}, {\"method\": \"GET\", \"path\": \"/v1/files\", \"summary\": \"list files the asking person can reach across their contexts, split into owned and shared files; use limit and cursor query parameters to page…"
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"eligibility\": {\"role\": \"producer\", \"scope\": \"default\"}, \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"status\": \"available\", \"title\": \"C1-C4 candidate-neutral black-box fixture\", \"work_item_id\": \"fixture-qm-qm-run-2-af31b06f\", \"workspace_id\": \"default\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"eligibility\": {\"role\": \"producer\", \"scope\": \"default\"}, \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"status\": \"available\", \"title\": \"C1-C4 candidate-neutral black-box fixture\", \"work_item_id\": \"fixture-qm-qm-run-2-af31b06f\", \"workspace_id\": \"default\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-qm-qm-run-2-af31b06f",
+            "limit": 10
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/work-items",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/coordination/work-items",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-qm-qm-run-2-af31b06f/claim",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-qm-qm-run-2-af31b06f/claim",
+          "actor_id": "agent-a",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-a"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-2-af31b06f\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-2-af31b06f\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-result-qm-run-2-af31b06f",
+            "limit": 10
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"reviewer_role\": \"reviewer\", \"status\": \"awaiting_review\", \"work_item_id\": \"fixture-result-qm-run-2-af31b06f\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-2-af31b06f\"}"
+              },
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"reviewer_role\": \"reviewer\", \"status\": \"awaiting_review\", \"work_item_id\": \"fixture-result-qm-run-2-af31b06f\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-result-qm-run-2-af31b06f",
+            "limit": 10
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-result-qm-run-2-af31b06f/review/claim",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-result-qm-run-2-af31b06f/review/complete",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/reviews",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "qm-run-3-edcdfafe",
+      "candidate": "yc-software/qm",
+      "candidate_class": "ref",
+      "candidate_commit": "568252bd4e6da5288b239573abef972f3e16b3f9",
+      "base_url": "http://127.0.0.1:18080",
+      "agent_ids": {
+        "producer": "agent-a",
+        "discoverer_reviewer": "agent-b"
+      },
+      "device_ids": {
+        "agent-a": "fixture-device-a",
+        "agent-b": "fixture-device-b"
+      },
+      "workspace_id": "org:fixture",
+      "human_events": [
+        {
+          "event": "human.activate",
+          "text": "检查 shared context",
+          "agent_id": "agent-b"
+        }
+      ],
+      "canonical_git_references": {
+        "repository": "https://github.com/jununfly/ZAgenticOPN",
+        "fixture_protocol": "research/routa-qm-conformance/2026-08-20-conformance-fixture-mapping.md",
+        "candidate_evidence": "https://github.com/yc-software/qm/tree/568252bd4e6da5288b239573abef972f3e16b3f9"
+      },
+      "fixtures": {
+        "C1": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "human_work_item_id": null,
+            "shared_memory_publish": true,
+            "shared_memory_discover": true,
+            "api_catalog_has_work_item_route": false,
+            "strict_gap": "shared memory fact discovery is not a typed eligible Work Item API"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "GET",
+              "path": "/v1/work-items",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "GET",
+              "path": "/v1/coordination/work-items",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        },
+        "C2": {
+          "status": "conformance_fail",
+          "strict_pass": false,
+          "observations": {
+            "concurrent_claim_responses": [
+              403,
+              403
+            ],
+            "evidence_status": "unsupported_on_exposed_surface",
+            "winner": null,
+            "loser": null,
+            "duplicate_execution": null,
+            "strict_gap": "no Work Item claim endpoint is exposed; memory writes do not establish execution authority"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-qm-qm-run-3-edcdfafe/claim",
+              "actor_id": "agent-a",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-qm-qm-run-3-edcdfafe/claim",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        },
+        "C3": {
+          "status": "pass",
+          "strict_pass": true,
+          "observations": {
+            "shared_memory_publish": true,
+            "consumer_can_read_result": true,
+            "required_fields": {
+              "result_summary": true,
+              "next_action": true,
+              "acceptance_status": true,
+              "blocker": true,
+              "references": true
+            },
+            "strict_gap": null
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            }
+          ]
+        },
+        "C4": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "reviewer_activation": "agent-b",
+            "shared_memory_review_discover": true,
+            "review_claim_endpoint_exposed": false,
+            "review_completed": false,
+            "strict_gap": "shared memory discovery has no reviewer claim, reference verification, or completion transition"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/v1/memory/facts",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/memory/search",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-result-qm-run-3-edcdfafe/review/claim",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/work-items/fixture-result-qm-run-3-edcdfafe/review/complete",
+              "actor_id": "agent-b",
+              "status": 403
+            },
+            {
+              "method": "POST",
+              "path": "/v1/reviews",
+              "actor_id": "agent-b",
+              "status": 403
+            }
+          ]
+        }
+      },
+      "health_ok": true,
+      "http_transcript": [
+        {
+          "method": "GET",
+          "path": "/healthz",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "ok": true
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/apis",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": "{\"actorId\": \"agent-a\", \"admin\": {\"isAdmin\": false}, \"endpoints\": [{\"method\": \"GET\", \"path\": \"/v1/apis\", \"summary\": \"this list — every endpoint your token can call right now, plus whether the user is an org admin\"}, {\"method\": \"GET\", \"path\": \"/v1/runtime-config\", \"summary\": \"read this scope's effective harness/model, approved choices, override, and whether the org recommends an upgrade\"}, {\"method\": \"PUT\", \"path\": \"/v1/runtime-config\", \"summary\": \"set this scope's default with {harnessId,modelId}, follow the org with {inherit:true}, or keep the current override while acknowledging the recommendation with {keep:true}\"}, {\"method\": \"GET\", \"path\": \"/v1/channel-header-pin\", \"summary\": \"read whether this channel scope shows the pinned model header in Slack\"}, {\"method\": \"PUT\", \"path\": \"/v1/channel-header-pin\", \"summary\": \"override the pinned Slack header for this channel scope with {on: boolean}; {on: null} reverts to the org default\"}, {\"method\": \"GET\", \"path\": \"/v1/projects\", \"summary\": \"list every project the asking person belongs to\"}, {\"method\": \"POST\", \"path\": \"/v1/projects\", \"summary\": \"create a project owned by the asking person — body {name}\"}, {\"method\": \"PATCH\", \"path\": \"/v1/projects/:id\", \"summary\": \"rename a project the asking person owns — body {name}\"}, {\"method\": \"POST\", \"path\": \"/v1/projects/:id/members\", \"summary\": \"add an internal directory member to a project the asking person belongs to — body {memberId}\"}, {\"method\": \"DELETE\", \"path\": \"/v1/projects/:id/members/:memberId\", \"summary\": \"remove a member from a project the asking person owns\"}, {\"method\": \"PUT\", \"path\": \"/v1/projects/:id/slack-channel\", \"summary\": \"link a project to its Slack home channel — body {channel} (name or id; the asking person must be in the project and able to see the channel — public, or a private one they belong to; a channel that already has its own agent workspace is rejected with 409). Everyone in the channel joins the project, and the roster follows the channel from then on; the channel becomes the project's default delivery audience for crons and report-outs.\"}, {\"method\": \"DELETE\", \"path\": \"/v1/projects/:id/slack-channel\", \"summary\": \"unlink a project's Slack home channel — members who joined via the channel leave the project\"}, {\"method\": \"POST\", \"path\": \"/v1/triggers/:id/consent\", \"summary\": \"accept or decline a standing trigger's deliveries to you (a teammate's cron/webhook/watch that DMs you) — body {decision:\\\"accept\\\"|\\\"decline\\\"}; reversible; recipient-only\"}, {\"method\": \"GET\", \"path\": \"/v1/conversations\", \"summary\": \"list the asking person's own conversations (id, title, archived, pinned, lastActivityAt) — the same list their web sidebar shows\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations/:id\", \"summary\": \"update one of the asking person's conversations — body {archived?, pinned?, title?, color?}; archive/unarchive, pin/unpin, rename (null title clears), or set the sidebar color (#rrggbb; null clears). Per-person and reversible; 404 for a conversation not on their list\"}, {\"method\": \"GET\", \"path\": \"/v1/conversations/:id?tailTurns=20\", \"summary\": \"read the bounded transcript of one of the asking person's conversations; defaults to the last 20 turns and supports older paging with tailTurns and beforeSeq; returns 404 for a conversation they cannot see\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations\", \"summary\": \"start a FRESH conversation in this scope (no inherited transcript) — body {text, title?}; text becomes its first message and a run begins there asynchronously. Unlike /fork, the new session starts with only what you put in text. Human-attended turns only — refused (403) from crons and other automations\"}, {\"method\": \"POST\", \"path\": \"/v1/conversations/:id/fork\", \"summary\": \"fork one of the asking person's conversations into a new conversation — body optionally {upToSeq}; returns 404 for a conversation they cannot see\"}, {\"method\": \"GET\", \"path\": \"/v1/files\", \"summary\": \"list files the asking person can reach across their contexts, split into owned and shared files; use limit and cursor query parameters to page…"
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"eligibility\": {\"role\": \"producer\", \"scope\": \"default\"}, \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"status\": \"available\", \"title\": \"C1-C4 candidate-neutral black-box fixture\", \"work_item_id\": \"fixture-qm-qm-run-3-edcdfafe\", \"workspace_id\": \"default\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"eligibility\": {\"role\": \"producer\", \"scope\": \"default\"}, \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"status\": \"available\", \"title\": \"C1-C4 candidate-neutral black-box fixture\", \"work_item_id\": \"fixture-qm-qm-run-3-edcdfafe\", \"workspace_id\": \"default\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-qm-qm-run-3-edcdfafe",
+            "limit": 10
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/work-items",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/v1/coordination/work-items",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-qm-qm-run-3-edcdfafe/claim",
+          "actor_id": "agent-a",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-a"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-qm-qm-run-3-edcdfafe/claim",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-3-edcdfafe\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-3-edcdfafe\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-result-qm-run-3-edcdfafe",
+            "limit": 10
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/facts",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "ok": true,
+            "added": 1,
+            "scopeId": "org:fixture"
+          },
+          "request_body": {
+            "facts": [
+              "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"reviewer_role\": \"reviewer\", \"status\": \"awaiting_review\", \"work_item_id\": \"fixture-result-qm-run-3-edcdfafe\"}"
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/memory/search",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "results": [
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-qm-run-3-edcdfafe\"}"
+              },
+              {
+                "scopeId": "org:fixture",
+                "fact": "(2026-08-20) {\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"reviewer_role\": \"reviewer\", \"status\": \"awaiting_review\", \"work_item_id\": \"fixture-result-qm-run-3-edcdfafe\"}"
+              }
+            ]
+          },
+          "request_body": {
+            "query": "fixture-result-qm-run-3-edcdfafe",
+            "limit": 10
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-result-qm-run-3-edcdfafe/review/claim",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/work-items/fixture-result-qm-run-3-edcdfafe/review/complete",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/reviews",
+          "actor_id": "agent-b",
+          "status": 403,
+          "response": {
+            "error": "forbidden",
+            "message": "capability token not valid for this route"
+          },
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        }
+      ]
+    }
+  ],
+  "strict_gate_summary": {
+    "C1": {
+      "pass_count": 0,
+      "statuses": [
+        "partial",
+        "partial",
+        "partial"
+      ]
+    },
+    "C2": {
+      "pass_count": 0,
+      "statuses": [
+        "conformance_fail",
+        "conformance_fail",
+        "conformance_fail"
+      ]
+    },
+    "C3": {
+      "pass_count": 3,
+      "statuses": [
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    "C4": {
+      "pass_count": 0,
+      "statuses": [
+        "partial",
+        "partial",
+        "partial"
+      ]
+    }
+  }
+}

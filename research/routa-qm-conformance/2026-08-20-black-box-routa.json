@@ -1,0 +1,2568 @@
+{
+  "protocol": "zagenticopn-c1-c4-black-box/v1",
+  "generated_at": "2026-08-20T14:34:56Z",
+  "candidate": "routa",
+  "runs_requested": 3,
+  "runs": [
+    {
+      "run_id": "routa-run-1-d2d5d187",
+      "candidate": "phodal/routa",
+      "candidate_class": "ext",
+      "candidate_commit": "e48861ab81e2b30378fd32f05204a3ab424c4fec",
+      "base_url": "http://127.0.0.1:3211",
+      "agent_ids": {
+        "producer": "agent-a",
+        "discoverer_reviewer": "agent-b"
+      },
+      "device_ids": {
+        "agent-a": "fixture-device-a",
+        "agent-b": "fixture-device-b"
+      },
+      "workspace_id": "default",
+      "human_events": [
+        {
+          "event": "human.activate",
+          "text": "检查 shared context",
+          "agent_id": "agent-b"
+        }
+      ],
+      "canonical_git_references": {
+        "repository": "https://github.com/jununfly/ZAgenticOPN",
+        "fixture_protocol": "research/routa-qm-conformance/2026-08-20-conformance-fixture-mapping.md",
+        "candidate_evidence": "https://github.com/phodal/routa/tree/e48861ab81e2b30378fd32f05204a3ab424c4fec"
+      },
+      "fixtures": {
+        "C1": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "human_work_item_id": null,
+            "discovered_by_agent": "agent-b",
+            "task_id": "75280797-8936-4005-a75e-47dca1d55bca",
+            "discovered": true,
+            "ready_query_has_filter_reasons": false,
+            "strict_gap": "ready task is not Agent-eligibility-aware Work Item discovery"
+          },
+          "request_descriptors": [
+            {
+              "method": "GET",
+              "path": "/api/kanban/boards?workspaceId=default",
+              "actor_id": null,
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks",
+              "actor_id": null,
+              "status": 201
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks/ready?workspaceId=default",
+              "actor_id": null,
+              "status": 200
+            }
+          ]
+        },
+        "C2": {
+          "status": "conformance_fail",
+          "strict_pass": false,
+          "observations": {
+            "candidate_claim_endpoint_exposed": false,
+            "evidence_status": "unsupported_on_exposed_surface",
+            "winner": null,
+            "loser": null,
+            "duplicate_execution": null,
+            "strict_gap": "no Work Item claim transaction was exposed by the HTTP surface"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/claim",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/claim",
+              "actor_id": "agent-a",
+              "status": 404
+            }
+          ]
+        },
+        "C3": {
+          "status": "pass",
+          "strict_pass": true,
+          "observations": {
+            "producer_artifact_status": true,
+            "consumer_can_read_artifact": true,
+            "required_fields": [
+              "result_summary",
+              "next_action",
+              "acceptance_status",
+              "blocker",
+              "references"
+            ],
+            "required_fields_in_generic_artifact": true,
+            "strict_gap": null
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+              "actor_id": "agent-b",
+              "status": 200
+            }
+          ]
+        },
+        "C4": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "reviewer_activation": "agent-b",
+            "awaiting_review_visible": true,
+            "review_claim_endpoint_exposed": false,
+            "review_completed": false,
+            "strict_gap": "review column visibility is not reviewer Agent claim/verify/complete continuation"
+          },
+          "request_descriptors": [
+            {
+              "method": "GET",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "PATCH",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks?workspaceId=default",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/review/claim",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/review/complete",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/reviews",
+              "actor_id": "agent-b",
+              "status": 404
+            }
+          ]
+        }
+      },
+      "task_id": "75280797-8936-4005-a75e-47dca1d55bca",
+      "http_transcript": [
+        {
+          "method": "GET",
+          "path": "/api/health",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "server": "routa-server",
+            "status": "ok",
+            "timestamp": "2026-08-20T14:34:56.484319+00:00",
+            "version": "0.19.0"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/kanban/boards?workspaceId=default",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "boards": [
+              {
+                "autoProviderId": null,
+                "columns": [
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": true,
+                      "enabled": true,
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-backlog-refiner",
+                      "specialistName": "Backlog Refiner",
+                      "steps": [
+                        {
+                          "id": "backlog-refiner",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-backlog-refiner",
+                          "specialistName": "Backlog Refiner"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "slate",
+                    "id": "backlog",
+                    "name": "Backlog",
+                    "position": 0,
+                    "stage": "backlog"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-todo-orchestrator",
+                      "specialistName": "Todo Orchestrator",
+                      "steps": [
+                        {
+                          "id": "todo-orchestrator",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-todo-orchestrator",
+                          "specialistName": "Todo Orchestrator"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "sky",
+                    "id": "todo",
+                    "name": "Todo",
+                    "position": 1,
+                    "stage": "todo"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "requiredTaskFields": [
+                        "scope",
+                        "acceptance_criteria",
+                        "verification_plan"
+                      ],
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-dev-executor",
+                      "specialistName": "Dev Crafter",
+                      "steps": [
+                        {
+                          "id": "dev-executor",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-dev-executor",
+                          "specialistName": "Dev Crafter"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "amber",
+                    "id": "dev",
+                    "name": "Dev",
+                    "position": 2,
+                    "stage": "dev"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "requiredArtifacts": [
+                        "screenshot",
+                        "test_results"
+                      ],
+                      "role": "GATE",
+                      "specialistId": "kanban-qa-frontend",
+                      "specialistName": "QA Frontend",
+                      "steps": [
+                        {
+                          "id": "qa-frontend",
+                          "role": "GATE",
+                          "specialistId": "kanban-qa-frontend",
+                          "specialistName": "QA Frontend"
+                        },
+                        {
+                          "id": "review-guard",
+                          "role": "GATE",
+                          "specialistId": "kanban-review-guard",
+                          "specialistName": "Review Guard"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "slate",
+                    "id": "review",
+                    "name": "Review",
+                    "position": 3,
+                    "stage": "review"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "role": "GATE",
+                      "specialistId": "kanban-done-reporter",
+                      "specialistName": "Done Reporter",
+                      "steps": [
+                        {
+                          "id": "done-reporter",
+                          "role": "GATE",
+                          "specialistId": "kanban-done-reporter",
+                          "specialistName": "Done Reporter"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "emerald",
+                    "id": "done",
+                    "name": "Done",
+                    "position": 4,
+                    "stage": "done"
+                  },
+                  {
+                    "color": "rose",
+                    "id": "blocked",
+                    "name": "Blocked",
+                    "position": 5,
+                    "stage": "blocked"
+                  }
+                ],
+                "createdAt": "2026-08-20T12:20:05.052Z",
+                "devSessionSupervision": {
+                  "completionRequirement": "turn_complete",
+                  "inactivityTimeoutMinutes": 10,
+                  "maxRecoveryAttempts": 1,
+                  "mode": "watchdog_retry"
+                },
+                "githubTokenConfigured": false,
+                "id": "353968be-baee-40df-a278-1e778a148d49",
+                "isDefault": true,
+                "name": "Board",
+                "queue": {
+                  "boardId": "353968be-baee-40df-a278-1e778a148d49",
+                  "queuedCardIds": [],
+                  "queuedCards": [],
+                  "queuedCount": 0,
+                  "queuedPositions": {},
+                  "runningCards": [],
+                  "runningCount": 0
+                },
+                "sessionConcurrencyLimit": 1,
+                "updatedAt": "2026-08-20T12:20:05.052Z",
+                "workspaceId": "default"
+              }
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks",
+          "actor_id": null,
+          "status": 201,
+          "response": {
+            "task": {
+              "acceptanceCriteria": [
+                "The producer result is readable by another Agent."
+              ],
+              "artifactSummary": {
+                "byType": {},
+                "missingRequired": [],
+                "requiredSatisfied": true,
+                "total": 0
+              },
+              "assignedRole": "CRAFTER",
+              "assignedSpecialistId": "kanban-todo-orchestrator",
+              "assignedSpecialistName": "Todo Orchestrator",
+              "boardId": "353968be-baee-40df-a278-1e778a148d49",
+              "codebaseIds": [],
+              "columnId": "todo",
+              "createdAt": "2026-08-20T14:34:56.535426Z",
+              "dependencies": [],
+              "evidenceSummary": {
+                "artifact": {
+                  "byType": {},
+                  "missingRequired": [],
+                  "requiredSatisfied": true,
+                  "total": 0
+                },
+                "completion": {
+                  "hasSummary": false
+                },
+                "runs": {
+                  "latestStatus": "idle",
+                  "total": 0
+                },
+                "verification": {
+                  "hasReport": false,
+                  "hasVerdict": false
+                }
+              },
+              "id": "75280797-8936-4005-a75e-47dca1d55bca",
+              "investValidation": {
+                "checks": {
+                  "estimable": {
+                    "reason": "Scope and acceptance criteria provide enough context to estimate work.",
+                    "status": "pass"
+                  },
+                  "independent": {
+                    "reason": "No blocking prerequisite was detected.",
+                    "status": "pass"
+                  },
+                  "negotiable": {
+                    "reason": "Negotiability is a human judgment call when no canonical story contract is present.",
+                    "status": "warning"
+                  },
+                  "small": {
+                    "reason": "The story looks narrow enough for a single implementation pass.",
+                    "status": "pass"
+                  },
+                  "testable": {
+                    "reason": "Acceptance criteria or an explicit verification plan makes the outcome testable.",
+                    "status": "pass"
+                  },
+                  "valuable": {
+                    "reason": "Objective contains enough detail to express user or delivery value.",
+                    "status": "pass"
+                  }
+                },
+                "issues": [],
+                "overallStatus": "warning",
+                "source": "heuristic"
+              },
+              "labels": [],
+              "laneHandoffs": [],
+              "laneSessions": [],
+              "lastSyncError": "Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?",
+              "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+              "position": 0,
+              "scope": "The fixed C1-C4 black-box fixture for this run.",
+              "sessionIds": [],
+              "status": "PENDING",
+              "storyReadiness": {
+                "checks": {
+                  "acceptanceCriteria": true,
+                  "dependenciesDeclared": false,
+                  "scope": true,
+                  "testCases": true,
+                  "verificationCommands": true,
+                  "verificationPlan": true
+                },
+                "missing": [],
+                "ready": true,
+                "requiredTaskFields": [
+                  "scope",
+                  "acceptance_criteria",
+                  "verification_plan"
+                ]
+              },
+              "testCases": [
+                "C1",
+                "C2",
+                "C3",
+                "C4"
+              ],
+              "title": "C1-C4 fixture routa-run-1-d2d5d187",
+              "updatedAt": "2026-08-20T14:34:56.535426Z",
+              "verificationCommands": [
+                "black-box-fixture --candidate routa"
+              ],
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "title": "C1-C4 fixture routa-run-1-d2d5d187",
+            "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+            "workspaceId": "default",
+            "boardId": "353968be-baee-40df-a278-1e778a148d49",
+            "columnId": "todo",
+            "scope": "The fixed C1-C4 black-box fixture for this run.",
+            "acceptanceCriteria": [
+              "The producer result is readable by another Agent."
+            ],
+            "verificationCommands": [
+              "black-box-fixture --candidate routa"
+            ],
+            "testCases": [
+              "C1",
+              "C2",
+              "C3",
+              "C4"
+            ]
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/ready?workspaceId=default",
+          "actor_id": null,
+          "status": 200,
+          "response": "{\"tasks\": [{\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"todo\", \"createdAt\": \"2026-08-20T14:34:56.535Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"completion\": {\"hasSummary\": false}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": false, \"hasVerdict\": false}}, \"id\": \"75280797-8936-4005-a75e-47dca1d55bca\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"Acceptance criteria or an explicit verification plan makes the outcome testable.\", \"status\": \"pass\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"warning\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?\", \"objective\": \"Discover, compete, publish structured evidence, and continue review without task-specific Human context\", \"position\": 0, \"scope\": \"The fixed C1-C4 black-box fixture for this run.\", \"sessionIds\": [], \"status\": \"PENDING\", \"storyReadiness\": {\"checks\": {\"acceptanceCriteria\": true, \"dependenciesDeclared\": false, \"scope\": true, \"testCases\": true, \"verificationCommands\": true, \"verificationPlan\": true}, \"missing\": [], \"ready\": true, \"requiredTaskFields\": [\"scope\", \"acceptance_criteria\", \"verification_plan\"]}, \"testCases\": [\"C1\", \"C2\", \"C3\", \"C4\"], \"title\": \"C1-C4 fixture routa-run-1-d2d5d187\", \"updatedAt\": \"2026-08-20T14:34:56.535Z\", \"verificationCommands\": [\"black-box-fixture --candidate routa\"], \"workspaceId\": \"default\"}, {\"artifactSummary\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"todo\", \"createdAt\": \"2026-08-20T12:22:41.606Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"completion\": {\"hasSummary\": false}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": false, \"hasVerdict\": false}}, \"id\": \"00a637be-85cf-4afe-b8e9-57fc374b8b29\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Missing scope and acceptance criteria leaves the story hard to estimate.\", \"status\": \"fail\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"No acceptance criteria or verification plan was provided.\", \"status\": \"fail\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"fail\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No…"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/claim",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/claim",
+          "actor_id": "agent-a",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-a"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/claims",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/work-items",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/coordination/work-items",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-1-d2d5d187\"}",
+              "context": "C3 structured result fixture",
+              "createdAt": "2026-08-20T14:34:56.579302Z",
+              "id": "0a52ac5c-acef-4e10-aac0-a98af0027ba0",
+              "metadata": {
+                "canonical_commit": "fixture-canonical-reference",
+                "run_id": "routa-run-1-d2d5d187"
+              },
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "75280797-8936-4005-a75e-47dca1d55bca",
+              "type": "logs",
+              "updatedAt": "2026-08-20T14:34:56.579302Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "logs",
+            "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-1-d2d5d187\"}",
+            "context": "C3 structured result fixture",
+            "metadata": {
+              "run_id": "routa-run-1-d2d5d187",
+              "canonical_commit": "fixture-canonical-reference"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "artifacts": [
+              {
+                "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-1-d2d5d187\"}",
+                "context": "C3 structured result fixture",
+                "createdAt": "2026-08-20T14:34:56.579Z",
+                "id": "0a52ac5c-acef-4e10-aac0-a98af0027ba0",
+                "metadata": {
+                  "canonical_commit": "fixture-canonical-reference",
+                  "run_id": "routa-run-1-d2d5d187"
+                },
+                "providedByAgentId": "agent-a",
+                "status": "provided",
+                "taskId": "75280797-8936-4005-a75e-47dca1d55bca",
+                "type": "logs",
+                "updatedAt": "2026-08-20T14:34:56.579Z",
+                "workspaceId": "default"
+              }
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "fixture screenshot placeholder",
+              "context": "C4 review gate fixture",
+              "createdAt": "2026-08-20T14:34:56.586632Z",
+              "id": "c05ad47b-5804-49ef-b7ed-b2e71fdd846e",
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "75280797-8936-4005-a75e-47dca1d55bca",
+              "type": "screenshot",
+              "updatedAt": "2026-08-20T14:34:56.586632Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "screenshot",
+            "content": "fixture screenshot placeholder",
+            "context": "C4 review gate fixture"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "fixture test results: C1-C4 black-box",
+              "context": "C4 review gate fixture",
+              "createdAt": "2026-08-20T14:34:56.590132Z",
+              "id": "ed27ec2e-0a56-4cb7-bd6b-4dfc7107af5b",
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "75280797-8936-4005-a75e-47dca1d55bca",
+              "type": "test_results",
+              "updatedAt": "2026-08-20T14:34:56.590132Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "test_results",
+            "content": "fixture test results: C1-C4 black-box",
+            "context": "C4 review gate fixture"
+          }
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "task": {
+              "acceptanceCriteria": [
+                "The producer result is readable by another Agent."
+              ],
+              "artifactSummary": {
+                "byType": {
+                  "logs": 1,
+                  "screenshot": 1,
+                  "test_results": 1
+                },
+                "missingRequired": [],
+                "requiredSatisfied": true,
+                "total": 3
+              },
+              "assignedRole": "CRAFTER",
+              "assignedSpecialistId": "kanban-todo-orchestrator",
+              "assignedSpecialistName": "Todo Orchestrator",
+              "boardId": "353968be-baee-40df-a278-1e778a148d49",
+              "codebaseIds": [],
+              "columnId": "review",
+              "completionSummary": "The producer completed the black-box probe.",
+              "createdAt": "2026-08-20T14:34:56.535Z",
+              "dependencies": [],
+              "evidenceSummary": {
+                "artifact": {
+                  "byType": {
+                    "logs": 1,
+                    "screenshot": 1,
+                    "test_results": 1
+                  },
+                  "missingRequired": [],
+                  "requiredSatisfied": true,
+                  "total": 3
+                },
+                "completion": {
+                  "hasSummary": true
+                },
+                "runs": {
+                  "latestStatus": "idle",
+                  "total": 0
+                },
+                "verification": {
+                  "hasReport": true,
+                  "hasVerdict": true,
+                  "verdict": "APPROVED"
+                }
+              },
+              "id": "75280797-8936-4005-a75e-47dca1d55bca",
+              "investValidation": {
+                "checks": {
+                  "estimable": {
+                    "reason": "Scope and acceptance criteria provide enough context to estimate work.",
+                    "status": "pass"
+                  },
+                  "independent": {
+                    "reason": "No blocking prerequisite was detected.",
+                    "status": "pass"
+                  },
+                  "negotiable": {
+                    "reason": "Negotiability is a human judgment call when no canonical story contract is present.",
+                    "status": "warning"
+                  },
+                  "small": {
+                    "reason": "The story looks narrow enough for a single implementation pass.",
+                    "status": "pass"
+                  },
+                  "testable": {
+                    "reason": "Acceptance criteria or an explicit verification plan makes the outcome testable.",
+                    "status": "pass"
+                  },
+                  "valuable": {
+                    "reason": "Objective contains enough detail to express user or delivery value.",
+                    "status": "pass"
+                  }
+                },
+                "issues": [],
+                "overallStatus": "warning",
+                "source": "heuristic"
+              },
+              "labels": [],
+              "laneHandoffs": [],
+              "laneSessions": [],
+              "lastSyncError": "Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?",
+              "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+              "position": 0,
+              "scope": "The fixed C1-C4 black-box fixture for this run.",
+              "sessionIds": [],
+              "status": "REVIEW_REQUIRED",
+              "storyReadiness": {
+                "checks": {
+                  "acceptanceCriteria": true,
+                  "dependenciesDeclared": false,
+                  "scope": true,
+                  "testCases": true,
+                  "verificationCommands": true,
+                  "verificationPlan": true
+                },
+                "missing": [],
+                "ready": true,
+                "requiredTaskFields": []
+              },
+              "testCases": [
+                "C1",
+                "C2",
+                "C3",
+                "C4"
+              ],
+              "title": "C1-C4 fixture routa-run-1-d2d5d187",
+              "updatedAt": "2026-08-20T14:34:56.593414Z",
+              "verificationCommands": [
+                "black-box-fixture --candidate routa"
+              ],
+              "verificationReport": "C3 generic artifact is readable; typed result schema remains absent.",
+              "verificationVerdict": "APPROVED",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "completionSummary": "The producer completed the black-box probe.",
+            "verificationVerdict": "APPROVED",
+            "verificationReport": "C3 generic artifact is readable; typed result schema remains absent.",
+            "columnId": "review"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks?workspaceId=default",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": "{\"tasks\": [{\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"review\", \"completionSummary\": \"The producer completed the black-box probe.\", \"createdAt\": \"2026-08-20T14:34:56.535Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"completion\": {\"hasSummary\": true}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": true, \"hasVerdict\": true, \"verdict\": \"APPROVED\"}}, \"id\": \"75280797-8936-4005-a75e-47dca1d55bca\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"Acceptance criteria or an explicit verification plan makes the outcome testable.\", \"status\": \"pass\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"warning\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?\", \"objective\": \"Discover, compete, publish structured evidence, and continue review without task-specific Human context\", \"position\": 0, \"scope\": \"The fixed C1-C4 black-box fixture for this run.\", \"sessionIds\": [], \"status\": \"REVIEW_REQUIRED\", \"storyReadiness\": {\"checks\": {\"acceptanceCriteria\": true, \"dependenciesDeclared\": false, \"scope\": true, \"testCases\": true, \"verificationCommands\": true, \"verificationPlan\": true}, \"missing\": [], \"ready\": true, \"requiredTaskFields\": []}, \"testCases\": [\"C1\", \"C2\", \"C3\", \"C4\"], \"title\": \"C1-C4 fixture routa-run-1-d2d5d187\", \"updatedAt\": \"2026-08-20T14:34:56.593Z\", \"verificationCommands\": [\"black-box-fixture --candidate routa\"], \"verificationReport\": \"C3 generic artifact is readable; typed result schema remains absent.\", \"verificationVerdict\": \"APPROVED\", \"workspaceId\": \"default\"}, {\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"review\", \"completionSummary\": \"The producer completed the black-box probe.\", \"createdAt\": \"2026-08-20T12:35:44.227Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"completion\": {\"hasSummary\": true}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": true, \"hasVerdict\": true, \"verdict\": \"APPROVED\"}}, \"id\": \"2f95d09b-51d8-4c00-99ee-c141cd75f8ca\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": …"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/review/claim",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/75280797-8936-4005-a75e-47dca1d55bca/review/complete",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/reviews",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "routa-run-2-0fa51d56",
+      "candidate": "phodal/routa",
+      "candidate_class": "ext",
+      "candidate_commit": "e48861ab81e2b30378fd32f05204a3ab424c4fec",
+      "base_url": "http://127.0.0.1:3211",
+      "agent_ids": {
+        "producer": "agent-a",
+        "discoverer_reviewer": "agent-b"
+      },
+      "device_ids": {
+        "agent-a": "fixture-device-a",
+        "agent-b": "fixture-device-b"
+      },
+      "workspace_id": "default",
+      "human_events": [
+        {
+          "event": "human.activate",
+          "text": "检查 shared context",
+          "agent_id": "agent-b"
+        }
+      ],
+      "canonical_git_references": {
+        "repository": "https://github.com/jununfly/ZAgenticOPN",
+        "fixture_protocol": "research/routa-qm-conformance/2026-08-20-conformance-fixture-mapping.md",
+        "candidate_evidence": "https://github.com/phodal/routa/tree/e48861ab81e2b30378fd32f05204a3ab424c4fec"
+      },
+      "fixtures": {
+        "C1": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "human_work_item_id": null,
+            "discovered_by_agent": "agent-b",
+            "task_id": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+            "discovered": true,
+            "ready_query_has_filter_reasons": false,
+            "strict_gap": "ready task is not Agent-eligibility-aware Work Item discovery"
+          },
+          "request_descriptors": [
+            {
+              "method": "GET",
+              "path": "/api/kanban/boards?workspaceId=default",
+              "actor_id": null,
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks",
+              "actor_id": null,
+              "status": 201
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks/ready?workspaceId=default",
+              "actor_id": null,
+              "status": 200
+            }
+          ]
+        },
+        "C2": {
+          "status": "conformance_fail",
+          "strict_pass": false,
+          "observations": {
+            "candidate_claim_endpoint_exposed": false,
+            "evidence_status": "unsupported_on_exposed_surface",
+            "winner": null,
+            "loser": null,
+            "duplicate_execution": null,
+            "strict_gap": "no Work Item claim transaction was exposed by the HTTP surface"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/claim",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/claim",
+              "actor_id": "agent-a",
+              "status": 404
+            }
+          ]
+        },
+        "C3": {
+          "status": "pass",
+          "strict_pass": true,
+          "observations": {
+            "producer_artifact_status": true,
+            "consumer_can_read_artifact": true,
+            "required_fields": [
+              "result_summary",
+              "next_action",
+              "acceptance_status",
+              "blocker",
+              "references"
+            ],
+            "required_fields_in_generic_artifact": true,
+            "strict_gap": null
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+              "actor_id": "agent-b",
+              "status": 200
+            }
+          ]
+        },
+        "C4": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "reviewer_activation": "agent-b",
+            "awaiting_review_visible": true,
+            "review_claim_endpoint_exposed": false,
+            "review_completed": false,
+            "strict_gap": "review column visibility is not reviewer Agent claim/verify/complete continuation"
+          },
+          "request_descriptors": [
+            {
+              "method": "GET",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "PATCH",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks?workspaceId=default",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/review/claim",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/review/complete",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/reviews",
+              "actor_id": "agent-b",
+              "status": 404
+            }
+          ]
+        }
+      },
+      "task_id": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+      "http_transcript": [
+        {
+          "method": "GET",
+          "path": "/api/health",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "server": "routa-server",
+            "status": "ok",
+            "timestamp": "2026-08-20T14:34:56.616898+00:00",
+            "version": "0.19.0"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/kanban/boards?workspaceId=default",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "boards": [
+              {
+                "autoProviderId": null,
+                "columns": [
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": true,
+                      "enabled": true,
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-backlog-refiner",
+                      "specialistName": "Backlog Refiner",
+                      "steps": [
+                        {
+                          "id": "backlog-refiner",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-backlog-refiner",
+                          "specialistName": "Backlog Refiner"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "slate",
+                    "id": "backlog",
+                    "name": "Backlog",
+                    "position": 0,
+                    "stage": "backlog"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-todo-orchestrator",
+                      "specialistName": "Todo Orchestrator",
+                      "steps": [
+                        {
+                          "id": "todo-orchestrator",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-todo-orchestrator",
+                          "specialistName": "Todo Orchestrator"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "sky",
+                    "id": "todo",
+                    "name": "Todo",
+                    "position": 1,
+                    "stage": "todo"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "requiredTaskFields": [
+                        "scope",
+                        "acceptance_criteria",
+                        "verification_plan"
+                      ],
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-dev-executor",
+                      "specialistName": "Dev Crafter",
+                      "steps": [
+                        {
+                          "id": "dev-executor",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-dev-executor",
+                          "specialistName": "Dev Crafter"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "amber",
+                    "id": "dev",
+                    "name": "Dev",
+                    "position": 2,
+                    "stage": "dev"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "requiredArtifacts": [
+                        "screenshot",
+                        "test_results"
+                      ],
+                      "role": "GATE",
+                      "specialistId": "kanban-qa-frontend",
+                      "specialistName": "QA Frontend",
+                      "steps": [
+                        {
+                          "id": "qa-frontend",
+                          "role": "GATE",
+                          "specialistId": "kanban-qa-frontend",
+                          "specialistName": "QA Frontend"
+                        },
+                        {
+                          "id": "review-guard",
+                          "role": "GATE",
+                          "specialistId": "kanban-review-guard",
+                          "specialistName": "Review Guard"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "slate",
+                    "id": "review",
+                    "name": "Review",
+                    "position": 3,
+                    "stage": "review"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "role": "GATE",
+                      "specialistId": "kanban-done-reporter",
+                      "specialistName": "Done Reporter",
+                      "steps": [
+                        {
+                          "id": "done-reporter",
+                          "role": "GATE",
+                          "specialistId": "kanban-done-reporter",
+                          "specialistName": "Done Reporter"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "emerald",
+                    "id": "done",
+                    "name": "Done",
+                    "position": 4,
+                    "stage": "done"
+                  },
+                  {
+                    "color": "rose",
+                    "id": "blocked",
+                    "name": "Blocked",
+                    "position": 5,
+                    "stage": "blocked"
+                  }
+                ],
+                "createdAt": "2026-08-20T12:20:05.052Z",
+                "devSessionSupervision": {
+                  "completionRequirement": "turn_complete",
+                  "inactivityTimeoutMinutes": 10,
+                  "maxRecoveryAttempts": 1,
+                  "mode": "watchdog_retry"
+                },
+                "githubTokenConfigured": false,
+                "id": "353968be-baee-40df-a278-1e778a148d49",
+                "isDefault": true,
+                "name": "Board",
+                "queue": {
+                  "boardId": "353968be-baee-40df-a278-1e778a148d49",
+                  "queuedCardIds": [],
+                  "queuedCards": [],
+                  "queuedCount": 0,
+                  "queuedPositions": {},
+                  "runningCards": [],
+                  "runningCount": 0
+                },
+                "sessionConcurrencyLimit": 1,
+                "updatedAt": "2026-08-20T12:20:05.052Z",
+                "workspaceId": "default"
+              }
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks",
+          "actor_id": null,
+          "status": 201,
+          "response": {
+            "task": {
+              "acceptanceCriteria": [
+                "The producer result is readable by another Agent."
+              ],
+              "artifactSummary": {
+                "byType": {},
+                "missingRequired": [],
+                "requiredSatisfied": true,
+                "total": 0
+              },
+              "assignedRole": "CRAFTER",
+              "assignedSpecialistId": "kanban-todo-orchestrator",
+              "assignedSpecialistName": "Todo Orchestrator",
+              "boardId": "353968be-baee-40df-a278-1e778a148d49",
+              "codebaseIds": [],
+              "columnId": "todo",
+              "createdAt": "2026-08-20T14:34:56.644827Z",
+              "dependencies": [],
+              "evidenceSummary": {
+                "artifact": {
+                  "byType": {},
+                  "missingRequired": [],
+                  "requiredSatisfied": true,
+                  "total": 0
+                },
+                "completion": {
+                  "hasSummary": false
+                },
+                "runs": {
+                  "latestStatus": "idle",
+                  "total": 0
+                },
+                "verification": {
+                  "hasReport": false,
+                  "hasVerdict": false
+                }
+              },
+              "id": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+              "investValidation": {
+                "checks": {
+                  "estimable": {
+                    "reason": "Scope and acceptance criteria provide enough context to estimate work.",
+                    "status": "pass"
+                  },
+                  "independent": {
+                    "reason": "No blocking prerequisite was detected.",
+                    "status": "pass"
+                  },
+                  "negotiable": {
+                    "reason": "Negotiability is a human judgment call when no canonical story contract is present.",
+                    "status": "warning"
+                  },
+                  "small": {
+                    "reason": "The story looks narrow enough for a single implementation pass.",
+                    "status": "pass"
+                  },
+                  "testable": {
+                    "reason": "Acceptance criteria or an explicit verification plan makes the outcome testable.",
+                    "status": "pass"
+                  },
+                  "valuable": {
+                    "reason": "Objective contains enough detail to express user or delivery value.",
+                    "status": "pass"
+                  }
+                },
+                "issues": [],
+                "overallStatus": "warning",
+                "source": "heuristic"
+              },
+              "labels": [],
+              "laneHandoffs": [],
+              "laneSessions": [],
+              "lastSyncError": "Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?",
+              "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+              "position": 0,
+              "scope": "The fixed C1-C4 black-box fixture for this run.",
+              "sessionIds": [],
+              "status": "PENDING",
+              "storyReadiness": {
+                "checks": {
+                  "acceptanceCriteria": true,
+                  "dependenciesDeclared": false,
+                  "scope": true,
+                  "testCases": true,
+                  "verificationCommands": true,
+                  "verificationPlan": true
+                },
+                "missing": [],
+                "ready": true,
+                "requiredTaskFields": [
+                  "scope",
+                  "acceptance_criteria",
+                  "verification_plan"
+                ]
+              },
+              "testCases": [
+                "C1",
+                "C2",
+                "C3",
+                "C4"
+              ],
+              "title": "C1-C4 fixture routa-run-2-0fa51d56",
+              "updatedAt": "2026-08-20T14:34:56.644827Z",
+              "verificationCommands": [
+                "black-box-fixture --candidate routa"
+              ],
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "title": "C1-C4 fixture routa-run-2-0fa51d56",
+            "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+            "workspaceId": "default",
+            "boardId": "353968be-baee-40df-a278-1e778a148d49",
+            "columnId": "todo",
+            "scope": "The fixed C1-C4 black-box fixture for this run.",
+            "acceptanceCriteria": [
+              "The producer result is readable by another Agent."
+            ],
+            "verificationCommands": [
+              "black-box-fixture --candidate routa"
+            ],
+            "testCases": [
+              "C1",
+              "C2",
+              "C3",
+              "C4"
+            ]
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/ready?workspaceId=default",
+          "actor_id": null,
+          "status": 200,
+          "response": "{\"tasks\": [{\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"todo\", \"createdAt\": \"2026-08-20T14:34:56.644Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"completion\": {\"hasSummary\": false}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": false, \"hasVerdict\": false}}, \"id\": \"a9330e7d-4428-44d1-b953-a76e1e436ffb\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"Acceptance criteria or an explicit verification plan makes the outcome testable.\", \"status\": \"pass\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"warning\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?\", \"objective\": \"Discover, compete, publish structured evidence, and continue review without task-specific Human context\", \"position\": 0, \"scope\": \"The fixed C1-C4 black-box fixture for this run.\", \"sessionIds\": [], \"status\": \"PENDING\", \"storyReadiness\": {\"checks\": {\"acceptanceCriteria\": true, \"dependenciesDeclared\": false, \"scope\": true, \"testCases\": true, \"verificationCommands\": true, \"verificationPlan\": true}, \"missing\": [], \"ready\": true, \"requiredTaskFields\": [\"scope\", \"acceptance_criteria\", \"verification_plan\"]}, \"testCases\": [\"C1\", \"C2\", \"C3\", \"C4\"], \"title\": \"C1-C4 fixture routa-run-2-0fa51d56\", \"updatedAt\": \"2026-08-20T14:34:56.644Z\", \"verificationCommands\": [\"black-box-fixture --candidate routa\"], \"workspaceId\": \"default\"}, {\"artifactSummary\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"todo\", \"createdAt\": \"2026-08-20T12:22:41.606Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"completion\": {\"hasSummary\": false}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": false, \"hasVerdict\": false}}, \"id\": \"00a637be-85cf-4afe-b8e9-57fc374b8b29\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Missing scope and acceptance criteria leaves the story hard to estimate.\", \"status\": \"fail\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"No acceptance criteria or verification plan was provided.\", \"status\": \"fail\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"fail\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No…"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/claim",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/claim",
+          "actor_id": "agent-a",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-a"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/claims",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/work-items",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/coordination/work-items",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-2-0fa51d56\"}",
+              "context": "C3 structured result fixture",
+              "createdAt": "2026-08-20T14:34:56.672704Z",
+              "id": "bb66a361-4db5-4805-b348-1cfd4b1c6150",
+              "metadata": {
+                "canonical_commit": "fixture-canonical-reference",
+                "run_id": "routa-run-2-0fa51d56"
+              },
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+              "type": "logs",
+              "updatedAt": "2026-08-20T14:34:56.672704Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "logs",
+            "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-2-0fa51d56\"}",
+            "context": "C3 structured result fixture",
+            "metadata": {
+              "run_id": "routa-run-2-0fa51d56",
+              "canonical_commit": "fixture-canonical-reference"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "artifacts": [
+              {
+                "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-2-0fa51d56\"}",
+                "context": "C3 structured result fixture",
+                "createdAt": "2026-08-20T14:34:56.672Z",
+                "id": "bb66a361-4db5-4805-b348-1cfd4b1c6150",
+                "metadata": {
+                  "canonical_commit": "fixture-canonical-reference",
+                  "run_id": "routa-run-2-0fa51d56"
+                },
+                "providedByAgentId": "agent-a",
+                "status": "provided",
+                "taskId": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+                "type": "logs",
+                "updatedAt": "2026-08-20T14:34:56.672Z",
+                "workspaceId": "default"
+              }
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "fixture screenshot placeholder",
+              "context": "C4 review gate fixture",
+              "createdAt": "2026-08-20T14:34:56.680991Z",
+              "id": "61dbe5b4-886a-487a-b06d-66d8802873ac",
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+              "type": "screenshot",
+              "updatedAt": "2026-08-20T14:34:56.680991Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "screenshot",
+            "content": "fixture screenshot placeholder",
+            "context": "C4 review gate fixture"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "fixture test results: C1-C4 black-box",
+              "context": "C4 review gate fixture",
+              "createdAt": "2026-08-20T14:34:56.685427Z",
+              "id": "0ee6b88d-6a88-4ad1-ae50-34ba18040e65",
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+              "type": "test_results",
+              "updatedAt": "2026-08-20T14:34:56.685427Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "test_results",
+            "content": "fixture test results: C1-C4 black-box",
+            "context": "C4 review gate fixture"
+          }
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "task": {
+              "acceptanceCriteria": [
+                "The producer result is readable by another Agent."
+              ],
+              "artifactSummary": {
+                "byType": {
+                  "logs": 1,
+                  "screenshot": 1,
+                  "test_results": 1
+                },
+                "missingRequired": [],
+                "requiredSatisfied": true,
+                "total": 3
+              },
+              "assignedRole": "CRAFTER",
+              "assignedSpecialistId": "kanban-todo-orchestrator",
+              "assignedSpecialistName": "Todo Orchestrator",
+              "boardId": "353968be-baee-40df-a278-1e778a148d49",
+              "codebaseIds": [],
+              "columnId": "review",
+              "completionSummary": "The producer completed the black-box probe.",
+              "createdAt": "2026-08-20T14:34:56.644Z",
+              "dependencies": [],
+              "evidenceSummary": {
+                "artifact": {
+                  "byType": {
+                    "logs": 1,
+                    "screenshot": 1,
+                    "test_results": 1
+                  },
+                  "missingRequired": [],
+                  "requiredSatisfied": true,
+                  "total": 3
+                },
+                "completion": {
+                  "hasSummary": true
+                },
+                "runs": {
+                  "latestStatus": "idle",
+                  "total": 0
+                },
+                "verification": {
+                  "hasReport": true,
+                  "hasVerdict": true,
+                  "verdict": "APPROVED"
+                }
+              },
+              "id": "a9330e7d-4428-44d1-b953-a76e1e436ffb",
+              "investValidation": {
+                "checks": {
+                  "estimable": {
+                    "reason": "Scope and acceptance criteria provide enough context to estimate work.",
+                    "status": "pass"
+                  },
+                  "independent": {
+                    "reason": "No blocking prerequisite was detected.",
+                    "status": "pass"
+                  },
+                  "negotiable": {
+                    "reason": "Negotiability is a human judgment call when no canonical story contract is present.",
+                    "status": "warning"
+                  },
+                  "small": {
+                    "reason": "The story looks narrow enough for a single implementation pass.",
+                    "status": "pass"
+                  },
+                  "testable": {
+                    "reason": "Acceptance criteria or an explicit verification plan makes the outcome testable.",
+                    "status": "pass"
+                  },
+                  "valuable": {
+                    "reason": "Objective contains enough detail to express user or delivery value.",
+                    "status": "pass"
+                  }
+                },
+                "issues": [],
+                "overallStatus": "warning",
+                "source": "heuristic"
+              },
+              "labels": [],
+              "laneHandoffs": [],
+              "laneSessions": [],
+              "lastSyncError": "Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?",
+              "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+              "position": 0,
+              "scope": "The fixed C1-C4 black-box fixture for this run.",
+              "sessionIds": [],
+              "status": "REVIEW_REQUIRED",
+              "storyReadiness": {
+                "checks": {
+                  "acceptanceCriteria": true,
+                  "dependenciesDeclared": false,
+                  "scope": true,
+                  "testCases": true,
+                  "verificationCommands": true,
+                  "verificationPlan": true
+                },
+                "missing": [],
+                "ready": true,
+                "requiredTaskFields": []
+              },
+              "testCases": [
+                "C1",
+                "C2",
+                "C3",
+                "C4"
+              ],
+              "title": "C1-C4 fixture routa-run-2-0fa51d56",
+              "updatedAt": "2026-08-20T14:34:56.690309Z",
+              "verificationCommands": [
+                "black-box-fixture --candidate routa"
+              ],
+              "verificationReport": "C3 generic artifact is readable; typed result schema remains absent.",
+              "verificationVerdict": "APPROVED",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "completionSummary": "The producer completed the black-box probe.",
+            "verificationVerdict": "APPROVED",
+            "verificationReport": "C3 generic artifact is readable; typed result schema remains absent.",
+            "columnId": "review"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks?workspaceId=default",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": "{\"tasks\": [{\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"review\", \"completionSummary\": \"The producer completed the black-box probe.\", \"createdAt\": \"2026-08-20T14:34:56.644Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"completion\": {\"hasSummary\": true}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": true, \"hasVerdict\": true, \"verdict\": \"APPROVED\"}}, \"id\": \"a9330e7d-4428-44d1-b953-a76e1e436ffb\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"Acceptance criteria or an explicit verification plan makes the outcome testable.\", \"status\": \"pass\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"warning\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?\", \"objective\": \"Discover, compete, publish structured evidence, and continue review without task-specific Human context\", \"position\": 0, \"scope\": \"The fixed C1-C4 black-box fixture for this run.\", \"sessionIds\": [], \"status\": \"REVIEW_REQUIRED\", \"storyReadiness\": {\"checks\": {\"acceptanceCriteria\": true, \"dependenciesDeclared\": false, \"scope\": true, \"testCases\": true, \"verificationCommands\": true, \"verificationPlan\": true}, \"missing\": [], \"ready\": true, \"requiredTaskFields\": []}, \"testCases\": [\"C1\", \"C2\", \"C3\", \"C4\"], \"title\": \"C1-C4 fixture routa-run-2-0fa51d56\", \"updatedAt\": \"2026-08-20T14:34:56.690Z\", \"verificationCommands\": [\"black-box-fixture --candidate routa\"], \"verificationReport\": \"C3 generic artifact is readable; typed result schema remains absent.\", \"verificationVerdict\": \"APPROVED\", \"workspaceId\": \"default\"}, {\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"review\", \"completionSummary\": \"The producer completed the black-box probe.\", \"createdAt\": \"2026-08-20T14:34:56.535Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"completion\": {\"hasSummary\": true}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": true, \"hasVerdict\": true, \"verdict\": \"APPROVED\"}}, \"id\": \"75280797-8936-4005-a75e-47dca1d55bca\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": …"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/review/claim",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/a9330e7d-4428-44d1-b953-a76e1e436ffb/review/complete",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/reviews",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "routa-run-3-a30058fe",
+      "candidate": "phodal/routa",
+      "candidate_class": "ext",
+      "candidate_commit": "e48861ab81e2b30378fd32f05204a3ab424c4fec",
+      "base_url": "http://127.0.0.1:3211",
+      "agent_ids": {
+        "producer": "agent-a",
+        "discoverer_reviewer": "agent-b"
+      },
+      "device_ids": {
+        "agent-a": "fixture-device-a",
+        "agent-b": "fixture-device-b"
+      },
+      "workspace_id": "default",
+      "human_events": [
+        {
+          "event": "human.activate",
+          "text": "检查 shared context",
+          "agent_id": "agent-b"
+        }
+      ],
+      "canonical_git_references": {
+        "repository": "https://github.com/jununfly/ZAgenticOPN",
+        "fixture_protocol": "research/routa-qm-conformance/2026-08-20-conformance-fixture-mapping.md",
+        "candidate_evidence": "https://github.com/phodal/routa/tree/e48861ab81e2b30378fd32f05204a3ab424c4fec"
+      },
+      "fixtures": {
+        "C1": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "human_work_item_id": null,
+            "discovered_by_agent": "agent-b",
+            "task_id": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+            "discovered": true,
+            "ready_query_has_filter_reasons": false,
+            "strict_gap": "ready task is not Agent-eligibility-aware Work Item discovery"
+          },
+          "request_descriptors": [
+            {
+              "method": "GET",
+              "path": "/api/kanban/boards?workspaceId=default",
+              "actor_id": null,
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks",
+              "actor_id": null,
+              "status": 201
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks/ready?workspaceId=default",
+              "actor_id": null,
+              "status": 200
+            }
+          ]
+        },
+        "C2": {
+          "status": "conformance_fail",
+          "strict_pass": false,
+          "observations": {
+            "candidate_claim_endpoint_exposed": false,
+            "evidence_status": "unsupported_on_exposed_surface",
+            "winner": null,
+            "loser": null,
+            "duplicate_execution": null,
+            "strict_gap": "no Work Item claim transaction was exposed by the HTTP surface"
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/claim",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/claim",
+              "actor_id": "agent-a",
+              "status": 404
+            }
+          ]
+        },
+        "C3": {
+          "status": "pass",
+          "strict_pass": true,
+          "observations": {
+            "producer_artifact_status": true,
+            "consumer_can_read_artifact": true,
+            "required_fields": [
+              "result_summary",
+              "next_action",
+              "acceptance_status",
+              "blocker",
+              "references"
+            ],
+            "required_fields_in_generic_artifact": true,
+            "strict_gap": null
+          },
+          "request_descriptors": [
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+              "actor_id": "agent-b",
+              "status": 200
+            }
+          ]
+        },
+        "C4": {
+          "status": "partial",
+          "strict_pass": false,
+          "observations": {
+            "reviewer_activation": "agent-b",
+            "awaiting_review_visible": true,
+            "review_claim_endpoint_exposed": false,
+            "review_completed": false,
+            "strict_gap": "review column visibility is not reviewer Agent claim/verify/complete continuation"
+          },
+          "request_descriptors": [
+            {
+              "method": "GET",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+              "actor_id": "agent-a",
+              "status": 201
+            },
+            {
+              "method": "PATCH",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db",
+              "actor_id": "agent-a",
+              "status": 200
+            },
+            {
+              "method": "GET",
+              "path": "/api/tasks?workspaceId=default",
+              "actor_id": "agent-b",
+              "status": 200
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/review/claim",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/review/complete",
+              "actor_id": "agent-b",
+              "status": 404
+            },
+            {
+              "method": "POST",
+              "path": "/api/reviews",
+              "actor_id": "agent-b",
+              "status": 404
+            }
+          ]
+        }
+      },
+      "task_id": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+      "http_transcript": [
+        {
+          "method": "GET",
+          "path": "/api/health",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "server": "routa-server",
+            "status": "ok",
+            "timestamp": "2026-08-20T14:34:56.717560+00:00",
+            "version": "0.19.0"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/kanban/boards?workspaceId=default",
+          "actor_id": null,
+          "status": 200,
+          "response": {
+            "boards": [
+              {
+                "autoProviderId": null,
+                "columns": [
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": true,
+                      "enabled": true,
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-backlog-refiner",
+                      "specialistName": "Backlog Refiner",
+                      "steps": [
+                        {
+                          "id": "backlog-refiner",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-backlog-refiner",
+                          "specialistName": "Backlog Refiner"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "slate",
+                    "id": "backlog",
+                    "name": "Backlog",
+                    "position": 0,
+                    "stage": "backlog"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-todo-orchestrator",
+                      "specialistName": "Todo Orchestrator",
+                      "steps": [
+                        {
+                          "id": "todo-orchestrator",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-todo-orchestrator",
+                          "specialistName": "Todo Orchestrator"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "sky",
+                    "id": "todo",
+                    "name": "Todo",
+                    "position": 1,
+                    "stage": "todo"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "requiredTaskFields": [
+                        "scope",
+                        "acceptance_criteria",
+                        "verification_plan"
+                      ],
+                      "role": "CRAFTER",
+                      "specialistId": "kanban-dev-executor",
+                      "specialistName": "Dev Crafter",
+                      "steps": [
+                        {
+                          "id": "dev-executor",
+                          "role": "CRAFTER",
+                          "specialistId": "kanban-dev-executor",
+                          "specialistName": "Dev Crafter"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "amber",
+                    "id": "dev",
+                    "name": "Dev",
+                    "position": 2,
+                    "stage": "dev"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "requiredArtifacts": [
+                        "screenshot",
+                        "test_results"
+                      ],
+                      "role": "GATE",
+                      "specialistId": "kanban-qa-frontend",
+                      "specialistName": "QA Frontend",
+                      "steps": [
+                        {
+                          "id": "qa-frontend",
+                          "role": "GATE",
+                          "specialistId": "kanban-qa-frontend",
+                          "specialistName": "QA Frontend"
+                        },
+                        {
+                          "id": "review-guard",
+                          "role": "GATE",
+                          "specialistId": "kanban-review-guard",
+                          "specialistName": "Review Guard"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "slate",
+                    "id": "review",
+                    "name": "Review",
+                    "position": 3,
+                    "stage": "review"
+                  },
+                  {
+                    "automation": {
+                      "autoAdvanceOnSuccess": false,
+                      "enabled": true,
+                      "role": "GATE",
+                      "specialistId": "kanban-done-reporter",
+                      "specialistName": "Done Reporter",
+                      "steps": [
+                        {
+                          "id": "done-reporter",
+                          "role": "GATE",
+                          "specialistId": "kanban-done-reporter",
+                          "specialistName": "Done Reporter"
+                        }
+                      ],
+                      "transitionType": "entry"
+                    },
+                    "color": "emerald",
+                    "id": "done",
+                    "name": "Done",
+                    "position": 4,
+                    "stage": "done"
+                  },
+                  {
+                    "color": "rose",
+                    "id": "blocked",
+                    "name": "Blocked",
+                    "position": 5,
+                    "stage": "blocked"
+                  }
+                ],
+                "createdAt": "2026-08-20T12:20:05.052Z",
+                "devSessionSupervision": {
+                  "completionRequirement": "turn_complete",
+                  "inactivityTimeoutMinutes": 10,
+                  "maxRecoveryAttempts": 1,
+                  "mode": "watchdog_retry"
+                },
+                "githubTokenConfigured": false,
+                "id": "353968be-baee-40df-a278-1e778a148d49",
+                "isDefault": true,
+                "name": "Board",
+                "queue": {
+                  "boardId": "353968be-baee-40df-a278-1e778a148d49",
+                  "queuedCardIds": [],
+                  "queuedCards": [],
+                  "queuedCount": 0,
+                  "queuedPositions": {},
+                  "runningCards": [],
+                  "runningCount": 0
+                },
+                "sessionConcurrencyLimit": 1,
+                "updatedAt": "2026-08-20T12:20:05.052Z",
+                "workspaceId": "default"
+              }
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks",
+          "actor_id": null,
+          "status": 201,
+          "response": {
+            "task": {
+              "acceptanceCriteria": [
+                "The producer result is readable by another Agent."
+              ],
+              "artifactSummary": {
+                "byType": {},
+                "missingRequired": [],
+                "requiredSatisfied": true,
+                "total": 0
+              },
+              "assignedRole": "CRAFTER",
+              "assignedSpecialistId": "kanban-todo-orchestrator",
+              "assignedSpecialistName": "Todo Orchestrator",
+              "boardId": "353968be-baee-40df-a278-1e778a148d49",
+              "codebaseIds": [],
+              "columnId": "todo",
+              "createdAt": "2026-08-20T14:34:56.748068Z",
+              "dependencies": [],
+              "evidenceSummary": {
+                "artifact": {
+                  "byType": {},
+                  "missingRequired": [],
+                  "requiredSatisfied": true,
+                  "total": 0
+                },
+                "completion": {
+                  "hasSummary": false
+                },
+                "runs": {
+                  "latestStatus": "idle",
+                  "total": 0
+                },
+                "verification": {
+                  "hasReport": false,
+                  "hasVerdict": false
+                }
+              },
+              "id": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+              "investValidation": {
+                "checks": {
+                  "estimable": {
+                    "reason": "Scope and acceptance criteria provide enough context to estimate work.",
+                    "status": "pass"
+                  },
+                  "independent": {
+                    "reason": "No blocking prerequisite was detected.",
+                    "status": "pass"
+                  },
+                  "negotiable": {
+                    "reason": "Negotiability is a human judgment call when no canonical story contract is present.",
+                    "status": "warning"
+                  },
+                  "small": {
+                    "reason": "The story looks narrow enough for a single implementation pass.",
+                    "status": "pass"
+                  },
+                  "testable": {
+                    "reason": "Acceptance criteria or an explicit verification plan makes the outcome testable.",
+                    "status": "pass"
+                  },
+                  "valuable": {
+                    "reason": "Objective contains enough detail to express user or delivery value.",
+                    "status": "pass"
+                  }
+                },
+                "issues": [],
+                "overallStatus": "warning",
+                "source": "heuristic"
+              },
+              "labels": [],
+              "laneHandoffs": [],
+              "laneSessions": [],
+              "lastSyncError": "Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?",
+              "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+              "position": 0,
+              "scope": "The fixed C1-C4 black-box fixture for this run.",
+              "sessionIds": [],
+              "status": "PENDING",
+              "storyReadiness": {
+                "checks": {
+                  "acceptanceCriteria": true,
+                  "dependenciesDeclared": false,
+                  "scope": true,
+                  "testCases": true,
+                  "verificationCommands": true,
+                  "verificationPlan": true
+                },
+                "missing": [],
+                "ready": true,
+                "requiredTaskFields": [
+                  "scope",
+                  "acceptance_criteria",
+                  "verification_plan"
+                ]
+              },
+              "testCases": [
+                "C1",
+                "C2",
+                "C3",
+                "C4"
+              ],
+              "title": "C1-C4 fixture routa-run-3-a30058fe",
+              "updatedAt": "2026-08-20T14:34:56.748068Z",
+              "verificationCommands": [
+                "black-box-fixture --candidate routa"
+              ],
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "title": "C1-C4 fixture routa-run-3-a30058fe",
+            "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+            "workspaceId": "default",
+            "boardId": "353968be-baee-40df-a278-1e778a148d49",
+            "columnId": "todo",
+            "scope": "The fixed C1-C4 black-box fixture for this run.",
+            "acceptanceCriteria": [
+              "The producer result is readable by another Agent."
+            ],
+            "verificationCommands": [
+              "black-box-fixture --candidate routa"
+            ],
+            "testCases": [
+              "C1",
+              "C2",
+              "C3",
+              "C4"
+            ]
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/ready?workspaceId=default",
+          "actor_id": null,
+          "status": 200,
+          "response": "{\"tasks\": [{\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"todo\", \"createdAt\": \"2026-08-20T14:34:56.748Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"completion\": {\"hasSummary\": false}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": false, \"hasVerdict\": false}}, \"id\": \"c1206009-06ba-4ccf-ba72-91b12ef986db\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"Acceptance criteria or an explicit verification plan makes the outcome testable.\", \"status\": \"pass\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"warning\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?\", \"objective\": \"Discover, compete, publish structured evidence, and continue review without task-specific Human context\", \"position\": 0, \"scope\": \"The fixed C1-C4 black-box fixture for this run.\", \"sessionIds\": [], \"status\": \"PENDING\", \"storyReadiness\": {\"checks\": {\"acceptanceCriteria\": true, \"dependenciesDeclared\": false, \"scope\": true, \"testCases\": true, \"verificationCommands\": true, \"verificationPlan\": true}, \"missing\": [], \"ready\": true, \"requiredTaskFields\": [\"scope\", \"acceptance_criteria\", \"verification_plan\"]}, \"testCases\": [\"C1\", \"C2\", \"C3\", \"C4\"], \"title\": \"C1-C4 fixture routa-run-3-a30058fe\", \"updatedAt\": \"2026-08-20T14:34:56.748Z\", \"verificationCommands\": [\"black-box-fixture --candidate routa\"], \"workspaceId\": \"default\"}, {\"artifactSummary\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"todo\", \"createdAt\": \"2026-08-20T12:22:41.606Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 0}, \"completion\": {\"hasSummary\": false}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": false, \"hasVerdict\": false}}, \"id\": \"00a637be-85cf-4afe-b8e9-57fc374b8b29\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Missing scope and acceptance criteria leaves the story hard to estimate.\", \"status\": \"fail\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"No acceptance criteria or verification plan was provided.\", \"status\": \"fail\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"fail\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No…"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/claim",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/claim",
+          "actor_id": "agent-a",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-a"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/claims",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/work-items",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/coordination/work-items",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-3-a30058fe\"}",
+              "context": "C3 structured result fixture",
+              "createdAt": "2026-08-20T14:34:56.780515Z",
+              "id": "6eec6259-8e2c-410d-bc1f-9f9d890b0e96",
+              "metadata": {
+                "canonical_commit": "fixture-canonical-reference",
+                "run_id": "routa-run-3-a30058fe"
+              },
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+              "type": "logs",
+              "updatedAt": "2026-08-20T14:34:56.780515Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "logs",
+            "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-3-a30058fe\"}",
+            "context": "C3 structured result fixture",
+            "metadata": {
+              "run_id": "routa-run-3-a30058fe",
+              "canonical_commit": "fixture-canonical-reference"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": {
+            "artifacts": [
+              {
+                "content": "{\"acceptance_status\": \"ready_for_review\", \"blocker\": null, \"next_action\": \"A reviewer Agent should inspect the recorded evidence.\", \"references\": [{\"commit\": \"fixture-canonical-reference\", \"path\": \"research/routa-qm-conformance/\", \"repository\": \"https://github.com/jununfly/ZAgenticOPN\"}], \"result_summary\": \"The producer completed the black-box probe.\", \"work_item_id\": \"fixture-result-routa-run-3-a30058fe\"}",
+                "context": "C3 structured result fixture",
+                "createdAt": "2026-08-20T14:34:56.780Z",
+                "id": "6eec6259-8e2c-410d-bc1f-9f9d890b0e96",
+                "metadata": {
+                  "canonical_commit": "fixture-canonical-reference",
+                  "run_id": "routa-run-3-a30058fe"
+                },
+                "providedByAgentId": "agent-a",
+                "status": "provided",
+                "taskId": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+                "type": "logs",
+                "updatedAt": "2026-08-20T14:34:56.780Z",
+                "workspaceId": "default"
+              }
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "fixture screenshot placeholder",
+              "context": "C4 review gate fixture",
+              "createdAt": "2026-08-20T14:34:56.788498Z",
+              "id": "ef909852-fe36-41c8-b40e-8c3fbb40b56b",
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+              "type": "screenshot",
+              "updatedAt": "2026-08-20T14:34:56.788498Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "screenshot",
+            "content": "fixture screenshot placeholder",
+            "context": "C4 review gate fixture"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/artifacts",
+          "actor_id": "agent-a",
+          "status": 201,
+          "response": {
+            "artifact": {
+              "content": "fixture test results: C1-C4 black-box",
+              "context": "C4 review gate fixture",
+              "createdAt": "2026-08-20T14:34:56.792821Z",
+              "id": "4d1c4b32-8170-4336-89d3-bea94b13954c",
+              "providedByAgentId": "agent-a",
+              "status": "provided",
+              "taskId": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+              "type": "test_results",
+              "updatedAt": "2026-08-20T14:34:56.792821Z",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "agentId": "agent-a",
+            "type": "test_results",
+            "content": "fixture test results: C1-C4 black-box",
+            "context": "C4 review gate fixture"
+          }
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db",
+          "actor_id": "agent-a",
+          "status": 200,
+          "response": {
+            "task": {
+              "acceptanceCriteria": [
+                "The producer result is readable by another Agent."
+              ],
+              "artifactSummary": {
+                "byType": {
+                  "logs": 1,
+                  "screenshot": 1,
+                  "test_results": 1
+                },
+                "missingRequired": [],
+                "requiredSatisfied": true,
+                "total": 3
+              },
+              "assignedRole": "CRAFTER",
+              "assignedSpecialistId": "kanban-todo-orchestrator",
+              "assignedSpecialistName": "Todo Orchestrator",
+              "boardId": "353968be-baee-40df-a278-1e778a148d49",
+              "codebaseIds": [],
+              "columnId": "review",
+              "completionSummary": "The producer completed the black-box probe.",
+              "createdAt": "2026-08-20T14:34:56.748Z",
+              "dependencies": [],
+              "evidenceSummary": {
+                "artifact": {
+                  "byType": {
+                    "logs": 1,
+                    "screenshot": 1,
+                    "test_results": 1
+                  },
+                  "missingRequired": [],
+                  "requiredSatisfied": true,
+                  "total": 3
+                },
+                "completion": {
+                  "hasSummary": true
+                },
+                "runs": {
+                  "latestStatus": "idle",
+                  "total": 0
+                },
+                "verification": {
+                  "hasReport": true,
+                  "hasVerdict": true,
+                  "verdict": "APPROVED"
+                }
+              },
+              "id": "c1206009-06ba-4ccf-ba72-91b12ef986db",
+              "investValidation": {
+                "checks": {
+                  "estimable": {
+                    "reason": "Scope and acceptance criteria provide enough context to estimate work.",
+                    "status": "pass"
+                  },
+                  "independent": {
+                    "reason": "No blocking prerequisite was detected.",
+                    "status": "pass"
+                  },
+                  "negotiable": {
+                    "reason": "Negotiability is a human judgment call when no canonical story contract is present.",
+                    "status": "warning"
+                  },
+                  "small": {
+                    "reason": "The story looks narrow enough for a single implementation pass.",
+                    "status": "pass"
+                  },
+                  "testable": {
+                    "reason": "Acceptance criteria or an explicit verification plan makes the outcome testable.",
+                    "status": "pass"
+                  },
+                  "valuable": {
+                    "reason": "Objective contains enough detail to express user or delivery value.",
+                    "status": "pass"
+                  }
+                },
+                "issues": [],
+                "overallStatus": "warning",
+                "source": "heuristic"
+              },
+              "labels": [],
+              "laneHandoffs": [],
+              "laneSessions": [],
+              "lastSyncError": "Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?",
+              "objective": "Discover, compete, publish structured evidence, and continue review without task-specific Human context",
+              "position": 0,
+              "scope": "The fixed C1-C4 black-box fixture for this run.",
+              "sessionIds": [],
+              "status": "REVIEW_REQUIRED",
+              "storyReadiness": {
+                "checks": {
+                  "acceptanceCriteria": true,
+                  "dependenciesDeclared": false,
+                  "scope": true,
+                  "testCases": true,
+                  "verificationCommands": true,
+                  "verificationPlan": true
+                },
+                "missing": [],
+                "ready": true,
+                "requiredTaskFields": []
+              },
+              "testCases": [
+                "C1",
+                "C2",
+                "C3",
+                "C4"
+              ],
+              "title": "C1-C4 fixture routa-run-3-a30058fe",
+              "updatedAt": "2026-08-20T14:34:56.797411Z",
+              "verificationCommands": [
+                "black-box-fixture --candidate routa"
+              ],
+              "verificationReport": "C3 generic artifact is readable; typed result schema remains absent.",
+              "verificationVerdict": "APPROVED",
+              "workspaceId": "default"
+            }
+          },
+          "request_body": {
+            "completionSummary": "The producer completed the black-box probe.",
+            "verificationVerdict": "APPROVED",
+            "verificationReport": "C3 generic artifact is readable; typed result schema remains absent.",
+            "columnId": "review"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks?workspaceId=default",
+          "actor_id": "agent-b",
+          "status": 200,
+          "response": "{\"tasks\": [{\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"review\", \"completionSummary\": \"The producer completed the black-box probe.\", \"createdAt\": \"2026-08-20T14:34:56.748Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"completion\": {\"hasSummary\": true}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": true, \"hasVerdict\": true, \"verdict\": \"APPROVED\"}}, \"id\": \"c1206009-06ba-4ccf-ba72-91b12ef986db\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": \"The story looks narrow enough for a single implementation pass.\", \"status\": \"pass\"}, \"testable\": {\"reason\": \"Acceptance criteria or an explicit verification plan makes the outcome testable.\", \"status\": \"pass\"}, \"valuable\": {\"reason\": \"Objective contains enough detail to express user or delivery value.\", \"status\": \"pass\"}}, \"issues\": [], \"overallStatus\": \"warning\", \"source\": \"heuristic\"}, \"labels\": [], \"laneHandoffs\": [], \"laneSessions\": [], \"lastSyncError\": \"Failed to create ACP session: Failed to spawn 'opencode' (resolved: 'opencode'): No such file or directory (os error 2). Is it installed and in PATH?\", \"objective\": \"Discover, compete, publish structured evidence, and continue review without task-specific Human context\", \"position\": 0, \"scope\": \"The fixed C1-C4 black-box fixture for this run.\", \"sessionIds\": [], \"status\": \"REVIEW_REQUIRED\", \"storyReadiness\": {\"checks\": {\"acceptanceCriteria\": true, \"dependenciesDeclared\": false, \"scope\": true, \"testCases\": true, \"verificationCommands\": true, \"verificationPlan\": true}, \"missing\": [], \"ready\": true, \"requiredTaskFields\": []}, \"testCases\": [\"C1\", \"C2\", \"C3\", \"C4\"], \"title\": \"C1-C4 fixture routa-run-3-a30058fe\", \"updatedAt\": \"2026-08-20T14:34:56.797Z\", \"verificationCommands\": [\"black-box-fixture --candidate routa\"], \"verificationReport\": \"C3 generic artifact is readable; typed result schema remains absent.\", \"verificationVerdict\": \"APPROVED\", \"workspaceId\": \"default\"}, {\"acceptanceCriteria\": [\"The producer result is readable by another Agent.\"], \"artifactSummary\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"assignedRole\": \"CRAFTER\", \"assignedSpecialistId\": \"kanban-todo-orchestrator\", \"assignedSpecialistName\": \"Todo Orchestrator\", \"boardId\": \"353968be-baee-40df-a278-1e778a148d49\", \"codebaseIds\": [], \"columnId\": \"review\", \"completionSummary\": \"The producer completed the black-box probe.\", \"createdAt\": \"2026-08-20T14:34:56.644Z\", \"dependencies\": [], \"evidenceSummary\": {\"artifact\": {\"byType\": {\"logs\": 1, \"screenshot\": 1, \"test_results\": 1}, \"missingRequired\": [], \"requiredSatisfied\": true, \"total\": 3}, \"completion\": {\"hasSummary\": true}, \"runs\": {\"latestStatus\": \"idle\", \"total\": 0}, \"verification\": {\"hasReport\": true, \"hasVerdict\": true, \"verdict\": \"APPROVED\"}}, \"id\": \"a9330e7d-4428-44d1-b953-a76e1e436ffb\", \"investValidation\": {\"checks\": {\"estimable\": {\"reason\": \"Scope and acceptance criteria provide enough context to estimate work.\", \"status\": \"pass\"}, \"independent\": {\"reason\": \"No blocking prerequisite was detected.\", \"status\": \"pass\"}, \"negotiable\": {\"reason\": \"Negotiability is a human judgment call when no canonical story contract is present.\", \"status\": \"warning\"}, \"small\": {\"reason\": …"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/review/claim",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/c1206009-06ba-4ccf-ba72-91b12ef986db/review/complete",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/reviews",
+          "actor_id": "agent-b",
+          "status": 404,
+          "response": null,
+          "request_body": {
+            "agentId": "agent-b"
+          }
+        }
+      ]
+    }
+  ],
+  "strict_gate_summary": {
+    "C1": {
+      "pass_count": 0,
+      "statuses": [
+        "partial",
+        "partial",
+        "partial"
+      ]
+    },
+    "C2": {
+      "pass_count": 0,
+      "statuses": [
+        "conformance_fail",
+        "conformance_fail",
+        "conformance_fail"
+      ]
+    },
+    "C3": {
+      "pass_count": 3,
+      "statuses": [
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    "C4": {
+      "pass_count": 0,
+      "statuses": [
+        "partial",
+        "partial",
+        "partial"
+      ]
+    }
+  }
+}

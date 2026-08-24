@@ -1,0 +1,20 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Pinned runtime entrypoints and external coordination APIs",
+    "criteria": [
+      {"id": "mcp-runtime-paths", "question": "Read the pinned repository's README.md, Cargo.toml, crates/mcp-agent-mail-server/Cargo.toml, crates/mcp-agent-mail-server/src, crates/mcp-agent-mail-cli/src/main.rs, benches/golden/am_serve-http_help.txt, benches/golden/am_serve-stdio_help.txt, crates/mcp-agent-mail-cli/tests/http_surface_isolation.rs and crates/mcp-agent-mail-cli/tests/http_transport_harness.rs. Report only canonical runtime entrypoints, transport, endpoints, auth and executable tests found there.", "critical": true, "keywords": ["README.md", "Cargo.toml", "mcp-agent-mail-server", "serve-http", "serve-stdio", "http_surface_isolation", "http_transport_harness"]},
+      {"id": "mcp-coordination-paths", "question": "Read the pinned repository's send_message, fetch_inbox_events, reservation, project, agent identity and MCP tool schemas/tests. Determine whether they expose Work Item publish/discover, execution claim and reviewer continuation; preserve unknown when the semantic mapping is not present.", "critical": true, "keywords": ["send_message", "fetch_inbox_events", "file_reservation", "reservation", "project", "agent", "tool", "resource"]},
+      {"id": "avernet-runtime-paths", "question": "Read the pinned repository's README.md, docs/quick-start.md, docs/bot-provider-integration.md, docs/bot-integration.md, docker-compose.yml, src/gateway/README.md, src/gateway/src/gateway/community/main.py, src/engine/start.py and relevant e2e/integration tests. Report only canonical runtime entrypoints, transports, endpoints, auth and executable tests found there.", "critical": true, "keywords": ["README.md", "quick-start", "bot-provider-integration", "bot-integration", "docker-compose", "community/main.py", "engine/start.py", "e2e", "integration"]},
+      {"id": "avernet-coordination-paths", "question": "Read the pinned repository's bot, work item, task, session, notification and contract API sources/tests. Determine whether they expose shared Work Item publish/discover, atomic execution claim and reviewer continuation; preserve unknown when the semantic mapping is not present.", "critical": true, "keywords": ["bot", "work_item", "task", "session", "notification", "contract", "claim", "review"]}
+    ],
+    "repositories": [
+      {"owner": "Dicklesworthstone", "name": "mcp_agent_mail_rust"},
+      {"owner": "inclusionAI", "name": "Avernet"}
+    ],
+    "policyVersion": "zagenticopn-experience-version-ext-runtime-paths/v1",
+    "budget": {"maxFiles": 180, "maxBytes": 8000000, "deadlineMs": 360000}
+  }
+}

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Architecture Study</title><body>
+<h1>Architecture Study: https://github.com/agentrq/agentrq.git</h1>
+<li>Snapshot: `study-f38629515739d222b059772e`</li>
+<li>Commit: `45c87390fdb535066a05c0592e8183b1b461689b`</li>
+<li>Map snapshot: `map-e78e86f960834f8d16835d9b`</li>
+<h2>Selected scope</h2>
+<li>`backend` — top-level structure</li>
+<h2>Claims</h2>
+<li>`observed` backend/internal/app/app.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/common_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/crud.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/dup_name_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/event.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/telemetry.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/telemetry_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/workflow.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/workflow_text.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/crud/workflow_text_controller.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/event/event.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/mcp/client_identity.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/mcp/event.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/mcp/manager.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/mcp/server.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/notification/email.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/notification/notification.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/pub/stats.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/push/push.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/slack/slack.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/slack/slack_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/telemetry/close_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/telemetry/telemetry.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/controller/telemetry/telemetry_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/data/entity/crud/entity.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/data/entity/err/error.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/data/model/model.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/data/view/api/view.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/api.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/api_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/event_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/middleware/ddos/ddos.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/middleware/ratelimit/ratelimit.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/push_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/api/telemetry_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/coremcp/coremcp.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/coremcp/oauth_authorize_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/coremcp/server.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/mcp/mcp.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/mcp/mcp_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/mcp/oauth_client_binding_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/handler/slack/slack.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/mapper/api/error.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/repository/base/repository.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/repository/base/repository_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/repository/dbconn/dbconn.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/repository/postgres/postgres.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/repository/sqlite/sqlite.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/auth/auth.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/auth/cimd.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/auth/github.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/auth/google.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/auth/jwt.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/cleanup/cleanup.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/config/config.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/config/config_test.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/eventbus/eventbus.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/eventinstruction/eventinstruction.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/idgen/idgen.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/image/image.go contains a declared module or interface symbol.</li>
+<li>`observed` backend/internal/service/log/log.go contains a declared module or interface symbol.</li>
+<li>`inferred` backend/internal/data/entity/crud/entity.go has a source-reference relationship to set to empty.</li>
+<li>`inferred` backend/internal/data/entity/err/error.go has a source-reference relationship to net/http.</li>
+<li>`inferred` backend/internal/data/model/model.go has a source-reference relationship to they picked event code_changed.</li>
+<li>`inferred` backend/internal/mapper/api/workflow.go has a source-reference relationship to cleared.</li>
+<li>`inferred` backend/internal/service/auth/auth.go has a source-reference relationship to context.</li>
+<li>`inferred` backend/internal/service/auth/redirect_match_test.go has a source-reference relationship to testing.</li>
+<li>`inferred` backend/internal/service/auth/redirect_scheme.go has a source-reference relationship to strings.</li>
+<li>`inferred` backend/internal/service/eventinstruction/eventinstruction.go has a source-reference relationship to fmt.</li>
+<li>`unknown` The owner of backend is not established by this study.</li>
+<h2>Relationships</h2>
+<li>`backend/internal/data/entity/crud/entity.go` → `set to empty` (imports-or-requires)</li>
+<li>`backend/internal/data/entity/err/error.go` → `net/http` (imports-or-requires)</li>
+<li>`backend/internal/data/model/model.go` → `they picked event code_changed` (imports-or-requires)</li>
+<li>`backend/internal/mapper/api/workflow.go` → `cleared` (imports-or-requires)</li>
+<li>`backend/internal/service/auth/auth.go` → `context` (imports-or-requires)</li>
+<li>`backend/internal/service/auth/redirect_match_test.go` → `testing` (imports-or-requires)</li>
+<li>`backend/internal/service/auth/redirect_scheme.go` → `strings` (imports-or-requires)</li>
+<li>`backend/internal/service/eventinstruction/eventinstruction.go` → `fmt` (imports-or-requires)</li>
+<h2>Runtime flows</h2>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/AGENTS.md` → `backend/AGENTS.md` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/_config/.env.example` → `backend/cmd/server/_config/.env.example` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/_config/.env.example` → `backend/cmd/server/_config/.env.example` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/_config/base.yaml` → `backend/cmd/server/_config/base.yaml` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/cmd/server/main.go` → `backend/cmd/server/main.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/app/app.go` → `backend/internal/app/app.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/dup_name_test.go` → `backend/internal/controller/crud/dup_name_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/dup_name_test.go` → `backend/internal/controller/crud/dup_name_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/event.go` → `backend/internal/controller/crud/event.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/event_test.go` → `backend/internal/controller/crud/event_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/task.go` → `backend/internal/controller/crud/task.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/task.go` → `backend/internal/controller/crud/task.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/task_test.go` → `backend/internal/controller/crud/task_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/task_test.go` → `backend/internal/controller/crud/task_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/crud/workflow.go` → `backend/internal/controller/crud/workflow.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/event/event.go` → `backend/internal/controller/event/event.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/autoallow.go` → `backend/internal/controller/mcp/autoallow.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/autoallow_test.go` → `backend/internal/controller/mcp/autoallow_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/autoallow_test.go` → `backend/internal/controller/mcp/autoallow_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/lifecycle_test.go` → `backend/internal/controller/mcp/lifecycle_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/lifecycle_test.go` → `backend/internal/controller/mcp/lifecycle_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager.go` → `backend/internal/controller/mcp/manager.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager.go` → `backend/internal/controller/mcp/manager.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager.go` → `backend/internal/controller/mcp/manager.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager.go` → `backend/internal/controller/mcp/manager.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager.go` → `backend/internal/controller/mcp/manager.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager.go` → `backend/internal/controller/mcp/manager.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/manager_test.go` → `backend/internal/controller/mcp/manager_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/protocol_version_test.go` → `backend/internal/controller/mcp/protocol_version_test.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<li>`backend/internal/controller/mcp/server.go` → `backend/internal/controller/mcp/server.go` (entrypoint-to-selected-module)</li>
+<h2>Risks</h2>
+<li>execution-and-sandbox: credentials, approvals, isolation, and recovery may be coupled to this path</li>
+<li>persistence-and-recovery: data ownership, migration, consistency, and rollback need explicit review</li>
+<li>ownership: maintenance and incident responsibility are not established by this pass</li>
+<h2>Unknowns</h2>
+<li>scope: 21 selected files were outside max-files=120</li>
+<h2>Follow-up targets</h2>
+<li>`Dockerfile` — map target not selected for this bounded study</li>
+<li>`backend/internal/data/view/api` — map target not selected for this bounded study</li>
+<li>`backend/internal/handler/api` — map target not selected for this bounded study</li>
+<li>`backend/internal/mapper/api` — map target not selected for this bounded study</li>
+<li>`backend/openapi.yaml` — map target not selected for this bounded study</li>
+<li>`docker-compose.yml` — map target not selected for this bounded study</li>
+<li>`integrations` — map target not selected for this bounded study</li>
+<li>`integrations/slack/README.md` — map target not selected for this bounded study</li>
+<li>`plugins` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/.gitignore` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/LICENSE` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/README.md` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/cordis.patch.yml` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/package.json` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/src/client.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/src/config.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/src/index.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/src/prompt.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/src/sessions.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/src/tools.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/test/parse.test.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/test/sessions.test.ts` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/tsconfig.json` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/tsdown.config.ts` — map target not selected for this bounded study</li>
+<li>`backend/go.mod` — map target not selected for this bounded study</li>
+<li>`frontend/package.json` — map target not selected for this bounded study</li>
+<li>`plugins/deepseek-harness/package.json` — map target not selected for this bounded study</li>
+<li>`.` — map target not selected for this bounded study</li>
+<li>`.githooks` — map target not selected for this bounded study</li>
+<li>`.github` — map target not selected for this bounded study</li>
+<li>`.jules` — map target not selected for this bounded study</li>
+<li>`docs` — map target not selected for this bounded study</li>
+<li>`frontend` — map target not selected for this bounded study</li>
+<li>`integrations` — map target not selected for this bounded study</li>
+<li>`plugins` — map target not selected for this bounded study</li>
+<li>`scripts` — map target not selected for this bounded study</li>
+<li>`.github/workflows/docker-publish.yml` — map target not selected for this bounded study</li>
+<li>`.github/workflows/docker-release.yml` — map target not selected for this bounded study</li>
+<li>`.github/workflows/plugin-deepseek-harness.yml` — map target not selected for this bounded study</li>
+<li>`Makefile` — map target not selected for this bounded study</li>
+<p><em>This study is descriptive; solution selection belongs to zj-tech-research-report.</em></p>
+</body></html>

@@ -42,14 +42,18 @@
     "1-1": {
       "id": "1-1",
       "label": "阶段 0：问题发现与候选方案选择",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1",
       "children": [
         "1-1-1",
         "1-1-2",
         "1-1-3",
-        "1-1-4"
+        "1-1-4",
+        "1-1-5",
+        "1-1-6",
+        "1-1-7",
+        "1-1-8"
       ],
       "decisions": [
         {
@@ -61,6 +65,11 @@
           "q": "比较使用什么淘汰门？",
           "answer": "候选必须接受固定版本的 C1–C8 conformance scenarios；C1–C4 与 R5/R6/R8 是首轮淘汰门。",
           "note": "通过后再比较完整 R1–R12、语义所有权和总所有权成本。"
+        },
+        {
+          "q": "Q1 完成后当前共同焦点是什么？",
+          "answer": "先冻结 Feature 1 对齐契约的 Q2：Human action script；开源方案 conformance comparison 暂缓到 Q2–Q6 对齐完成后继续。",
+          "note": "Q1 已确定并完成首个真实任务：用优秀技术方案报告改进 zj-research-report skill；当前不进入产品代码或 PoC。"
         }
       ],
       "notes": ""
@@ -68,8 +77,8 @@
     "1-2": {
       "id": "1-2",
       "label": "阶段 1：Agent 自服务协作体验版",
-      "status": "pending",
-      "mode": "explore",
+      "status": "in_progress",
+      "mode": "exploit",
       "parent": "1",
       "children": [
         "1-2-1",
@@ -89,7 +98,7 @@
           "note": "认证、HA、Dashboard、自动发现等保持 Deferred。"
         }
       ],
-      "notes": ""
+      "notes": "已进入阶段 1 Experience Version；当前只施工 1-2-1，同设备单项目最小闭环。"
     },
     "1-3": {
       "id": "1-3",
@@ -142,32 +151,50 @@
     "1-1-3": {
       "id": "1-1-3",
       "label": "对比新开源方案与当前候选基线",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "explore",
       "parent": "1-1",
       "children": [],
       "decisions": [],
-      "notes": "等待 Human 提供另一个开源项目或方案。只做固定版本证据审计与 conformance comparison；不得开始产品实现或 PoC。"
+      "notes": "已完成同一 C1–C8 brief 对 phodal/routa（ext）与 yc-software/qm（ref）的 sealed evidence 采集与 technical-c4/v1 对比。报告 healthy=true；两候选当前证据全部来自 AGENTS.md，C1–C4、R5/R6/R8 仍 unverified，不据此做采用结论。报告：research/routa-qm-conformance/2026-08-20-draft.md；receipt：research/routa-qm-conformance/2026-08-20-receipt.json。"
     },
     "1-1-4": {
       "id": "1-1-4",
       "label": "Human 确认 A/B/C/D 技术决策",
-      "status": "pending",
+      "status": "completed",
       "mode": "explore",
       "parent": "1-1",
-      "children": [],
-      "decisions": [],
-      "notes": ""
+      "children": [
+        "1-1-4-1"
+      ],
+      "decisions": [
+        {
+          "q": "A/B/C/D 技术路线选择",
+          "answer": "D：先补采真实 runtime/API/test 证据；暂不开始产品 runtime。",
+          "note": "Routa 与 qm 当前 sealed evidence 全部来自 AGENTS.md，C1–C4、R5/R6/R8 尚未被真实运行行为证明。"
+        }
+      ],
+      "notes": "等待 Human 基于 routa/qm conformance 报告作 A/B/C/D 决策；当前推荐 D：先补采 runtime/API/test 证据，不开始产品 runtime。"
     },
     "1-2-1": {
       "id": "1-2-1",
       "label": "同设备 Codex → WorkBuddy → Codex 闭环",
-      "status": "pending",
-      "mode": "explore",
+      "status": "in_progress",
+      "mode": "exploit",
       "parent": "1-2",
-      "children": [],
-      "decisions": [],
-      "notes": ""
+      "children": [
+        "1-2-1-1",
+        "1-2-1-2",
+        "1-2-1-3"
+      ],
+      "decisions": [
+        {
+          "q": "Experience Version 最小实现采用什么技术形态？",
+          "answer": "Python stdlib + SQLite + JSON CLI projection",
+          "note": "保持一个小而深的 coordination protocol seam；SQLite 提供同设备共享上下文的事务性持久化，CLI 让 Codex/WorkBuddy 可通过同一接口调用；不引入后台服务、第三方依赖或生产运维能力。"
+        }
+      ],
+      "notes": "施工范围：publish/discover/claim/publish_result/claim_review/review-complete、最小 scope/profile、持久化 shared context、Markdown scorecard；不做后台自动发现或生产级恢复。"
     },
     "1-2-2": {
       "id": "1-2-2",
@@ -258,11 +285,484 @@
       "children": [],
       "decisions": [],
       "notes": ""
+    },
+    "1-1-5": {
+      "id": "1-1-5",
+      "label": "Feature 1 对齐契约：冻结 Q1–Q6",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1",
+      "children": [
+        "1-1-5-1",
+        "1-1-5-2",
+        "1-1-5-3",
+        "1-1-5-4",
+        "1-1-5-5",
+        "1-1-5-6"
+      ],
+      "decisions": [],
+      "notes": "Q1 已确认；当前焦点是 Q2 Human action script。完成 Q2–Q6 后，将对齐草案转为 Experience Version Spec，再恢复 1-1-3 的开源 conformance comparison；在 1-1-4 Human A/B/C/D 决策前不开发产品。"
+    },
+    "1-1-5-1": {
+      "id": "1-1-5-1",
+      "label": "Q1：确定首个真实任务",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "首个真实任务是什么？",
+          "answer": "找一份优秀的技术方案分析报告，改进 zj-research-report skill 的效果。",
+          "note": "这是 Feature 1 的首个真实任务，不授权 ZAgenticOPN 产品代码、runtime 或 PoC。"
+        }
+      ],
+      "notes": "已确认并完成：找一份优秀的技术方案分析报告，改进 zj-research-report skill 的效果；标杆为固定 commit 的 Kubernetes KEP-753；源 skill 与运行副本已更新，technical-c4/v1 编译 receipt healthy=true。"
+    },
+    "1-1-5-2": {
+      "id": "1-1-5-2",
+      "label": "Q2：冻结 Human action script",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "Human 在闭环中允许做什么？",
+          "answer": "直接采用：Human 只提交一次初始目标，执行三次任务无关激活（Codex → WorkBuddy → Codex），并处理权限、冲突、方向和无法继续的异常。",
+          "note": "Human 不指定 Work Item，不转述前序结果，不复制上下文，不手工安排 review 或下一步，不手工拼装最终结果。"
+        }
+      ],
+      "notes": "Q2 已由 Human 直接采用。Human action script：一次初始目标 + 三次只说‘检查 shared context’的激活（Codex → WorkBuddy → Codex）；仅处理权限、冲突、方向和无法继续的异常。"
+    },
+    "1-1-5-3": {
+      "id": "1-1-5-3",
+      "label": "Q3：定义 Work Item eligibility",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "什么使 Work Item 对 Agent eligible？",
+          "answer": "直接采用三个过滤条件：AgentInstance 属于当前 CollaborationScope；Work Item 状态是 available 或当前 Agent 可处理的 awaiting_agent_review；Work Item 所需的最小能力和权限与 Agent profile 匹配。",
+          "note": "首版不建设 Agent 自动能力发现；能力由固定 Agent profile 或实验配置表达；没有 eligible work 时返回过滤原因。"
+        }
+      ],
+      "notes": "Q3 已由 Human 直接采用：scope、状态、profile/权限三项过滤；不建设 Agent 自动能力发现。"
+    },
+    "1-1-5-4": {
+      "id": "1-1-5-4",
+      "label": "Q4：冻结 claim、执行与 review 转移",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "claim、执行与 review 如何转移？",
+          "answer": "直接采用：available → claimed（atomic claim）→ awaiting_agent_review → completed；claimed → blocked；available → cancelled；awaiting_agent_review 的 reviewer 必须重新 atomic claim 后 review。一次激活最多成功 claim 一个 Work Item，并发竞争只能一个 Agent 成功；首版不设置 claim TTL；Agent 中断由 Human 显式标记 blocked 或重新开放，不自动恢复。",
+          "note": "review 请求修改时保留结构化结果和引用，按明确状态转移重新进入执行；不引入自动 retry、抢占或后台恢复。"
+        }
+      ],
+      "notes": "Q4 已由 Human 全部采用：单激活单 claim、原子竞争、review re-claim、无 claim TTL、Human 显式处理中断。"
+    },
+    "1-1-5-5": {
+      "id": "1-1-5-5",
+      "label": "Q5：冻结结果发布与 Git provenance",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "结果发布和 Git provenance 的最低契约是什么？",
+          "answer": "直接采用：submit 必须包含 result_summary、next_action、acceptance_status 和 references；未完成时必须发布结构化 blocker。Git references 必须包含 commit SHA、变更文件、测试命令及结果，必要时补充 branch 或 diff 状态。",
+          "note": "shared context 只保存结构化结果和 Git references，不保存完整对话、代码副本或大文件；Reviewer 只凭 shared context 与 canonical Git facts 接续。"
+        }
+      ],
+      "notes": "Q5 已由 Human 全部采用：固定结果字段、Git provenance、结构化 blocker 和最小 shared context。"
+    },
+    "1-1-5-6": {
+      "id": "1-1-5-6",
+      "label": "Q6：冻结有用性与退出条件",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "什么结果才算有用并允许退出当前对齐阶段？",
+          "answer": "直接采用两层退出证据：硬条件为 C1 Publish/discover、C2 无重复 claim、C3 结果可读、C4 review continuation 无 Human 补上下文及最终 Git artifact 满足 acceptance；价值条件为任务特定 Human intervention=0、固定三次激活、相对方案 A 的 Human 介入时间不明显劣化、连续 3 次真实任务实验通过。",
+          "note": "Agent 总耗时不单独决定成败；任一硬条件失败则闭环不通过，价值条件用于判断是否继续、修订或停止。"
+        }
+      ],
+      "notes": "Q6 已由 Human 全部采用：硬条件与价值条件共同构成退出证据；Q1–Q6 对齐完成，下一步先将对齐草案转为 Experience Version Spec。"
+    },
+    "1-1-6": {
+      "id": "1-1-6",
+      "label": "将 Feature 1 对齐草案转为 Experience Version Spec",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1",
+      "children": [],
+      "decisions": [],
+      "notes": "Experience Version Spec 已生成并作为 canonical product input；主 Spec 与 README 已建立入口；GitHub issue #1 已发布并标记 ready-for-agent。"
+    },
+    "1-1-4-1": {
+      "id": "1-1-4-1",
+      "label": "补采 Routa 与 qm 的 runtime、API/schema 与 test conformance 证据",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-4",
+      "children": [],
+      "decisions": [
+        {
+          "q": "C1 的发现门是否需要 Agent eligibility 语义？",
+          "answer": "需要；generic task/memory list 只能 partial，shared query 至少要支持当前 Agent 的 eligibility 判断；filter reasons 属于 C5。",
+          "note": "冻结 C1 口径。"
+        },
+        {
+          "q": "没有 exposed claim API 时如何判定？",
+          "answer": "对当前 conformance 判定失败并标记 unsupported on exposed surface，但不扩大为源码完全没有该能力。",
+          "note": "冻结 C2 证据边界。"
+        },
+        {
+          "q": "C3 是否必须独立 typed API？",
+          "answer": "不必须独立 API；最低要求是可机器解析的结构化 shared record，generic storage 可以接受，自由文本不接受。",
+          "note": "冻结 C3 口径，后续按此复核黑盒结果。"
+        },
+        {
+          "q": "C4 是否需要完整 review 状态链？",
+          "answer": "需要 discover → claim → verify references → complete review；Human 不补上下文，冲突和异常才升级。",
+          "note": "冻结 C4 口径。"
+        },
+        {
+          "q": "qm 的 C3 是否升级为通过？",
+          "answer": "是；generic storage 可接受，qm 黑盒已证明 Agent A 发布结构化五字段记录且 Agent B 成功解析读取。",
+          "note": "按已冻结的 C3 口径重算；不影响 C1/C2/C4。"
+        },
+        {
+          "q": "Routa 的 C3 是否升级为通过？",
+          "answer": "暂不；当前只检查字符串包含字段，需先完成严格 JSON parse 与五字段校验，三次均通过后再升级。",
+          "note": "避免把看起来像 JSON 的 generic artifact 当作结构化 conformance。"
+        },
+        {
+          "q": "Routa 与 qm 的 C1 是否升级？",
+          "answer": "不升级；generic ready task 或 memory search 没有证明当前 Agent eligibility、scope 匹配与排除原因。",
+          "note": "两者 C1 保持 partial。"
+        },
+        {
+          "q": "C2 是否采用 exposed-surface 双层标签？",
+          "answer": "是；记为 conformance_fail / unsupported_on_exposed_surface，同时明确不能推出源码全局 absent。",
+          "note": "将 exposed API 事实与源码能力未知性分开。"
+        },
+        {
+          "q": "黑盒 HTTP 证据的适用范围是什么？",
+          "answer": "接受为候选筛选证据，不作为完整 Agent 自主行为或 ZAgenticOPN 体验版通过证据。",
+          "note": "固定证据层级。"
+        },
+        {
+          "q": "C1/C2/C4 是否继续作为硬门？",
+          "answer": "是；它们分别对应发现、唯一执行权与 Agent 接续，是 Feature 1 的核心价值门。",
+          "note": "不因 C3、scope 或 memory 邻近能力而放宽。"
+        },
+        {
+          "q": "当前证据是否排除 Routa/qm 的 A/B？",
+          "answer": "是；两者不能进入整体复用或薄适配，但仍可抽取单位能力。",
+          "note": "结论范围是排除 A/B，不是否定候选全部价值。"
+        },
+        {
+          "q": "下一步选 D 还是 C？",
+          "answer": "D：继续一轮 ext 候选搜索，但设置一轮封顶；若仍无候选通过硬门，则转 C。",
+          "note": "避免过早自研，也避免无限搜索。"
+        },
+        {
+          "q": "qm C3 通过是否改变路线？",
+          "answer": "不改变；它只提升 qm 的 selective reuse 价值，不足以支持 A/B 或启动产品 runtime。",
+          "note": "保持 D 一轮封顶规则。"
+        },
+        {
+          "q": "D 一轮封顶的退出规则是什么？",
+          "answer": "最多 3 个 ext 候选；统一固定 commit/runtime/API/test 与三次 C1–C4 重放；任一候选通过 C1/C2/C4 即停止并由 Human 选择 A/B/C；全部失败则 D 耗尽并转 C，但仍需 Human 明确授权产品 runtime。",
+          "note": "防止无限搜索与未经授权的实现。"
+        },
+        {
+          "q": "是否先修正 Routa C3 证据？",
+          "answer": "是；先补完整 JSON parse 与五字段校验，三次通过后更新 scorecard；不改变 D/C 路线，不启动产品 runtime。",
+          "note": "低成本统一 C3 证据口径。"
+        }
+      ],
+      "notes": "第五轮黑盒 fixture 与 review 复核已完成：Routa/qm 固定 commit 真实 HTTP runtime 各连续 3 次。按已确认口径，Routa 与 qm 的 C1 均 partial，C2 均 conformance_fail / unsupported_on_exposed_surface，C3 均 strict_pass=3/3（generic storage 中的结构化五字段 record 可通过），C4 均 partial；核心 C1/C2/C4 硬门没有候选通过。证据与 runner：research/routa-qm-conformance/run_c1_c4_black_box.py、2026-08-20-black-box-fixture-protocol.md、2026-08-20-black-box-routa.json、2026-08-20-black-box-qm.json、2026-08-20-black-box-fixture-results.md。Review 退出规则：下一轮最多 3 个 ext 候选，统一固定 commit/runtime/API/test 与三次重放；任一候选通过 C1/C2/C4 即停止并由 Human 选择 A/B/C；全部失败则 D 耗尽并转 C，但仍需 Human 明确授权产品 runtime。当前不启动 ZAgenticOPN 产品 runtime。"
+    },
+    "1-1-7": {
+      "id": "1-1-7",
+      "label": "下一轮最多 3 个 ext 候选筛选与 C1–C4 黑盒复验",
+      "status": "completed",
+      "mode": "explore",
+      "parent": "1-1",
+      "children": [
+        "1-1-7-1",
+        "1-1-7-2",
+        "1-1-7-3"
+      ],
+      "decisions": [
+        {
+          "q": "ext 候选数量上限",
+          "answer": "最多筛选 3 个 ext 候选；每个候选均须接受同一固定版本的 C1–C4 黑盒协议。",
+          "note": "防止 D 无限搜索；当前只做候选筛选证据，不启动 ZAgenticOPN 产品 runtime。"
+        },
+        {
+          "q": "候选证据最低要求",
+          "answer": "每个候选固定 commit，并记录真实 runtime、可调用 API/schema、相关 test 与完整 HTTP/API transcript；同一 fixture 连续运行 3 次。",
+          "note": "缺少 exposed surface 证据时只能标记 unknown 或 unsupported_on_exposed_surface，不能扩大为源码全局 absent。"
+        },
+        {
+          "q": "硬门退出规则",
+          "answer": "C1 publish/discover、C2 competing claim、C4 review continuation 任一候选通过即停止 D，并由 Human 重新选择 A/B/C；C3 仍要求结构化五字段结果可读。",
+          "note": "C1/C2/C4 是 Feature 1 核心价值硬门，不能被邻近 task、memory、queue 能力替代。"
+        },
+        {
+          "q": "D 耗尽后的路线",
+          "answer": "若 3 个 ext 候选全部未通过 C1/C2/C4，D 视为耗尽，转入 C：ZAgenticOPN 主导架构并选择性抽取单位能力；转 C 仍需 Human 明确授权产品 runtime。",
+          "note": "不得因 D 耗尽而自动进入实现。"
+        }
+      ],
+      "notes": "D 轮次已按封顶规则完成：Routa、MCP Agent Mail Rust、Avernet（当前刷新固定 commit）均未通过 C1/C2/C4 硬门。最终 scorecard：research/routa-qm-conformance/2026-08-20-ext-round-results.md。下一路线为 C：ZAgenticOPN 主导架构并选择性抽取单位能力；仍需 Human 明确授权产品 runtime。当前禁止产品 runtime、PoC、部署、自动发现/唤醒和未经授权的 A/B/C 采用。"
+    },
+    "1-1-7-1": {
+      "id": "1-1-7-1",
+      "label": "Routa 固定 commit C1–C4 黑盒三次复验",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-7",
+      "children": [],
+      "decisions": [
+        {
+          "q": "Routa 黑盒结果",
+          "answer": "固定 commit 连续 3 次：C1 partial、C2 conformance_fail / unsupported_on_exposed_surface、C3 strict_pass=3/3、C4 partial；未通过核心硬门。",
+          "note": "保留 task filtering、artifact/evidence gate、lane handoff 和 queue concurrency 单位能力，不进入 A/B 采用。"
+        }
+      ],
+      "notes": "证据：research/routa-qm-conformance/2026-08-20-black-box-fixture-results.md、2026-08-20-black-box-routa.json。产品 runtime 未启动。"
+    },
+    "1-1-7-2": {
+      "id": "1-1-7-2",
+      "label": "MCP Agent Mail Rust exposed surface conformance 筛选",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-7",
+      "children": [],
+      "decisions": [
+        {
+          "q": "MCP Agent Mail Rust exposed surface",
+          "answer": "固定 commit 的 canonical API inventory 覆盖 Agent identity、message/inbox、file reservation 和 search，但没有 Work Item claim 或 reviewer continuation API；C1 仅 partial，C2 为 conformance_fail / unsupported_on_exposed_surface，C3/C4 unknown。",
+          "note": "不把 file reservation 或 message inbox 等同于 Feature 1 的执行 authority 或 review 状态链；保留为 selective-reuse 候选。"
+        }
+      ],
+      "notes": "证据：research/routa-qm-conformance/2026-08-20-ext-runtime-findings.md；sealed inputs 含 2026-08-20-ext-runtime-surface-ledger-response.json。未启动候选产品 runtime。"
+    },
+    "1-1-7-3": {
+      "id": "1-1-7-3",
+      "label": "Avernet 固定 commit runtime/API/test 证据补采",
+      "status": "completed",
+      "mode": "explore",
+      "parent": "1-1-7",
+      "children": [],
+      "decisions": [
+        {
+          "q": "Avernet 当前证据边界",
+          "answer": "本轮固定 commit 的 sealed evidence 只有架构规则与 Bot Provider 接入说明，C1–C4 保持 unknown；后续 source-path 请求解析到不同默认分支 commit，不能混入本轮。",
+          "note": "只有在同一固定 commit 上获得可运行 transport/API/test 证据后，才能判定硬门；不因 unknown 自动转 C 或启动产品 runtime。"
+        },
+        {
+          "q": "Avernet current profile refresh outcome",
+          "answer": "固定刷新 commit 7c6518171cc9dac0b0139e4accb2bf6aa0780776 的 sealed README 明确 community Work Item implementation 为 no-op；C1/C2/C3/C4 均 conformance_fail / unsupported_on_exposed_surface。",
+          "note": "neutral Work Item port 可作为接口参考，但 no-op community profile 不进入 A/B；不混用旧 39f revision。"
+        }
+      ],
+      "notes": "证据：research/routa-qm-conformance/2026-08-20-ext-round-results.md、2026-08-20-avernet-work-item-current-ledger-response.json。Avernet current profile 的 community Work Item 为 no-op，未启动候选产品 runtime。"
+    },
+    "1-1-8": {
+      "id": "1-1-8",
+      "label": "C 路线选择性复用能力地图与实施准入",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1",
+      "children": [
+        "1-1-8-1",
+        "1-1-8-2"
+      ],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-1-8-1": {
+      "id": "1-1-8-1",
+      "label": "C 路线选择性复用能力地图",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-1-8",
+      "children": [],
+      "decisions": [
+        {
+          "q": "C 路线所有权边界",
+          "answer": "ZAgenticOPN 继续拥有 Agent identity/scope、eligibility、Work Item lifecycle、claim authority、result/review semantics 与 scorecard；候选只提供可替换的窄单位能力或接口参考。",
+          "note": "详见 docs/designs/agent-self-service-collaboration-selective-reuse-capability-map.md。"
+        }
+      ],
+      "notes": "设计文档已生成：docs/designs/agent-self-service-collaboration-selective-reuse-capability-map.md。仅完成文档与实施准入边界，未启动产品 runtime。"
+    },
+    "1-1-8-2": {
+      "id": "1-1-8-2",
+      "label": "Human 确认 C 路线与 Experience Version runtime 实施准入",
+      "status": "completed",
+      "mode": "explore",
+      "parent": "1-1-8",
+      "children": [],
+      "decisions": [
+        {
+          "q": "Experience Version 实施授权",
+          "answer": "D 耗尽只允许提出 C 路线；产品 runtime/PoC/部署仍需 Human 明确授权，不能由候选筛选结果自动触发。",
+          "note": "在授权前只继续做证据、契约和 fixture 设计；自动发现、自动唤醒、后台恢复和 ZAgenticLoop 代码抽取保持禁止。"
+        },
+        {
+          "q": "Human 是否授权进入 C 路线 Experience Version 实施",
+          "answer": "已授权：进入 Experience Version 最小纵向切片实施",
+          "note": "C 路线由 ZAgenticOPN 主导架构，先做同设备 Codex → WorkBuddy → Codex；保持自动发现、后台轮询、TTL/retry、HA、Dashboard、自动 merge/push/release 与 ZAgenticLoop 抽取为 deferred。"
+        }
+      ],
+      "notes": "Human 已明确授权进入 C 路线 Experience Version 实施；先实现同设备最小纵向切片并以 C1–C4 与最终 Git artifact 验证。"
+    },
+    "1-2-1-1": {
+      "id": "1-2-1-1",
+      "label": "coordination protocol seam 与 SQLite shared context",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1-2": {
+      "id": "1-2-1-2",
+      "label": "C1–C4 黑盒 fixture 与产品健康 scorecard",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1-3": {
+      "id": "1-2-1-3",
+      "label": "同设备 Codex → WorkBuddy → Codex 真实任务 smoke test",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1",
+      "children": [
+        "1-2-1-3-1",
+        "1-2-1-3-2"
+      ],
+      "decisions": [
+        {
+          "q": "最小 smoke 是否足以完成真实任务闭环？",
+          "answer": "协议 smoke 已通过；真实跨仓库 skill 任务仍需由 Codex 与 WorkBuddy 按 Human action script 执行",
+          "note": "临时 Git artifact 已证明 C1/C3/C4 和最终引用链路；尚未把它计为首个真实任务的价值证据，也未声称三次真实实验通过。"
+        },
+        {
+          "q": "真实 WorkBuddy 激活是否通过 C1？",
+          "answer": "未通过：WorkBuddy 读取的是 ZInitiatives context，未进入 ZAgenticOPN coordination seam，也未 claim Work Item",
+          "note": "分类：observed-failure。ZAgenticOPN shared store 状态正常，Work Item 仍为 available；失败发生在 Agent integration/activation routing，不是 Work Item eligibility 或 SQLite claim 语义。"
+        },
+        {
+          "q": "WorkBuddy 第二次激活是否完成自服务接续？",
+          "answer": "未完成：能读取并摘要 Work Item，但未产生本次 discover/claim 事件，仍要求 Human 选择 A/B/C/D",
+          "note": "分类：observed-failure。旧 discover 事件来自前次手工 CLI 探针；本次事件流无新增，Work Item 仍 available。required_* 空数组和 discover work_id=null 暂不改动，均不是当前硬门失败原因。"
+        }
+      ],
+      "notes": "AgentRQ adapter wrapper-level C1/C2/C4 fixture 已完成；真实 WorkBuddy activation routing 仍未完成，既有 observed-failure 保留。"
+    },
+    "1-2-1-3-1": {
+      "id": "1-2-1-3-1",
+      "label": "AgentRQ adapter C1/C2/C4 黑盒验证",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1-3",
+      "children": [],
+      "decisions": [
+        {
+          "q": "AgentRQ adapter 黑盒验证的所有权与范围是什么？",
+          "answer": "只验证 same-device single-project 的 C1 publish/discover、C2 competing claim、C4 review continuation；AgentRQ 只提供 queue/MCP/notification/gateway transport，ZAgenticOPN 或 wrapper 保持 eligibility、atomic claim、result/review 状态和 scope/private context/Git provenance 所有权。任一 C1/C2/C4 失败即判定该 adapter 未通过 conformance。",
+          "note": "本轮归类 observed-failure；不引入 AgentRQ poller、scheduler、workflow、Supervisor、生产部署或自动唤醒语义。"
+        },
+        {
+          "q": "AgentRQ adapter C1/C2/C4 黑盒结果是什么？",
+          "answer": "adapter-level C1/C2/C4 均通过（各 1/1）：C1 task-agnostic getTask 发现 eligible Work Item；C2 两个并发 adapter 仅一个 product-owned claim 成功且仅一个 transport status 更新；C4 reviewer 仅凭 shared context 发现 generic review task、验证结构化 result/Git reference 并完成。",
+          "note": "这是 wrapper-level adapted pass，不是 AgentRQ native conformance：固定 commit exposed surface 只有 createTask/getTask/updateTaskStatus/reply，C2 claim 与 C4 reviewer state 由 ZAgenticOPN CoordinationProtocol 持有；真实 AgentRQ backend 因本机无 Go/Docker 未启动。证据：research/agentrq-candidate/2026-08-24-agentrq-adapter-black-box.{json,md}；测试 python -m unittest discover -s tests -v（7/7）。"
+        }
+      ],
+      "notes": "Adapter-level C1/C2/C4 black-box 通过；native AgentRQ C2/C4 仍 unsupported/not_native，产品语义继续由 ZAgenticOPN 所有。固定 commit 45c87390fdb535066a05c0592e8183b1b461689b；真实 backend runtime 未启动（本机无 Go/Docker）。"
+    },
+    "1-2-1-3-2": {
+      "id": "1-2-1-3-2",
+      "label": "WorkBuddy task-agnostic activation routing failure follow-up",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1-3",
+      "children": [],
+      "decisions": [
+        {
+          "q": "AgentRQ adapter验证完成后真实 smoke 的当前焦点是什么？",
+          "answer": "继续处理已观察到的 WorkBuddy activation routing failure：让任务无关的检查 shared context 激活真正进入 ZAgenticOPN coordination seam；AgentRQ adapter 结果只作为可选 transport，不替代 WorkBuddy 接线验证。",
+          "note": "本轮不展开该 follow-up；WorkBuddy 仍未产生 discover/claim 事件，属于 observed-failure。"
+        },
+        {
+          "q": "WorkBuddy activation routing 如何最小修复？",
+          "answer": "增加一个显式的 task-agnostic activation entrypoint：Agent 只提供自己的稳定 profile、scope 和 activation session，不提供 Work Item id；entrypoint 调用 discover，并在有 frontier 时只 claim 一个 execution 或 review Work Item，返回结构化 handoff。",
+          "note": "这是 activation adapter seam，不是自动发现/后台轮询；ZAgenticOPN 继续拥有 eligibility、claim、review 和 scope。通过项目内脚本与 AGENTS.md 记录 WorkBuddy 应进入该 seam，避免把 ZInitiatives 导航 context 当作产品 shared context。"
+        },
+        {
+          "q": "activation routing 最小修复的黑盒结果是什么？",
+          "answer": "项目内 activation entrypoint 已通过：WorkBuddy 无 Work Item id 的外部子进程激活能 discover 并 claim execution；Codex 无 Work Item id 激活能 discover 并 claim awaiting_agent_review；run_same_device_smoke 已改为实际调用该入口并完成到 completed。",
+          "note": "9/9 tests 通过。该证据只证明 project-local activation seam 和同设备可复现 smoke；真实 WorkBuddy UI/runtime 尚未由 Human 重放，也未计入三次真实价值实验。"
+        },
+        {
+          "q": "真实 WorkBuddy UI/runtime 重放结果是什么？",
+          "answer": "未通过：WorkBuddy v5.3.14 已切到本地 ZAgenticOPN 文件夹并进入新建任务，但发送固定的检查 shared context 请求未产生消息或运行；项目 shared store 目标 scope 没有 discover/claim 事件。",
+          "note": "分类：observed-failure。可见请求可填入，但无障碍点击、坐标点击、Return/Cmd+Return/Ctrl+Return 均未提交；点击 Agent 应用快捷场景还触发 removeChild UI 错误。证据 research/activation-routing/2026-08-24-workbuddy-runtime-replay.md。"
+        },
+        {
+          "q": "WorkBuddy CLI 激活返回 no_eligible_work 说明什么？",
+          "answer": "部分通过：真实 WorkBuddy 已执行项目内 activation seam，并在目标 scope 产生 discover 事件；但该 scope 当时没有可声明 Work Item，因此没有 claim，C1 execution claim 仍未通过。",
+          "note": "已由 .workbuddy/memory/2026-08-24.md 与 .zagenticopn/shared.sqlite3 独立核对：activation-a40f6da3210b、eligible_count=0、无目标 scope Work Item。下一步由 Codex 发布一个同 scope 的窄任务，再由 Human 触发一次检查 shared context；证据 research/activation-routing/2026-08-24-workbuddy-cli-replay.md。"
+        },
+        {
+          "q": "WorkBuddy 二轮 claim 后 block 的 creator 裁决是什么？",
+          "answer": "保留 Git provenance 硬约束：不放行空 references，不使用伪造 N/A commit；将本 Work Item 的 block 作为 C1 路由通过但 acceptance 不具备可交付结果证据的观察记录。未来执行任务必须带真实 commit/files/tests，若要支持纯证据任务需另行做显式产品契约决策。",
+          "note": "真实事件已核对：discover eligible_count=1 → claim_succeeded execution → block，Work Item revision=2/state=blocked；WorkBuddy 未编造 commit。证据 research/activation-routing/2026-08-24-workbuddy-claim-block.md。"
+        },
+        {
+          "q": "C4 如何在不放宽 Git provenance 的前提下继续？",
+          "answer": "发布一个真实产物型 Work Item：WorkBuddy 通过任务无关 activation claim 后，新增一份 C4 结果文档，运行现有测试，提交真实 Git commit，并以真实 commit/files/tests 引用 publish-result + submit；随后 Codex 任务无关 review activation claim-review 并验收。",
+          "note": "这是对上一轮契约冲突的修正：不使用空 references 或 N/A commit，不修改 coordination.py 或路线图 JSON；Work Item acceptance 显式要求可审计 Git artifact。"
+        },
+        {
+          "q": "C4 首次 Codex review 应如何裁决？",
+          "answer": "request_changes：commit 023ead9 与 9/9 测试证据有效，但当前结果文件与事件账本显示本 Work Item 走了显式 claim、没有对应 discover 事件，未满足 acceptance 的每轮 task-agnostic activation。要求 WorkBuddy 重新执行 scripts/activate_agent.py 无 Work Item ID discover→claim，修正结果文档并以新真实 commit/files/tests 重新 publish-result + submit。",
+          "note": "独立证据：该 Work Item 只有 claim_succeeded(activation-workbuddy-3)、publish_result、submit，没有同 Work Item 前的 discover；结果文件第 3 步自述显式 claim。先 request_changes，不能 accept 不完整的 C4。"
+        },
+        {
+          "q": "C4 二次 Codex review 的裁决是什么？",
+          "answer": "accept：R2 已按 request_changes 严格使用 scripts/activate_agent.py 无 Work Item ID，activation-ee2fbd368a8f 下同一 Work Item 产生 discover→claim_succeeded；R2 commit 89d6043 只追加结果文件，publish-result 携带真实 commit/files/tests，测试 9/9 通过。",
+          "note": "独立核验通过：events row 15 discover 与 row 16 claim_succeeded 紧邻；git show 89d6043 --stat 为 1 file/36 insertions，R1 commit 023ead9 字节未变；本地复跑 python -m unittest discover -s tests -v 为 9/9。可执行 review claim 后 accept。"
+        }
+      ],
+      "notes": "真实 WorkBuddy routing 已完成 no_eligible_work discover、C1 discover→claim execution，并通过真实产物型 Work Item 完成 C4：R1 commit 023ead9 首审 request_changes（缺少本 work discover），R2 由 scripts/activate_agent.py 无 Work Item ID 产生 activation-ee2fbd368a8f 的 discover→claim_succeeded，追加 commit 89d6043，publish-result 携带真实 commit/files/tests；Codex 二次 claim-review 独立复跑 9/9 tests 后 accept，Work Item c4-workbuddy-result-artifact-20260824 已 completed。上一条 routing-only Work Item 仍按 creator 裁决 blocked。节点继续 in_progress：C2 competing real activation、三次真实价值实验及后续 C-route closeout 尚未完成。"
     }
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-20 16:23:58",
+    "updated": "2026-08-24 21:40:37",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }

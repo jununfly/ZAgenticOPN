@@ -1,0 +1,80 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "ZAgenticOPN Experience Version conformance comparison: Routa versus qm",
+    "criteria": [
+      {
+        "id": "c1-publish-discover",
+        "question": "What primary evidence shows that one Agent can publish available work and another Agent can discover it after a task-agnostic Human trigger, without the Human naming a Work Item or copying context?",
+        "critical": true,
+        "keywords": ["publish", "discover", "frontier", "task", "work item", "coordination"]
+      },
+      {
+        "id": "c2-competing-claim",
+        "question": "What primary evidence shows atomic competing claim semantics in which concurrent Agents cannot both obtain execution authority or execute the same Work Item?",
+        "critical": true,
+        "keywords": ["claim", "atomic", "concurrency", "reservation", "lease", "lock", "ownership"]
+      },
+      {
+        "id": "c3-result-publication",
+        "question": "What primary evidence shows that an executing Agent can publish result summary, acceptance status, next action, blocker and canonical Git references for another Agent to read?",
+        "critical": true,
+        "keywords": ["result", "handoff", "review", "artifact", "commit", "reference", "provenance"]
+      },
+      {
+        "id": "c4-review-continuation",
+        "question": "What primary evidence shows that a reviewer Agent can discover and atomically claim awaiting review, verify the referenced result and complete review without Human context supplementation?",
+        "critical": true,
+        "keywords": ["review", "handoff", "approve", "verify", "continuation", "agent"]
+      },
+      {
+        "id": "c5-no-eligible-work",
+        "question": "What evidence shows the system reports no eligible work and filter reasons instead of inventing work or requiring the Human to select a Work Item?",
+        "critical": true,
+        "keywords": ["eligible", "filter", "empty", "available", "scope", "capability"]
+      },
+      {
+        "id": "c6-context-defect",
+        "question": "What evidence shows missing acceptance, result or references become an observable classified defect rather than being treated as a successful handoff?",
+        "critical": true,
+        "keywords": ["validation", "error", "missing", "acceptance", "blocker", "diagnostic"]
+      },
+      {
+        "id": "c7-scope-isolation",
+        "question": "How does the project isolate default coordination queries by project or workspace while preserving explicit cross-project navigation when allowed?",
+        "critical": true,
+        "keywords": ["scope", "workspace", "project", "tenant", "isolation", "permission"]
+      },
+      {
+        "id": "c8-private-recovery",
+        "question": "How does the project separate Agent-private recovery context from shared coordination facts, and what evidence supports recovery after an Agent interruption?",
+        "critical": true,
+        "keywords": ["private", "shared", "context", "recovery", "session", "memory", "checkpoint"]
+      },
+      {
+        "id": "product-semantics-and-ownership",
+        "question": "Which product semantics, state models, identity boundaries, acceptance rules and lifecycle responsibilities would remain owned by ZAgenticOPN versus the candidate?",
+        "critical": true,
+        "keywords": ["architecture", "state", "identity", "ownership", "lifecycle", "integration", "extension"]
+      },
+      {
+        "id": "experience-fit-and-change-cost",
+        "question": "What evidence shows the candidate can support the narrow Experience Version, and what adapter, deployment, upgrade, license or maintenance costs would be introduced?",
+        "critical": true,
+        "keywords": ["quickstart", "example", "CLI", "MCP", "API", "deployment", "upgrade", "license", "test"]
+      }
+    ],
+    "repositories": [
+      {"owner": "phodal", "name": "routa"},
+      {"owner": "yc-software", "name": "qm"}
+    ],
+    "policyVersion": "zagenticopn-experience-version-conformance/v1",
+    "budget": {
+      "maxFiles": 96,
+      "maxBytes": 3200000,
+      "deadlineMs": 240000
+    }
+  }
+}

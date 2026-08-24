@@ -2,9 +2,13 @@
 
 状态：Active
 
-Current stage：Problem Discovery
+Current stage：Experience Version
 
 产品所有者：ZAgenticOPN
+
+Experience Version Spec：[Agent 自服务协作 Experience Version](agent-self-service-collaboration-experience-version.md)
+
+Q1–Q6 决策记录：[Experience Version 对齐契约](../designs/agent-self-service-collaboration-experience-version-alignment.md)
 
 ## 阶段声明
 
@@ -14,13 +18,16 @@ Current product hypothesis:
   自行发现、认领、执行和接续工作，可以显著减少 Human 的搬运、派发和缝合。
 
 Current vertical slice:
-  Human 要求 Codex 检查 shared context；Codex 发布可执行工作；
-  Human 要求 WorkBuddy 检查 shared context；WorkBuddy 自行 claim、执行并提交 Git 结果；
-  Human 再要求 Codex 检查 shared context；Codex 自行发现 awaiting-review、验证并完成。
+  首个真实任务是“找一份优秀的技术方案分析报告，改进
+  zj-research-report 这个 skill 的效果”。Human 要求 Codex 检查 shared context；
+  Codex 发布可执行工作；Human 要求 WorkBuddy 检查 shared context；WorkBuddy
+  自行 claim、执行并提交 Git 结果；Human 再要求 Codex 检查 shared context；
+  Codex 自行发现 awaiting-review、验证并完成。
 
 Stage exit evidence:
-  候选无关方案完成；另一个开源方案接受同一 conformance comparison；
-  Human 明确选择 A/B/C/D，并授权或否决 Experience Version。
+  同设备 Codex → WorkBuddy → Codex 单项目路径连续完成 3 次可复现实验；
+  C1–C4 与最终 Git artifact 全部通过；shared-context 事件和 Markdown
+  scorecard 能复核 Human 介入、claim 冲突、接续和结果 provenance。
 
 Deferred decisions:
   自动发现、自动唤醒、生产级认证与 ACL、HA、灾难恢复、完整 Dashboard、
@@ -130,7 +137,7 @@ Agent 负责查询 shared context、判断 eligibility、选择和 claim 一个 
 
 ## 开源选择门
 
-当前对 MineContext、MyContext 和 TencentDB-Agent-Memory 的固定版本审计表明，三者都没有原生形成 R5、R6、R8 闭环，因此当前决策为 D：等待另一个开源方案进入同一 comparison。
+当前对 MineContext、MyContext 和 TencentDB-Agent-Memory 的固定版本审计表明，三者都没有原生形成 R5、R6、R8 闭环；随后对 Routa、MCP Agent Mail Rust 和 Avernet 的封顶 ext 轮次也未通过 C1/C2/C4 核心硬门。最终 scorecard 见 [`research/routa-qm-conformance/2026-08-20-ext-round-results.md`](../../research/routa-qm-conformance/2026-08-20-ext-round-results.md)。D 轮次已耗尽，当前只提出 C：ZAgenticOPN 主导架构并选择性复用单位能力。
 
 新候选先接受 R5、R6、R8 淘汰门，再比较 R1–R12、语义所有权、Experience Version 工作量、运行负担、许可和长期所有权成本。通过后按以下分类决策：
 
@@ -139,4 +146,7 @@ Agent 负责查询 shared context、判断 eligibility、选择和 claim 一个 
 - C：ZAgenticOPN 主导架构，只选择性复用单位能力；
 - D：继续搜索。
 
-完成比较并获得 Human 明确决策前，不创建产品实现或 PoC。
+开源比较门已完成，Human 已明确授权 C 路线 Experience Version 实施。
+当前实现只覆盖同设备单项目最小纵向切片；后续阶段能力仍按 Deferred 处理。
+
+当前 C 路线的能力所有权、可抽取单位能力和实施准入见 [`docs/designs/agent-self-service-collaboration-selective-reuse-capability-map.md`](../designs/agent-self-service-collaboration-selective-reuse-capability-map.md)。D 轮次已耗尽，Human 已授权进入 Experience Version 实施；实现范围仍受本 Spec 的纵向切片和 Deferred 边界约束。

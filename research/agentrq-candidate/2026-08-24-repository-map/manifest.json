@@ -1,0 +1,68 @@
+{
+  "immutable": true,
+  "kind": "repository-map",
+  "schema": "zj-repository-map-manifest/v1",
+  "scope": {
+    "exclusions": [
+      ".git"
+    ],
+    "root": "."
+  },
+  "shards": [
+    {
+      "bytes": 3475,
+      "path": "facts/integrations.jsonl",
+      "sha256": "ae3e1bddadd81bb97080d36c78d8499e08335727c90d20fc19f90faf9007fa61"
+    },
+    {
+      "bytes": 552,
+      "path": "facts/packages.jsonl",
+      "sha256": "a33a2a59173376b9faa0a8dabc3ac0c028f1e1cb20f02b2ee3367fccf8d01de6"
+    },
+    {
+      "bytes": 1134,
+      "path": "facts/summary.json",
+      "sha256": "4b2e707451fa1fa5fefefb80b581092c05099ae9b1a8c526291c02398f57e92e"
+    },
+    {
+      "bytes": 56595,
+      "path": "facts/tree.jsonl",
+      "sha256": "1c74752dc8600c6ccea7fc0d718c66e1394eeadb8426ce68740cfc9d2a32bf45"
+    },
+    {
+      "bytes": 585,
+      "path": "facts/workflows.jsonl",
+      "sha256": "90fedc450ddaeee4f6fd8f14e623638275814dd29c271a3290dee34bdc796651"
+    },
+    {
+      "bytes": 8915,
+      "path": "navigation/targets.json",
+      "sha256": "c776f7c495cf08ead3f7ac595bf8c052e62aea6413d2546cf6c7f1237174f4ef"
+    }
+  ],
+  "snapshotId": "map-e78e86f960834f8d16835d9b",
+  "source": {
+    "commit": "45c87390fdb535066a05c0592e8183b1b461689b",
+    "identity": "commit-plus-working-tree",
+    "ref": "main",
+    "repository": "https://github.com/agentrq/agentrq.git",
+    "state": "clean",
+    "statusEntries": 0,
+    "workingTreeFingerprint": "e32ec0a519d9e5df06a54f87cb41ade0ceb445170efc1e57849581d61a3520ca"
+  },
+  "views": {
+    "artifacts": [
+      {
+        "bytes": 5099,
+        "path": "views/map.html",
+        "sha256": "a56549d6cc237441b5b88ad48945428be815a6620722436d769f917b4b18f03b"
+      },
+      {
+        "bytes": 4658,
+        "path": "views/map.md",
+        "sha256": "8db32d7459d42dc6a9db45cbdb648cb52e88a9aab6441f97c49d64a5d9352b73"
+      }
+    ],
+    "defaultTargetLimit": 100
+  }
+}

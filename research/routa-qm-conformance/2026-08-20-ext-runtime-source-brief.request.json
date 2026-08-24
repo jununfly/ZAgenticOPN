@@ -1,0 +1,20 @@
+{
+  "protocol": "zj-research-cli/v1",
+  "operation": "collect",
+  "brief": {
+    "schema": "zj-research-brief/v1",
+    "topic": "Pinned ext runtime source paths",
+    "criteria": [
+      {"id": "mcp-server-entry", "question": "Read only the pinned MCP Agent Mail Rust server entry and HTTP/stdio help/test paths selected by these exact path tokens. Report the actual command, transport, port and externally callable surface.", "critical": true, "keywords": ["mcp-agent-mail-server", "serve-http", "serve-stdio", "http_surface_isolation", "http_transport_harness"]},
+      {"id": "mcp-mail-and-reservation", "question": "Read only the pinned MCP Agent Mail Rust message inbox and file reservation source/test paths selected by these exact path tokens. Report the actual message, inbox, reservation and conflict semantics without mapping them to Work Items unless the source does so.", "critical": true, "keywords": ["fetch_inbox_events", "file_reservation", "reservation_artifact", "reservations.rs", "send_message"]},
+      {"id": "avernet-entry", "question": "Read only the pinned Avernet quick-start, bot integration, Docker and gateway main paths selected by these exact path tokens. Report the actual runtime command, transport and external API surface.", "critical": true, "keywords": ["quick-start.md", "bot-provider-integration.md", "bot-integration.md", "docker-compose.yml", "community/main.py"]},
+      {"id": "avernet-collaboration", "question": "Read only the pinned Avernet work-item, session, task, notification and contract paths selected by these exact path tokens. Report any externally callable shared collaboration, claim or review semantics and leave unsupported mappings unknown.", "critical": true, "keywords": ["work_item", "session_router", "task-queue", "notification", "protocol-contract-tests"]}
+    ],
+    "repositories": [
+      {"owner": "Dicklesworthstone", "name": "mcp_agent_mail_rust"},
+      {"owner": "inclusionAI", "name": "Avernet"}
+    ],
+    "policyVersion": "zagenticopn-experience-version-ext-runtime-source/v1",
+    "budget": {"maxFiles": 160, "maxBytes": 8000000, "deadlineMs": 360000}
+  }
+}

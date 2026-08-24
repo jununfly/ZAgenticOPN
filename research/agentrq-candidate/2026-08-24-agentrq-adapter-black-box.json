@@ -1,0 +1,72 @@
+{
+  "candidate": "agentrq/agentrq",
+  "commit": "45c87390fdb535066a05c0592e8183b1b461689b",
+  "native_surface_boundary": {
+    "c1": "adapted_pass: getTask supplies a task-agnostic queue; ZAgenticOPN applies eligibility",
+    "c2": "not_native: no AgentRQ claim operation; wrapper-owned CoordinationProtocol claim passes",
+    "c4": "not_native: no AgentRQ reviewer state; wrapper projects a generic review task and owns review state"
+  },
+  "scenarios": [
+    {
+      "discovery_status": "eligible_work",
+      "filter_reasons": {},
+      "gate": "C1",
+      "human_supplied_work_id": false,
+      "status": "PASS",
+      "task_agnostic_getTask_calls": 1,
+      "work_id": "c1-work"
+    },
+    {
+      "claim_conflicts": 1,
+      "duplicate_execution": 0,
+      "effective_claimants": 1,
+      "gate": "C2",
+      "outcomes": [
+        {
+          "agent_id": "workbuddy-01",
+          "error": "work item is already claimed",
+          "outcome": "lost"
+        },
+        {
+          "agent_id": "workbuddy-02",
+          "outcome": "won"
+        }
+      ],
+      "status": "PASS",
+      "transport_ongoing_updates": 1,
+      "work_id": "c2-work"
+    },
+    {
+      "final_state": "completed",
+      "gate": "C4",
+      "review_discovery_status": "eligible_work",
+      "review_task_id": "c4-work:review",
+      "reviewer_supplied_work_id": false,
+      "status": "PASS",
+      "structured_reply": {
+        "acceptance_status": "met",
+        "next_action": "Reviewer verifies the pinned commit and test result.",
+        "references": [
+          {
+            "commit": "45c8739",
+            "files": [
+              "artifact.md"
+            ],
+            "tests": [
+              "black-box: pass"
+            ]
+          }
+        ],
+        "result_summary": "Created the reviewed artifact.",
+        "work_id": "c4-work"
+      },
+      "work_id": "c4-work"
+    }
+  ],
+  "surface": [
+    "createTask",
+    "getTask",
+    "updateTaskStatus",
+    "reply"
+  ]
+}
