@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-24 22:09:01
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-24 22:22:02
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -33,4 +33,5 @@
 - Q: 这次 observed-failure 的最小修复是什么？ → 增加 Human 显式 reopen seam：在明确 operator、scope、Work Item 和 reason 后，将陈旧 claimed 或已阻塞 Work Item 安全回到 available，停用旧 execution claim 并记录 human_reopened 事件；同时明确 Agent 必须在 Work Item 所属项目 scope 中运行 activation，不能把默认 zagenticopn/experience-version 的 no_eligible_work 当作跨项目任务接续。 (不提供自动恢复、claim TTL、后台轮询、跨 scope 自动搜索或重试；修复服务当前已复现的陈旧 claim 与错误 scope 接线，三次价值实验继续暂停。)
 - Q: 修复完成的验收证据是什么？ → 黑盒测试证明 Human reopen 不会伪造结果、清理 active claim、保留 operator/reason 事件且不能重开 completed/awaiting-review；真实 DB 对当前 work-zj-research-report-improvement-20260820 只在修复后执行一次显式 reopen，再由正确项目 scope 的真实 Agent 重新竞争并继续。 (在真实 Agent 重新接续前，不把 C2 或价值实验记为通过；旧 C4 scope 的 no_eligible_work 继续作为无关历史探活记录。)
 - Q: 当前修复已完成到什么程度？ → 最小 Human reopen seam 已实现并通过 11/11 黑盒测试；真实陈旧 Work Item 已执行一次显式 reopen，revision=2、state=available、claimant 为空、旧 execution claim inactive，events sequence 28 记录 operator/reason/previous_claimant。 (真实 Agent 仍需在 Work Item 所属的 junjunfly/ZAgentic/zj-research-report scope 重新激活并直接接续执行；在此之前，三次价值实验保持暂停，不能把 C2 记为完整真实实验通过。)
+- Q: ZAgentic WorkBuddy activation routing 修复结果是什么？ → 根因是 ZAgentic/AGENTS.md 未指向 ZAgenticOPN activation seam，WorkBuddy 因此只输出仓库摘要；已在 commit f04f856 增加当前 owning scope、sibling entrypoint、无 Work Item id 和 claimed 后同 activation 执行规则。隔离 SQLite 项目级 smoke 已通过，事件为 publish→discover→claim_succeeded。 (真实 WorkBuddy UI/runtime 仍需在 ZAgentic 项目重放并核对 shared.sqlite3 新 activation 事件；若仍只输出摘要，继续记为 observed-failure。三次价值实验保持暂停。)
 <!-- ROADMAP_SECTION_END -->

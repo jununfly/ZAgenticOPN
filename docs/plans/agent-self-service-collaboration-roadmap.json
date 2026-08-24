@@ -882,6 +882,11 @@
           "q": "当前修复已完成到什么程度？",
           "answer": "最小 Human reopen seam 已实现并通过 11/11 黑盒测试；真实陈旧 Work Item 已执行一次显式 reopen，revision=2、state=available、claimant 为空、旧 execution claim inactive，events sequence 28 记录 operator/reason/previous_claimant。",
           "note": "真实 Agent 仍需在 Work Item 所属的 junjunfly/ZAgentic/zj-research-report scope 重新激活并直接接续执行；在此之前，三次价值实验保持暂停，不能把 C2 记为完整真实实验通过。"
+        },
+        {
+          "q": "ZAgentic WorkBuddy activation routing 修复结果是什么？",
+          "answer": "根因是 ZAgentic/AGENTS.md 未指向 ZAgenticOPN activation seam，WorkBuddy 因此只输出仓库摘要；已在 commit f04f856 增加当前 owning scope、sibling entrypoint、无 Work Item id 和 claimed 后同 activation 执行规则。隔离 SQLite 项目级 smoke 已通过，事件为 publish→discover→claim_succeeded。",
+          "note": "真实 WorkBuddy UI/runtime 仍需在 ZAgentic 项目重放并核对 shared.sqlite3 新 activation 事件；若仍只输出摘要，继续记为 observed-failure。三次价值实验保持暂停。"
         }
       ],
       "notes": ""
@@ -889,7 +894,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-24 22:09:01",
+    "updated": "2026-08-24 22:22:02",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
