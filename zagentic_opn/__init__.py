@@ -14,6 +14,7 @@ from .coordination import (
     NotFoundError,
     PublishRequest,
     PublishResultRequest,
+    ReopenRequest,
     ReviewRequest,
     ValidationError,
 )
@@ -34,6 +35,7 @@ __all__ = [
     "NotFoundError",
     "PublishRequest",
     "PublishResultRequest",
+    "ReopenRequest",
     "ReviewRequest",
     "ValidationError",
 ]

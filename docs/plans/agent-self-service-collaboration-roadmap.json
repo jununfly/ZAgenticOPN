@@ -661,7 +661,8 @@
       "parent": "1-2-1",
       "children": [
         "1-2-1-3-1",
-        "1-2-1-3-2"
+        "1-2-1-3-2",
+        "1-2-1-3-3"
       ],
       "decisions": [
         {
@@ -758,11 +759,137 @@
         }
       ],
       "notes": "真实 WorkBuddy routing 已完成 no_eligible_work discover、C1 discover→claim execution，并通过真实产物型 Work Item 完成 C4：R1 commit 023ead9 首审 request_changes（缺少本 work discover），R2 由 scripts/activate_agent.py 无 Work Item ID 产生 activation-ee2fbd368a8f 的 discover→claim_succeeded，追加 commit 89d6043，publish-result 携带真实 commit/files/tests；Codex 二次 claim-review 独立复跑 9/9 tests 后 accept，Work Item c4-workbuddy-result-artifact-20260824 已 completed。上一条 routing-only Work Item 仍按 creator 裁决 blocked。节点继续 in_progress：C2 competing real activation、三次真实价值实验及后续 C-route closeout 尚未完成。"
+    },
+    "1-2-1-3-3": {
+      "id": "1-2-1-3-3",
+      "label": "C2 真实竞争 claim 与三次独立价值实验",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1-3",
+      "children": [
+        "1-2-1-3-3-1",
+        "1-2-1-3-3-2",
+        "1-2-1-3-3-3",
+        "1-2-1-3-3-4",
+        "1-2-1-3-3-5"
+      ],
+      "decisions": [
+        {
+          "q": "本轮工作属于哪个生命周期分类？",
+          "answer": "stage-critical：C2 唯一 claim、无重复执行和三次独立真实实验都是 Experience Version 的阶段退出证据",
+          "note": "保留 WorkBuddy activation routing 的 observed-failure，不把 UI/runtime、自动发现、恢复或生产运维纳入本轮。"
+        },
+        {
+          "q": "C2 真实竞争 claim 如何验收？",
+          "answer": "发布一个同 scope、对 Codex 与 WorkBuddy profile 均 eligible 的真实 Work Item；两次不带 Work Item ID 的近同时 activation 争抢同一 frontier，必须得到一个 claim_succeeded、一个 claim_conflict、一个 claimant 且无重复执行；胜者只执行一次并提交真实 commit、changed files、tests，随后由另一 Agent 接续 review。",
+          "note": "竞争窗口使用同一 SQLite shared context；不得用独立 fixture、手工指定 Work Item 或以单元测试替代真实事件。"
+        },
+        {
+          "q": "三次价值实验如何避免把同一 fixture 当成重复证据？",
+          "answer": "建立三个独立 Work Item 与三份独立实验记录；每次都使用真实可交付任务、唯一 commit/changed files/tests 和独立事件窗口，按 Codex → WorkBuddy → Codex 的任务无关激活路径记录 Human 介入、claim 冲突、接续和结果 provenance。",
+          "note": "三次实验不是复制测试；任何硬门失败都阻断该轮并保留失败证据，Human 只处理权限、冲突、方向或无法继续的异常。"
+        },
+        {
+          "q": "首个真实实验的交付物是什么？",
+          "answer": "继续使用首个真实任务：维护并改进 zj-research-report 技术方案分析能力，同时在 ZAgenticOPN 中提交可审计的研究/验收文档、真实 Git artifact 与测试结果；后两次使用不同的真实技术文档维护任务并各自产生独立 artifact。",
+          "note": "不把 activation-routing 结果 markdown 的机械复制当作价值实验；每个 Work Item 必须说明实际文档/skill 变更和可复核收益。"
+        }
+      ],
+      "notes": ""
+    },
+    "1-2-1-3-3-1": {
+      "id": "1-2-1-3-3-1",
+      "label": "C2 同一真实 Work Item 的近同时竞争 claim",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1-3-3",
+      "children": [
+        "1-2-1-3-3-1-1"
+      ],
+      "decisions": [
+        {
+          "q": "C2 竞争使用哪个真实 Work Item？",
+          "answer": "复用 shared store 中已经发布且仍为 available 的 work-zj-research-report-improvement-20260820，scope 为 junjunfly/ZAgentic/zj-research-report；它的 acceptance 正是首个 zj-research-report skill/document maintenance 任务，Codex 与 WorkBuddy profile 都可 eligible。",
+          "note": "不新造占位 fixture；两次 activation 命令均不携带 Work Item ID，只通过同一 shared SQLite 的 discover frontier 争抢该项。"
+        },
+        {
+          "q": "C2 第一轮真实竞争 claim 观察到什么？",
+          "answer": "通过竞争硬门的现阶段条件：同一 Work Item 在 activation-c2-workbuddy-20260824 与 activation-c2-codex-20260824 下均 discover；WorkBuddy 产生唯一 claim_succeeded，Codex 产生唯一 claim_conflict，active execution claim 仅 workbuddy-01，未产生重复执行事件。",
+          "note": "Work Item 仍处于 claimed，真实执行、result publication 和 Codex review 尚未完成；C2 子节点保持 in_progress，不能提前记为完整实验通过。"
+        }
+      ],
+      "notes": ""
+    },
+    "1-2-1-3-3-2": {
+      "id": "1-2-1-3-3-2",
+      "label": "价值实验一：zj-research-report 技术方案分析维护",
+      "status": "pending",
+      "mode": "exploit",
+      "parent": "1-2-1-3-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1-3-3-3": {
+      "id": "1-2-1-3-3-3",
+      "label": "价值实验二：独立技术文档维护任务",
+      "status": "pending",
+      "mode": "exploit",
+      "parent": "1-2-1-3-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1-3-3-4": {
+      "id": "1-2-1-3-3-4",
+      "label": "价值实验三：独立技术文档维护任务",
+      "status": "pending",
+      "mode": "exploit",
+      "parent": "1-2-1-3-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1-3-3-5": {
+      "id": "1-2-1-3-3-5",
+      "label": "三次实验 scorecard 与 Experience Version 退出判断",
+      "status": "pending",
+      "mode": "exploit",
+      "parent": "1-2-1-3-3",
+      "children": [],
+      "decisions": [],
+      "notes": ""
+    },
+    "1-2-1-3-3-1-1": {
+      "id": "1-2-1-3-3-1-1",
+      "label": "Human 显式 reopen 与真实 Agent scope 接续修复",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1-3-3-1",
+      "children": [],
+      "decisions": [
+        {
+          "q": "这次 observed-failure 的最小修复是什么？",
+          "answer": "增加 Human 显式 reopen seam：在明确 operator、scope、Work Item 和 reason 后，将陈旧 claimed 或已阻塞 Work Item 安全回到 available，停用旧 execution claim 并记录 human_reopened 事件；同时明确 Agent 必须在 Work Item 所属项目 scope 中运行 activation，不能把默认 zagenticopn/experience-version 的 no_eligible_work 当作跨项目任务接续。",
+          "note": "不提供自动恢复、claim TTL、后台轮询、跨 scope 自动搜索或重试；修复服务当前已复现的陈旧 claim 与错误 scope 接线，三次价值实验继续暂停。"
+        },
+        {
+          "q": "修复完成的验收证据是什么？",
+          "answer": "黑盒测试证明 Human reopen 不会伪造结果、清理 active claim、保留 operator/reason 事件且不能重开 completed/awaiting-review；真实 DB 对当前 work-zj-research-report-improvement-20260820 只在修复后执行一次显式 reopen，再由正确项目 scope 的真实 Agent 重新竞争并继续。",
+          "note": "在真实 Agent 重新接续前，不把 C2 或价值实验记为通过；旧 C4 scope 的 no_eligible_work 继续作为无关历史探活记录。"
+        },
+        {
+          "q": "当前修复已完成到什么程度？",
+          "answer": "最小 Human reopen seam 已实现并通过 11/11 黑盒测试；真实陈旧 Work Item 已执行一次显式 reopen，revision=2、state=available、claimant 为空、旧 execution claim inactive，events sequence 28 记录 operator/reason/previous_claimant。",
+          "note": "真实 Agent 仍需在 Work Item 所属的 junjunfly/ZAgentic/zj-research-report scope 重新激活并直接接续执行；在此之前，三次价值实验保持暂停，不能把 C2 记为完整真实实验通过。"
+        }
+      ],
+      "notes": ""
     }
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-24 21:40:37",
+    "updated": "2026-08-24 22:09:01",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }

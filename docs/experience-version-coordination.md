@@ -4,6 +4,28 @@ The first implementation is a small Python module with a SQLite shared context. 
 
 The store is intentionally local and durable enough for the same-device smoke test. It is not a production memory service, scheduler, lease manager, notification system, or recovery system.
 
+## Human exception: reopen a stale claim
+
+If an Agent runtime activates the wrong project scope or disappears after a
+claim, do not fabricate a result and do not edit SQLite directly. Human may
+explicitly reopen only a `claimed` or `blocked` Work Item:
+
+```sh
+python -m zagentic_opn --db "$DB" reopen \
+  --scope "$SCOPE" \
+  --work-id "$WORK_ID" \
+  --operator-id human-zj \
+  --reason "The owning Agent runtime did not receive the handoff in this project scope."
+```
+
+The operation clears active claims, returns the item to `available`, and emits
+`human_reopened` with the operator, reason, previous state, and previous
+claimant. It is an explicit exception path: there is no claim TTL, automatic
+retry, background recovery, or cross-scope search. After reopening, the next
+Agent must activate from the Work Item's owning project scope; a
+`no_eligible_work` result from another scope is not evidence that this item is
+complete or absent.
+
 ## Agent activation flow
 
 Each activation receives a stable `agent_id`, `device_id`, an experiment `scope`, and a fresh `activation_id`. The human-facing prompt remains only “检查 shared context”. The agent performs `discover`; if an eligible item exists, it performs one `claim` and then executes the work outside the coordination module.

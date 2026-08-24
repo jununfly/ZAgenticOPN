@@ -17,6 +17,7 @@ from .coordination import (
     DiscoverRequest,
     PublishRequest,
     PublishResultRequest,
+    ReopenRequest,
     ReviewRequest,
 )
 
@@ -34,6 +35,7 @@ def main(argv: list[str] | None = None) -> int:
     _submit_parser(subparsers)
     _review_parser(subparsers)
     _block_parser(subparsers)
+    _reopen_parser(subparsers)
     scorecard = subparsers.add_parser("scorecard")
     scorecard.add_argument("--scope", required=True)
     scorecard.add_argument("--out")
@@ -125,6 +127,14 @@ def _block_parser(subparsers: Any) -> None:
     parser.add_argument("--next-action", required=True)
 
 
+def _reopen_parser(subparsers: Any) -> None:
+    parser = subparsers.add_parser("reopen")
+    parser.add_argument("--scope", required=True)
+    parser.add_argument("--work-id", required=True)
+    parser.add_argument("--operator-id", required=True)
+    parser.add_argument("--reason", required=True)
+
+
 def _agent_args(parser: Any, *, review: bool = False) -> None:
     parser.add_argument("--agent-id", required=True)
     parser.add_argument("--device-id", required=True)
@@ -153,6 +163,8 @@ def _dispatch(protocol: CoordinationProtocol, args: argparse.Namespace) -> dict[
         return protocol.review(ReviewRequest(args.scope, args.work_id, _agent(args), args.decision, args.note))
     if args.command == "block":
         return protocol.block(BlockRequest(args.scope, args.work_id, _agent(args), args.category, args.observed_facts, args.attempted_actions, args.required_decision, args.next_action))
+    if args.command == "reopen":
+        return protocol.reopen(ReopenRequest(args.scope, args.work_id, args.operator_id, args.reason))
     if args.command == "scorecard":
         return protocol.scorecard(args.scope)
     raise ValueError(f"unknown command: {args.command}")

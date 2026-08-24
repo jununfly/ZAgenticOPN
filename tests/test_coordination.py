@@ -17,7 +17,9 @@ from zagentic_opn import (
     EligibilityError,
     PublishRequest,
     PublishResultRequest,
+    ReopenRequest,
     ReviewRequest,
+    ValidationError,
 )
 
 
@@ -192,6 +194,77 @@ class CoordinationBlackBoxTests(unittest.TestCase):
         self.protocol.claim(ClaimRequest(self.scope, first, self.workbuddy, activation))
         with self.assertRaises(CoordinationError):
             self.protocol.claim(ClaimRequest(self.scope, second, self.workbuddy, activation))
+
+    def test_human_reopen_releases_stale_claim_without_fabricating_result(self) -> None:
+        work_id = self.publish_work()
+        self.protocol.claim(
+            ClaimRequest(self.scope, work_id, self.workbuddy, "activation-stale-claim")
+        )
+
+        reopened = self.protocol.reopen(
+            ReopenRequest(
+                self.scope,
+                work_id,
+                "human-zj",
+                "WorkBuddy runtime activated the wrong project scope and did not receive the claimed handoff.",
+            )
+        )
+
+        self.assertEqual(reopened["state"], "available")
+        self.assertIsNone(reopened["claimant"])
+        self.assertIsNone(reopened["result_summary"])
+        self.assertEqual(reopened["references"], [])
+        with self.assertRaises(EligibilityError):
+            self.protocol.publish_result(
+                PublishResultRequest(
+                    self.scope,
+                    work_id,
+                    self.workbuddy,
+                    "A stale claimant must not publish after Human reopen.",
+                    "No next action.",
+                    "not_met",
+                    ({"commit": "never", "files": [], "tests": []},),
+                )
+            )
+
+        reclaimed = self.protocol.claim(
+            ClaimRequest(self.scope, work_id, self.codex, "activation-reopened-claim")
+        )
+        self.assertEqual(reclaimed["claim"]["agent_id"], "codex-01")
+
+    def test_human_reopen_rejects_review_frontier_and_completed_work(self) -> None:
+        work_id = self.publish_work()
+        self.protocol.claim(
+            ClaimRequest(self.scope, work_id, self.workbuddy, "activation-review-seed")
+        )
+        self.protocol.publish_result(
+            PublishResultRequest(
+                self.scope,
+                work_id,
+                self.workbuddy,
+                "Result is ready for review.",
+                "Codex verifies the referenced commit.",
+                "met",
+                ({"commit": "abc1234", "files": ["SKILL.md"], "tests": ["pass"]},),
+            )
+        )
+        self.protocol.submit(self.scope, work_id, self.workbuddy)
+
+        with self.assertRaises(ValidationError):
+            self.protocol.reopen(
+                ReopenRequest(self.scope, work_id, "human-zj", "Do not bypass reviewer frontier.")
+            )
+
+        self.protocol.claim_review(
+            ClaimReviewRequest(self.scope, work_id, self.codex, "activation-review-claim")
+        )
+        self.protocol.review(
+            ReviewRequest(self.scope, work_id, self.codex, "accept", "Verified.")
+        )
+        with self.assertRaises(ValidationError):
+            self.protocol.reopen(
+                ReopenRequest(self.scope, work_id, "human-zj", "Completed work stays immutable.")
+            )
 
 
 if __name__ == "__main__":

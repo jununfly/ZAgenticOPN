@@ -120,6 +120,16 @@ class BlockRequest:
 
 
 @dataclass(frozen=True)
+class ReopenRequest:
+    """Human exception request for releasing a stale or blocked Work Item."""
+
+    scope: str
+    work_id: str
+    operator_id: str
+    reason: str
+
+
+@dataclass(frozen=True)
 class ClaimReviewRequest:
     """Request to atomically claim an awaiting-agent-review Work Item."""
 
@@ -330,6 +340,60 @@ class CoordinationProtocol:
                 (request.work_id,),
             )
             self._event(conn, "block", request.scope, request.work_id, request.agent, None, blocker)
+            return self.inspect(request.scope, request.work_id, conn=conn)
+
+    def reopen(self, request: ReopenRequest) -> dict[str, Any]:
+        """Explicitly return a stale or blocked Work Item to the frontier.
+
+        This is a Human exception path, not automatic recovery. It clears
+        execution/review ownership and records the operator's reason while
+        preserving the Work Item and its event history.
+        """
+
+        for value, name in (
+            (request.scope, "scope"),
+            (request.work_id, "work_id"),
+            (request.operator_id, "operator_id"),
+            (request.reason, "reason"),
+        ):
+            _require_text(value, name)
+        with self._connection() as conn:
+            row = self._get_row(conn, request.scope, request.work_id)
+            if row["state"] not in {"claimed", "blocked"}:
+                raise ValidationError(
+                    f"only claimed or blocked work items can be reopened: {row['state']}"
+                )
+            previous_state = row["state"]
+            previous_claimant = row["claimant"]
+            conn.execute(
+                """
+                UPDATE work_items
+                SET state = 'available', claimant = NULL, result_summary = NULL,
+                    next_action = NULL, acceptance_status = NULL,
+                    references_json = NULL, blocker_json = NULL,
+                    updated_at = ?, revision = revision + 1
+                WHERE id = ?
+                """,
+                (_now(), request.work_id),
+            )
+            conn.execute(
+                "UPDATE claims SET active = 0 WHERE work_id = ? AND active = 1",
+                (request.work_id,),
+            )
+            self._event(
+                conn,
+                "human_reopened",
+                request.scope,
+                request.work_id,
+                None,
+                None,
+                {
+                    "operator_id": request.operator_id,
+                    "reason": request.reason,
+                    "previous_state": previous_state,
+                    "previous_claimant": previous_claimant,
+                },
+            )
             return self.inspect(request.scope, request.work_id, conn=conn)
 
     def claim_review(self, request: ClaimReviewRequest) -> dict[str, Any]:
@@ -704,6 +768,7 @@ __all__ = [
     "NotFoundError",
     "PublishRequest",
     "PublishResultRequest",
+    "ReopenRequest",
     "ReviewRequest",
     "ValidationError",
 ]
