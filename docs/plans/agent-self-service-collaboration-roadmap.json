@@ -866,7 +866,9 @@
       "status": "in_progress",
       "mode": "exploit",
       "parent": "1-2-1-3-3-1",
-      "children": [],
+      "children": [
+        "1-2-1-3-3-1-1-1"
+      ],
       "decisions": [
         {
           "q": "这次 observed-failure 的最小修复是什么？",
@@ -887,14 +889,34 @@
           "q": "ZAgentic WorkBuddy activation routing 修复结果是什么？",
           "answer": "根因是 ZAgentic/AGENTS.md 未指向 ZAgenticOPN activation seam，WorkBuddy 因此只输出仓库摘要；已在 commit f04f856 增加当前 owning scope、sibling entrypoint、无 Work Item id 和 claimed 后同 activation 执行规则。隔离 SQLite 项目级 smoke 已通过，事件为 publish→discover→claim_succeeded。",
           "note": "真实 WorkBuddy UI/runtime 仍需在 ZAgentic 项目重放并核对 shared.sqlite3 新 activation 事件；若仍只输出摘要，继续记为 observed-failure。三次价值实验保持暂停。"
+        },
+        {
+          "q": "ZAgentic AGENTS.md activation 指针由谁维护？",
+          "answer": "由 ZAgentic 目标仓库 owner/Human 维护；ZAgenticOPN 不直接修改 sibling 仓库，只在本项目 roadmap 登记外部 TODO、保留 observed-failure 证据和验收条件。",
+          "note": "此前由 Codex 直接提交的 ZAgentic commit f04f856 属于越界修复，将用 ZAgentic 自有 scripts/zj-git revert；后续只等待目标仓库 owner 处理，三次价值实验继续暂停。"
+        },
+        {
+          "q": "此前的 ZAgentic activation pointer 修复是否保留？",
+          "answer": "不保留：ZAgentic commit f04f856 已由目标仓库 owner 侧 revert commit 6d304bc 撤回；ZAgenticOPN 只保留 Human reopen seam、observed-failure 证据和外部维护 TODO。",
+          "note": "隔离 scope smoke 仅说明目标仓库若由其 owner 增加指针后可验证的验收形状，不是本项目已完成的真实 WorkBuddy UI/runtime 修复。"
         }
       ],
+      "notes": ""
+    },
+    "1-2-1-3-3-1-1-1": {
+      "id": "1-2-1-3-3-1-1-1",
+      "label": "ZAgentic WorkBuddy activation 指针外部维护 TODO",
+      "status": "pending",
+      "mode": "explore",
+      "parent": "1-2-1-3-3-1-1",
+      "children": [],
+      "decisions": [],
       "notes": ""
     }
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-24 22:22:02",
+    "updated": "2026-08-24 22:24:40",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
