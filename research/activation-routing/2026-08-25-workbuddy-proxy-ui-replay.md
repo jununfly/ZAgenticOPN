@@ -59,3 +59,35 @@ R1 时我也是用 CLI 路径提交,Codex 反驳了;R2 严格走 `scripts/activa
 - 通过 `python -m zagentic_opn ... publish-result` 提交 result,`python -m zagentic_opn ... submit` 进入 `awaiting_agent_review`。
 - `push` 由 zj 显式触发,我不擅自 push。
 - **Codex 评审时建议比对**:本 work `claim_succeeded` 事件(activation-workbuddy-4)是否有前导 `discover` 事件?如果没有,等同 R1 模式,建议 `request_changes` 让 workbuddy-01 重做(走 `scripts/activate_agent.py` 无 id 路径)或 `escalate` 给 zj 决策是否允许"workbuddy-01 IDE 会话无 UI 工具"的现实约束。
+
+## R2 — Codex request_changes 重做(2026-08-26 15:00)
+
+### Codex R1 反驳全文(seq 35, decision=request_changes, 06:59:25 UTC)
+
+> R1: request_changes. Independent verification confirms e51bafb and 24/24 tests, but the formal UI submission was **x查 shared context rather than the exact alias**; events contain claim_succeeded activation-workbuddy-4 without a discover event, so no same-activation discover→claim→handoff proof exists. **R2 must use the real UI with exact 检查 shared context and produce the required evidence.** Review return now releases prior execution ownership so the retry can claim cleanly.
+
+Codex 给两条反驳,**都对**:
+1. **触发短语不严格**:R1 时 zj 14:53 实际发的是「x查 shared context」(我宽松地当成"检查"的口头化变体),但 acceptance 第 2 条隐含 "**fixed phrase** 进入 ZAgenticOPN Proxy"——「x查」首字错为 `x` 即**不**是「检查」的 exact alias。
+2. **同 activation discover→claim→handoff 证据缺失**:R1 claim 走 `python -m zagentic_opn ... claim --work-id` 显式路径,`activation_id=activation-workbuddy-4` 的 `claim_succeeded` 没有前导 `discover` 事件——R1/R2 教训我**重蹈 R1 模式**。
+
+### R2 路径(2026-08-26 15:00:57)
+
+- zj 15:00:57 再次触发「**检查** shared context」(本轮首字 `查` 而非 `x`,**exact alias 修复**)。
+- events 表 seq 36+37 显示 workbuddy-01 在新 activation `activation-1b652891ee9a` 下产生 `discover`(eligible_count=1, filter_reasons: state_blocked=1, state_completed=1)→ `claim_succeeded`(**同 activation 一气呵成**,revision=6)。这条 activation 的 discover 与 claim_succeeded 严格满足 acceptance 第 2 条"**同一 activation 的 discover→claim→handoff 证据**"——discover 与 claim 在同一 `activation-1b652891ee9a` 下,不再是 R1 的 `claim --work-id` 跳过 discover 模式。
+- work 状态:`request_changes` 把 state 拨回 `available` + claimant 清空(seq 35 副作用)→ 新一轮 activation-1b652891ee9a `discover+claim_succeeded` 重新拿回 work → 当前 `state=claimed`, `revision=6`, `claimant=workbuddy-01`。
+- 本次 R2 重做的 workbuddy-01 execution 任务:在已新增的结果文件上 **append-only 加 R2 段**(保留 R1 commit `e51bafb` 字节不动,符合 R1→R2 append-only 审计模式),新 commit 携带新 SHA,在 `publish_result` 报文中同时引用 R1 commit(`e51bafb`)+ R2 commit,acceptance_status 标 `met`——因为 R2 路径同时满足 acceptance 4 条。
+
+### R2 测试证据(commit 前重跑)
+
+`python -m unittest discover -s tests -v` → **25 passed / 0 failed / 0 errors / 0.668s**(比 R1 时 24 多 1 个,新测试 24→25)。
+
+### R2 commit 与 publish_result(将由后续 commit 落地,本节为 references 字段源)
+
+- **commit(R2)**:由 git 在 append-only 写入本 R2 段后 commit 落地,SHA 不在本文件硬编码(避免 commit 自指循环,R2 模式沿用 R1 commit 经验)。
+- **files**:`research/activation-routing/2026-08-25-workbuddy-proxy-ui-replay.md`(本文件,append-only,新增 N 行,字节级 R1 commit `e51bafb` 内容冻结)。
+- **tests**:`python -m unittest discover -s tests -v` → 25 passed / 0 failed / 0 errors / 0.668s。
+- **scope / work_id**:`zagenticopn/experience-version` / `workbuddy-ui-proxy-replay-20260825`。
+- **claimant / creator**:`workbuddy-01` / `codex-01`。
+- **R2 claim activation_id**:`activation-1b652891ee9a` (kind=execution,**有前导 discover 事件,与 Codex R1 反驳要求一致**)。
+- **work state**:`claimed` (rev 6, 同 activation `discover + claim_succeeded` 完整 trace) → publish_result → submit → awaiting_agent_review。
+- **未触碰**:`AGENTS.md`(acceptance 明令禁止)、`zagentic_opn/`、`docs/plans/agent-self-service-collaboration-roadmap.{json,md}`、`docs/prds/`、`docs/experience-version-coordination.md`、其它已 staged/unstaged 文件、zj 的 untracked `2026-08-25-workbuddy-ui-submit-failure.md`(本 commit 不纳入)。
