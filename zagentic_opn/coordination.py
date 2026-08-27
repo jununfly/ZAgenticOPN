@@ -13,7 +13,7 @@ import threading
 import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Literal
 
@@ -422,14 +422,34 @@ class CoordinationProtocol:
             else:
                 new_state = "blocked"
                 event_type = "review_escalated"
-            conn.execute(
-                "UPDATE work_items SET state = ?, claimant = CASE WHEN ? = 'available' THEN NULL ELSE claimant END, updated_at = ?, revision = revision + 1 WHERE id = ?",
-                (new_state, new_state, _now(), request.work_id),
-            )
+            if new_state == "available":
+                conn.execute(
+                    """
+                    UPDATE work_items
+                    SET state = 'available', claimant = NULL,
+                        result_summary = NULL, next_action = NULL,
+                        acceptance_status = NULL, references_json = NULL,
+                        blocker_json = NULL, updated_at = ?, revision = revision + 1
+                    WHERE id = ?
+                    """,
+                    (_now(), request.work_id),
+                )
+            else:
+                conn.execute(
+                    "UPDATE work_items SET state = ?, updated_at = ?, revision = revision + 1 WHERE id = ?",
+                    (new_state, _now(), request.work_id),
+                )
             conn.execute(
                 "UPDATE claims SET active = 0 WHERE work_id = ? AND kind = 'review' AND active = 1",
                 (request.work_id,),
             )
+            if new_state == "available":
+                # A returned result is a new execution attempt, so no prior
+                # execution claimant may keep the unique active claim.
+                conn.execute(
+                    "UPDATE claims SET active = 0 WHERE work_id = ? AND kind = 'execution' AND active = 1",
+                    (request.work_id,),
+                )
             self._event(
                 conn,
                 event_type,
@@ -448,6 +468,52 @@ class CoordinationProtocol:
             return _work_row(self._get_row(conn, scope, work_id))
         with self._connection() as own_conn:
             return _work_row(self._get_row(own_conn, scope, work_id))
+
+    def record_activation_rejected(
+        self,
+        scope: str,
+        activation_id: str,
+        reason: str,
+        agent: AgentProfile | None = None,
+        payload: dict[str, Any] | None = None,
+    ) -> None:
+        """Record a host/contract rejection without creating or claiming work."""
+
+        _require_text(scope, "scope")
+        _require_text(activation_id, "activation_id")
+        _require_text(reason, "reason")
+        event_payload = dict(payload or {})
+        event_payload["reason"] = reason
+        with self._connection() as conn:
+            self._event(conn, "activation_rejected", scope, None, agent, activation_id, event_payload)
+
+    def record_handoff_delivery_failed(
+        self,
+        scope: str,
+        work_id: str,
+        activation_id: str,
+        agent: AgentProfile,
+        reason: str,
+    ) -> None:
+        """Record a post-claim host delivery failure as an observable event."""
+
+        for value, name in (
+            (scope, "scope"),
+            (work_id, "work_id"),
+            (activation_id, "activation_id"),
+            (reason, "reason"),
+        ):
+            _require_text(value, name)
+        with self._connection() as conn:
+            self._event(
+                conn,
+                "handoff_delivery_failed",
+                scope,
+                work_id,
+                agent,
+                activation_id,
+                {"reason": reason},
+            )
 
     def scorecard(self, scope: str) -> str:
         """Render an auditable Markdown health scorecard for one scope."""
@@ -753,7 +819,7 @@ def _json(value: Any) -> str:
 
 
 def _now() -> str:
-    return datetime.now(UTC).isoformat(timespec="seconds")
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
 __all__ = [

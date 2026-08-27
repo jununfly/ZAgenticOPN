@@ -2,6 +2,18 @@
 
 from .activation import ActivationAdapter, ActivationRequest
 from .agentrq_adapter import AgentRQAdapter, AgentRQTransport
+from .activation_contract import (
+    ACTIVATION_SCHEMA_VERSION,
+    INTENT_CHECK_SHARED_CONTEXT,
+    PRE_MODEL_HANDOFF_INJECTION,
+    RECEIPT_SCHEMA_VERSION,
+    SHARED_CONTEXT_ALIAS,
+    ContractError,
+    handoff_context,
+    parse_activation_call,
+    resolve_intent,
+)
+from .proxy import AgentIntegrationProxy, ModelRuntime, ProxyRequest, SHARED_CONTEXT_PHRASE
 from .coordination import (
     AgentProfile,
     BlockRequest,
@@ -22,14 +34,17 @@ from .coordination import (
 __all__ = [
     "ActivationAdapter",
     "ActivationRequest",
+    "ACTIVATION_SCHEMA_VERSION",
     "AgentProfile",
     "AgentRQAdapter",
     "AgentRQTransport",
+    "AgentIntegrationProxy",
     "BlockRequest",
     "ClaimRequest",
     "ClaimReviewRequest",
     "CoordinationError",
     "CoordinationProtocol",
+    "ContractError",
     "DiscoverRequest",
     "EligibilityError",
     "NotFoundError",
@@ -37,5 +52,15 @@ __all__ = [
     "PublishResultRequest",
     "ReopenRequest",
     "ReviewRequest",
+    "INTENT_CHECK_SHARED_CONTEXT",
+    "ModelRuntime",
+    "PRE_MODEL_HANDOFF_INJECTION",
+    "ProxyRequest",
+    "RECEIPT_SCHEMA_VERSION",
+    "SHARED_CONTEXT_ALIAS",
+    "SHARED_CONTEXT_PHRASE",
     "ValidationError",
+    "handoff_context",
+    "parse_activation_call",
+    "resolve_intent",
 ]

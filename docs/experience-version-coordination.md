@@ -1,6 +1,15 @@
 # Experience Version coordination seam
 
-The first implementation is a small Python module with a SQLite shared context. Agents use the public `CoordinationProtocol` interface directly in-process or through `python -m zagentic_opn`, while SQLite, event projection, and scorecard formatting remain implementation details.
+The first implementation is a small Python module with a SQLite shared context. Agents use the public `CoordinationProtocol` interface directly in-process or through the canonical `python -m zagentic_opn.activation_runner` JSON-Call, while SQLite, event projection, and scorecard formatting remain implementation details.
+
+The task-agnostic activation alias is resolved by the ZAgenticOPN-owned
+`zj-opn-activation` Skill/host adapter. The runner accepts only the versioned
+intent `zagenticopn.activation.check_shared_context.v1`; it performs one
+discover and at most one claim, then returns one structured receipt. Runtime
+configuration is host-level and is reloaded for every call from
+`zagenticopn/runtime.json` under the system user config directory. See
+`skills/zj-opn-activation/references/activation-state-machine.md` for the
+activation-only maintenance diagram.
 
 The store is intentionally local and durable enough for the same-device smoke test. It is not a production memory service, scheduler, lease manager, notification system, or recovery system.
 
@@ -30,11 +39,19 @@ complete or absent.
 
 Each activation receives a stable `agent_id`, `device_id`, an experiment `scope`, and a fresh `activation_id`. The human-facing prompt remains only “检查 shared context”. The agent performs `discover`; if an eligible item exists, it performs one `claim` and then executes the work outside the coordination module.
 
+The host owns the scope handoff. A WorkBuddy adapter may use an explicit
+`ZAGENTICOPN_SCOPE`, or match the event workspace `cwd` against host-level
+`scope_bindings` in `zagenticopn/runtime.json`; the most-specific binding wins.
+If neither is available, the adapter returns `scope_unbound` and does not call
+the runner. The runner never derives scope from cwd, Git remotes, project
+files, or Work Items, and it never searches another scope.
+
 The project-local activation entrypoint makes that route executable from an
 external Agent runtime:
 
 ```sh
 python scripts/activate_agent.py \
+  --scope jununfly/ZAgentic/zj-research-report \
   --agent-id workbuddy-01 \
   --device-id device-a \
   --capabilities technical-writing \
@@ -45,6 +62,15 @@ It does not accept a Work Item id. It performs one discovery and claims at
 most the first eligible execution or review item, returning a structured JSON
 handoff. The activation id is generated for the session unless supplied by
 the runtime environment.
+
+The canonical host contract is instead a single JSON object on stdin to
+`python -m zagentic_opn.activation_runner`. It requires `schema_version`,
+`intent_id`, `activation_id`, `scope`, `agent_profile`, and the controlled
+`host_capabilities` list. The request never carries a local database path.
+The runner returns `claimed`, `no_eligible_work`, `claim_conflict`,
+`unsupported_host`, `invalid_contract`, or `invalid_runtime_config` as a
+structured receipt; a host handoff failure is reported as
+`handoff_delivery_failed` and recorded when the store is available.
 
 ```sh
 DB=.zagenticopn/shared.sqlite3
@@ -63,7 +89,7 @@ python -m zagentic_opn --db "$DB" discover \
   --activation-id activation-workbuddy-1
 ```
 
-The result reference must include a commit, changed files, and test outcomes. A reviewer then discovers the `awaiting_agent_review` item, claims review, verifies the Git reference, and accepts or returns the result. The store never receives the conversation or a code copy.
+The result reference must include a commit, changed files, and test outcomes. A reviewer then discovers the `awaiting_agent_review` item, claims review, verifies the Git reference, and accepts or returns the result. A `request_changes` decision returns the item to `available`, clears the prior result fields, and releases both the review claim and the old execution claim so a later task-agnostic activation can retry cleanly; the review event retains the reason. The store never receives the conversation or a code copy.
 
 ## AgentRQ adapter validation boundary
 

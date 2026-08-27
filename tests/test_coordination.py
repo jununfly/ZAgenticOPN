@@ -161,6 +161,53 @@ class CoordinationBlackBoxTests(unittest.TestCase):
         )
         self.assertEqual(completed["state"], "completed")
 
+    def test_review_request_changes_releases_execution_claim_for_retry(self) -> None:
+        work_id = self.publish_work()
+        self.protocol.claim(
+            ClaimRequest(self.scope, work_id, self.workbuddy, "activation-workbuddy-1")
+        )
+        self.protocol.publish_result(
+            PublishResultRequest(
+                self.scope,
+                work_id,
+                self.workbuddy,
+                "The first execution needs a corrected activation trace.",
+                "WorkBuddy reruns the task-agnostic activation.",
+                "partial",
+                ({"commit": "abc1234", "files": ["result.md"], "tests": ["pass"]},),
+            )
+        )
+        self.protocol.submit(self.scope, work_id, self.workbuddy)
+        self.protocol.claim_review(
+            ClaimReviewRequest(self.scope, work_id, self.codex, "activation-codex-review-1")
+        )
+
+        returned = self.protocol.review(
+            ReviewRequest(
+                self.scope,
+                work_id,
+                self.codex,
+                "request_changes",
+                "The activation trace needs a compliant discover before claim.",
+            )
+        )
+
+        self.assertEqual(returned["state"], "available")
+        self.assertIsNone(returned["claimant"])
+        self.assertIsNone(returned["result_summary"])
+        self.assertIsNone(returned["next_action"])
+        self.assertIsNone(returned["acceptance_status"])
+        self.assertEqual(returned["references"], [])
+
+        discovery = self.protocol.discover(
+            DiscoverRequest(self.scope, self.workbuddy, "activation-workbuddy-retry")
+        )
+        self.assertEqual(discovery["status"], "eligible_work")
+        reclaimed = self.protocol.claim(
+            ClaimRequest(self.scope, work_id, self.workbuddy, "activation-workbuddy-retry")
+        )
+        self.assertEqual(reclaimed["claim"]["agent_id"], "workbuddy-01")
+
     def test_no_eligible_work_is_observable_and_does_not_invent_work(self) -> None:
         work_id = self.publish_work()
         unqualified = AgentProfile("other", "device-a")

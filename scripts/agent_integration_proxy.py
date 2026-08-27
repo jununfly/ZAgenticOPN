@@ -1,4 +1,4 @@
-"""Run one task-agnostic Agent activation against the local shared context."""
+"""Expose the local Agent Integration Proxy as a one-request JSON host seam."""
 
 from __future__ import annotations
 
@@ -11,13 +11,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from zagentic_opn import ActivationAdapter, ActivationRequest, AgentProfile, CoordinationProtocol
+from zagentic_opn import (  # noqa: E402
+    AgentIntegrationProxy,
+    AgentProfile,
+    CoordinationProtocol,
+    ProxyRequest,
+)
 
 
 def main() -> int:
     configured_scope = os.getenv("ZAGENTICOPN_SCOPE")
     parser = argparse.ArgumentParser(
-        description="Discover and claim at most one eligible Work Item; do not provide a Work Item id."
+        description="Prepare one model request from a task-agnostic activation; do not provide a Work Item id."
     )
     parser.add_argument("--db", type=Path, default=Path(os.getenv("ZAGENTICOPN_DB", ".zagenticopn/shared.sqlite3")))
     parser.add_argument("--scope", default=configured_scope, required=not bool(configured_scope))
@@ -28,7 +33,8 @@ def main() -> int:
     parser.add_argument("--activation-id", default=os.getenv("ZAGENTICOPN_ACTIVATION_ID"))
     parser.add_argument("--can-review", action="store_true")
     args = parser.parse_args()
-    activation_id = args.activation_id or f"activation-{uuid.uuid4().hex[:12]}"
+
+    payload = json.load(sys.stdin)
     agent = AgentProfile(
         args.agent_id,
         args.device_id,
@@ -36,8 +42,13 @@ def main() -> int:
         _split(args.permissions),
         args.can_review,
     )
-    result = ActivationAdapter(CoordinationProtocol(args.db)).activate(
-        ActivationRequest(args.scope, agent, activation_id)
+    result = AgentIntegrationProxy(CoordinationProtocol(args.db)).prepare(
+        ProxyRequest(
+            message=payload["message"],
+            scope=args.scope,
+            agent=agent,
+            activation_id=payload.get("activation_id") or args.activation_id or f"activation-{uuid.uuid4().hex[:12]}",
+        )
     )
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 2 if result["status"] == "claim_conflict" else 0

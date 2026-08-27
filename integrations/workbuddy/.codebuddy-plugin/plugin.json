@@ -1,0 +1,7 @@
+{
+  "name": "zagenticopn-agent-integration",
+  "version": "0.1.0",
+  "description": "Global WorkBuddy hook for task-agnostic ZAgenticOPN activation.",
+  "license": "MIT",
+  "hooks": "./hooks/hooks.json"
+}
