@@ -48,6 +48,18 @@ Human 已确认：**找一份优秀的技术方案分析报告，改进 `zj-rese
 
 产物：一份可重复的 experiment brief。没有真实 acceptance 的任务不进入原型。
 
+#### Q1 范围修订（经 OPN Work Item 追认）
+
+原始 Q1 把范围冻结在 `skills/engineering/zj-research-report/`（旧 bucket + 旧名）与单一 `.codex` 运行副本。实际交付 commit `869fa1f` 触达 49 文件、形成 research-skills rearchitecture，路径演化为 `skills/research/zj-tech-research-report/`（canonical name）+ `skills/research/zj-research/`（compiler）+ 双运行副本（`~/.codex/skills/zj-research-report/`、`~/.workbuddy/skills/zj-research-report/`，后者为有意运行时别名）。
+
+本修订经 OPN Work Item `work-zj-research-report-improvement-20260820-canonical-scope` 的两次 reviewer `request_changes` 闭环追认：
+
+- 第一次 `request_changes`（revision 7）明确接受"补充正式 scope 决策"作为缩小范围的替代方案——即 OPN（reviewer = codex-01，代表 Human 验收）认可以 scope ADR 形式扩张范围；
+- 第二次 `request_changes`（revision 12）进一步要求 OPN 侧对 active alignment Spec 的正式变更证据，本小节即该证据：Q1 的"允许修改范围"与"最终 Git artifact 和测试命令"在此追认为 `skills/research/` 新布局，旧 `skills/engineering/zj-research-report/` 路径作废；
+- 形式化范围决策的落地在 ZAgentic `docs/zj-adr/0004-research-report-improvement-scope.md`，并随 ZAgentic 修复 commit（本地 `cf014ba` 及本轮修复 commit）进入评审。
+
+此修订不改变 Q1 的 Human 初始目标文本与 acceptance 实质，仅将"允许修改范围"对齐到实际已落地的 rearchitecture；OPN 产品代码与 Feature 1 runtime PoC 仍不授权修改。
+
 ### Q2：Human 在闭环中允许做什么？
 
 Human 已确认，直接采用：只提交一次初始目标，执行三次任务无关激活（Codex → WorkBuddy → Codex），并处理权限、冲突、方向和无法继续的异常。
