@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 01:07:17
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 01:39:06
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -26,4 +26,12 @@
     ├── [ ][X+] 1-4-1. 评估自动发现、通知与设备唤醒
     ├── [ ][X+] 1-4-2. 按真实失败建设生产可靠性
     └── [ ][X+] 1-4-3. 个人闭环有效后评估团队治理
+
+### 当前施工：1-2-1-3-3-2. 价值实验一：zj-research-report 技术方案分析维护
+
+C2 真实竞争 claim 已完成，Human 已恢复三次独立价值实验。下一步创建新的真实 Work Item，执行价值实验一：维护并改进 zj-research-report 技术方案分析能力；必须产出独立事件窗口、真实 Git artifact 与可复核收益证据。
+
+**决策：**
+- Q: 价值实验一的首次启动顺序如何处理？ → 将 preflight 的错误顺序标记为 observed-failure：Codex 在 Work Item 已预发布后 claim 了本应由 WorkBuddy 执行的任务；该尝试不计入价值实验窗口。阻断该 preflight Work Item 后，重新执行干净窗口：Codex 先检查空 frontier，随后发布初始 Work Item，WorkBuddy claim/执行，Codex review。 (preflight 未执行代码、未产生 Git artifact；干净窗口必须有 3 次任务无关 activation、独立 Work Item、独立事件窗口、真实 commit/changed files/tests 和可复核 review。)
+- Q: 价值实验一首个干净窗口的实际结果是什么？ → 窗口未通过：Codex 空 frontier → 发布新 Work Item → WorkBuddy 真实 UI discover/claim → Codex review 的事件链已形成，但 WorkBuddy 只提交了 partial 前置 audit，未完成 ZAgentic source skill 修改、运行 quick_validate.py / publish_report.py 或 healthy=true receipt；Codex 已 request_changes，Work Item 回到 available，节点保持 in_progress。 (分类为 observed-failure：WorkBuddy 将本地跨仓库 commit 误判为必须等待新的 Human commit+push 指令，尽管当前 Work Item acceptance 已明确授权实际 source update。保留 preflight commit 与完整事件证据；不追加第四次 activation，不把 partial 当作价值实验通过。后续需重新开启独立窗口。)
 <!-- ROADMAP_SECTION_END -->
