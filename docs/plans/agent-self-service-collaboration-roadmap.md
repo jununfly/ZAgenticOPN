@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 17:26:31
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 18:03:29
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -26,4 +26,11 @@
     ├── [ ][X+] 1-4-1. 评估自动发现、通知与设备唤醒
     ├── [ ][X+] 1-4-2. 按真实失败建设生产可靠性
     └── [ ][X+] 1-4-3. 个人闭环有效后评估团队治理
+
+### 当前施工：1-2-1-3-3-4. 价值实验三：独立技术文档维护任务
+
+已选择独立维护 technical-proposal-exemplar.md：补充 KEP-753 11 步决策链到 Problem discovery、Experience Version、Usefulness validation、Dogfood/release 四阶段的最小证据检查项；限定为文档及必要镜像同步，不改 SKILL.md、validator、Report IR 或产品运行时。下一步由 Codex 创建新的独立 Work Item，WorkBuddy 通过任务无关 activation 执行，随后 Codex review。
+
+**决策：**
+- Q: 价值实验三选择哪一个独立技术文档维护任务？ → 维护 ZAgentic 的 skills/research/zj-tech-research-report/references/technical-proposal-exemplar.md：将 KEP-753 的 11 步决策链与 Problem discovery、Experience Version、Usefulness validation、Dogfood/release 四阶段的最小证据整理为可执行检查项，同时保留 decision chain、候选语义和 ownership/risk 边界；不修改 SKILL.md、validator、Report IR 或产品运行时，不复用实验二 technical-decision-brief。 (stage-critical；验收以该 exemplar 的独立 Git artifact、必要 runtime 镜像同步、文档一致性检查和可复核 commit/files/tests 为准；使用独立 Work Item 与独立事件窗口。)
 <!-- ROADMAP_SECTION_END -->
