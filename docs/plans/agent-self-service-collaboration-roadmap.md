@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 18:03:29
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 18:11:25
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -29,8 +29,9 @@
 
 ### 当前施工：1-2-1-3-3-4. 价值实验三：独立技术文档维护任务
 
-已选择独立维护 technical-proposal-exemplar.md：补充 KEP-753 11 步决策链到 Problem discovery、Experience Version、Usefulness validation、Dogfood/release 四阶段的最小证据检查项；限定为文档及必要镜像同步，不改 SKILL.md、validator、Report IR 或产品运行时。下一步由 Codex 创建新的独立 Work Item，WorkBuddy 通过任务无关 activation 执行，随后 Codex review。
+实验三正式窗口尚未开始。初始 Work Item work-value-experiment-3-technical-proposal-exemplar-20260828 因 required_capabilities/required_permissions 配置错误，在 activation 64705fb2-ee63-4269-8402-2677de54cfa8 返回 no_eligible_work 后，已作为实验前 observed-failure 阻断。已重新发布正确配置的独立 Work Item work-value-experiment-3-technical-proposal-exemplar-20260828-rerun（capability=technical-writing；permission=zagentic-skill-write）；下一步由 WorkBuddy 通过任务无关 activation discover/claim，完成后由 Codex review。
 
 **决策：**
 - Q: 价值实验三选择哪一个独立技术文档维护任务？ → 维护 ZAgentic 的 skills/research/zj-tech-research-report/references/technical-proposal-exemplar.md：将 KEP-753 的 11 步决策链与 Problem discovery、Experience Version、Usefulness validation、Dogfood/release 四阶段的最小证据整理为可执行检查项，同时保留 decision chain、候选语义和 ownership/risk 边界；不修改 SKILL.md、validator、Report IR 或产品运行时，不复用实验二 technical-decision-brief。 (stage-critical；验收以该 exemplar 的独立 Git artifact、必要 runtime 镜像同步、文档一致性检查和可复核 commit/files/tests 为准；使用独立 Work Item 与独立事件窗口。)
+- Q: 实验三初始 Work Item 的 eligibility 配置如何处理？ → 将 work-value-experiment-3-technical-proposal-exemplar-20260828 标记为实验前配置失败并阻断，不计入正式实验窗口：发布时误把 git-write 放入 required_capabilities 且误把 git-write 放入 required_permissions，导致 WorkBuddy 的 technical-writing/zagentic-skill-write profile 正确返回 no_eligible_work。重新发布独立 Work Item，required_capabilities 仅为 technical-writing，required_permissions 为 zagentic-skill-write。 (保留 activation 64705fb2-ee63-4269-8402-2677de54cfa8 的 no_eligible receipt 与 discovery 事件作为配置失败证据；新窗口使用 rerun Work Item，仍须独立事件链、真实 Git artifact 和 Codex review。)
 <!-- ROADMAP_SECTION_END -->
