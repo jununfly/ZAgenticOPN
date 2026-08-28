@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Technical Research Report</title>
+<style>:root{color-scheme:light dark;font-family:Inter,ui-sans-serif,system-ui,sans-serif;line-height:1.6}body{max-width:1100px;margin:0 auto;padding:40px 28px}h1,h2,h3{line-height:1.25}table{border-collapse:collapse;width:100%;display:block;overflow:auto}th,td{border:1px solid #8886;padding:8px 10px;text-align:left}pre{overflow:auto;padding:16px;border-radius:8px;background:#8882}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}blockquote{border-left:4px solid #8888;margin-left:0;padding-left:16px;color:#666}a{color:#0969da}.mermaid{text-align:center;background:transparent}@media print{body{max-width:none;padding:0}a{color:inherit}}</style>
+</head>
+<body>
+<main>
+<h1>多设备多 Agent 协同开发的上下文与记忆层选型</h1>
+<h2>1. Executive summary</h2>
+<p>对于 Human-led federation 场景，TencentDB-Agent-Memory 最适合作为共享记忆与协作元数据底座；MyContext 更适合作为个人工作上下文层，MineContext 更适合作为本地优先的个人上下文伙伴。三者都不能单独替代 Git、canonical roadmap、Work Packet、任务 claim、预算协调或发布治理，因此推荐将 TencentDB-Agent-Memory 接入现有 ZHarness/ZAgentic control plane，而不是让记忆系统承担控制面职责。</p>
+<ul>
+<li>选择 TencentDB-Agent-Memory 作为共享 memory/metadata layer，并通过明确 adapter 接入 ZHarness/ZAgentic control plane；不要让它替代 Git、canonical roadmap、Work Packet、planned-cell claim、预算协调或发布门。本议题未发现未决信息缺口（ledger unknownCriteria 为空），信息完备。</li>
+<li>如果第一阶段优先解决个人设备上的私有上下文捕获和检索，选择 MyContext；MineContext 作为本地优先个人 context companion 评估，不作为多人协作底座。</li>
+</ul>
+<h2>2. Key findings</h2>
+<ul>
+<li>MineContext 将自己定位为主动的、上下文感知的个人 AI partner，并提供 context-source/捕获/处理结构。 <a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">[2]</a> <a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">[5]</a></li>
+<li>MineContext 的 README 明确包含 Local-First 与 Privacy Protection 入口。 <a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">[4]</a></li>
+<li>在本次固定 commit 的采集范围内，没有足够 canonical evidence 证明 MineContext 提供团队级 Agent/task ownership、跨设备 conflict protocol 或协作预算控制。 <a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">[1]</a> <a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">[3]</a></li>
+<li>MyContext 将自己定位为每个人的持久个人工作 context layer，并强调个人数据控制和 consequential action approval。 <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">[7]</a> <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">[9]</a></li>
+<li>MyContext 提供多来源增量 ingestion、本地 SQLite vault、知识图谱和持久 FastAPI retrieval 服务。 <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">[6]</a> <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/docs/design/persona-distill-forge.md">[10]</a> <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">[8]</a></li>
+<li>MyContext 的个人定位和本地数据迁移约束意味着它不能直接被视为团队共享控制面；跨设备协作仍需外部 owner、版本和任务系统。 <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">[7]</a> <a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">[8]</a></li>
+<li>TencentDB-Agent-Memory 的 MemoryCore 显式管理 users、teams、Agents、tasks、Skills、knowledge assets、memberships、ownership 和 access relationships。 <a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/README.md">[13]</a></li>
+<li>MemoryCore 作为独立 core 通过 HTTP Gateway、TypeScript/Python SDK 为 memory、knowledge metadata 和 asset metadata 提供统一访问。 <a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/README.md">[15]</a></li>
+<li>TencentDB-Agent-Memory 的版本迁移、Docker/Kubernetes runtime 和 memory/metadata API 仍不等于 Git merge、roadmap decision、Work Packet claim 或实验预算协调。 <a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/README.md">[14]</a> <a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/Dockerfile">[11]</a> <a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/Dockerfile">[12]</a></li>
+</ul>
+<h2>3. Analysis &amp; synthesis</h2>
+<h3>comparison-context</h3>
+<p>个人上下文能力：MineContext 偏主动捕获和本地优先；MyContext 偏多源工作知识图谱和个人检索；TencentDB-Agent-Memory 偏多层 memory 与资产元数据服务。</p>
+<h3>comparison-governance</h3>
+<p>针对 Human-led federation，TencentDB-Agent-Memory 的 teams/Agents/tasks/memberships/ownership 元数据最接近共享协作事实；但三者都需要外部 control plane 管理代码、决策、claim、预算和发布。</p>
+<h3>comparison-deployment</h3>
+<p>MyContext 与 MineContext 的本地/个人取向更适合单人隐私边界；TencentDB-Agent-Memory 的独立 Gateway、容器和 API 更适合集中式共享服务，但会增加部署、权限和迁移治理。</p>
+<h3>3.7 Recommendation</h3>
+<ul>
+<li>选择 TencentDB-Agent-Memory 作为共享 memory/metadata layer，并通过明确 adapter 接入 ZHarness/ZAgentic control plane；不要让它替代 Git、canonical roadmap、Work Packet、planned-cell claim、预算协调或发布门。本议题未发现未决信息缺口（ledger unknownCriteria 为空），信息完备。</li>
+<li>如果第一阶段优先解决个人设备上的私有上下文捕获和检索，选择 MyContext；MineContext 作为本地优先个人 context companion 评估，不作为多人协作底座。</li>
+</ul>
+<h2>4. Information gaps &amp; next steps</h2>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Nature</th>
+<th>Next step</th>
+</tr>
+</thead>
+</table>
+<h2>6. Source list</h2>
+<ol>
+<li><a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">volcengine/MineContext@171c7a9ea8091e326ddcf0f10718aa1b58c83c65:README.md</a> — Evidence <code>80fab05c83d9214a24f7b9a8</code></li>
+<li><a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">volcengine/MineContext@171c7a9ea8091e326ddcf0f10718aa1b58c83c65:README.md</a> — Evidence <code>c1670d9d33d1395b02484b66</code></li>
+<li><a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">volcengine/MineContext@171c7a9ea8091e326ddcf0f10718aa1b58c83c65:README.md</a> — Evidence <code>4f94f3db9db3b45787bf3254</code></li>
+<li><a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">volcengine/MineContext@171c7a9ea8091e326ddcf0f10718aa1b58c83c65:README.md</a> — Evidence <code>46a23e06545555264946319f</code></li>
+<li><a href="https://github.com/volcengine/MineContext/blob/171c7a9ea8091e326ddcf0f10718aa1b58c83c65/README.md">volcengine/MineContext@171c7a9ea8091e326ddcf0f10718aa1b58c83c65:README.md</a> — Evidence <code>f5afc3d0b3536e1f3f9ad043</code></li>
+<li><a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">openTrinity/mycontext@81b3c7ac178dbf141ca97cbe6b6682f73e3d3199:README.md</a> — Evidence <code>b694a2b9b94a8ba7e6b47ef4</code></li>
+<li><a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">openTrinity/mycontext@81b3c7ac178dbf141ca97cbe6b6682f73e3d3199:README.md</a> — Evidence <code>6953f661bac7a6ee6f695ab3</code></li>
+<li><a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">openTrinity/mycontext@81b3c7ac178dbf141ca97cbe6b6682f73e3d3199:README.md</a> — Evidence <code>5d344f534037a88a2d0ae65d</code></li>
+<li><a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/README.md">openTrinity/mycontext@81b3c7ac178dbf141ca97cbe6b6682f73e3d3199:README.md</a> — Evidence <code>e1c77df9c8b21389e3d252f5</code></li>
+<li><a href="https://github.com/openTrinity/mycontext/blob/81b3c7ac178dbf141ca97cbe6b6682f73e3d3199/docs/design/persona-distill-forge.md">openTrinity/mycontext@81b3c7ac178dbf141ca97cbe6b6682f73e3d3199:docs/design/persona-distill-forge.md</a> — Evidence <code>78ba4d9be35e0241eb5f86a4</code></li>
+<li><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/Dockerfile">TencentCloud/TencentDB-Agent-Memory@97f94654280b2932c35ba4806a491999ed244cc9:MemoryCore/Dockerfile</a> — Evidence <code>1879da8cdc20aaea25ede65c</code></li>
+<li><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/Dockerfile">TencentCloud/TencentDB-Agent-Memory@97f94654280b2932c35ba4806a491999ed244cc9:MemoryCore/Dockerfile</a> — Evidence <code>6de50efd7dd6779d955d942a</code></li>
+<li><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/README.md">TencentCloud/TencentDB-Agent-Memory@97f94654280b2932c35ba4806a491999ed244cc9:MemoryCore/README.md</a> — Evidence <code>a53eaf05e9e36a79f063b7ea</code></li>
+<li><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/README.md">TencentCloud/TencentDB-Agent-Memory@97f94654280b2932c35ba4806a491999ed244cc9:MemoryCore/README.md</a> — Evidence <code>21caa43672cc9f52c6c746a1</code></li>
+<li><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/97f94654280b2932c35ba4806a491999ed244cc9/MemoryCore/README.md">TencentCloud/TencentDB-Agent-Memory@97f94654280b2932c35ba4806a491999ed244cc9:MemoryCore/README.md</a> — Evidence <code>b7389632d90d5c3be6a231f3</code></li>
+</ol>
+
+</main>
+</body>
+</html>

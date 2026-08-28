@@ -1,0 +1,29 @@
+{
+  "markdownPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/activation-routing/2026-08-28-solution-a-baseline.md",
+  "htmlPath": "/Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN/research/activation-routing/2026-08-28-solution-a-baseline.html",
+  "reportHash": "64b61f0eef37682371b0dd5d7d32ec67975dfc2ff7220afe9c4f1dad909ad1bb",
+  "publishCount": 1,
+  "evaluation": {
+    "reportHash": "64b61f0eef37682371b0dd5d7d32ec67975dfc2ff7220afe9c4f1dad909ad1bb",
+    "reportFamily": "zj-draft/v1",
+    "compilerVersion": "research/v1",
+    "healthy": true,
+    "correctness": {
+      "revisionPinned": true,
+      "provenanceComplete": true,
+      "criticalClaimsEvidence": true,
+      "scoringAxesSeparated": true,
+      "publishExactlyOnce": true,
+      "receiptConsistent": true
+    },
+    "evidenceCount": 18,
+    "unknownCount": 0,
+    "navigationFailureCount": 0,
+    "collection": {
+      "filesRead": 60,
+      "sourceBytesRead": 905869,
+      "durationMs": 42931,
+      "cacheHit": false
+    }
+  }
+}
