@@ -989,7 +989,7 @@
     "1-2-1-3-3-2": {
       "id": "1-2-1-3-3-2",
       "label": "价值实验一：zj-research-report 技术方案分析维护",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3-3",
       "children": [],
@@ -1015,17 +1015,23 @@
           "note": "远程隔离分支 origin/value-exp-1/kep753-c4-alignment 可达 5a42790，origin/main 仍为 d3d94a2；三个关键 runtime 文件与 5a42790 tree 字节一致，ALIAS.md 保留且污染条目不存在；receipt evaluation.healthy=true、qualityGate.healthy=true、reportHash=016376572170293bf9fa058d076dac68dea3d525ef01f91467ff1bfa150857e6、graduationCriteria=3、versionSkew=false；隔离提交 quick_validate.py 与 verify_technical_report.py 均通过。本实验一已完成，但 1-2-1-3-3-2 仍需其余独立价值实验和聚合退出证据，不得提前完成节点。"
         }
       ],
-      "notes": "C2 真实竞争 claim 已完成，Human 已恢复三次独立价值实验。下一步创建新的真实 Work Item，执行价值实验一：维护并改进 zj-research-report 技术方案分析能力；必须产出独立事件窗口、真实 Git artifact 与可复核收益证据。"
+      "notes": "价值实验一已完成：独立 Work Item work-value-experiment-1-zj-research-report-20260828-rerun 经 WorkBuddy claim/执行/结果发布后，由 Codex claim-review 并 accept；ZAgentic 隔离分支 5a4279079f7d2ac05cffbb60d1d6055c913c9845、compiler receipt healthy=true/reportHash=016376572170293bf9fa058d076dac68dea3d525ef01f91467ff1bfa150857e6、source/runtime 副本同步和验证证据均已核对。下一步转入 1-2-1-3-3-3，建立不同真实技术文档维护任务；三次实验聚合退出仍未完成。"
     },
     "1-2-1-3-3-3": {
       "id": "1-2-1-3-3-3",
       "label": "价值实验二：独立技术文档维护任务",
-      "status": "pending",
+      "status": "in_progress",
       "mode": "exploit",
       "parent": "1-2-1-3-3",
       "children": [],
-      "decisions": [],
-      "notes": ""
+      "decisions": [
+        {
+          "q": "价值实验二选择哪一个独立技术文档维护任务？",
+          "answer": "维护 ZAgentic 的 skills/research/zj-tech-research-report/references/technical-decision-brief.md，补充 KEP-753 steps 7–8 到 Report IR 的准确映射与生命周期条件：graduationCriteria 是 list，versionSkew 只在 dogfood/release 阶段出现；不修改产品运行时。",
+          "note": "该任务与实验一的 SKILL.md、validator、fixture 和 compiler-backed report 改动文件不同；它将复现的报告说明/契约误读沉淀为 source-owned 技术文档，形成独立可审计 commit 和文档校验结果。"
+        }
+      ],
+      "notes": "实验二已选定独立技术文档维护任务：更新 skills/research/zj-tech-research-report/references/technical-decision-brief.md，准确记录 KEP-753 steps 7–8 与 technical-c4/v1 Report IR 的字段映射和阶段条件。验收要求新的隔离 Git commit、changed files、文档/技能校验结果和 Codex review；不得复用实验一 Work Item 或 artifact。"
     },
     "1-2-1-3-3-4": {
       "id": "1-2-1-3-3-4",
@@ -1170,7 +1176,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-28 11:09:19",
+    "updated": "2026-08-28 11:15:49",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }

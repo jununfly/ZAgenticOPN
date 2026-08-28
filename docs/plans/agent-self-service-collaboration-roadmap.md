@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 11:09:19
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 11:15:49
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -27,13 +27,10 @@
     ├── [ ][X+] 1-4-2. 按真实失败建设生产可靠性
     └── [ ][X+] 1-4-3. 个人闭环有效后评估团队治理
 
-### 当前施工：1-2-1-3-3-2. 价值实验一：zj-research-report 技术方案分析维护
+### 当前施工：1-2-1-3-3-3. 价值实验二：独立技术文档维护任务
 
-C2 真实竞争 claim 已完成，Human 已恢复三次独立价值实验。下一步创建新的真实 Work Item，执行价值实验一：维护并改进 zj-research-report 技术方案分析能力；必须产出独立事件窗口、真实 Git artifact 与可复核收益证据。
+实验二已选定独立技术文档维护任务：更新 skills/research/zj-tech-research-report/references/technical-decision-brief.md，准确记录 KEP-753 steps 7–8 与 technical-c4/v1 Report IR 的字段映射和阶段条件。验收要求新的隔离 Git commit、changed files、文档/技能校验结果和 Codex review；不得复用实验一 Work Item 或 artifact。
 
 **决策：**
-- Q: 价值实验一的首次启动顺序如何处理？ → 将 preflight 的错误顺序标记为 observed-failure：Codex 在 Work Item 已预发布后 claim 了本应由 WorkBuddy 执行的任务；该尝试不计入价值实验窗口。阻断该 preflight Work Item 后，重新执行干净窗口：Codex 先检查空 frontier，随后发布初始 Work Item，WorkBuddy claim/执行，Codex review。 (preflight 未执行代码、未产生 Git artifact；干净窗口必须有 3 次任务无关 activation、独立 Work Item、独立事件窗口、真实 commit/changed files/tests 和可复核 review。)
-- Q: 价值实验一首个干净窗口的实际结果是什么？ → 窗口未通过：Codex 空 frontier → 发布新 Work Item → WorkBuddy 真实 UI discover/claim → Codex review 的事件链已形成，但 WorkBuddy 只提交了 partial 前置 audit，未完成 ZAgentic source skill 修改、运行 quick_validate.py / publish_report.py 或 healthy=true receipt；Codex 已 request_changes，Work Item 回到 available，节点保持 in_progress。 (分类为 observed-failure：WorkBuddy 将本地跨仓库 commit 误判为必须等待新的 Human commit+push 指令，尽管当前 Work Item acceptance 已明确授权实际 source update。保留 preflight commit 与完整事件证据；不追加第四次 activation，不把 partial 当作价值实验通过。后续需重新开启独立窗口。)
-- Q: 旧 partial Work Item 与价值实验一的新窗口如何处理？ → 按 Human 指令将旧 Work Item work-value-experiment-1-zj-research-report-20260828-clean 阻断为 blocked/observed-failure，保留完整审计记录；新建独立 Work Item work-value-experiment-1-zj-research-report-20260828-rerun，重新开始价值实验一窗口。 (旧项因 block seam 要求由 cleanup identity 领取后立即阻断，未执行目标任务；新项 acceptance 明确 KEP-753 steps 7/8 的 bounded improvement、source/runtime alias 同步、quick_validate.py、publish_report.py、真实 commit 和 healthy=true receipt。恰好三次正式任务无关 activation 尚未开始；此前 inspect discover 事件不计入正式窗口。)
-- Q: 价值实验一重跑的 Codex review 结果是什么？ → 通过：Work Item work-value-experiment-1-zj-research-report-20260828-rerun 已由 WorkBuddy 发布 acceptance_status=met 的结构化结果，Codex 在 activation-value-exp-1-codex-review-rerun-20260828 下发现并 claim-review，核验 commit 5a4279079f7d2ac05cffbb60d1d6055c913c9845、真实 compiler receipt 和 runtime 副本后 accept；Work Item 已 completed。 (远程隔离分支 origin/value-exp-1/kep753-c4-alignment 可达 5a42790，origin/main 仍为 d3d94a2；三个关键 runtime 文件与 5a42790 tree 字节一致，ALIAS.md 保留且污染条目不存在；receipt evaluation.healthy=true、qualityGate.healthy=true、reportHash=016376572170293bf9fa058d076dac68dea3d525ef01f91467ff1bfa150857e6、graduationCriteria=3、versionSkew=false；隔离提交 quick_validate.py 与 verify_technical_report.py 均通过。本实验一已完成，但 1-2-1-3-3-2 仍需其余独立价值实验和聚合退出证据，不得提前完成节点。)
+- Q: 价值实验二选择哪一个独立技术文档维护任务？ → 维护 ZAgentic 的 skills/research/zj-tech-research-report/references/technical-decision-brief.md，补充 KEP-753 steps 7–8 到 Report IR 的准确映射与生命周期条件：graduationCriteria 是 list，versionSkew 只在 dogfood/release 阶段出现；不修改产品运行时。 (该任务与实验一的 SKILL.md、validator、fixture 和 compiler-backed report 改动文件不同；它将复现的报告说明/契约误读沉淀为 source-owned 技术文档，形成独立可审计 commit 和文档校验结果。)
 <!-- ROADMAP_SECTION_END -->
