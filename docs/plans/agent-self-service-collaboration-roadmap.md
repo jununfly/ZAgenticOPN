@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 17:26:31
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 23:12:02
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -14,7 +14,7 @@
 │   ├── [x][X+] 1-1-7. 下一轮最多 3 个 ext 候选筛选与 C1–C4 黑盒复验
 │   └── [x][Y+] 1-1-8. C 路线选择性复用能力地图与实施准入
 ├── [~][Y+] 1-2. 阶段 1：Agent 自服务协作体验版
-│   ├── [~][Y+] 1-2-1. 同设备 Codex → WorkBuddy → Codex 闭环
+│   ├── [x][Y+] 1-2-1. 同设备 Codex → WorkBuddy → Codex 闭环
 │   ├── [ ][X+] 1-2-2. 跨设备双 Agent 单项目闭环
 │   ├── [ ][X+] 1-2-3. 多设备多 Agent 多项目闭环
 │   └── [ ][X+] 1-2-4. Agent private context 中断恢复
