@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 21:28:13
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-28 21:50:53
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -26,13 +26,4 @@
     ├── [ ][X+] 1-4-1. 评估自动发现、通知与设备唤醒
     ├── [ ][X+] 1-4-2. 按真实失败建设生产可靠性
     └── [ ][X+] 1-4-3. 个人闭环有效后评估团队治理
-
-### 当前施工：1-2-1-3-3-4. 价值实验三：独立技术文档维护任务
-
-实验三首次交付 commit 227cadb4f682193ab02fcf28f1800757b479df04 已由 Codex claim-review；远程分支与三处 runtime mirror 核验通过，但 review request_changes，需修复 step 7 非空 graduationCriteria、step 8 三字段完整性、dogfood/release 独立 stage rows 和未同步术语 mechanical contract。Work Item 当前 available，实验窗口保持同一独立 Work Item，等待 WorkBuddy doc-only 修订并重新 submit。
-
-**决策：**
-- Q: 价值实验三选择哪一个独立技术文档维护任务？ → 维护 ZAgentic 的 skills/research/zj-tech-research-report/references/technical-proposal-exemplar.md：将 KEP-753 的 11 步决策链与 Problem discovery、Experience Version、Usefulness validation、Dogfood/release 四阶段的最小证据整理为可执行检查项，同时保留 decision chain、候选语义和 ownership/risk 边界；不修改 SKILL.md、validator、Report IR 或产品运行时，不复用实验二 technical-decision-brief。 (stage-critical；验收以该 exemplar 的独立 Git artifact、必要 runtime 镜像同步、文档一致性检查和可复核 commit/files/tests 为准；使用独立 Work Item 与独立事件窗口。)
-- Q: 实验三初始 Work Item 的 eligibility 配置如何处理？ → 将 work-value-experiment-3-technical-proposal-exemplar-20260828 标记为实验前配置失败并阻断，不计入正式实验窗口：发布时误把 git-write 放入 required_capabilities 且误把 git-write 放入 required_permissions，导致 WorkBuddy 的 technical-writing/zagentic-skill-write profile 正确返回 no_eligible_work。重新发布独立 Work Item，required_capabilities 仅为 technical-writing，required_permissions 为 zagentic-skill-write。 (保留 activation 64705fb2-ee63-4269-8402-2677de54cfa8 的 no_eligible receipt 与 discovery 事件作为配置失败证据；新窗口使用 rerun Work Item，仍须独立事件链、真实 Git artifact 和 Codex review。)
-- Q: 价值实验三首次 Codex review 如何处理？ → request_changes：目标提交 227cadb4f682193ab02fcf28f1800757b479df04 的远程分支与三处 runtime mirror 已核验，但 exemplar 有四项需修订：step 7 明确非 problem-discovery 阶段 graduationCriteria 必须为非空 list；step 8 的失败条件覆盖 upgrade、downgrade、versionSkewRisks 三个非空字段；dogfood 与 release 拆为两个独立 stage rows；移除未同步的 mechanical contract 术语或改用既有词汇。Work Item 回到 available，等待同一独立窗口 doc-only 修订、重新验证和 submit。 (Standards 与 Spec 两轴均发现 blocker；实验三尚未完成。目标 commit 仅改 exemplar，四处副本核验字节一致。SKILL.md 既有的 metric/promoteTo 四字段措辞与 technical-decision-brief.md/validator 的最小契约冲突，已作为后续独立维护项记录，不扩大本 Work Item。18:05 的 no_eligible 激活发生在 Work Item 发布之前，不计为本 Work Item 的 eligibility 配置失败。)
 <!-- ROADMAP_SECTION_END -->

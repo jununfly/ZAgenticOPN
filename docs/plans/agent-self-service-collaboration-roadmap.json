@@ -1051,7 +1051,7 @@
     "1-2-1-3-3-4": {
       "id": "1-2-1-3-3-4",
       "label": "价值实验三：独立技术文档维护任务",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3-3",
       "children": [],
@@ -1070,9 +1070,14 @@
           "q": "价值实验三首次 Codex review 如何处理？",
           "answer": "request_changes：目标提交 227cadb4f682193ab02fcf28f1800757b479df04 的远程分支与三处 runtime mirror 已核验，但 exemplar 有四项需修订：step 7 明确非 problem-discovery 阶段 graduationCriteria 必须为非空 list；step 8 的失败条件覆盖 upgrade、downgrade、versionSkewRisks 三个非空字段；dogfood 与 release 拆为两个独立 stage rows；移除未同步的 mechanical contract 术语或改用既有词汇。Work Item 回到 available，等待同一独立窗口 doc-only 修订、重新验证和 submit。",
           "note": "Standards 与 Spec 两轴均发现 blocker；实验三尚未完成。目标 commit 仅改 exemplar，四处副本核验字节一致。SKILL.md 既有的 metric/promoteTo 四字段措辞与 technical-decision-brief.md/validator 的最小契约冲突，已作为后续独立维护项记录，不扩大本 Work Item。18:05 的 no_eligible 激活发生在 Work Item 发布之前，不计为本 Work Item 的 eligibility 配置失败。"
+        },
+        {
+          "q": "价值实验三最终 Codex review 是否通过？",
+          "answer": "accept：WorkBuddy 第二轮修复 commit f01fa1bb1abfab576e6de457d0bc7f5e2aa19f76 已推送到 origin/value-exp-3/technical-proposal-exemplar；相对 origin/main 基座 8a8548b 的实验三改动仍只涉及 technical-proposal-exemplar.md。Codex 通过任务无关 review activation 核验并接受：step 7 非 discovery 阶段要求非空 graduationCriteria，step 8 覆盖 upgrade/downgrade/versionSkewRisks 三字段，dogfood/release 分行，且移除未同步 mechanical contract 术语并改用 machine-checked Report IR contract。目标 work item 已 completed/revision 10。",
+          "note": "独立 target worktree 的 skill verify、gate 负向/控制探针、11 步与 5 stage 结构、pinned KEP、候选语义、ownership 边界、递归 48-skill 校验及四处 runtime mirror sha256 d32020b1c67420851c2c5b86e7e717af883b51029cf1857394d72f2fd488282c 一致；官方 plugin validator 的 bucket 误报仍为既有问题，fallback recursive validator 通过。SKILL.md 的 metric/promoteTo 契约 drift 作为独立维护项，不纳入实验三。"
         }
       ],
-      "notes": "实验三首次交付 commit 227cadb4f682193ab02fcf28f1800757b479df04 已由 Codex claim-review；远程分支与三处 runtime mirror 核验通过，但 review request_changes，需修复 step 7 非空 graduationCriteria、step 8 三字段完整性、dogfood/release 独立 stage rows 和未同步术语 mechanical contract。Work Item 当前 available，实验窗口保持同一独立 Work Item，等待 WorkBuddy doc-only 修订并重新 submit。"
+      "notes": "实验三已完成：独立 Work Item work-value-experiment-3-technical-proposal-exemplar-20260828-rerun 经 WorkBuddy 执行、Codex 首轮 request_changes、WorkBuddy 第二轮修复、Codex 最终 accept。最终 Git commit f01fa1bb1abfab576e6de457d0bc7f5e2aa19f76 已推送，目标分支 value-exp-3/technical-proposal-exemplar 基于 origin/main 8a8548b，仅修改 technical-proposal-exemplar.md；四处 runtime copy sha256 d32020b1c67420851c2c5b86e7e717af883b51029cf1857394d72f2fd488282c 一致。下一步为 1-2-1-3-3-5 三次实验 scorecard 与 Experience Version 退出判断。SKILL.md 的 graduationCriteria metric/promoteTo 既有契约 drift 另立维护项。"
     },
     "1-2-1-3-3-5": {
       "id": "1-2-1-3-3-5",
@@ -1207,7 +1212,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-28 21:28:13",
+    "updated": "2026-08-28 21:50:53",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
