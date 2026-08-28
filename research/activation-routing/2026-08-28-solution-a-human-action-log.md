@@ -6,6 +6,10 @@
 
 方案 A 必须在与 Experience Version 相同的真实任务和 acceptance 下，由 Human 手动完成上下文搬运、任务派发、review 安排和结果缝合；每一项都要在发生时记录开始/结束时间。Agent 执行、测试、编译和 review 的耗时不计入 Human intervention，除非 Human 实际在该时间段执行了上述动作。
 
+**审计指针（2026-08-29）：** 本表在 2026-08-29 的全量只读核对后**仍未填写**。核对发现固定实验输入完好，但同一真实任务已由 Experience Version 臂交付、运行副本漂移已消除，方案 A 的源码变更集归零。详见 [`2026-08-29-solution-a-window-audit.md`](2026-08-29-solution-a-window-audit.md)。该审计不构成本表任何一行的记录，也不替代 Human 现场填写。
+
+**任务 B 指针（2026-08-29）：** Human 选 B 后改用新任务（KEP-753 step 4 → 机器可核验 `riskRegister`）。任务定义见 [`2026-08-29-solution-a-task-b-kit.md`](2026-08-29-solution-a-task-b-kit.md)；Agent 侧实现与编译已完成，机器可复核事实见 [`2026-08-29-solution-a-task-b-agent-record.md`](2026-08-29-solution-a-task-b-agent-record.md)。**本表依旧空白** —— review 搬运、review 安排、结果缝合及全部时间戳仍只能由 Human 现场记录。
+
 ## 固定实验输入
 
 - 初始目标：找一份优秀的技术方案分析报告，改进 `zj-research-report` 这个 skill 的效果。
