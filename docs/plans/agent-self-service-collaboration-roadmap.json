@@ -1065,9 +1065,14 @@
           "q": "实验三初始 Work Item 的 eligibility 配置如何处理？",
           "answer": "将 work-value-experiment-3-technical-proposal-exemplar-20260828 标记为实验前配置失败并阻断，不计入正式实验窗口：发布时误把 git-write 放入 required_capabilities 且误把 git-write 放入 required_permissions，导致 WorkBuddy 的 technical-writing/zagentic-skill-write profile 正确返回 no_eligible_work。重新发布独立 Work Item，required_capabilities 仅为 technical-writing，required_permissions 为 zagentic-skill-write。",
           "note": "保留 activation 64705fb2-ee63-4269-8402-2677de54cfa8 的 no_eligible receipt 与 discovery 事件作为配置失败证据；新窗口使用 rerun Work Item，仍须独立事件链、真实 Git artifact 和 Codex review。"
+        },
+        {
+          "q": "价值实验三首次 Codex review 如何处理？",
+          "answer": "request_changes：目标提交 227cadb4f682193ab02fcf28f1800757b479df04 的远程分支与三处 runtime mirror 已核验，但 exemplar 有四项需修订：step 7 明确非 problem-discovery 阶段 graduationCriteria 必须为非空 list；step 8 的失败条件覆盖 upgrade、downgrade、versionSkewRisks 三个非空字段；dogfood 与 release 拆为两个独立 stage rows；移除未同步的 mechanical contract 术语或改用既有词汇。Work Item 回到 available，等待同一独立窗口 doc-only 修订、重新验证和 submit。",
+          "note": "Standards 与 Spec 两轴均发现 blocker；实验三尚未完成。目标 commit 仅改 exemplar，四处副本核验字节一致。SKILL.md 既有的 metric/promoteTo 四字段措辞与 technical-decision-brief.md/validator 的最小契约冲突，已作为后续独立维护项记录，不扩大本 Work Item。18:05 的 no_eligible 激活发生在 Work Item 发布之前，不计为本 Work Item 的 eligibility 配置失败。"
         }
       ],
-      "notes": "实验三正式窗口尚未开始。初始 Work Item work-value-experiment-3-technical-proposal-exemplar-20260828 因 required_capabilities/required_permissions 配置错误，在 activation 64705fb2-ee63-4269-8402-2677de54cfa8 返回 no_eligible_work 后，已作为实验前 observed-failure 阻断。已重新发布正确配置的独立 Work Item work-value-experiment-3-technical-proposal-exemplar-20260828-rerun（capability=technical-writing；permission=zagentic-skill-write）；下一步由 WorkBuddy 通过任务无关 activation discover/claim，完成后由 Codex review。"
+      "notes": "实验三首次交付 commit 227cadb4f682193ab02fcf28f1800757b479df04 已由 Codex claim-review；远程分支与三处 runtime mirror 核验通过，但 review request_changes，需修复 step 7 非空 graduationCriteria、step 8 三字段完整性、dogfood/release 独立 stage rows 和未同步术语 mechanical contract。Work Item 当前 available，实验窗口保持同一独立 Work Item，等待 WorkBuddy doc-only 修订并重新 submit。"
     },
     "1-2-1-3-3-5": {
       "id": "1-2-1-3-3-5",
@@ -1202,7 +1207,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-28 18:11:25",
+    "updated": "2026-08-28 21:28:13",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
