@@ -1008,6 +1008,11 @@
           "q": "旧 partial Work Item 与价值实验一的新窗口如何处理？",
           "answer": "按 Human 指令将旧 Work Item work-value-experiment-1-zj-research-report-20260828-clean 阻断为 blocked/observed-failure，保留完整审计记录；新建独立 Work Item work-value-experiment-1-zj-research-report-20260828-rerun，重新开始价值实验一窗口。",
           "note": "旧项因 block seam 要求由 cleanup identity 领取后立即阻断，未执行目标任务；新项 acceptance 明确 KEP-753 steps 7/8 的 bounded improvement、source/runtime alias 同步、quick_validate.py、publish_report.py、真实 commit 和 healthy=true receipt。恰好三次正式任务无关 activation 尚未开始；此前 inspect discover 事件不计入正式窗口。"
+        },
+        {
+          "q": "价值实验一重跑的 Codex review 结果是什么？",
+          "answer": "通过：Work Item work-value-experiment-1-zj-research-report-20260828-rerun 已由 WorkBuddy 发布 acceptance_status=met 的结构化结果，Codex 在 activation-value-exp-1-codex-review-rerun-20260828 下发现并 claim-review，核验 commit 5a4279079f7d2ac05cffbb60d1d6055c913c9845、真实 compiler receipt 和 runtime 副本后 accept；Work Item 已 completed。",
+          "note": "远程隔离分支 origin/value-exp-1/kep753-c4-alignment 可达 5a42790，origin/main 仍为 d3d94a2；三个关键 runtime 文件与 5a42790 tree 字节一致，ALIAS.md 保留且污染条目不存在；receipt evaluation.healthy=true、qualityGate.healthy=true、reportHash=016376572170293bf9fa058d076dac68dea3d525ef01f91467ff1bfa150857e6、graduationCriteria=3、versionSkew=false；隔离提交 quick_validate.py 与 verify_technical_report.py 均通过。本实验一已完成，但 1-2-1-3-3-2 仍需其余独立价值实验和聚合退出证据，不得提前完成节点。"
         }
       ],
       "notes": "C2 真实竞争 claim 已完成，Human 已恢复三次独立价值实验。下一步创建新的真实 Work Item，执行价值实验一：维护并改进 zj-research-report 技术方案分析能力；必须产出独立事件窗口、真实 Git artifact 与可复核收益证据。"
@@ -1165,7 +1170,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-28 01:54:04",
+    "updated": "2026-08-28 11:09:19",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
