@@ -185,7 +185,8 @@
       "children": [
         "1-2-1-1",
         "1-2-1-2",
-        "1-2-1-3"
+        "1-2-1-3",
+        "1-2-1-4"
       ],
       "decisions": [
         {
@@ -707,7 +708,7 @@
     "1-2-1-3-2": {
       "id": "1-2-1-3-2",
       "label": "WorkBuddy task-agnostic activation routing failure follow-up",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3",
       "children": [],
@@ -756,9 +757,154 @@
           "q": "C4 二次 Codex review 的裁决是什么？",
           "answer": "accept：R2 已按 request_changes 严格使用 scripts/activate_agent.py 无 Work Item ID，activation-ee2fbd368a8f 下同一 Work Item 产生 discover→claim_succeeded；R2 commit 89d6043 只追加结果文件，publish-result 携带真实 commit/files/tests，测试 9/9 通过。",
           "note": "独立核验通过：events row 15 discover 与 row 16 claim_succeeded 紧邻；git show 89d6043 --stat 为 1 file/36 insertions，R1 commit 023ead9 字节未变；本地复跑 python -m unittest discover -s tests -v 为 9/9。可执行 review claim 后 accept。"
+        },
+        {
+          "q": "已复现的 WorkBuddy UI/runtime routing failure 采用什么最小修复方向？",
+          "answer": "采用 ZAgenticOPN-owned local Agent Integration Proxy：Proxy 精确识别固定短语‘检查 shared context’，以固定 Agent profile 和当前授权 scope 调用现有 activation seam；不要求项目仓库修改、AGENTS.md 指针、项目 wrapper 或 ZInitiatives 路由。",
+          "note": "分类为 observed-failure；Proxy 是当前设备的显式激活入口，不是自动发现、后台轮询或项目级维护责任。保留现有 coordination.py 的 eligibility、原子 claim、review 和 Git provenance 所有权。"
+        },
+        {
+          "q": "本轮实现的验收优先级是什么？",
+          "answer": "先走通一条最小主要功能路径：WorkBuddy 请求 → local Proxy 精确触发 → 唯一 eligible frontier 原子 claim → handoff 注入同一次模型请求 → Agent 执行真实 Work Item 并提交 commit/files/tests。",
+          "note": "只验证当前同设备、单项目、单 context 的主路径；没有 eligible work 时返回 no eligible work，不伪造任务；多候选、跨设备、恢复和完整治理不阻塞本轮。"
+        },
+        {
+          "q": "Proxy 主路径通过前，Q26–Q30 等细节设计如何处理？",
+          "answer": "延期，不在本轮展开。",
+          "note": "先以真实 WorkBuddy UI/runtime 能产生 discover→claim→handoff→execution 为阶段证据；主路径通过后再叠加 profile 注册、多 context、多候选裁决、完整 ACL、capability token、多协议、remote Proxy、HA 与复杂生命周期设计。"
+        },
+        {
+          "q": "Proxy 第一条主要功能路径实现后的当前证据是什么？",
+          "answer": "已实现 ZAgenticOPN-owned local Agent Integration Proxy：固定短语精确匹配后调用现有 activation seam；唯一 claim 成功时输出含 objective/acceptance 的单次 model messages；无 eligible work 时返回 no_eligible_work 且不调用模型。",
+          "note": "14/14 unittest 通过，包含真实 SQLite coordination、无 Work Item id 的外部 host subprocess、handoff 单次请求和 no-eligible negative path。该证据仍是产品代码/host seam，不等同于 WorkBuddy v5.3.14 UI/runtime 已重放；下一步接入并重放真实 UI。"
+        },
+        {
+          "q": "修复 active-workspace DB fallback 后的正式 WorkBuddy UI 重放结果是什么？",
+          "answer": "仍未通过：插件已 enabled 且 UserPromptSubmit 配置已加载，但 WorkBuddy v5.3.14 正式 UI 填入固定短语后 Return、Command-Return 与可见发送控件均未产生新消息；shared store 中 workbuddy-ui-proxy-replay-20260825 仍 available、无 discover/claim 事件。",
+          "note": "分类：observed-failure。证据 research/activation-routing/2026-08-25-workbuddy-ui-submit-failure.md；Proxy/host hook 隔离测试 16/16 通过，因此当前边界收窄为 WorkBuddy UI editor/submission path 未触发 UserPromptSubmit。三次价值实验继续暂停，不把插件加载或 CLI 验证当作 UI 通过。"
+        },
+        {
+          "q": "自然短语与机器 activation 协议的关系是什么？",
+          "answer": "接受：自然短语‘检查 shared context’降级为 Human alias；机器事实源采用版本化 intent_id，例如 zagenticopn.activation.check_shared_context.v1。Skill、WorkBuddy adapter 或其他入口都应最终发出同一 intent_id，不能让不同模型自行解释自然语言作为控制协议。",
+          "note": "本决定认可 skill 的兼容性优势，但不让 description 单独承担可靠性；后续继续确定 alias→intent_id 映射边界、最小 contract transport 与 receipt 验收。"
+        },
+        {
+          "q": "alias resolver、Skill 与 host adapter 如何分工？",
+          "answer": "同意推荐：中央 resolver 只做固定 alias 的精确匹配并产出版本化 intent_id；ZAgenticOPN-owned Skill 负责 activation 触发后的 do-what 与 how-to-do；WorkBuddy/Codex 等 host adapter 只负责把可用入口接到同一 contract。Skill 的 canonical source 放在 ZAgenticOPN/skills/ 下，不放入消费项目，不要求消费项目修改或维护 AGENTS.md。",
+          "note": "后续安装到各 Agent 的 host/user scope 属于分发问题，不能反向变成项目级维护责任；command/button 可作为 UI fallback，但不替代标准 alias→intent_id→runner 主路径。"
+        },
+        {
+          "q": "zj-opn-activation Skill 与 runner 的职责边界是什么？",
+          "answer": "确认：Skill canonical name 为 zj-opn-activation，源文件放在 ZAgenticOPN/skills/ 下；Skill 只规定 activation 后的 do-what/how-to-do，并调用统一 local runner；runner 接收结构化 activation contract，负责真实 discover、至多一次 claim、handoff 与 receipt；Skill 不直接读 SQLite、不自行选择 Work Item、不自行 claim。没有合法 receipt 时不得声称已完成 shared-context 检查、claim 或 handoff。",
+          "note": "Skill 名称与 ZAgenticOPN-owned 归属已确定；下一轮只收敛 runner 输入边界、最小 receipt 和 host 调用 transport，不提前建设通用平台。"
+        },
+        {
+          "q": "zj-opn-activation runner 的输入、transport、receipt 与 scope 边界如何确定？",
+          "answer": "确认：Q4 runner 只接受结构化 intent_id，不接受自然短语或任意文本；Q5 transport 采用 JSON-Call；Q6 runner 对 claimed、no_eligible_work、claim_conflict、blocked、invalid_contract 等结果都返回结构化 receipt，shared store 保存 canonical events，Skill 生成简短 Human 摘要；Q7 scope 与稳定 Agent profile 由 host/session 显式提供，runner 不从 cwd、Git remote 推导，也不自动搜索多个 scope。",
+          "note": "这些约束用于先收敛一条可验证主路径；不提前引入 MCP、HTTP、多 scope 搜索、自动恢复或项目级维护。"
+        },
+        {
+          "q": "zj-opn-activation 的 resolver、JSON-Call、重试、handoff 与状态机如何确定？",
+          "answer": "全部同意推荐：Q8 由 ZAgenticOPN-owned 中央 resolver 精确把 Human alias 转为 intent_id；Q9 JSON-Call 使用严格最小 schema，缺少必填字段返回 invalid_contract，不从环境/cwd/Git 推导；Q10 一次 Call 只执行一次 discover、最多一次 claim，不自动重试、轮询或跨 scope；Q11 claimed receipt 直接携带完整 handoff；Q12 Skill 按确定性状态机处理 claimed/no_eligible_work/claim_conflict/blocked/invalid_contract。状态机使用 Mermaid 图记录在 zj-opn-activation Skill 的内置参考文件中作为维护参考。",
+          "note": "Skill 内置 Mermaid 只用于维护和理解，不取代 JSON receipt、shared store events 或 coordination seam 的运行时事实源；实现阶段再按 Skill 写作规范创建 canonical Skill 与 runner contract。"
+        },
+        {
+          "q": "zj-opn-activation 第一版范围、Skill 结构、实现顺序与 Human 摘要如何确定？",
+          "answer": "全部同意推荐：Q13 第一版只支持 zagenticopn.activation.check_shared_context.v1、一个固定 alias、同设备单项目；Q14 使用 skills/zj-opn-activation/SKILL.md + references/activation-state-machine.md，runner 代码留在 zagentic_opn/ 与 scripts/；Q15 先 JSON-Call contract/runner 黑盒测试，再 Skill，再 host adapter，最后正式 WorkBuddy UI/runtime 重放；Q16 使用固定 Human 摘要模板，包含 status、activation_id、scope、work_id、next_action 与 evidence reference。",
+          "note": "先走通一条可观察主路径，不建设通用 intent registry、多语言、多 host、多 scope 或完整 Markdown 报告体系。"
+        },
+        {
+          "q": "zj-opn-activation 的 alias、JSON-Call、Skill description 与第一版验收如何确定？",
+          "answer": "全部同意推荐：Q17 resolver 仅去除首尾空白后精确匹配固定 alias，不做 substring、模糊、同义词或模型判断；Q18 未知文本返回 pass_through，不调用 runner、不创建 activation；Q19 runner 通过 stdin 接收单个 JSON request、stdout 返回单个 JSON receipt，host 提供 store/path 等运行配置，request 只带 schema_version、intent_id、activation_id、scope、agent_profile；Q20 Skill description 只帮助识别使用时机并规定先调用 runner、无合法 receipt 不得声称完成，不实现 alias 解析或 SQLite 操作；Q21 第一版通过 valid claim、no eligible、claim conflict、invalid contract、wrong scope 及 receipt/摘要/状态机一致性黑盒门。",
+          "note": "这些门验证 contract 与行为边界，不启动三次价值实验；WorkBuddy UI 仍需单独重放，不能用 contract 通过替代 UI/runtime 通过。"
+        },
+        {
+          "q": "zj-opn-activation 的运行配置、拒绝可观测性、模型边界、入口统一、intent owner 与 Mermaid 边界如何确定？",
+          "answer": "全部同意推荐：Q22 runner path、shared store path 等运行配置由 host-level 配置提供，JSON-Call 不携带本地路径，缺失配置返回 invalid_runtime_config；Q23 所有已进入 runner 的 JSON-Call 都返回 receipt，invalid contract/runtime config 记录 rejection event，未知自然文本 pass_through 不进入 runner；Q24 runner 不调用模型，只返回 receipt，host/Skill 负责将合法 handoff 注入当前 Agent 请求；Q25 普通提交、Skill、WorkBuddy command/button 等入口只能生成同一 JSON-Call 并进入同一 resolver/runner；Q26 intent 定义和 alias registry 由 ZAgenticOPN 产品代码中的中央 resolver/registry 负责，Skill 与 adapter 只引用；Q27 Mermaid 只描述 activation routing：resolver → JSON-Call → discover → claim → receipt，执行、结果发布和 review 继续引用 coordination seam 文档。",
+          "note": "在 Skill 内置状态机文档中增加独立 section，明确：该图用于维护 activation 行为，不把产品所有生命周期重新复制一遍，也不让文档图取代 shared store 的运行时事实；该 section 用于提醒其他 Agent 当前文档意图。"
+        },
+        {
+          "q": "运行配置缺失时如何保证可观测性？",
+          "answer": "选择 1：runner 始终返回 invalid_runtime_config receipt；shared store 可访问时写 rejection event，不可访问时明确 event_recorded=false，绝不伪造已落盘事件，也不自动寻找其他 shared store。",
+          "note": "Human 追加要求：继续确定配置缺失后的及时重建与热加载机制；优先考虑 host-level 配置的原子更新与 runner 每次 JSON-Call 重新读取，避免常驻配置服务。"
+        },
+        {
+          "q": "中央 resolver、runner canonical 入口、Human 摘要与 agent_profile 如何确定？",
+          "answer": "全部同意推荐：Q29 中央 resolver 位于 ZAgenticOPN 产品代码中，作为无副作用纯函数，首尾空白规范化后精确匹配并返回 intent_id 或 None，不读库、不写 event、不调用模型；Q30 Skill 调用版本化本地可执行模块，例如 python -m zagentic_opn.activation_runner，host 可配置运行环境但不改变 JSON contract，scripts 仅作调试/人工入口；Q31 Skill 基于 receipt 按固定字段模板确定性生成 Human 摘要，不调用模型、不添加 receipt 之外的推断；Q32 第一版 agent_profile 固定为 agent_id、device_id、capabilities、permissions、can_review，其他 host 元数据暂不进入 contract。",
+          "note": "Q28 的配置缺失重建与热加载另作为后续配置生命周期决策处理；不把 runner/Skill/host 三处做成多套语义。"
+        },
+        {
+          "q": "运行配置缺失后的重建、热加载、并发更新与 repair 触发如何确定？",
+          "answer": "全部同意推荐：Q33 使用 host-level 幂等 configure/repair 入口，由 host 显式提供完整配置值，缺失时 fail closed；Q34 runner 每次 JSON-Call 重新读取并校验配置，采用临时文件写入后原子替换，避免常驻 daemon/watcher；Q35 配置更新使用临时文件、原子替换和短锁，runner 每次读取完整快照；Q36 runner 返回 required_fields、repair_action、config_revision、event_recorded 等信息，host 根据 receipt 触发显式 repair，缺少明确输入时等待 Human，不猜测、不切换 store。",
+          "note": "第一版不建设后台配置服务或自动恢复系统；下一步确定 host-level 配置的 canonical source、configure/repair 的调用面以及 receipt handoff 的注入边界。"
+        },
+        {
+          "q": "host runtime 配置的 canonical source 如何跨平台确定？",
+          "answer": "采用跨平台系统配置目录接口获取用户级配置根目录，再拼接 zagenticopn/runtime.json；不把 ~/.config、~/Library 或 %LOCALAPPDATA% 等单一平台路径写死。ZAGENTICOPN_RUNTIME_CONFIG 只作为显式 host 覆盖和测试入口。",
+          "note": "配置仍属于 host-level，不属于消费项目；具体采用标准库实现还是 platformdirs 等路径库在实现阶段按依赖约束确定。"
+        },
+        {
+          "q": "configure/repair 的调用面如何确定？",
+          "answer": "选择 1：提供独立的 python -m zagentic_opn.runtime_config configure JSON-Call；只负责校验、原子写入和返回新配置结果，不触发 discover/claim。",
+          "note": "配置修复与 Work Item activation 分离；修复成功后由下一次 activation 重新读取。"
+        },
+        {
+          "q": "handoff 注入失败时如何避免孤立 claim？",
+          "answer": "选择 1：host 在调用 runner 前声明具备 pre-model handoff injection 能力；不具备时在 claim 前返回 unsupported_host；运行时注入失败返回 handoff_delivery_failed receipt，不自动重试或跨 scope 恢复。",
+          "note": "区分 host 接收能力、coordination claim 和 handoff delivery；不以自然语言复制或隐式重试掩盖失败。"
+        },
+        {
+          "q": "配置热加载的可观测信息采用什么最小形式？",
+          "answer": "不增加 config_revision 或 config_fingerprint；如果仅为排查配置重建与热加载问题，直接使用 YYYYMMDDHHMMSS 时间戳。第一版不维护配置指纹或递增版本。",
+          "note": "时间戳的具体语义（配置写入时间、runner 读取时间或两者）以及是否进入 receipt，作为后续最小实现细节确定。"
+        },
+        {
+          "q": "配置时间戳的记录内容、时区、精度与用途如何确定？",
+          "answer": "全部同意推荐并补充：configure/repair 写入 config_updated_at，runner 每次读取后在 receipt 返回 config_loaded_at；两者均只用于诊断，不参与 claim、eligibility 或并发正确性。统一使用 UTC 和 Human 可读的 YYYYMMDDHHMMSS 基础格式，允许追加毫秒值（例如 YYYYMMDDHHMMSS.SSS）；不使用 config_revision 或 config_fingerprint。",
+          "note": "时间戳不是唯一 ID 或版本控制机制；具体是否附加 UTC 标记、哪些状态 receipt 必须返回时间戳，在实现 contract 时保持最小一致。"
+        },
+        {
+          "q": "配置时间戳、runtime.json 字段、repair 校验与 host handoff 能力如何确定？",
+          "answer": "全部同意推荐：Q43 所有进入 runner 的 receipt 都返回 config_loaded_at，配置可读时附带 config_updated_at，无法读取时为 null，pass_through 不进入 runner；Q44 runtime.json 第一版只包含 shared_store_path 与 config_updated_at，scope/profile 来自 JSON-Call，runner command 属于 host 安装配置；Q45 configure/repair 使用严格 JSON schema，只接受已注册字段，缺失或无效值拒绝写入；Q46 host 的 pre_model_handoff_injection 能力作为 JSON-Call 显式能力字段，runner 在 claim 前校验，不具备时返回 unsupported_host。",
+          "note": "这些约束延续最小主路径：配置属于 host，身份/scope 属于 activation，handoff 能力属于 host；后续需定义实际注入失败、receipt 状态闭合与防孤立 claim。"
+        },
+        {
+          "q": "handoff 注入失败时的 claim 与 receipt 状态如何闭合？",
+          "answer": "选择 1：host 在调用 runner 前声明具备 pre-model handoff injection 能力；不具备时在 claim 前返回 unsupported_host；运行时注入失败返回 handoff_delivery_failed receipt，不自动重试或跨 scope 恢复。",
+          "note": "区分 host 接收能力、coordination claim 和 handoff delivery，避免产生孤立 claim。"
+        },
+        {
+          "q": "unsupported_host 是否需要写入 rejection event？",
+          "answer": "选择 1：记录 activation_rejected event，并在 receipt 返回 event_recorded；若 shared store 不可访问则返回 event_recorded=false，不伪造事件。",
+          "note": "拒绝路径也必须可观测，但不让观测失败改变 fail-closed 语义。"
+        },
+        {
+          "q": "host handoff 能力字段采用什么表示？",
+          "answer": "选择 1：使用受控 host_capabilities 列表，第一版只注册 pre_model_handoff_injection；未知能力值返回 invalid_contract。",
+          "note": "把 host 能力变成稳定、可校验的 contract 字段，不让自然语言或模型推断能力。"
+        },
+        {
+          "q": "runtime 配置中的 shared store 不存在或不可读时如何处理？",
+          "answer": "选择 1：拒绝执行并返回 invalid_runtime_config；不自动创建空库、不切换其他路径、不跨 scope 恢复。",
+          "note": "避免把配置错误伪装成 no_eligible_work 或把事件写入错误 store。"
+        },
+        {
+          "q": "runtime 配置时间戳的最终格式是什么？",
+          "answer": "选择 1：使用 UTC 的 YYYYMMDDHHMMSS[.SSS]Z；例如 20260826153112.347Z。",
+          "note": "config_updated_at 与 config_loaded_at 只用于诊断和热加载观察，不参与身份、eligibility、claim 或并发正确性。"
+        },
+        {
+          "q": "WorkBuddy UI/runtime observed-failure 的 R2 正式重放结果是什么？",
+          "answer": "通过：WorkBuddy v5.3.14 正式 UI 原生粘贴并提交精确 alias「检查 shared context」后，真实 WorkBuddy hook 注入 handoff；shared store 在同一 activation-1b652891ee9a 下记录 discover(seq 36)→claim_succeeded(seq 37)，WorkBuddy 执行并以 4a13412 提交结果，Codex 独立 claim-review 后 accept，Work Item 已 completed。",
+          "note": "独立证据：events、WorkBuddy UI 对话中的 hook handoff 文本、research/activation-routing/2026-08-25-workbuddy-proxy-ui-replay.md；R1 的 x查 shared context/activation-workbuddy-4 无 discover 被 request_changes，保留为失败对照。4a13412 仅追加结果文件 32 行，python -m unittest discover -s tests -v 本地 25/25 通过。该证据通过窄 UI/runtime activation seam，不等于三次价值实验或 Experience Version stage exit。"
+        },
+        {
+          "q": "review request_changes 返回 Work Item 后如何保证后续合规 activation 可以再次 claim？",
+          "answer": "request_changes 必须清理旧结果字段、释放 review claim 和旧 execution claim，再将 Work Item 返回 available；下一次无 Work Item id 的 discover→claim 才能重新获得唯一执行权。",
+          "note": "这是本轮复现的 seam 缺陷修复：新增 CoordinationProtocol 黑盒回归测试，验证 request_changes 后 state=available、旧结果清空、旧 claim 释放，新的 discover 与 claim 可成功；完整测试 25/25 通过。"
         }
       ],
-      "notes": "真实 WorkBuddy routing 已完成 no_eligible_work discover、C1 discover→claim execution，并通过真实产物型 Work Item 完成 C4：R1 commit 023ead9 首审 request_changes（缺少本 work discover），R2 由 scripts/activate_agent.py 无 Work Item ID 产生 activation-ee2fbd368a8f 的 discover→claim_succeeded，追加 commit 89d6043，publish-result 携带真实 commit/files/tests；Codex 二次 claim-review 独立复跑 9/9 tests 后 accept，Work Item c4-workbuddy-result-artifact-20260824 已 completed。上一条 routing-only Work Item 仍按 creator 裁决 blocked。节点继续 in_progress：C2 competing real activation、三次真实价值实验及后续 C-route closeout 尚未完成。"
+      "notes": "Observed-failure 已完成闭环。WorkBuddy v5.3.14 正式 UI 使用精确 alias「检查 shared context」触发 ZAgenticOPN-owned Proxy；同一 activation-1b652891ee9a 产生 discover→claim_succeeded，handoff 注入、WorkBuddy 执行、Codex review accept 和 Work Item completed 均已核验。R1 错误输入与无 discover 失败对照保留。证据：research/activation-routing/2026-08-25-workbuddy-proxy-ui-replay.md；commit 4a13412；25/25 tests。三次价值实验不属于本节点，仍按 Human 指令暂停。"
     },
     "1-2-1-3-3": {
       "id": "1-2-1-3-3",
@@ -793,6 +939,16 @@
           "q": "首个真实实验的交付物是什么？",
           "answer": "继续使用首个真实任务：维护并改进 zj-research-report 技术方案分析能力，同时在 ZAgenticOPN 中提交可审计的研究/验收文档、真实 Git artifact 与测试结果；后两次使用不同的真实技术文档维护任务并各自产生独立 artifact。",
           "note": "不把 activation-routing 结果 markdown 的机械复制当作价值实验；每个 Work Item 必须说明实际文档/skill 变更和可复核收益。"
+        },
+        {
+          "q": "Human 是否恢复 C2 真实竞争接续与三次独立价值实验？",
+          "answer": "恢复：继续 C2 收口，并恢复三次独立价值实验。",
+          "note": "Human 已明确恢复；当前仍只推进 Experience Version 同设备单项目范围，不展开 deferred 能力。三次实验必须使用真实 Work Item、独立 artifact、独立事件窗口和可复核 Git provenance。"
+        },
+        {
+          "q": "当前下一步应该做什么？",
+          "answer": "先执行 1-2-1-3-3-2：价值实验一——围绕 zj-research-report 技术方案分析维护，创建新的真实 Work Item，并按 Codex → WorkBuddy → Codex 的任务无关激活路径完成一次独立实验。",
+          "note": "C2 真实竞争 claim 已完成；本轮只收集 Experience Version 的真实价值证据。实验必须有独立 Work Item、独立事件窗口、真实 Git artifact（commit/changed files/tests）和可复核的 Human 介入、claim 冲突、接续与 provenance；不启动跨设备、自动发现、恢复或生产运维工作。"
         }
       ],
       "notes": ""
@@ -800,7 +956,7 @@
     "1-2-1-3-3-1": {
       "id": "1-2-1-3-3-1",
       "label": "C2 同一真实 Work Item 的近同时竞争 claim",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3-3",
       "children": [
@@ -808,14 +964,24 @@
       ],
       "decisions": [
         {
-          "q": "C2 竞争使用哪个真实 Work Item？",
-          "answer": "复用 shared store 中已经发布且仍为 available 的 work-zj-research-report-improvement-20260820，scope 为 junjunfly/ZAgentic/zj-research-report；它的 acceptance 正是首个 zj-research-report skill/document maintenance 任务，Codex 与 WorkBuddy profile 都可 eligible。",
-          "note": "不新造占位 fixture；两次 activation 命令均不携带 Work Item ID，只通过同一 shared SQLite 的 discover frontier 争抢该项。"
-        },
-        {
           "q": "C2 第一轮真实竞争 claim 观察到什么？",
           "answer": "通过竞争硬门的现阶段条件：同一 Work Item 在 activation-c2-workbuddy-20260824 与 activation-c2-codex-20260824 下均 discover；WorkBuddy 产生唯一 claim_succeeded，Codex 产生唯一 claim_conflict，active execution claim 仅 workbuddy-01，未产生重复执行事件。",
           "note": "Work Item 仍处于 claimed，真实执行、result publication 和 Codex review 尚未完成；C2 子节点保持 in_progress，不能提前记为完整实验通过。"
+        },
+        {
+          "q": "C2 竞争使用哪个真实 Work Item？",
+          "answer": "复用 shared store 中已经发布且仍为 available 的 work-zj-research-report-improvement-20260820-canonical-scope，scope 为 jununfly/ZAgentic/zj-research-report；它的 acceptance 正是首个 zj-research-report skill/document maintenance 任务，Codex 与 WorkBuddy profile 都可 eligible。",
+          "note": "不新造占位 fixture；两次 activation 命令均不携带 Work Item ID，只通过同一 shared SQLite 的 canonical scope discover frontier 争抢该项。"
+        },
+        {
+          "q": "C2 本轮竞争使用哪一个真实 Work Item？",
+          "answer": "发布新的 work-c2-information-gaps-regression-20260827，scope 为 jununfly/ZAgentic/zj-research-report；两个 activation 只通过 scope discover，不携带 Work Item ID。",
+          "note": "原决策引用的 work-zj-research-report-improvement-20260820-canonical-scope 已 completed，不能复用为竞争窗口；新项是对源 skill/测试的真实回归维护，不是占位 fixture。"
+        },
+        {
+          "q": "C2 第二轮真实竞争 claim 与接续结果是什么？",
+          "answer": "通过：work-c2-information-gaps-regression-20260827 在同一 scope 的两个无 Work Item ID activation 下产生两次 discover、codex-01 唯一 claim_succeeded、workbuddy-01 唯一 claim_conflict；codex-01 只执行一次真实回归任务并提交 f7b4f3f345a7ba0e40aa05552bcf3cdd4d3c61e9，workbuddy-01 独立 claim-review 后 review accept，Work Item completed/revision 5。",
+          "note": "OPN events seq 79–87；结果通过 publish-result + submit + claim-review + review。C2 硬门已通过；三次价值实验仍按 Human 指令暂停。节点树中的外部 activation 指针 TODO 仍独立 pending，不因 C2 通过而关闭。"
         }
       ],
       "notes": ""
@@ -823,22 +989,64 @@
     "1-2-1-3-3-2": {
       "id": "1-2-1-3-3-2",
       "label": "价值实验一：zj-research-report 技术方案分析维护",
-      "status": "pending",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3-3",
       "children": [],
-      "decisions": [],
-      "notes": ""
+      "decisions": [
+        {
+          "q": "价值实验一的首次启动顺序如何处理？",
+          "answer": "将 preflight 的错误顺序标记为 observed-failure：Codex 在 Work Item 已预发布后 claim 了本应由 WorkBuddy 执行的任务；该尝试不计入价值实验窗口。阻断该 preflight Work Item 后，重新执行干净窗口：Codex 先检查空 frontier，随后发布初始 Work Item，WorkBuddy claim/执行，Codex review。",
+          "note": "preflight 未执行代码、未产生 Git artifact；干净窗口必须有 3 次任务无关 activation、独立 Work Item、独立事件窗口、真实 commit/changed files/tests 和可复核 review。"
+        },
+        {
+          "q": "价值实验一首个干净窗口的实际结果是什么？",
+          "answer": "窗口未通过：Codex 空 frontier → 发布新 Work Item → WorkBuddy 真实 UI discover/claim → Codex review 的事件链已形成，但 WorkBuddy 只提交了 partial 前置 audit，未完成 ZAgentic source skill 修改、运行 quick_validate.py / publish_report.py 或 healthy=true receipt；Codex 已 request_changes，Work Item 回到 available，节点保持 in_progress。",
+          "note": "分类为 observed-failure：WorkBuddy 将本地跨仓库 commit 误判为必须等待新的 Human commit+push 指令，尽管当前 Work Item acceptance 已明确授权实际 source update。保留 preflight commit 与完整事件证据；不追加第四次 activation，不把 partial 当作价值实验通过。后续需重新开启独立窗口。"
+        },
+        {
+          "q": "旧 partial Work Item 与价值实验一的新窗口如何处理？",
+          "answer": "按 Human 指令将旧 Work Item work-value-experiment-1-zj-research-report-20260828-clean 阻断为 blocked/observed-failure，保留完整审计记录；新建独立 Work Item work-value-experiment-1-zj-research-report-20260828-rerun，重新开始价值实验一窗口。",
+          "note": "旧项因 block seam 要求由 cleanup identity 领取后立即阻断，未执行目标任务；新项 acceptance 明确 KEP-753 steps 7/8 的 bounded improvement、source/runtime alias 同步、quick_validate.py、publish_report.py、真实 commit 和 healthy=true receipt。恰好三次正式任务无关 activation 尚未开始；此前 inspect discover 事件不计入正式窗口。"
+        },
+        {
+          "q": "价值实验一重跑的 Codex review 结果是什么？",
+          "answer": "通过：Work Item work-value-experiment-1-zj-research-report-20260828-rerun 已由 WorkBuddy 发布 acceptance_status=met 的结构化结果，Codex 在 activation-value-exp-1-codex-review-rerun-20260828 下发现并 claim-review，核验 commit 5a4279079f7d2ac05cffbb60d1d6055c913c9845、真实 compiler receipt 和 runtime 副本后 accept；Work Item 已 completed。",
+          "note": "远程隔离分支 origin/value-exp-1/kep753-c4-alignment 可达 5a42790，origin/main 仍为 d3d94a2；三个关键 runtime 文件与 5a42790 tree 字节一致，ALIAS.md 保留且污染条目不存在；receipt evaluation.healthy=true、qualityGate.healthy=true、reportHash=016376572170293bf9fa058d076dac68dea3d525ef01f91467ff1bfa150857e6、graduationCriteria=3、versionSkew=false；隔离提交 quick_validate.py 与 verify_technical_report.py 均通过。本实验一已完成，但 1-2-1-3-3-2 仍需其余独立价值实验和聚合退出证据，不得提前完成节点。"
+        }
+      ],
+      "notes": "价值实验一已完成：独立 Work Item work-value-experiment-1-zj-research-report-20260828-rerun 经 WorkBuddy claim/执行/结果发布后，由 Codex claim-review 并 accept；ZAgentic 隔离分支 5a4279079f7d2ac05cffbb60d1d6055c913c9845、compiler receipt healthy=true/reportHash=016376572170293bf9fa058d076dac68dea3d525ef01f91467ff1bfa150857e6、source/runtime 副本同步和验证证据均已核对。下一步转入 1-2-1-3-3-3，建立不同真实技术文档维护任务；三次实验聚合退出仍未完成。"
     },
     "1-2-1-3-3-3": {
       "id": "1-2-1-3-3-3",
       "label": "价值实验二：独立技术文档维护任务",
-      "status": "pending",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3-3",
       "children": [],
-      "decisions": [],
-      "notes": ""
+      "decisions": [
+        {
+          "q": "价值实验二选择哪一个独立技术文档维护任务？",
+          "answer": "维护 ZAgentic 的 skills/research/zj-tech-research-report/references/technical-decision-brief.md，补充 KEP-753 steps 7–8 到 Report IR 的准确映射与生命周期条件：graduationCriteria 是 list，versionSkew 只在 dogfood/release 阶段出现；不修改产品运行时。",
+          "note": "该任务与实验一的 SKILL.md、validator、fixture 和 compiler-backed report 改动文件不同；它将复现的报告说明/契约误读沉淀为 source-owned 技术文档，形成独立可审计 commit 和文档校验结果。"
+        },
+        {
+          "q": "价值实验二 Codex review 是否通过？",
+          "answer": "request_changes：目标提交相对实验一基座仅修改指定 technical-decision-brief.md，Standards review 通过；但独立复核发现两个阻断项：文档声称 versionSkew 在 experience-version 等早期阶段的省略由 validator 强制，而当前 gate 只对 dogfood/release 要求该对象，携带 versionSkew 的 experience-version 报告仍会通过；WorkBuddy 声称 runtime alias brief 已同步，但 ~/.codex/skills/zj-research-report/ 与 ~/.workbuddy/skills/zj-research-report/ 仍为旧 34 行副本。退回后需修正文档与实际 legacy alias，同步后重跑验证并发布新结果。",
+          "note": "目标分支 e166484 相对 5a42790 的 diff 仅 1 个 reference 文件、33 行新增；Python 3.12 下 verify_technical_report.py 通过，Python 3.9 环境错误属于既有运行时兼容问题。探针：experience-version 携带 versionSkew 返回 success/counts.versionSkew=true；source/canonical brief 为 67 行，两个实际 legacy alias 仍为 34 行。Work Item 已 request_changes 回 available，实验二保持 in_progress，不启动第四次 activation。"
+        },
+        {
+          "q": "价值实验二第二次 Codex review 是否通过？",
+          "answer": "request_changes：此前两个 blocker 已修复，但复核发现新的精度问题：新增术语 pre-dogfood 未登记在 ZJ-CONTEXT.md，违反 vocabulary-sync 规则；文档将 counts.versionSkew 写成“true when present”，但 validator 使用 bool(report.versionSkew)，早期阶段显式空对象会记录 false。需改写为已有词汇并准确描述 truthiness 语义，再同步四处 brief、重跑验证并重新提交。",
+          "note": "325b2d9 相对 e166484 仍只改目标 reference 文档；四处 brief 当前 70 行、SHA-256 1503ed... 一致，六探针与 verify_technical_report.py（Python 3.12）通过。Standards 轴发现 pre-dogfood 术语问题；Spec 轴发现 presence/truthiness 文案问题。Work Item 已 request_changes 回 available revision=10，实验二保持 in_progress。"
+        },
+        {
+          "q": "价值实验二最终 Codex review 是否通过？",
+          "answer": "accept：f3622df1cbaf09f20569a5fd5f1635098b553363 已通过 Standards 与 Spec 双轴复核。该追加提交仅修订 technical-decision-brief.md：移除未登记的 pre-dogfood，准确说明三阶段的 versionSkew 契约约定与 validator 的 truthiness 行为；source、两个 Codex runtime 路径和 WorkBuddy legacy alias 四处 75 行字节一致。verify_technical_report.py、全生命周期 truthiness 矩阵和 graduationCriteria 负向探针均通过。Work Item 已 completed/met。",
+          "note": "实验二完成：Codex activation-value-exp-2-codex-review-fix2-20260828 发现并 claim-review，核验 f3622df 远程分支、doc-only diff、四处 alias 同步、验证测试和全生命周期探针后 accept；Work Item work-value-experiment-2-zj-tech-research-report-20260828 state=completed/revision=15。Host runtime binding 已将 ZAgentic 与 ZAgenticOPN 都解析到 jununfly/ZAgentic/zj-research-report。下一步转入价值实验三；不要 merge/release，AGENTS/activation skill/孤儿 scope 另行决策。"
+        }
+      ],
+      "notes": "实验二已完成：独立 Work Item work-value-experiment-2-zj-tech-research-report-20260828 经 WorkBuddy 三次修复/执行窗口后，由 Codex claim-review 并 accept；最终 doc-only commit f3622df1cbaf09f20569a5fd5f1635098b553363 位于 origin/value-exp-2/tech-decision-brief-lifecycle，source 与三个 runtime alias 的 brief 四处 75 行字节一致（sha256 e219439c...），verify_technical_report.py 和全生命周期 versionSkew truthiness 矩阵通过。下一步转入 1-2-1-3-3-4 价值实验三；三次实验聚合退出仍未完成。"
     },
     "1-2-1-3-3-4": {
       "id": "1-2-1-3-3-4",
@@ -863,11 +1071,11 @@
     "1-2-1-3-3-1-1": {
       "id": "1-2-1-3-3-1-1",
       "label": "Human 显式 reopen 与真实 Agent scope 接续修复",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "exploit",
       "parent": "1-2-1-3-3-1",
       "children": [
-        "1-2-1-3-3-1-1-1"
+        "1-2-1-3-3-1-1-2"
       ],
       "decisions": [
         {
@@ -879,11 +1087,6 @@
           "q": "修复完成的验收证据是什么？",
           "answer": "黑盒测试证明 Human reopen 不会伪造结果、清理 active claim、保留 operator/reason 事件且不能重开 completed/awaiting-review；真实 DB 对当前 work-zj-research-report-improvement-20260820 只在修复后执行一次显式 reopen，再由正确项目 scope 的真实 Agent 重新竞争并继续。",
           "note": "在真实 Agent 重新接续前，不把 C2 或价值实验记为通过；旧 C4 scope 的 no_eligible_work 继续作为无关历史探活记录。"
-        },
-        {
-          "q": "当前修复已完成到什么程度？",
-          "answer": "最小 Human reopen seam 已实现并通过 11/11 黑盒测试；真实陈旧 Work Item 已执行一次显式 reopen，revision=2、state=available、claimant 为空、旧 execution claim inactive，events sequence 28 记录 operator/reason/previous_claimant。",
-          "note": "真实 Agent 仍需在 Work Item 所属的 junjunfly/ZAgentic/zj-research-report scope 重新激活并直接接续执行；在此之前，三次价值实验保持暂停，不能把 C2 记为完整真实实验通过。"
         },
         {
           "q": "ZAgentic WorkBuddy activation routing 修复结果是什么？",
@@ -899,24 +1102,96 @@
           "q": "此前的 ZAgentic activation pointer 修复是否保留？",
           "answer": "不保留：ZAgentic commit f04f856 已由目标仓库 owner 侧 revert commit 6d304bc 撤回；ZAgenticOPN 只保留 Human reopen seam、observed-failure 证据和外部维护 TODO。",
           "note": "隔离 scope smoke 仅说明目标仓库若由其 owner 增加指针后可验证的验收形状，不是本项目已完成的真实 WorkBuddy UI/runtime 修复。"
+        },
+        {
+          "q": "恢复后在 ZAgentic/zj-research-report scope 的真实 WorkBuddy activation 结果是什么？",
+          "answer": "未通过：WorkBuddy 未产生可验证 activation receipt，未在目标 scope 写入 discover 或 claim；回复内容转而分析 ZJ-CONTEXT.md 的术语同步并要求 Human 选择 A/B/C。",
+          "note": "分类：observed-failure。只读核验确认 zj-opn-activation canonical 文件与 /Users/bilibili/.workbuddy/skills 安装副本字节一致，但 Work Item 仍 available、目标 scope 无新增事件；当前不能证明用户输入是否为精确 alias，也不能把本轮算作 C2 或价值实验。不得修改消费项目 AGENTS.md 或 ZJ-CONTEXT.md；下一步定位 host 的确定性 pre-submit 路由与选择结果可观测性。"
+        },
+        {
+          "q": "复现的 WorkBuddy 错误 scope 接线如何修复？",
+          "answer": "由 ZAgenticOPN-owned WorkBuddy host adapter 使用显式 ZAGENTICOPN_SCOPE，或读取 host-level runtime.json 的 scope_bindings，将事件 cwd 按最长匹配绑定到 scope；没有绑定时返回 scope_unbound 并 fail closed，不使用默认 scope、不从 cwd/Git remote/Work Item 推导，也不跨 scope 搜索。",
+          "note": "分类：observed-failure。保持 runner contract 的 scope 显式输入，消费项目无需修改 AGENTS.md、源码或配置；scope binding 属于宿主配置，下一次真实 UI replay 需核对目标 scope 的同 activation discover→claim→handoff。"
+        },
+        {
+          "q": "当前修复已完成到什么程度？",
+          "answer": "最小 Human reopen seam 已实现并通过 11/11 黑盒测试；真实陈旧 Work Item 已执行一次显式 reopen，revision=2、state=available、claimant 为空、旧 execution claim inactive，events sequence 28 记录 operator/reason/previous_claimant。",
+          "note": "真实 Agent 仍需在 Work Item 所属的 jununfly/ZAgentic/zj-research-report canonical scope 重新激活并直接接续执行；在此之前，三次价值实验保持暂停，不能把 C2 记为完整真实实验通过。"
         }
       ],
-      "notes": ""
+      "notes": "Repair scope 已完成：Human reopen、canonical scope 接续、WorkBuddy Hook Python 3.9 兼容与真实 UI replay 均有可复核证据。外部 activation 指针 TODO 已移出本节点，独立跟踪于 1-2-1-4；不再阻塞 C2。"
     },
-    "1-2-1-3-3-1-1-1": {
-      "id": "1-2-1-3-3-1-1-1",
-      "label": "ZAgentic WorkBuddy activation 指针外部维护 TODO",
-      "status": "pending",
-      "mode": "explore",
+    "1-2-1-3-3-1-1-2": {
+      "id": "1-2-1-3-3-1-1-2",
+      "label": "WorkBuddy Hook Python 3.9 启动兼容修复",
+      "status": "completed",
+      "mode": "exploit",
       "parent": "1-2-1-3-3-1-1",
       "children": [],
-      "decisions": [],
-      "notes": ""
+      "decisions": [
+        {
+          "q": "WorkBuddy Hook 在系统 Python 3.9 下启动失败如何修复？",
+          "answer": "将项目运行时的 datetime.UTC 改为 Python 3.9 可用的 datetime.timezone.utc，并以 /usr/bin/python3 直接执行真实 Hook 回归；不引入运行时升级要求，不修改消费项目。",
+          "note": "分类为 observed-failure：WorkBuddy v5.3.14 已真实 spawn Hook，但系统 python3=3.9.6 在导入阶段抛出 ImportError，阻断目标 scope 的 activation receipt。验收还需包含 Hook 无错误启动、目标 scope 的同 activation discover→claim→handoff 证据。"
+        },
+        {
+          "q": "Python 3.9 修复后的真实 WorkBuddy UI 重放结果是什么？",
+          "answer": "代码与隔离 Hook 路径通过，但本轮真实 UI 仍未通过：插件配置被加载，WorkBuddy 16:40 会话未产生 user-prompt-submit.py 的 HookExecutor spawn，shared store 没有新的目标 scope discover/claim 事件。",
+          "note": "继续将问题限定为 UI UserPromptSubmit 提交路径；不把 ZJ-CONTEXT.md 术语巡检或普通模型回复视为 activation，通过前保持三次价值实验暂停。"
+        },
+        {
+          "q": "目标 Work Item 返回 no_eligible_work 的根因和修复是什么？",
+          "answer": "根因是 Work Item 发布时使用了与宿主 runtime binding 不一致的 owning scope；宿主使用 canonical scope jununfly/ZAgentic/zj-research-report，而错误 owner token 的 Work Item 被严格隔离在另一个 scope。保持严格 scope 隔离，不增加模糊匹配、跨 scope 搜索或从 Work Item 反推 scope。纠正 OPN 协调文档活动示例，并通过公开 publish seam 在 canonical scope 重发等价 Work Item。",
+          "note": "分类为 observed-failure：真实 UI Hook 已产生 canonical scope 的 discover，但该 scope 当时没有 eligible item；直接查询证明 Work Item scope 不一致。旧错误 scope item 保留为可审计历史，三次价值实验不因本次修复自动启动。"
+        },
+        {
+          "q": "WorkBuddy 启动后立即提交 prompt 时为何未产生 activation receipt？",
+          "answer": "本轮不是 no_eligible_work：WorkBuddy 日志显示 prompt 开始时 PluginsProductProvider active=0，随后才加载 zagenticopn-agent-integration；该 prompt 没有 user-prompt-submit.py 的 HookExecutor，且 shared store 在此之前已存在 canonical scope 的 available Work Item。因此将问题限定为 WorkBuddy 启动/插件加载竞态；保持严格 scope 隔离，不把普通模型回复当作 receipt。下一次应在插件 runtime 完成加载后新建会话，再用精确短语验证。",
+          "note": "分类为 observed-failure：插件已安装并在全局设置启用，但真实 UI 提交时序仍可绕过 UserPromptSubmit hook；当前仍不启动 C2/三次价值实验。"
+        },
+        {
+          "q": "重启后新会话仍未产生 activation receipt 的证据是什么？",
+          "answer": "新会话 32ff24fc-5d05-48c4-b54c-a595d73e6e18 在 17:58:28.943 已进入 prompt()；同一启动窗口直到 17:58:28.973 才加载 zagenticopn-agent-integration 的 hooks 配置，之后才在 17:58:29.055 出现 active=32。该会话未出现目标 user-prompt-submit.py 的 HookExecutor，shared store 事件仍停在 sequence 47，canonical Work Item 仍为 available。因此重启和新建会话并未消除提交早于插件 ready 的竞态。",
+          "note": "分类仍为 observed-failure：当前 workaround 是等待插件 runtime ready 后再提交；不能把 WorkBuddy 普通一致性报告视为 activation 成功。下一次验证应在日志已有 Loaded hooks configuration 且 active=32 之后发送精确短语。"
+        },
+        {
+          "q": "在 WorkBuddy 没有 runtime-ready UI 指示时，Human 如何规避新会话首次 prompt 竞态？",
+          "answer": "不要求 ZAgenticOPN 适配 WorkBuddy 生命周期：把新会话首次 prompt 视为 warm-up；首轮回复完成后，在同一会话再次发送精确短语“检查 shared context”。只有第二次提交产生目标 HookExecutor、activation receipt 和 shared store 事件，才算有效 activation；首次普通巡检结果一律不计入。",
+          "note": "分类为 observed-failure：新会话 30b6ec95-fb7f-49dc-b414-2a5de49dd620 在 prompt() 时插件尚未完成加载。Human 只需遵循会话级操作提醒，不增加消费项目维护，不启动 C2/三次价值实验。"
+        },
+        {
+          "q": "WorkBuddy Hook Python 3.9 修复与真实 UI replay 是否通过？",
+          "answer": "通过：修复后真实 WorkBuddy UI 在 session e8101a3d-d704-40c6-86a5-ab9b7aa7add7 使用精确短语“检查 shared context”，HookExecutor 于 2026-08-27 23:40:11.828+08:00 spawn user-prompt-submit.py；shared store 在同一 activation-583812644af1 下记录 seq 72 discover→seq 73 claim_succeeded，WorkBuddy 主线程记录注入 1 个 hidden user context block；replay Work Item work-workbuddy-ui-activation-replay-20260827 经 Codex review accept 完成。",
+          "note": "observed-failure 已闭合。证据只证明当前同设备 UI activation/handoff 路径，不自动宣称 C2 竞争 claim 或三次价值实验通过；下一步进入 1-2-1-3-3-1 的真实 C2。"
+        }
+      ],
+      "notes": "Python 3.9 Hook 启动兼容与真实 WorkBuddy UI replay 已验收闭合；OPN Work Item work-workbuddy-ui-activation-replay-20260827 revision 5 completed，activation-583812644af1 的 discover→claim_succeeded 与 HookExecutor/handoff 日志均可复核。"
+    },
+    "1-2-1-4": {
+      "id": "1-2-1-4",
+      "label": "ZAgentic WorkBuddy activation 指针外部维护 TODO",
+      "status": "completed",
+      "mode": "explore",
+      "parent": "1-2-1",
+      "children": [],
+      "decisions": [
+        {
+          "q": "activation 指针 TODO 如何与 C2 完成判定解耦？",
+          "answer": "将 ZAgentic WorkBuddy activation 指针外部维护 TODO 从 C2 子树移为 1-2-1-4 独立 pending 节点；它保留待处理事实，但不再作为 C2 claim、执行和 review 的子节点。",
+          "note": "该事项属于消费项目 owner/Human 的外部维护责任，不是 ZAgenticOPN 产品 runtime 交付；C2 可独立完成，TODO 继续单独跟踪。"
+        },
+        {
+          "q": "ZAgentic AGENTS.md activation 指针 TODO 的完成证据是什么？",
+          "answer": "已由 ZAgentic owner 在 commit d3d94a2 恢复 activation pointer：精确识别 Human alias「检查 shared context」，绑定 canonical scope jununfly/ZAgentic/zj-research-report，优先消费宿主已有 receipt，缺少 receipt 时通过 project-local entrypoint 执行一次无 Work Item ID 的 discover→claim，并覆盖 claimed、no_eligible_work、claim_conflict、unsupported_host、scope_unbound、handoff_delivery_failed、invalid_contract 与 invalid_runtime_config 分支。新术语已同步到 ZJ-CONTEXT.md。",
+          "note": "分类为 observed-failure closeout；activation pointer 只负责 Agent 路由，不改变 ZAgenticOPN runtime、eligibility 或 scope ownership。"
+        }
+      ],
+      "notes": "由 ZAgentic owner/Human 完成。可复核提交：jununfly/ZAgentic commit d3d94a2（AGENTS.md + ZJ-CONTEXT.md）。验证：activation pointer isolated smoke publish→discover→claim_succeeded（同一 activation_id）；ZAgentic recursive validation 48 skills、frontmatter 48 skills、private naming、validator tests 2/2、diff --check 全部通过。OPN runtime 与 shared SQLite 未改动。"
     }
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-24 22:24:40",
+    "updated": "2026-08-28 17:26:31",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }

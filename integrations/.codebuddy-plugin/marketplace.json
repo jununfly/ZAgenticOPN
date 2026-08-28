@@ -1,0 +1,16 @@
+{
+  "name": "zagenticopn-local",
+  "description": "Local development marketplace for the ZAgenticOPN Agent Integration Proxy.",
+  "owner": {
+    "name": "ZAgenticOPN"
+  },
+  "plugins": [
+    {
+      "name": "zagenticopn-agent-integration",
+      "description": "WorkBuddy UserPromptSubmit hook for task-agnostic ZAgenticOPN activation.",
+      "version": "0.1.0",
+      "source": "./workbuddy",
+      "license": "MIT"
+    }
+  ]
+}

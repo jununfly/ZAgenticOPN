@@ -11,17 +11,3 @@ ZAgenticLoop is a legacy project, not a dependency or default source of reusable
 The roadmap JSON is its sole source of truth. Modify and render it only with `zj-roadmap-driven`; do not edit the JSON or rendered Markdown directly.
 
 Git repositories remain canonical for code, Specs, Plans, commits, and release facts. ZInitiatives provides navigation only; ZAgenticOPN owns this product's content.
-
-## Task-agnostic Agent activation
-
-When Human says only “检查 shared context”, an Agent working in this repository must enter the product coordination seam instead of treating ZInitiatives navigation as the shared Work Item store. Run one project-local activation with the Agent's stable identity and profile:
-
-```sh
-python scripts/activate_agent.py \
-  --agent-id <stable-agent-id> \
-  --device-id <device-id> \
-  --capabilities technical-writing \
-  --permissions zagentic-skill-write
-```
-
-Do not provide a Work Item id. The command performs one `discover`, claims at most one eligible execution or review item, and prints the structured handoff. Follow the returned Work Item's objective and acceptance; publish results through the coordination CLI. This is an explicit Human-triggered activation seam, not polling, automatic discovery, or a request for Human task selection.
