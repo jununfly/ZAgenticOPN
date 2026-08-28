@@ -13,9 +13,10 @@
 | 仓库 | `ZAgentic`（不是 ZAgenticOPN 产品仓库） |
 | 基线 commit | `d1154ea3f4bcd0f5dcf2b0855ebc3ad735942f1d` |
 | 方案 A 分支 | `solution-a/kep753-risk-register` |
-| 提交状态 | **已提交并推送** —— commit SHA `93c17b78591a101450f270a35e2da5eed4d02611`（短 `93c17b7`），已推送至 `origin/solution-a/kep753-risk-register`，**未合并 main** |
-| 提交消息 | `feat(zj-tech-research-report): enforce machine-checked riskRegister contract (KEP-753 step 4)` |
-| 同步状态 | `## solution-a/kep753-risk-register...origin/solution-a/kep753-risk-register`（无 ahead/behind） |
+| 提交 1 | `93c17b78591a101450f270a35e2da5eed4d02611`（短 `93c17b7`）— `feat(zj-tech-research-report): enforce machine-checked riskRegister contract (KEP-753 step 4)`；5 文件 +152/−75 |
+| 提交 2 | `5942550e928dd97d887bdff35ad07d79f22e404b`（短 `5942550`）— `fix(zj-tech-research-report): close risk register review findings`；4 文件 +55/−8（r6 复述归一化 + r7 渲染限制契约文本） |
+| 提交状态 | **两个 commit 均已推送**至 `origin/solution-a/kep753-risk-register`，**未合并 main**；提交 2 是**追加**提交，未改写已推历史 |
+| 同步状态 | `## solution-a/kep753-risk-register...origin/solution-a/kep753-risk-register`（无 ahead/behind），tracked 工作区干净 |
 
 ## Changed files
 
@@ -28,7 +29,7 @@
  5 files changed, 152 insertions(+), 75 deletions(-)
 ```
 
-（上表为 **r4 修订后**的累计变更集：r1 为 `18`/`85`，r2 为 `27`/`123`，r3 追加 `ZJ-CONTEXT.md`，r4 是测试重构去重。明细见文末 review rounds r2 / r3 / r4。）
+（上表是**提交 1（`93c17b7`）**的变更集：r1 为 `18`/`85`，r2 为 `27`/`123`，r3 追加 `ZJ-CONTEXT.md`，r4 是测试重构去重。提交 2（`5942550`）另含 4 文件 +55/−8，对应 r6 与 r7。明细见文末 review rounds r2–r7。）
 
 新增未跟踪输出目录两个：`kep753-risk-register-2026-08-29-solution-a/`（r1）与 `kep753-risk-register-2026-08-29-solution-a-r2/`（r2）。
 
@@ -116,7 +117,7 @@ python3 skills/research/zj-tech-research-report/scripts/publish_report.py \
 
 这不是本次引入的新缺陷，而是既有形态：`graduationCriteria`（价值实验一的新增字段）同样只进质量门、不进渲染，且原报告本身完全没有风险内容（grep `risk` = 0）。但要让 acceptance 里写的「风险/验证链路」真正出现在报告里，必须改共享编译器 `skills/research/zj-research/` 的渲染层 —— **超出本任务范围**（任务范围只允许 `zj-tech-research-report/` 源 skill、必要输入和运行副本）。
 
-该偏差作为 open item 保留，交给 Codex review 判定：是接受「契约层强制 + 渲染待办」，还是把渲染改动作为独立 Work Item 追加。
+Codex review 已就此提出 `[P1/部分]`：**gate 通过 ≠ 读者可见**。该判定成立，且比本段的原始表述更准。**完整诊断与处置见文末 review round r7**（含渲染器归属的硬证据：渲染器是 ZHarness 的固定产物，不在本任务范围内，因此不存在范围内修复路径）。
 
 ## Review round r2 — Standards 硬违规：`owner: "TBD"` 仍然通过
 
@@ -260,6 +261,132 @@ cd /Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN
 
 顺序原因：记录文件要引用 ZAgentic 的 commit SHA，SHA 必须先存在；否则又会出现「文档引用不存在的 hash」这类自指问题。
 
+## Review round r5 — P1「owner 的 TBD 禁止未实现/未覆盖」：证伪，根因是 ref 不一致
+
+**判定：在方案 A 分支上该 P1 不成立；在 `main` 上它成立 —— 因为分支尚未合并。** review 读到的应当是不含本变更的 ref。
+
+### 分支上已实现且已覆盖（可复核）
+
+| 位置 | 证据 |
+|---|---|
+| 校验器 `scripts/validate_technical_report.py:22` | `PLACEHOLDER_VALUES = {...}`（`tbd/tba/tbc/n-a/na/none/null/nil/unknown/?/-/--/待定/未定/未知/无/暂无/不清楚`） |
+| 校验器 `:233-234` | `elif str(value).strip().casefold() in PLACEHOLDER_VALUES:` → `…{field} is a placeholder, not real content`，对**全部六个字段**生效，含 `owner` |
+| 测试 `tests/verify_technical_report.py:281-285` | `tbd_owner["riskRegister"][0]["owner"] = "TBD"` → `assert_rejected(..., "riskRegister[0].owner is a placeholder")` |
+| 测试 `:287-291` | `mitigation = "待定"` → `assert_rejected(..., "riskRegister[1].mitigation is a placeholder")` |
+| 契约 `SKILL.md:125` | 「`owner` must name the role or party that carries the residual risk, not "TBD"; placeholders (`TBD`, `N/A`, `unknown`, `待定`, and similar) are rejected in **all six** fields」 |
+| 运行副本 | `~/.codex/skills/zj-research-report/` 与 `~/.codex/skills/zj-tech-research-report/` 两份均含该修复（`grep -c "is a placeholder"` = 1 / 1） |
+| commit | `93c17b7` 已含上述全部内容，并推送至 `origin/solution-a/kep753-risk-register` |
+
+### 定向变异测试（证明断言不是空转）
+
+只把 `:233` 的 `elif str(value)... in PLACEHOLDER_VALUES:` 改成 `elif False:`，其余不动，测试**必须**失败。实测：
+
+```
+rc = 1
+technical report contract: publisher did not reject tbd-owner with: riskRegister[0].owner is a placeholder
+```
+
+源码已完整还原，工作区 tracked 文件无改动。
+
+### 根因：review 与实现不在同一个 ref
+
+| ref | `PLACEHOLDER_VALUES` | 测试含 `TBD` | 合并进 `main` |
+|---|---|---|---|
+| `solution-a/kep753-risk-register` | 2 处 | 1 处 | — |
+| `main` | **0** | **0** | **否** |
+
+分支未合并进 `main`，所以任何按默认分支解析的读者都会正确报出「未实现」。
+
+### 为什么现在不合并（这是设计约束，不是拖延）
+
+两臂隔离是本实验的**根修复**：方案 A 与后续 Experience Version 臂各自从同一基线 `d1154ea` 出发、在独立分支上完成同一任务、互不参考对方产物。若现在把 `solution-a/kep753-risk-register` 合进 `main`，Experience Version 臂的基线就会包含方案 A 的实现，它再跑同一任务将无事可做 —— 正是本轮最初诊断出的「先跑臂抢占任务」退化对照。
+
+因此该 P1 的正确处置是二者之一：
+
+1. **把 review 指向分支** `solution-a/kep753-risk-register`（推荐，零风险）；
+2. 若 review 必须基于 `main`，则把该项标为 `deferred-until-merge`，owner 记为方案 A，等两臂对照收口、选定落地臂后再合并。
+
+## Review round r6 — P2「mitigation 仅拒绝完全相等文本」：成立，按"只做安全的一半"修
+
+**判定成立，部分修复。** 原实现是 `str(mitigation).strip().casefold() == str(risk).strip().casefold()`，只比到 strip+忽略大小写。加个句号、改个空格就能绕过 —— 属实。
+
+### 修了什么
+
+| 文件 | 改动 |
+|---|---|
+| `validate_technical_report.py` | 新增 `content_key()`（`re.sub(r"\W", "", s.casefold())`）与 `_NON_CONTENT_RE`；复述判定改为 `content_key(mitigation) == content_key(risk)` —— **标点、空白、大小写全部不计**，"加句号"这条绕过路径关闭 |
+| `tests/verify_technical_report.py` | 新增反例 `punctuated-restated-risk`（mitigation = risk + `"."`）必须被拒；新增**正例** `quoted-risk`（mitigation 先引用 risk、再写出机制与审计手段）必须**放行** |
+| `SKILL.md` §5 | 契约写明：门只比内容，加句号/改空格仍算复述；**并且明确它是精确匹配而非模糊匹配** |
+| `ZJ-CONTEXT.md` | Risk Register 词条同步（避免重蹈 r3 的词汇未同步） |
+
+### 刻意没做的那一半，以及为什么
+
+**没做**模糊相似度 / 包含判定。理由是不对称代价：
+
+- 漏放（lazy mitigation 混过门）→ 到 review 层还能被发现，成本可接受；
+- 误拒（合法 mitigation 被门拦下）→ **直接阻断发布**，而且拦的是已经写对了的报告。
+
+而"引用 risk 原文再补机制"恰恰是合法 mitigation 的常见写法：risk `记忆层被当成控制面：…`，mitigation `…contained by read-only grants and a nightly bypass audit`。任何包含判定或相似度阈值都会先命中这一类。所以我把边界定死在**逐字复述**上，并把"换句话复述、但没写机制"明确划给 review 层 —— 那本来就是 review 存在的理由。
+
+为此专门加了一个**正例测试**把这条边界钉住：将来谁想加包含/相似度规则，这个测试会先失败。
+
+### 验证
+
+| 项 | 结果 |
+|---|---|
+| 回归 | `python3 tests/verify_technical_report.py` **PASS** |
+| 定向变异（把比较退回 `strip().casefold()`） | `rc=1`，`publisher did not reject punctuated-restated-risk with: mitigation restates the risk` —— 证明新测试精确守在新行为上；源码已还原 |
+| 副本同步 | 两份 codex 副本只剩 `.pyc` / `ALIAS.md` |
+| `quick_validate.py` | 源 + 别名双 PASS |
+| r6 重新发布 | `kep753-risk-register-2026-08-29-solution-a-r6/`：编译器 + 质量门双 healthy，`riskRegister=4`，`riskRegisterCoverage=true`，reportHash `01637657…`，receipt SHA-256 `9fda5d54…` |
+
+输出目录与 review 轮次对齐：**r1**（初版）/ **r2**（占位符修复）/ **r6**（复述归一化）。r3（文档）、r4（测试重构）未改变 gate 行为，故不产新 artifact。
+
+## Review round r7 — P1/部分「IR 有 4 条风险且 gate 通过，但产物不展示风险登记」
+
+**判定成立。** 而且 reviewer 的表述比我在 r1 埋的那段 open item 更准确：**healthy receipt 只证明门过了，不证明读者看得见**。这一条此前是「已知但表述偏软」，现在按 P1 处理。
+
+### 硬证据：渲染器不在本任务范围内，甚至不在本仓库
+
+| 事实 | 证据 |
+|---|---|
+| 编译器是**外部固定产物** | `skills/research/zj-research/artifacts/compiler-lock.json`：repository `github.com/jununfly/ZHarness`，commit `9172aa0`，artifact `dsh-research-cli-9172aa0.tgz`，sha256 `e5297042ca080e3489969999b5f7094c1867da646f1c91a0a971a35ce9ecd21d` |
+| 渲染走 `zj-research-cli/v1` 协议的两个 operation | `publish_report.py:88` `compile-report` → `publish_report.py:94` `render-html` |
+| **编译器完全不认识这两个字段** | 在该锁定产物（`~/.cache/zj-research/compiler/e5297042…/`）内 grep：`graduationCriteria` **0 次**，`riskRegister` **0 次** |
+| 它渲染的是固定字段集 | 同一产物内仅出现 `concepts / diagrams / candidates / cards / claims / comparisons / recommendations / metrics`，**没有配置项可开** |
+
+所以这不是「改 `skills/research/zj-research/` 就能解决」，而是需要 **ZHarness 上游改渲染 + 出包 + 抬锁版本**。跨仓库发布，远超本实验范围。
+
+### 为什么没有范围内绕行方案
+
+| 绕法 | 为什么不采用 |
+|---|---|
+| 编译后补写 Markdown/HTML | `SKILL.md` §6 明令禁止：「Never hand-author or edit a competing Markdown or HTML version」 |
+| 把风险塞进 `concepts` / `claims` 让它被渲染 | 语义污染；且 `claims` 必须挂 ledger Evidence ID，风险条目没有证据来源，会反过来触发门自己的可追溯性检查 |
+| 写进 `recommendations` 散文 | 正是 `informationGaps` 那次回归明确否掉的「散文不等于契约」 |
+
+### 处置：拆成两件事，不混为一谈
+
+1. **不阻塞 `1-3-1`。** 该节点测的是 **Human intervention**，不是报告信息丰富度。风险登记不可见是 skill 的渲染缺陷，与两臂对照正交，拿它卡住阶段退出属于把两个问题绑死。
+2. **acceptance 的「风险/验证链路」这一项判为未达成**，作为 deferred 记录，并指定上游依赖：
+   - 依赖：`ZHarness@9172aa0` → 渲染层支持 `riskRegister`（以及既有同样不渲染的 `graduationCriteria`）
+   - 建议单独立 Work Item（仓库 `jununfly/ZHarness`），不在本实验内做
+
+### 范围内已做的补救：把这个假设钉死在契约里
+
+不能再让「gate 通过 = 报告里有」这个错误假设靠口头传递，所以写进了文本：
+
+| 文件 | 内容 |
+|---|---|
+| `SKILL.md` §6 | 新增：「A healthy receipt is **not** proof that everything in the IR reached the reader」——点名渲染器是锁定产物（ZHarness `9172aa0`）、列出固定渲染字段集、`graduationCriteria` 与 `riskRegister` 属于「契约强制但不渲染」，并禁止用后处理补偿 |
+| `ZJ-CONTEXT.md` | **Risk Register** 词条补交叉引用（「不渲染，见 Risk-register coverage」），并修正 r6 遗留的换行；**Risk-register coverage** 词条原本已写明该限制 |
+
+### 验证
+
+`quick_validate.py` 源 + 别名双 PASS；`tests/verify_technical_report.py` PASS；两份副本同步后只剩 `.pyc` / `ALIAS.md`。**gate 行为未变**（本次只动契约文本），故不产新 artifact。
+
+**落地**：r6 + r7 的变更由 Human 于 2026-08-29 02:14 GMT+8 以追加提交 `5942550e928dd97d887bdff35ad07d79f22e404b` 推送，**未改写已推的 `93c17b7`**。已交 Codex review。
+
 ## 下一步（Human 动作，Agent 不得代填）
 
 1. zj 把 objective / acceptance / 本记录的结果手工复制给 Codex；
@@ -267,7 +394,7 @@ cd /Users/bilibili/Documents/workspace/github/jununfly/ZAgenticOPN
 3. review 若 request_changes，每条意见单独搬回 WorkBuddy，**每次一行，不得压缩成一次成功**；
 4. zj 手工拼装最终结果；
 5. 全程由 zj 在 action log 现场填写开始/结束时间；
-6. 确认后由 zj 显式 `commit+push`，再把 commit SHA 回填本文件。
+6. ~~确认后由 zj 显式 `commit+push`，再把 commit SHA 回填本文件。~~ **已完成**（`93c17b7` + `5942550`），SHA 已回填本文件。
 
 方案 A 全程未使用 OPN shared context，也未调用 activation runner —— 这是方案 A 的定义约束。
 
