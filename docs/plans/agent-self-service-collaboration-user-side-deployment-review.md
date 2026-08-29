@@ -4,15 +4,16 @@
 
 ### Decision
 
-Decision: revise。
+Decision: accepted for owner-only private dogfood；持续观察。
 
 推荐采用“版本化、不可变的用户侧发布物 + 独立 runtime + host-level
-WorkBuddy 插件 + 用户数据目录”的部署形态。`0.1.0-rc.2` 已构建并通过临时
-clean-room 安装、doctor、activation 和 rollback 验收，但它来自 dirty working
-tree，且真实 WorkBuddy 用户级注册尚未验证；这两个问题仍是 blocking。active
-Spec 的 owner-only formal release 边界已完成同步。打包工具、分发外壳和具体
-WorkBuddy 用户插件目录属于 non-blocking open decisions，可在不改变产品部署契约
-的前提下选择。
+WorkBuddy 插件 + 用户数据目录”的部署形态。`0.1.0-rc.4` 已从 clean commit
+构建，并在真实用户 WorkBuddy 配置中完成 marketplace 注册、user-scope 安装、
+启用、doctor、workspace binding、任务无关 activation、结果 review 和 rc.4↔rc.3
+回滚往返。正式安装链路的 blocking 验证已闭合；三项日常真实任务的长期可用性观察
+仍待 Human 继续积累。active Spec 的 owner-only formal release 边界已完成同步。
+外层分发渠道、签名和更长期的数据保留仍是 non-blocking open decisions，可在不改变
+产品部署契约的前提下选择。
 
 ### Summary
 
@@ -45,7 +46,7 @@ ZAgenticOPN 工作树导入 Python 包。消费项目只作为 Agent 修改目�
   release 维护，不由消费项目 `AGENTS.md` 维护。
 - 安装、用户数据、备份和回滚责任：产品 owner 的用户账户；首版不承诺外部
   用户支持或自动更新。
-- 跟踪：roadmap `1-2-1-5-1`；上位节点为
+- 跟踪：roadmap `1-2-1-5-2`；上位节点为
   `1-2-1-5`「同设备多 Agent 个人重度使用与正式使用准备」。
 - 证据入口：
   [active Experience Version Spec](../prds/agent-self-service-collaboration-experience-version.md)、
@@ -213,37 +214,35 @@ review 和 scorecard。Agent 可以修改消费项目文件，但 activation、s
 
 | 指标 | baseline | unit | method | target/threshold | owner |
 | --- | --- | --- | --- | --- | --- |
-| clean-room install pass | 尚未测量；当前只有源码/fixture 接线 | 安装次数 | 在无 checkout、无项目 `PYTHONPATH` 的干净用户目录记录 installer + doctor receipt | 首个发布候选 1/1 通过 | Agent；Human 复核 |
-| source-tree coupling | 当前 hook 明确设置 source root/PYTHONPATH | activation 次数 | 记录 hook 子进程 argv/env/path，并在消费项目外启动 | 正式发布激活中 0 次读取产品源码树 | Agent |
-| activation receipt success | 既有同设备实验 scorecard；正式安装基线尚未测量 | 有效 activation | 从 WorkBuddy host 日志与 shared event 对账 | 连续 3 个真实日常任务无安装/runner 路径失败 | Human |
-| upgrade/rollback pass | 尚未测量 | 发布切换次数 | 新旧 release、schema migration、备份和回滚的固定 fixture | 1/1 升级通过；故障演练 1/1 可回滚 | Agent |
+| clean-room install pass | `0.1.0-rc.4`：1/1；临时 clean-room 与真实用户目录均通过 | 安装次数 | 在无 checkout、无项目 `PYTHONPATH` 的用户目录记录 installer + doctor receipt | 首个发布候选 1/1 通过 | Agent；Human 复核 |
+| source-tree coupling | rc.4 owner canary：0 次读取产品源码树 | activation 次数 | 记录 installed hook 子进程 argv/env/path，并在消费项目外启动 | 正式发布激活中 0 次读取产品源码树 | Agent |
+| activation receipt success | owner canary：1/1 | 有效 activation | 从 host plugin 输出与 product shared event 对账 | 连续 3 个真实日常任务无安装/runner 路径失败 | Human |
+| upgrade/rollback pass | rc.3→rc.4→rc.3→rc.4：1/1 | 发布切换次数 | 新旧 release、备份和回滚的固定 fixture 与真实用户目录往返 | 1/1 升级通过；故障演练 1/1 可回滚 | Agent |
 | product-caused Human intervention | 尚未测量 | 每个真实任务的动作/分钟 | 单独记录安装、配置、runner 修复和恢复动作，不混入任务特定操作 | 稳定使用后不需要每任务手工修复；异常按事件归因 | Human |
-| data leakage to consumer repo | 尚未测量 | 任务/安装次数 | 检查 repo diff、未跟踪文件、产品目录和 shared event references | 产品数据库、日志和 plugin payload 不出现在消费项目 repo | Agent |
+| data leakage to consumer repo | owner canary：0 个产品文件进入消费项目 repo | 任务/安装次数 | 检查 repo diff、未跟踪文件、产品目录和 shared event references | 产品数据库、日志和 plugin payload 不出现在消费项目 repo | Agent |
 
 实验不比较 Agent 总耗时；首先验证“正式安装确实是产品路径”，再观察日常使用
 中的有效 activation、接续、失败和 Human 成本。所有 baseline 未测量的项目必须在
 clean-room 阶段补齐，不能把当前源码运行结果当作安装结果。
 
-当前 RC 观察结果（2026-08-29）：`0.1.0-rc.2` 在 macOS arm64 构建，安装到临时
-用户产品目录后 `doctor` 通过；配置、publish、activation、scorecard 和 rollback
-均由 installed launcher 完成。临时消费项目在清除 `PYTHONPATH` 与
-`ZAGENTICOPN_SOURCE_ROOT` 后，host plugin 成功得到 `claimed` handoff；仓库自动化
-测试为 30/30 通过。该 RC manifest 标记 `source_tree_dirty=true`，所以这些结果是
-fixture evidence，不是正式 release 资格。
+当前 RC 观察结果（2026-08-29）：`0.1.0-rc.4` 从 commit
+`0f4d29bfeb60e61505dcdc3e5e5db863a8669568` 构建为 macOS arm64 bundle，manifest
+标记 `source_tree_dirty=false`。真实用户目录安装后，官方 WorkBuddy CLI 显示
+rc.4 为 user-scope enabled，rc.3 与旧 `zagenticopn-local` 为 disabled；doctor
+healthy。owner canary 在真实 `ZAgentic` workspace binding 上完成
+publish→claim→publish_result→review→completed，7 条关联事件可对账，消费项目无
+产品 runtime/data 文件。全量仓库测试现为 31/31 通过。
 
 ## Rollout, recovery, and lifecycle
 
 ### Rollout
 
-1. **Release candidate**：从固定 Git tag 构建版本化 artifact，生成 manifest 和
-   checksum；`0.1.0-rc.2` 已在临时用户目录完成 doctor、config、plugin payload
-   registration、activation smoke 和 rollback，但 manifest 标记了
-   `source_tree_dirty=true`，不能直接晋级为正式发布物。当前 installer 已接入
-   官方 host CLI 的 marketplace add/install 流程，待 clean-tag candidate 上做
-   一次真实 WorkBuddy 用户级 registration。
-2. **Owner canary**：在真实 WorkBuddy 用户级 plugin 注册完成后，于产品 owner 的
-   一个真实同设备 scope 中安装，先执行一个
-   可回滚的低风险 Work Item；对账 receipt、events、Git reference 和 repo diff。
+1. **Release candidate**：`0.1.0-rc.4` 已从固定 clean commit 构建，生成 manifest
+   和 checksum；临时 clean-room、真实用户级 host registration、doctor 与
+   rc.4↔rc.3 rollback 往返均通过。
+2. **Owner canary**：已在产品 owner 的真实同设备 scope 中执行一个可回滚的低风险
+   Work Item；对账 receipt、events、Git reference 和 repo diff，结果已由 reviewer
+   Agent 接受。日常三任务的长期观察仍由 Human 继续记录。
 3. **Private dogfood**：current release 指向通过 canary 的版本，产品 owner 在
    日常工作中持续使用；按周记录安装/activation 错误、恢复动作、完成率和效率
    缺口，不自动扩大到跨设备、多项目或其他用户。
@@ -306,10 +305,12 @@ host payload，不拼接 shell 命令，不从消费项目导入代码。runtime
 `python -m unittest discover -s tests -v` 只能证明源码层行为，不能替代 clean-room
 安装、版本切换和 host plugin 验收。
 
-已执行的 RC 命令链为：build `0.1.0-rc.2` → user-root install → `doctor` → installed
-runtime configure/publish → clean consumer hook activation → install `0.1.0-rc.1`
-and `0.1.0-rc.2` → rollback to `0.1.0-rc.1` → `doctor`。真实 WorkBuddy host 的
-官方用户级注册动作仍未执行。
+已执行的正式命令链为：clean build `0.1.0-rc.4` → 真实 user-root install → 官方
+WorkBuddy CLI marketplace add/install/enable → runtime configure → `doctor` →
+installed hook 在真实 consumer workspace 完成 task-agnostic activation →
+publish-result → submit → review → completed → rollback to `0.1.0-rc.3` → `doctor`
+→ rollback back to `0.1.0-rc.4` → `doctor`。旧开发 plugin 保留但 disabled；产品
+SQLite 位于用户侧 data 目录，未写入消费项目。
 
 ## Open decisions
 
@@ -317,7 +318,7 @@ and `0.1.0-rc.2` → rollback to `0.1.0-rc.1` → `doctor`。真实 WorkBuddy ho
 |---|---|---|---|
 | Runtime 首版使用 self-contained executable 还是发布物内隔离 Python 环境？ | 两种 spike 的安装体积、启动时间、macOS 架构兼容和 hook 调用结果 | Agent + Human | 首个 release candidate 构建前冻结；两者均不得读取源码树 |
 | macOS 外层分发使用 signed `.pkg`、`.dmg` 还是 release bundle installer？ | 用户级安装权限、签名/校验、升级/回滚和卸载演练 | Human | Owner canary 前冻结一个渠道 |
-| WorkBuddy 用户级 plugin 的注册 API/目录是什么？ | 干净 host 上的官方 CLI marketplace add/install 和 plugin reload 行为 | Human + Agent | clean-room install 能完成 plugin registration 且无消费项目复制 |
+| WorkBuddy 用户级 plugin 的注册 API/目录是什么？ | 干净 host 上的官方 CLI marketplace add/install/enable 和 plugin reload 行为 | Human + Agent | 已由真实用户配置 rc.4 验证；后续仅跟踪 host 版本兼容 |
 | `runtime.json` 与 storage schema 如何携带 release/contract 版本？ | migration fixture、混用版本负向测试和备份恢复结果 | Agent | version-skew 与 rollback gate 全通过 |
 | 个人数据的备份、保留和删除默认值是什么？ | owner 对 shared context、events、logs、backups 的处置选择 | Human | 首次真实日常使用前书面确认 |
 
@@ -328,12 +329,12 @@ and `0.1.0-rc.2` → rollback to `0.1.0-rc.1` → `doctor`。真实 WorkBuddy ho
 | Codex | 2026-08-29 | 当前方案把源码工作树当作 runtime，不能作为正式用户侧产品路径。 | 建议版本化 release bundle、user-level runtime、host-level plugin、独立 data/config 和原子升级/回滚。 | 等待 clean-tag release、host CLI registration 和 owner canary。 |
 | Human | 2026-08-29 | private dogfood 不能通过跨项目直接调用本仓库代码，必须按正式产品发布到用户侧。 | 本评审已将该要求提升为 `1-2-1-5-1` 的 deployment contract；active Spec、README 和 integration 说明已同步。 | 等待 clean-tag release、真实 host registration 和 owner canary。 |
 | Codex | 2026-08-29 | RC 是否真的脱离源码树？ | `0.1.0-rc.2` clean-room fixture 通过，30/30 自动化测试通过，rollback 与版本配对通过；manifest 如实标记 dirty working tree。官方 host CLI 的用户级 marketplace add/install 已由隔离配置探针确认，尚未在真实用户配置执行。 | clean-tag 构建、真实 WorkBuddy host 用户级注册和 owner canary 仍未完成。 |
+| Codex | 2026-08-29 | clean release 与真实用户安装是否闭合？ | `0.1.0-rc.4` 从 clean commit 构建，真实 WorkBuddy user-scope plugin registration/enable、workspace-bound owner canary、事件/Git/repo 对账和 rc.4↔rc.3 rollback 往返均通过；31/31 全量测试通过。 | 仍需 Human 在日常使用中积累 3 个真实任务的 activation/失败与效率观察；不阻塞本安装节点。 |
 
 ### Short-read acceptance
 
-当前 decision 是 revise。blocking findings 是：RC 不是从 clean tag 构建的正式
-artifact，以及真实 WorkBuddy 用户级 plugin registration/owner canary 尚未完成。
-下一验证动作是由 Agent 从 clean commit 构建 release candidate，并由 Human 在真实
-host 上完成一次用户级安装、配置、任务无关 activation 和故障回滚；阈值为 1/1
-安装通过、0 次源码树耦合、连续 3 个真实任务 activation 可对账、1/1 rollback
-成功。
+当前 decision 已接受为 owner-only private dogfood 交付方式。正式安装节点的阻断项
+已闭合：clean release、真实 user-scope registration、0 次源码树耦合、一次真实
+workspace-bound canary 和 1/1 rollback 往返均有证据。后续仅保留 Human 的长期观察：
+连续 3 个真实日常任务 activation 可对账，并记录安装/runner 失败、Human 介入与效率
+缺口；该观察不阻塞本节点完成，也不触发 Experience Version 阶段晋级。
