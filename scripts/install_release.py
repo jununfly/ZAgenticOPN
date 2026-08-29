@@ -1,21 +1,25 @@
 #!/usr/bin/env python3
-"""Install, inspect, and roll back a ZAgenticOPN release bundle."""
+"""Install, inspect, roll back, and uninstall a ZAgenticOPN release bundle."""
 
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
 
 
 MANIFEST_SCHEMA = "zagenticopn.release-manifest.v1"
+RUNTIME_CONFIG_SCHEMA = "zagenticopn.runtime-config.v1"
+PRODUCT_PLUGIN_NAME = "zagenticopn-agent-integration"
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -32,6 +36,44 @@ def main(argv: list[str] | None = None) -> int:
         help="allow a dirty source-tree bundle for fixtures; formal installs reject it",
     )
 
+    setup = subparsers.add_parser(
+        "setup",
+        help="one-step user-side setup for an extracted release bundle",
+    )
+    setup.add_argument(
+        "--bundle",
+        type=Path,
+        default=Path(__file__).resolve().parent,
+        help="extracted release directory; defaults to this installer directory",
+    )
+    setup.add_argument("--product-root", type=Path, default=_default_product_root())
+    setup.add_argument("--host-cli", help="host CLI; auto-detected when omitted")
+    setup.add_argument(
+        "--host-cli-node",
+        help="Node executable for a JavaScript host CLI; auto-detected when omitted",
+    )
+    setup.add_argument(
+        "--host-config-dir",
+        type=Path,
+        help="host user config directory; selected from the detected host when omitted",
+    )
+    setup.add_argument(
+        "--workspace-root",
+        type=Path,
+        help="explicit consumer workspace to bind during first setup",
+    )
+    setup.add_argument("--scope", help="explicit CollaborationScope for --workspace-root")
+    setup.add_argument(
+        "--non-interactive",
+        action="store_true",
+        help="install without asking for an optional first workspace binding",
+    )
+    setup.add_argument(
+        "--allow-dirty",
+        action="store_true",
+        help="allow a dirty source-tree bundle for fixtures; formal installs reject it",
+    )
+
     doctor = subparsers.add_parser("doctor")
     doctor.add_argument("--product-root", type=Path, default=_default_product_root())
     _add_host_options(doctor)
@@ -40,6 +82,32 @@ def main(argv: list[str] | None = None) -> int:
     rollback.add_argument("--product-root", type=Path, default=_default_product_root())
     _add_host_options(rollback)
     rollback.add_argument("--to", dest="release_id", required=True)
+
+    uninstall = subparsers.add_parser(
+        "uninstall",
+        help="remove the installed host integration and user-side release",
+    )
+    uninstall.add_argument("--product-root", type=Path, default=_default_product_root())
+    uninstall.add_argument("--host-cli", help="host CLI; auto-detected when omitted")
+    uninstall.add_argument(
+        "--host-cli-node",
+        help="Node executable for a JavaScript host CLI; auto-detected when omitted",
+    )
+    uninstall.add_argument(
+        "--host-config-dir",
+        type=Path,
+        help="host user config directory; selected from the detected host when omitted",
+    )
+    uninstall.add_argument(
+        "--keep-data",
+        action="store_true",
+        help="remove releases and host integration but retain runtime.json, data, backups and logs",
+    )
+    uninstall.add_argument(
+        "--yes",
+        action="store_true",
+        help="confirm removal; without it the command is a read-only preview",
+    )
 
     args = parser.parse_args(argv)
     try:
@@ -52,6 +120,27 @@ def main(argv: list[str] | None = None) -> int:
                 args.host_config_dir,
                 args.host_plugin_root,
                 args.allow_dirty,
+            )
+        elif args.operation == "setup":
+            result = _setup(
+                args.bundle,
+                args.product_root,
+                args.host_cli,
+                args.host_cli_node,
+                args.host_config_dir,
+                args.workspace_root,
+                args.scope,
+                args.non_interactive,
+                args.allow_dirty,
+            )
+        elif args.operation == "uninstall":
+            result = _uninstall(
+                args.product_root,
+                args.host_cli,
+                args.host_cli_node,
+                args.host_config_dir,
+                args.keep_data,
+                args.yes,
             )
         elif args.operation == "doctor":
             result = _doctor(
@@ -130,6 +219,7 @@ def _install(
         product_root / "backups",
     )
     _switch_current(product_root, target)
+    config_created = _ensure_runtime_config(product_root)
     installed_record = {
         "manifest_schema": MANIFEST_SCHEMA,
         "active_release": release_id,
@@ -137,6 +227,7 @@ def _install(
         "installed_at": str(time.time()),
         "product_root": str(product_root),
         "host_registration": host_registration,
+        "runtime_config_created": config_created,
     }
     (product_root / "install-manifest.json").write_text(
         json.dumps(installed_record, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
@@ -148,7 +239,211 @@ def _install(
         "product_root": str(product_root),
         "current": str(product_root / "current"),
         "host_registration": host_registration,
+        "runtime_config_created": config_created,
     }
+
+
+def _setup(
+    bundle: Path,
+    product_root: Path,
+    host_cli: str | None,
+    host_cli_node: str | None,
+    host_config_dir: Path | None,
+    workspace_root: Path | None,
+    scope: str | None,
+    non_interactive: bool,
+    allow_dirty: bool,
+) -> dict[str, Any]:
+    """Run the supported owner setup flow from an extracted release bundle."""
+
+    if (workspace_root is None) != (scope is None):
+        raise ValueError("--workspace-root and --scope must be provided together")
+
+    detected_host = host_cli or _detect_host_cli()
+    detected_node = host_cli_node
+    if Path(detected_host).suffix in {".js", ".mjs", ".cjs"} and detected_node is None:
+        detected_node = _detect_host_cli_node()
+    detected_config = host_config_dir or _default_host_config_for_cli(detected_host)
+
+    if workspace_root is None and not non_interactive and sys.stdin.isatty():
+        workspace_root, scope = _prompt_for_binding()
+
+    result = _install(
+        bundle,
+        product_root,
+        detected_host,
+        detected_node or "node",
+        detected_config,
+        None,
+        allow_dirty,
+    )
+    if workspace_root is not None and scope is not None:
+        result["configuration"] = _configure_first_binding(product_root, workspace_root, scope)
+    else:
+        result["configuration"] = {
+            "status": "awaiting_workspace_binding",
+            "config_path": str(product_root.expanduser().resolve() / "runtime.json"),
+            "next_action": (
+                "run ./current/bin/zagenticopn runtime-config configure with an explicit "
+                "workspace_root and scope"
+            ),
+        }
+    result["doctor"] = _doctor(
+        product_root,
+        detected_host,
+        detected_node or "node",
+        detected_config,
+        None,
+    )
+    result["setup"] = {
+        "host_cli": detected_host,
+        "host_cli_node": detected_node,
+        "host_config_dir": str(detected_config),
+    }
+    return result
+
+
+def _detect_host_cli() -> str:
+    configured = os.getenv("ZAGENTICOPN_HOST_CLI")
+    candidates = [
+        configured,
+        "/Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/dist/codebuddy.js",
+        str(Path.home() / "Applications/WorkBuddy.app/Contents/Resources/app.asar.unpacked/cli/dist/codebuddy.js"),
+        "/Applications/CodeBuddy.app/Contents/Resources/app.asar.unpacked/cli/dist/codebuddy.js",
+        str(Path.home() / "Applications/CodeBuddy.app/Contents/Resources/app.asar.unpacked/cli/dist/codebuddy.js"),
+    ]
+    for candidate in candidates:
+        if candidate and Path(candidate).expanduser().is_file():
+            return str(Path(candidate).expanduser().resolve())
+    for command in ("workbuddy", "codebuddy"):
+        resolved = shutil.which(command)
+        if resolved:
+            return resolved
+    raise ValueError(
+        "supported WorkBuddy/CodeBuddy host CLI was not found; install the host or "
+        "rerun with --host-cli /path/to/codebuddy.js"
+    )
+
+
+def _detect_host_cli_node() -> str:
+    configured = os.getenv("ZAGENTICOPN_HOST_CLI_NODE")
+    candidates = [configured, shutil.which("node"), "/opt/homebrew/bin/node", "/usr/local/bin/node", "/usr/bin/node"]
+    for candidate in candidates:
+        resolved = shutil.which(candidate) if candidate and not Path(candidate).expanduser().is_file() else candidate
+        if resolved and Path(resolved).expanduser().is_file() and os.access(resolved, os.X_OK):
+            return str(Path(resolved).expanduser().resolve())
+    raise ValueError(
+        "Node.js was not found for the detected host CLI; install Node.js or rerun "
+        "with --host-cli-node /path/to/node"
+    )
+
+
+def _default_host_config_for_cli(host_cli: str) -> Path:
+    if "codebuddy" in host_cli.lower() and "workbuddy" not in host_cli.lower():
+        return Path.home() / ".codebuddy"
+    return _default_host_config_dir()
+
+
+def _prompt_for_binding() -> tuple[Path | None, str | None]:
+    print("\nOptional first project setup")
+    print("Leave the workspace blank to finish installation without a binding.")
+    workspace_value = input("Consumer workspace absolute path: ").strip()
+    if not workspace_value:
+        return None, None
+    workspace = Path(workspace_value).expanduser().resolve()
+    if not workspace.is_dir():
+        raise ValueError(f"workspace root is not a directory: {workspace}")
+    scope_value = input("CollaborationScope: ").strip()
+    if not scope_value:
+        raise ValueError("CollaborationScope must not be empty")
+    return workspace, scope_value
+
+
+def _configure_first_binding(
+    product_root: Path,
+    workspace_root: Path,
+    scope: str,
+) -> dict[str, Any]:
+    product_root = product_root.expanduser().resolve()
+    workspace_root = workspace_root.expanduser().resolve()
+    if not workspace_root.is_dir():
+        raise ValueError(f"workspace root is not a directory: {workspace_root}")
+    config_path = product_root / "runtime.json"
+    payload = _load_manifest(config_path)
+    existing = payload.get("scope_bindings", [])
+    if not isinstance(existing, list):
+        raise ValueError("runtime config scope_bindings must be a list")
+    binding = {"workspace_root": str(workspace_root), "scope": scope}
+    if existing and binding not in existing:
+        raise ValueError(
+            "runtime config already has a different workspace binding; use the advanced "
+            "runtime-config command to change it"
+        )
+    payload["schema_version"] = RUNTIME_CONFIG_SCHEMA
+    payload["scope_bindings"] = [binding]
+    payload.pop("config_updated_at", None)
+    launcher = product_root / "current" / "bin" / "zagenticopn"
+    completed = subprocess.run(
+        [str(launcher), "runtime-config", "configure"],
+        input=json.dumps(payload, ensure_ascii=False),
+        capture_output=True,
+        text=True,
+        check=False,
+        env={**os.environ, "ZAGENTICOPN_RUNTIME_CONFIG": str(config_path)},
+        timeout=10,
+    )
+    if completed.returncode != 0:
+        raise ValueError(completed.stdout.strip() or completed.stderr.strip() or "runtime config failed")
+    result = _load_manifest_text(completed.stdout)
+    if result.get("status") != "configured":
+        raise ValueError(f"runtime config failed: {result}")
+    return result
+
+
+def _load_manifest_text(value: str) -> dict[str, Any]:
+    payload = json.loads(value)
+    if not isinstance(payload, dict):
+        raise ValueError("installer received a non-object runtime result")
+    return payload
+
+
+def _ensure_runtime_config(product_root: Path) -> bool:
+    config_path = product_root / "runtime.json"
+    if config_path.exists():
+        return False
+    parent = config_path.parent
+    temporary_name: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=parent, prefix=".runtime-", delete=False
+        ) as temporary:
+            temporary_name = temporary.name
+            json.dump(
+                {
+                    "shared_store_path": str(product_root / "data" / "shared.sqlite3"),
+                    "scope_bindings": [],
+                    "config_updated_at": datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S.000Z"),
+                },
+                temporary,
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+            temporary.write("\n")
+            temporary.flush()
+            os.fsync(temporary.fileno())
+        os.replace(temporary_name, config_path)
+        try:
+            os.chmod(config_path, 0o600)
+        except OSError:
+            pass
+    except BaseException:
+        if temporary_name:
+            try:
+                Path(temporary_name).unlink()
+            except OSError:
+                pass
+        raise
+    return True
 
 
 def _doctor(
@@ -226,6 +521,172 @@ def _rollback(
         "current": str(product_root / "current"),
         "host_registration": host_registration,
     }
+
+
+def _uninstall(
+    product_root: Path,
+    host_cli: str | None,
+    host_cli_node: str | None,
+    host_config_dir: Path | None,
+    keep_data: bool,
+    confirmed: bool,
+) -> dict[str, Any]:
+    """Remove this product's host registrations and user-side release state."""
+
+    product_root = product_root.expanduser().resolve()
+    targets = _uninstall_targets(product_root)
+    preview = {
+        "product_root": str(product_root),
+        "release_ids": [manifest["release_id"] for _, manifest in targets],
+        "data_action": "retain" if keep_data else "remove",
+    }
+    if not confirmed:
+        return {"status": "confirmation_required", **preview}
+
+    detected_host = host_cli or _detect_host_cli()
+    detected_node = host_cli_node
+    if Path(detected_host).suffix in {".js", ".mjs", ".cjs"} and detected_node is None:
+        detected_node = _detect_host_cli_node()
+    detected_config = host_config_dir or _default_host_config_for_cli(detected_host)
+
+    removed_registrations = []
+    for target, manifest in targets:
+        registration = _host_registration_details(manifest, target)
+        removed_registrations.append(
+            _remove_host_registration(
+                registration,
+                detected_host,
+                detected_node or "node",
+                detected_config,
+            )
+        )
+
+    if keep_data:
+        current = product_root / "current"
+        current.unlink()
+        shutil.rmtree(product_root / "versions")
+        (product_root / "install-manifest.json").unlink()
+    else:
+        shutil.rmtree(product_root)
+
+    return {
+        "status": "uninstalled",
+        **preview,
+        "host": {
+            "host_cli": detected_host,
+            "host_cli_node": detected_node,
+            "host_config_dir": str(detected_config),
+        },
+        "removed_registrations": removed_registrations,
+    }
+
+
+def _uninstall_targets(product_root: Path) -> list[tuple[Path, dict[str, Any]]]:
+    marker = product_root / "install-manifest.json"
+    if marker.is_symlink() or not marker.is_file():
+        raise ValueError(f"ZAgenticOPN install marker is missing: {marker}")
+    install_record = _load_manifest(marker)
+    if install_record.get("manifest_schema") != MANIFEST_SCHEMA:
+        raise ValueError(f"unsupported ZAgenticOPN install marker: {marker}")
+
+    current = product_root / "current"
+    if not current.is_symlink():
+        raise ValueError(f"current release pointer is missing: {current}")
+    versions = product_root / "versions"
+    if versions.is_symlink() or not versions.is_dir():
+        raise ValueError(f"installed release directory is missing: {versions}")
+
+    targets: list[tuple[Path, dict[str, Any]]] = []
+    for target in sorted(versions.iterdir()):
+        if target.is_symlink() or not target.is_dir() or target.name.startswith("."):
+            raise ValueError(f"unexpected entry in installed releases: {target}")
+        _safe_release_id(target.name)
+        manifest_path = target / "manifest.json"
+        if manifest_path.is_symlink():
+            raise ValueError(f"installed release manifest must not be a symlink: {manifest_path}")
+        manifest = _load_manifest(manifest_path)
+        if manifest.get("manifest_schema") != MANIFEST_SCHEMA:
+            raise ValueError(f"unsupported installed release manifest: {manifest_path}")
+        if manifest.get("product") != "ZAgenticOPN":
+            raise ValueError(f"installed release is not ZAgenticOPN: {target}")
+        if manifest.get("release_id") != target.name:
+            raise ValueError(f"release directory and manifest disagree: {target}")
+        integration = manifest.get("host_integration")
+        if not isinstance(integration, dict) or integration.get("plugin_name") != PRODUCT_PLUGIN_NAME:
+            raise ValueError(f"installed release is not a ZAgenticOPN host integration: {target}")
+        marketplace_name = integration.get("marketplace_name")
+        if marketplace_name != f"zagenticopn-release-{target.name}":
+            raise ValueError(f"installed release has an unsafe marketplace name: {target}")
+        targets.append((target, manifest))
+    if not targets:
+        raise ValueError(f"no installed ZAgenticOPN releases found: {versions}")
+    return targets
+
+
+def _remove_host_registration(
+    registration: dict[str, str],
+    host_cli: str,
+    host_cli_node: str,
+    host_config_dir: Path,
+) -> dict[str, Any]:
+    plugin_id = f"{registration['plugin_name']}@{registration['marketplace_name']}"
+    states = _host_plugin_states(host_cli, host_cli_node, host_config_dir)
+    plugin = states.get(plugin_id)
+    plugin_removed = False
+    if plugin is not None:
+        if plugin.get("enabled") is True:
+            _run_host_cli(
+                host_cli,
+                host_cli_node,
+                ["plugin", "disable", plugin_id, "--scope", "user"],
+                host_config_dir,
+            )
+        _run_host_cli(
+            host_cli,
+            host_cli_node,
+            ["plugin", "uninstall", plugin_id, "--scope", "user"],
+            host_config_dir,
+        )
+        plugin_removed = True
+
+    marketplace_removed = False
+    if _marketplace_entry(host_config_dir, registration["marketplace_name"]) is not None:
+        _run_host_cli(
+            host_cli,
+            host_cli_node,
+            ["plugin", "marketplace", "remove", registration["marketplace_name"]],
+            host_config_dir,
+        )
+        marketplace_removed = True
+    return {
+        "plugin_id": plugin_id,
+        "plugin_removed": plugin_removed,
+        "marketplace_removed": marketplace_removed,
+    }
+
+
+def _host_plugin_states(
+    host_cli: str,
+    host_cli_node: str,
+    host_config_dir: Path,
+) -> dict[str, dict[str, Any]]:
+    completed = _run_host_cli(
+        host_cli,
+        host_cli_node,
+        ["plugin", "list", "--json"],
+        host_config_dir,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise ValueError("host CLI plugin list did not return JSON") from error
+    if not isinstance(payload, list):
+        raise ValueError("host CLI plugin list JSON must be an array")
+    states: dict[str, dict[str, Any]] = {}
+    for item in payload:
+        if isinstance(item, dict) and isinstance(item.get("id"), str):
+            states[item["id"]] = item
+    return states
 
 
 def _load_and_verify_bundle(bundle: Path, *, allow_dirty: bool = False) -> dict[str, Any]:

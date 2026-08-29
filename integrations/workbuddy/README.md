@@ -17,8 +17,31 @@ user-level config/data directories.
 
 ## Formal owner installation
 
-Use the installer copied into a versioned release bundle. For WorkBuddy on macOS,
-pass the official host CLI entrypoint and the host user config directory:
+Use the top-level `Install.command` copied into a versioned release bundle. For
+the normal macOS path, double-click it or run:
+
+```sh
+./Install.command --workspace-root "/absolute/path/to/consumer-repo" \
+  --scope "owner/repo/project"
+```
+
+The one-step entrypoint detects the installed WorkBuddy/CodeBuddy CLI and Node
+runtime, then performs the formal user-level installation, initializes the
+product data/config directories, writes the explicit binding, and runs doctor.
+It does not require the user to know the host CLI path or Python invocation.
+For automation, or when host detection needs an explicit override, the same
+entrypoint accepts `--host-cli`, `--host-cli-node` and `--host-config-dir`.
+
+To install without configuring a project yet:
+
+```sh
+./Install.command --non-interactive
+```
+
+The result reports the exact next configure action. Scope must always be
+explicit; the installer never infers it from cwd or Git metadata.
+
+The underlying advanced command remains available when needed:
 
 ```sh
 python3 install_release.py install \
@@ -34,6 +57,31 @@ the matching plugin at host user scope, and records the immutable release path.
 It does not edit `installed_plugins.json` by hand. Run the same host options with
 `install_release.py doctor` after installation. A source-tree bundle is rejected
 unless `--allow-dirty` is explicitly used for a development fixture.
+
+## Formal owner uninstall
+
+The matching release bundle also contains `Uninstall.command`. Double-click it,
+or run it from the extracted release root:
+
+```sh
+./Uninstall.command
+```
+
+The command asks for Human confirmation, discovers all installed OPN release
+manifests, disables and uninstalls only their user-scope plugins, removes their
+release marketplaces through the official host CLI, and then removes the user
+product directory. To retain `runtime.json`, `shared.sqlite3`, backups and
+logs while removing installed runtime/plugin payloads, use:
+
+```sh
+./Uninstall.command --keep-data
+```
+
+The underlying `install_release.py uninstall --yes` command is available for
+automation only after the data-retention choice has been made. The uninstaller
+requires a valid install marker and current pointer, fails closed on unexpected
+release entries, never edits host registry files directly, and never touches a
+consuming project's source tree or Git artifacts.
 
 ## Development/fixture path only
 

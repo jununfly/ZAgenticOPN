@@ -12,8 +12,9 @@ WorkBuddy 插件 + 用户数据目录”的部署形态。`0.1.0-rc.4` 已从 cl
 启用、doctor、workspace binding、任务无关 activation、结果 review 和 rc.4↔rc.3
 回滚往返。正式安装链路的 blocking 验证已闭合；三项日常真实任务的长期可用性观察
 仍待 Human 继续积累。active Spec 的 owner-only formal release 边界已完成同步。
-外层分发渠道、签名和更长期的数据保留仍是 non-blocking open decisions，可在不改变
-产品部署契约的前提下选择。
+当前 owner 分发渠道冻结为“解压 release bundle 后双击或执行顶层
+`Install.command`”；signed `.pkg`/`.dmg` 和更长期的数据保留仍是 non-blocking
+open decisions，可在不改变产品部署契约的前提下后续选择。
 
 ### Summary
 
@@ -28,7 +29,8 @@ ZAgenticOPN 工作树导入 Python 包。消费项目只作为 Agent 修改目�
 - 当前目标平台：产品 owner 使用的 macOS 用户账户；首个发布只覆盖已验证的
   WorkBuddy/CodeBuddy host 和同设备、单项目、多 Agent 场景。
 - 发布物包含：ZAgenticOPN runtime、稳定启动入口、版本 manifest、WorkBuddy
-  host integration 和安装/升级/回滚工具。
+  host integration、顶层 `Install.command`/`Uninstall.command` 和安装/升级/回滚/
+  卸载工具。
 - 用户数据包括 host runtime 配置、同设备 shared SQLite、事件和本地备份；不
   放入消费项目仓库。
 - 受影响的现有表面：
@@ -46,7 +48,7 @@ ZAgenticOPN 工作树导入 Python 包。消费项目只作为 Agent 修改目�
   release 维护，不由消费项目 `AGENTS.md` 维护。
 - 安装、用户数据、备份和回滚责任：产品 owner 的用户账户；首版不承诺外部
   用户支持或自动更新。
-- 跟踪：roadmap `1-2-1-5-2`；上位节点为
+- 跟踪：roadmap `1-2-1-5-4`；上位节点为
   `1-2-1-5`「同设备多 Agent 个人重度使用与正式使用准备」。
 - 证据入口：
   [active Experience Version Spec](../prds/agent-self-service-collaboration-experience-version.md)、
@@ -149,6 +151,12 @@ release 内的 `host-integration` 作为 directory marketplace 加入 host，再
 CodeBuddy 可传入其对应的用户配置目录；具体 host 安装命令属于外层分发说明，
 不进入消费项目。
 
+`Install.command` 是正式 release 的开箱即用入口：它自动探测支持的 host
+CLI/Node，调用同一 `install_release.py setup` 流程，初始化用户级目录，接受
+显式的 workspace/scope 首次绑定，并在最后运行 `doctor`。高级 `install`、
+`doctor` 和 `rollback` 命令仍保留给自动化、诊断和回滚；安装入口不推断 scope，
+也不修改消费项目。
+
 ### Install and activation flow
 
 ```text
@@ -193,9 +201,11 @@ review 和 scorecard。Agent 可以修改消费项目文件，但 activation、s
 3. **Rollback**：切回上一个已知 release 指针；若 schema migration 已发生，使用
    对应备份恢复或执行已验证的向后迁移。不得只回滚 hook 而保留不兼容的 runtime
    或数据库。
-4. **Uninstall**：先停止新的 activation、导出或确认删除 shared context 和事件，
-   再移除 host plugin 与安装版本；用户明确确认后才删除 data/backups。卸载不能
-   删除消费项目源码或 Git artifact。
+4. **Uninstall**：顶层 `Uninstall.command` 要求 Human 确认，读取 install marker
+   和每个 release manifest，通过官方 host CLI 停用/卸载对应 user-scope plugin
+   并移除对应 marketplace；默认移除整个用户产品目录，也可用 `--keep-data`
+   保留 runtime config、shared context、backups 和 logs。卸载不能删除消费项目
+   源码或 Git artifact。
 
 ### Ownership and compatibility
 
@@ -274,8 +284,9 @@ release 和升级前 data backup；回滚后重新执行最小 activation smoke�
 
 ### Simplicity and accessibility
 
-用户只需要安装 release、配置一次 workspace/scope binding、在 host 中确认 plugin
-和执行 doctor；日常仍只输入“检查 shared context”。安装器必须提供清晰的当前版本、
+用户只需要运行 release 顶层 `Install.command`，按向导配置一次 workspace/scope
+binding；入口自动完成 host plugin 安装和 doctor，日常仍只输入“检查 shared context”。
+安装器必须提供清晰的当前版本、
 失败原因、修复动作和回滚入口；不要要求用户理解 Python、`PYTHONPATH` 或仓库
 内部布局。CLI 文案和诊断输出应支持复制、键盘操作和纯文本审阅。
 
@@ -299,7 +310,7 @@ host payload，不拼接 shell 命令，不从消费项目导入代码。runtime
 | version skew | plugin 与 runtime 使用不匹配版本 | 在 claim 前返回兼容性错误并给出 repair action | 100% reject mixed pair | Agent |
 | upgrade | 安装新版本，运行 storage/config migration 和 smoke | backup、migration、current switch、receipt 均可追踪 | 1/1 成功 | Agent |
 | rollback | 故意让新版本 smoke 失败，回到上一版本 | current、plugin、store 恢复到一致组合，旧事件仍可读 | 1/1 成功，无数据丢失 | Agent/Human |
-| uninstall | 先确认导出/删除，再移除产品 | consumer repo/Git artifact 不受影响，产品数据按选择处置 | 1/1；无越界删除 | Human |
+| uninstall | `Uninstall.command` 经确认后卸载所有 manifest 声明的 release；可选择保留数据 | host plugin/marketplace 清理完成，consumer repo/Git artifact 不受影响，产品数据按选择处置 | 1/1；无越界删除 | Human |
 
 可复现命令与 fixture 必须在实现阶段固定；当前仓库的
 `python -m unittest discover -s tests -v` 只能证明源码层行为，不能替代 clean-room
@@ -317,7 +328,7 @@ SQLite 位于用户侧 data 目录，未写入消费项目。
 | Question | Evidence needed | Owner | Due/exit condition |
 |---|---|---|---|
 | Runtime 首版使用 self-contained executable 还是发布物内隔离 Python 环境？ | 两种 spike 的安装体积、启动时间、macOS 架构兼容和 hook 调用结果 | Agent + Human | 首个 release candidate 构建前冻结；两者均不得读取源码树 |
-| macOS 外层分发使用 signed `.pkg`、`.dmg` 还是 release bundle installer？ | 用户级安装权限、签名/校验、升级/回滚和卸载演练 | Human | Owner canary 前冻结一个渠道 |
+| macOS 外层分发是否升级为 signed `.pkg` 或 `.dmg`？ | 签名服务、权限模型和卸载体验 | Human | 当前 release bundle + `Install.command` 已满足 owner-only；只有进入更广发布范围才重开 |
 | WorkBuddy 用户级 plugin 的注册 API/目录是什么？ | 干净 host 上的官方 CLI marketplace add/install/enable 和 plugin reload 行为 | Human + Agent | 已由真实用户配置 rc.4 验证；后续仅跟踪 host 版本兼容 |
 | `runtime.json` 与 storage schema 如何携带 release/contract 版本？ | migration fixture、混用版本负向测试和备份恢复结果 | Agent | version-skew 与 rollback gate 全通过 |
 | 个人数据的备份、保留和删除默认值是什么？ | owner 对 shared context、events、logs、backups 的处置选择 | Human | 首次真实日常使用前书面确认 |
@@ -330,6 +341,7 @@ SQLite 位于用户侧 data 目录，未写入消费项目。
 | Human | 2026-08-29 | private dogfood 不能通过跨项目直接调用本仓库代码，必须按正式产品发布到用户侧。 | 本评审已将该要求提升为 `1-2-1-5-1` 的 deployment contract；active Spec、README 和 integration 说明已同步。 | 等待 clean-tag release、真实 host registration 和 owner canary。 |
 | Codex | 2026-08-29 | RC 是否真的脱离源码树？ | `0.1.0-rc.2` clean-room fixture 通过，30/30 自动化测试通过，rollback 与版本配对通过；manifest 如实标记 dirty working tree。官方 host CLI 的用户级 marketplace add/install 已由隔离配置探针确认，尚未在真实用户配置执行。 | clean-tag 构建、真实 WorkBuddy host 用户级注册和 owner canary 仍未完成。 |
 | Codex | 2026-08-29 | clean release 与真实用户安装是否闭合？ | `0.1.0-rc.4` 从 clean commit 构建，真实 WorkBuddy user-scope plugin registration/enable、workspace-bound owner canary、事件/Git/repo 对账和 rc.4↔rc.3 rollback 往返均通过；31/31 全量测试通过。 | 仍需 Human 在日常使用中积累 3 个真实任务的 activation/失败与效率观察；不阻塞本安装节点。 |
+| Codex | 2026-08-29 | 用户仍需理解 Python、host CLI 路径和多段安装命令，是否算正式开箱即用？ | release bundle 新增顶层 `Install.command`，自动探测 WorkBuddy/CodeBuddy 与 Node，执行用户级安装、最小配置初始化、显式首次绑定和 doctor；新增 clean-room black-box 覆盖双击/终端入口。 | 解压仍是当前分发前提；signed `.pkg`/`.dmg` 继续 deferred。 |
 
 ### Short-read acceptance
 

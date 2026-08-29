@@ -108,6 +108,12 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     shutil.copy2(repo_root / "scripts" / "install_release.py", release_dir / "install_release.py")
+    installer_entrypoint = release_dir / "Install.command"
+    shutil.copy2(repo_root / "scripts" / "Install.command", installer_entrypoint)
+    installer_entrypoint.chmod(0o755)
+    uninstaller_entrypoint = release_dir / "Uninstall.command"
+    shutil.copy2(repo_root / "scripts" / "Uninstall.command", uninstaller_entrypoint)
+    uninstaller_entrypoint.chmod(0o755)
     (release_dir / "INSTALL.md").write_text(_install_notes(args.version), encoding="utf-8")
 
     source_commit, source_tree_dirty = _git_state(repo_root)
@@ -130,6 +136,15 @@ def main(argv: list[str] | None = None) -> int:
             "version": args.version,
             "marketplace_name": marketplace_name,
             "marketplace_path": "host-integration",
+        },
+        "installer": {
+            "path": "Install.command",
+            "requires_python": ">=3.9",
+        },
+        "uninstaller": {
+            "path": "Uninstall.command",
+            "requires_python": ">=3.9",
+            "requires_confirmation": True,
         },
         "contracts": {
             "activation": ACTIVATION_SCHEMA,
@@ -228,13 +243,63 @@ def _platform_tag() -> str:
 
 
 def _install_notes(version: str) -> str:
-    return f"""# ZAgenticOPN {version} release candidate
+    return f"""# ZAgenticOPN {version} release
 
-This bundle is a user-side release candidate. It does not require a
-ZAgenticOPN checkout in the consuming project.
+This bundle is a user-side release. It does not require a ZAgenticOPN checkout
+in the consuming project.
 
-Install into a clean user product root and register the host plugin through the
-WorkBuddy/CodeBuddy host CLI with:
+## One-step setup on macOS
+
+After extracting this directory, double-click `Install.command`, or run:
+
+```sh
+./Install.command --workspace-root "/absolute/path/to/consumer-repo" \\
+  --scope "owner/repo/project"
+```
+
+The entrypoint finds the installed WorkBuddy/CodeBuddy host and Node runtime,
+installs the matching user-level plugin, creates the product data/config
+directories, writes the explicit workspace-to-scope binding, and runs doctor.
+It never imports this checkout or modifies the consuming project.
+
+If you only want to install first and configure a project later, run:
+
+```sh
+./Install.command --non-interactive
+```
+
+The installer will leave an empty binding list and report the next configure
+action. Scope is never inferred from the current directory or Git remote.
+
+## Uninstall
+
+Double-click `Uninstall.command`, or run:
+
+```sh
+./Uninstall.command
+```
+
+The command requires Human confirmation. It removes this release's host
+plugin and marketplace registrations first. By default it then removes the
+user product directory, including shared context, events, backups and logs.
+To remove the runtime and host integration while retaining that data, use:
+
+```sh
+./Uninstall.command --keep-data
+```
+
+The consuming project's source tree and Git artifacts are never uninstall
+targets. The underlying command is also available as
+`python3 install_release.py uninstall --yes`; use `--yes` only after choosing
+the data-retention action.
+
+## Advanced installer entrypoint
+
+The underlying JSON installer remains available for upgrades, doctor and
+rollback. It is useful for automation and test fixtures; formal installs
+reject dirty source-tree bundles.
+
+For example:
 
 ```sh
 python3 install_release.py install \\

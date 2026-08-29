@@ -1246,7 +1246,9 @@
       "children": [
         "1-2-1-5-1",
         "1-2-1-5-2",
-        "1-2-1-5-3"
+        "1-2-1-5-3",
+        "1-2-1-5-4",
+        "1-2-1-5-5"
       ],
       "decisions": [
         {
@@ -1346,11 +1348,43 @@
       "children": [],
       "decisions": [],
       "notes": "下一步：Human 在当前 rc.4 正式用户侧 release 上持续使用同设备、多 Agent、单项目工作流，累计记录 3 个真实日常任务的 task-agnostic activation receipt、shared events、完成/失败归因、产品导致的 Human 介入和效率缺口。owner canary 只证明安装与路径闭环，不计入 3 个日常任务；本观察不扩大到跨设备、多项目或公开发布，也不以 Agent 总耗时单独判定价值。"
+    },
+    "1-2-1-5-4": {
+      "id": "1-2-1-5-4",
+      "label": "开箱即用的 owner release 安装入口与首次配置向导",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "如何把正式安装封装成开箱即用？",
+          "answer": "release bundle 自带可双击/可终端执行的 Install.command；它自动定位支持的 WorkBuddy/CodeBuddy CLI 与 Node，调用同一安装器完成 checksum 校验、用户级 runtime/plugin 安装、产品数据目录与最小 runtime.json 初始化、旧同名 plugin 停用和 doctor，并支持首次配置时显式传入或交互填写一个 workspace_root→scope binding。",
+          "note": "分类：stage-critical。开箱即用只消除安装链路中的内部路径、Python、host CLI 和用户目录知识，不改变当前同设备、单项目、owner-only 边界；scope 必须显式绑定，不能从 cwd、Git remote 或项目源码推断。保留 install/doctor/rollback 作为高级入口，fixture 仍可用 --allow-dirty。"
+        }
+      ],
+      "notes": "已完成：release bundle 顶层 Install.command 可双击/终端执行；自动探测 WorkBuddy/CodeBuddy host 与 Node，调用 setup 完成 checksum 校验、用户级 runtime/plugin 安装、用户目录与 runtime.json 初始化、显式 workspace_root→scope 首次绑定、旧同名 plugin 停用和 doctor。高级 install/doctor/rollback 与 fixture --allow-dirty 保留。新增 2 个 clean-room black-box：带显式 binding 的一键安装和无内部路径参数的 host/user-root 自动探测；全量测试 33/33，zsh -n、Python compile、git diff --check 通过。当前解压 release bundle 是 owner-only 分发形态，signed .pkg/.dmg 继续 deferred。"
+    },
+    "1-2-1-5-5": {
+      "id": "1-2-1-5-5",
+      "label": "开箱即用 release 卸载入口与数据保留确认",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "卸载如何与安装对称并保持数据安全？",
+          "answer": "release bundle 提供顶层 Uninstall.command；底层 install_release.py uninstall 只处理由版本 manifest 声明的 ZAgenticOPN plugin/marketplace，先通过官方 host CLI 完成停用和卸载，再根据 --keep-data 保留或在 --yes 确认后移除用户产品目录。没有 host CLI、安装标记或明确确认时 fail closed；消费项目、Git artifact 和源码 checkout 永远不在卸载目标内。",
+          "note": "分类：stage-critical。卸载是当前 owner-only 正式用户路径的退出能力；保留 shared context、events、backups 的选择必须显式，默认不删除数据。保留 install/doctor/rollback 高级命令与 fixture 边界；不把卸载扩展成跨设备或多用户数据治理。"
+        }
+      ],
+      "notes": "已完成：release bundle 新增顶层 Uninstall.command；底层 install_release.py 新增 uninstall 子命令。卸载要求安装标记/current pointer/release manifests 一致，并只处理 manifest 声明的 ZAgenticOPN user-scope plugin 与 release marketplace；官方 host CLI 清理后，默认删除用户产品目录，--keep-data 保留 runtime.json、data/shared.sqlite3、backups、logs；无 --yes 时仅返回 confirmation_required 预览；异常或缺少 host/marker 时 fail closed，消费项目和 Git artifact 永不触碰。新增未确认预览、完整删除、保留数据三条 release black-box；全量测试 36/36，shell/Python 检查通过。"
     }
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-29 14:25:52",
+    "updated": "2026-08-29 17:01:22",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
