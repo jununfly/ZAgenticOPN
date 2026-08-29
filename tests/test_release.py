@@ -168,6 +168,10 @@ class ReleaseCandidateBlackBoxTests(unittest.TestCase):
                 str(host_config_dir),
                 "--allow-dirty",
             )
+            settings_path = host_config_dir / "settings.json"
+            settings = json.loads(settings_path.read_text(encoding="utf-8"))
+            settings["enabledPlugins"]["zagenticopn-agent-integration@zagenticopn-local"] = True
+            settings_path.write_text(json.dumps(settings), encoding="utf-8")
             self._run(
                 sys.executable,
                 str(self.install_script),
@@ -203,6 +207,9 @@ class ReleaseCandidateBlackBoxTests(unittest.TestCase):
             )
             self.assertFalse(
                 settings["enabledPlugins"]["zagenticopn-agent-integration@zagenticopn-release-0.1.0-test.2"]
+            )
+            self.assertFalse(
+                settings["enabledPlugins"]["zagenticopn-agent-integration@zagenticopn-local"]
             )
             doctor = self._run(
                 sys.executable,

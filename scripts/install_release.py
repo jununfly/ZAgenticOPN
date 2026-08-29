@@ -338,7 +338,7 @@ def _register_host(
         ],
         host_config_dir,
     )
-    _disable_other_release_plugins(
+    _disable_other_product_plugins(
         registration["plugin_name"],
         registration["marketplace_name"],
         host_cli,
@@ -442,7 +442,7 @@ def _run_host_cli(
     return completed
 
 
-def _disable_other_release_plugins(
+def _disable_other_product_plugins(
     plugin_name: str,
     active_marketplace: str,
     host_cli: str,
@@ -457,10 +457,15 @@ def _disable_other_release_plugins(
     enabled_plugins = settings.get("enabledPlugins", {})
     if not isinstance(enabled_plugins, dict):
         return
-    prefix = f"{plugin_name}@zagenticopn-release-"
+    prefix = f"{plugin_name}@"
     active_id = f"{plugin_name}@{active_marketplace}"
     for plugin_id, enabled in enabled_plugins.items():
-        if plugin_id == active_id or not plugin_id.startswith(prefix) or enabled is not True:
+        if (
+            not isinstance(plugin_id, str)
+            or plugin_id == active_id
+            or not plugin_id.startswith(prefix)
+            or enabled is not True
+        ):
             continue
         _run_host_cli(
             host_cli,
