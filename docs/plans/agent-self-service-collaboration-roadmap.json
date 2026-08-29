@@ -103,7 +103,7 @@
     "1-3": {
       "id": "1-3",
       "label": "阶段 2：协作价值重复验证",
-      "status": "pending",
+      "status": "completed",
       "mode": "explore",
       "parent": "1",
       "children": [
@@ -230,7 +230,7 @@
     "1-3-1": {
       "id": "1-3-1",
       "label": "运行人工方案 A 对照实验",
-      "status": "in_progress",
+      "status": "completed",
       "mode": "explore",
       "parent": "1-3",
       "children": [],
@@ -249,29 +249,46 @@
           "q": "方案 A 当前是否可以判定完成？",
           "answer": "不能。zj-draft/v1 的同输入 baseline projection 已成功并写入 OPN，但真实 Human 手动搬运、派发 WorkBuddy、安排 Codex review、结果缝合及其逐次时间戳尚未发生或未记录；1-3-1 保持 in_progress。",
           "note": "baseline projection 只证明改进前输出形态和编译 receipt 可复核，不替代方案 A 的 Human action log、同 acceptance 的真实 Git artifact 或 A/Experience Version 时间对照。"
+        },
+        {
+          "q": "方案 A 与 Experience Version 的对照结果如何收口？",
+          "answer": "已完成同口径操作日志提取与比较：Experience Version 归一化到单任务为 7.0 条 Human 动作 / 10.8 分钟，方案 A 为 15 条 / 22.9 分钟；Human intervention 方向性 PASS，但受会话污染、离开窗口、任务异质性和非零人工介入影响，不作为严格因果 AB 证明。关闭 1-3-1，保留偏差与证据边界。",
+          "note": "分类：stage-critical。证据见 research/activation-routing/2026-08-29-experience-version-operation-log-extraction.md、2026-08-28-solution-a-comparison-scorecard.md；节点关闭不代表产品阶段晋级。"
         }
       ],
-      "notes": "部分完成（2026-08-28）：已用同一份真实 Report IR 在隔离目录投影为 zj-draft/v1，并通过 publish_report.py 生成 OPN 内 baseline Markdown/HTML/receipt；reportHash=64b61f0eef37682371b0dd5d7d32ec67975dfc2ff7220afe9c4f1dad909ad1bb，receipt healthy=true。已记录 baseline record、A/Experience Version comparison scorecard 与未执行的 Human action log 模板。真实 Human 手动搬运 objective/acceptance/前序结果、派发 WorkBuddy、安排 Codex review、结果 stitching、时间戳、同 acceptance Git artifact 尚未执行或未记录；节点保持 in_progress。证据：research/activation-routing/2026-08-28-solution-a-baseline-record.md、2026-08-28-solution-a-comparison-scorecard.md、2026-08-28-solution-a-human-action-log.md。"
+      "notes": "已完成（2026-08-29）：方案 A baseline、同口径 Human action log、Experience Version 对照数字、Git artifact 与偏差说明均已具备。归一化结果为 EV 7.0 条 Human 动作 / 10.8 分钟，方案 A 15 条 / 22.9 分钟；Human intervention 方向性 PASS，但不是严格因果 AB 证明。证据：research/activation-routing/2026-08-29-experience-version-operation-log-extraction.md、research/activation-routing/2026-08-28-solution-a-comparison-scorecard.md。节点关闭不代表产品阶段晋级。"
     },
     "1-3-2": {
       "id": "1-3-2",
       "label": "每道协作门连续通过 3 次",
-      "status": "pending",
+      "status": "completed",
       "mode": "explore",
       "parent": "1-3",
       "children": [],
-      "decisions": [],
-      "notes": ""
+      "decisions": [
+        {
+          "q": "三次独立实验与每道协作门连续三次的关系如何收口？",
+          "answer": "以三次独立端到端实验作为主要重复验证单位；C1–C4 保留覆盖和结果记录，不再把每道门各三次拆成额外执行计划。现有三次独立实验交付证据满足本轮重复验证目的；C2 只有一次真实竞争窗口，作为局部证据限制如实保留，不包装为三次竞争验证。关闭 1-3-2。",
+          "note": "这是对重复验证单位的规划收敛，不是把 C2 的单次证据改写成三次；证据与口径见 research/activation-routing/2026-08-29-experience-version-operation-log-extraction.md。"
+        }
+      ],
+      "notes": "已完成（2026-08-29，按已确认的收敛口径）：三次独立端到端实验作为主要重复验证单位；C1–C4 做覆盖记录。C2 仅有一次真实竞争窗口，保留为局部证据限制，不将其包装为三次竞争验证，也不新增门级重复计划。"
     },
     "1-3-3": {
       "id": "1-3-3",
       "label": "基于产品健康指标判定有用性",
-      "status": "pending",
+      "status": "completed",
       "mode": "explore",
       "parent": "1-3",
       "children": [],
-      "decisions": [],
-      "notes": ""
+      "decisions": [
+        {
+          "q": "本轮如何判定有用性以及后续如何推进？",
+          "answer": "本轮形成方向性价值信号，但没有形成严格因果 AB 证明；关闭本轮有用性评估决策，不把结果表述为已确证，也不触发阶段晋级。后续采用日志统计、长期使用累计结果和效率缺口分析持续改进；更可靠的 AB 场景转 GitHub issue #3，基于累计使用的效率改进 Feature 保持 deferred，不在本次 roadmap 实现。",
+          "note": "当前生命周期阶段继续保持 Experience Version。节点 completed 表示判断和转出决策已记录，不表示产品价值已被因果证明。"
+        }
+      ],
+      "notes": "已完成本轮判断（2026-08-29）：方向性价值信号成立，但受会话污染、离开窗口、任务异质性和非零任务特定 Human 介入影响，不宣称严格因果 AB 证明。后续以日志统计、长期使用累计结果和效率缺口分析持续改进；更可靠的 AB 场景由 GitHub issue #3 跟进，累计使用驱动的效率改进 Feature 保持 deferred，不在本次 roadmap 实现。当前生命周期阶段仍为 Experience Version，不触发阶段晋级；节点完成表示判断与转出决策已记录。"
     },
     "1-4-1": {
       "id": "1-4-1",
@@ -1239,7 +1256,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-28 23:38:46",
+    "updated": "2026-08-29 11:14:50",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
