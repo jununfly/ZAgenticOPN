@@ -82,8 +82,6 @@
       "parent": "1",
       "children": [
         "1-2-1",
-        "1-2-2",
-        "1-2-3",
         "1-2-4"
       ],
       "decisions": [
@@ -96,9 +94,14 @@
           "q": "Experience Version 允许投入什么？",
           "answer": "只投入区分两个 Agent、最小 Work Item、discover、atomic claim、result publication、awaiting-review continuation、Git references 和 Markdown scorecard。",
           "note": "认证、HA、Dashboard、自动发现等保持 Deferred。"
+        },
+        {
+          "q": "跨设备与多项目路线如何处理？",
+          "answer": "将原 1-2-2 跨设备双 Agent 单项目闭环与原 1-2-3 多设备多 Agent 多项目闭环分别抽出为独立 Deferred Plan；本路线图不继续实现这两条路线。",
+          "note": "Plan 文件：docs/plans/agent-self-service-collaboration-cross-device-single-project-plan.md；docs/plans/agent-self-service-collaboration-multi-device-multi-agent-multi-project-plan.md。重入条件是 Human 明确授权、同设备个人重度使用已有稳定基线，并按依赖顺序先完成跨设备单项目再进入多设备多项目。当前阶段仍聚焦同设备多 Agent。"
         }
       ],
-      "notes": "已进入阶段 1 Experience Version；当前只施工 1-2-1，同设备单项目最小闭环。"
+      "notes": "阶段 1 当前焦点转为 1-2-1-5：同设备多 Agent 个人重度使用与正式使用准备。原 1-2-2 与 1-2-3 已抽出为独立 Deferred Plan，不在本路线图施工；1-2-4 仍按既有边界保留为后续待处理项。个人正式使用按 private dogfood 边界推进，不自动改变 active Spec 的 Experience Version 阶段，也不展开公开生产化能力。"
     },
     "1-3": {
       "id": "1-3",
@@ -179,14 +182,15 @@
     "1-2-1": {
       "id": "1-2-1",
       "label": "同设备 Codex → WorkBuddy → Codex 闭环",
-      "status": "completed",
+      "status": "in_progress",
       "mode": "exploit",
       "parent": "1-2",
       "children": [
         "1-2-1-1",
         "1-2-1-2",
         "1-2-1-3",
-        "1-2-1-4"
+        "1-2-1-4",
+        "1-2-1-5"
       ],
       "decisions": [
         {
@@ -196,26 +200,6 @@
         }
       ],
       "notes": "施工范围：publish/discover/claim/publish_result/claim_review/review-complete、最小 scope/profile、持久化 shared context、Markdown scorecard；不做后台自动发现或生产级恢复。"
-    },
-    "1-2-2": {
-      "id": "1-2-2",
-      "label": "跨设备双 Agent 单项目闭环",
-      "status": "pending",
-      "mode": "explore",
-      "parent": "1-2",
-      "children": [],
-      "decisions": [],
-      "notes": ""
-    },
-    "1-2-3": {
-      "id": "1-2-3",
-      "label": "多设备多 Agent 多项目闭环",
-      "status": "pending",
-      "mode": "explore",
-      "parent": "1-2",
-      "children": [],
-      "decisions": [],
-      "notes": ""
     },
     "1-2-4": {
       "id": "1-2-4",
@@ -1252,11 +1236,27 @@
         }
       ],
       "notes": "由 ZAgentic owner/Human 完成。可复核提交：jununfly/ZAgentic commit d3d94a2（AGENTS.md + ZJ-CONTEXT.md）。验证：activation pointer isolated smoke publish→discover→claim_succeeded（同一 activation_id）；ZAgentic recursive validation 48 skills、frontmatter 48 skills、private naming、validator tests 2/2、diff --check 全部通过。OPN runtime 与 shared SQLite 未改动。"
+    },
+    "1-2-1-5": {
+      "id": "1-2-1-5",
+      "label": "同设备多 Agent 个人重度使用与正式使用准备",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1",
+      "children": [],
+      "decisions": [
+        {
+          "q": "同设备多 Agent 个人正式使用准备的范围是什么？",
+          "answer": "围绕现有同设备、多 Agent、单项目最小闭环，补齐产品 owner 日常重度使用所需的可用性、稳定性、可回滚发布和持续观察；Human 以真实日常工作使用，不再扩展跨设备、多项目或自动化能力。",
+          "note": "分类：stage-critical，服务当前个人使用目标；产物必须来自真实使用和 canonical Git facts。private dogfood 不等于公开生产发布，不自动改变 active Spec 的 Experience Version 阶段；认证、HA、灾难恢复、自动发现、完整 Dashboard 和团队治理继续 Deferred。"
+        }
+      ],
+      "notes": ""
     }
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-29 11:14:50",
+    "updated": "2026-08-29 11:45:11",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
