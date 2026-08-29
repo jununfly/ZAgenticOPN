@@ -1,7 +1,7 @@
 <!-- ROADMAP_SECTION_START -->
 ## ZJ Roadmap
 
-> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-29 11:45:11
+> 数据文件: `agent-self-service-collaboration-roadmap.json` | 最后更新: 2026-08-29 14:00:19
 
 [~][X+] 1. ZAgenticOPN Agent 自服务协作
 ├── [x][Y+] 1-1. 阶段 0：问题发现与候选方案选择
@@ -25,8 +25,9 @@
     ├── [ ][X+] 1-4-2. 按真实失败建设生产可靠性
     └── [ ][X+] 1-4-3. 个人闭环有效后评估团队治理
 
-### 当前施工：1-2-1-5. 同设备多 Agent 个人重度使用与正式使用准备
+### 当前施工：1-2-1-5-2. 真实 WorkBuddy 用户级安装与 owner canary
 
 **决策：**
-- Q: 同设备多 Agent 个人正式使用准备的范围是什么？ → 围绕现有同设备、多 Agent、单项目最小闭环，补齐产品 owner 日常重度使用所需的可用性、稳定性、可回滚发布和持续观察；Human 以真实日常工作使用，不再扩展跨设备、多项目或自动化能力。 (分类：stage-critical，服务当前个人使用目标；产物必须来自真实使用和 canonical Git facts。private dogfood 不等于公开生产发布，不自动改变 active Spec 的 Experience Version 阶段；认证、HA、灾难恢复、自动发现、完整 Dashboard 和团队治理继续 Deferred。)
+- Q: 真实 WorkBuddy 用户级插件如何注册？ → 通过 host 官方 CLI 的用户级路径注册 release 自带的 directory marketplace：先将 host-integration 目录作为不可变 release marketplace 加入用户 host，再以 --scope user 安装匹配插件；host registry 的 installPath 必须解析到用户侧 versions/<release-id>，不能指向仓库 checkout，也不能手写 host registry。 (已通过 WorkBuddy app 内置 codebuddy CLI 的临时 CODEBUDDY_CONFIG_DIR 探针确认 add/install/list 流程。正式 installer 将校验 host CLI、传入对应配置目录，并在版本化 release 目录执行 marketplace 注册；不执行真实用户配置切换，直到 clean RC 产生。)
+- Q: 版本化 marketplace 升级时如何避免重复 hook？ → 每个 release 保留自己的不可变 marketplace 以支持回滚，但 host user scope 同时只能启用当前 release 的 ZAgenticOPN plugin；安装或 rollback 新 pair 成功后，通过官方 host CLI disable 其它 zagenticopn-release-* plugin，不卸载其 marketplace。 (directory marketplace 的 source path 必须保留用于回滚；只禁用旧 plugin 可避免重复 UserPromptSubmit hook，也不破坏已安装 release。doctor 要验证当前 plugin enabled 且 host CLI 可读。)
 <!-- ROADMAP_SECTION_END -->

@@ -1,5 +1,20 @@
 # Experience Version coordination seam
 
+## Deployment boundary
+
+The source-tree commands in this document are development and black-box fixture
+commands. They are not the product owner's formal runtime path. For private
+dogfood, a versioned ZAgenticOPN release installs the runtime and the matching
+host integration in user-side product directories. A consuming project remains
+only the Agent's task workspace and Git artifact; it must not import this
+checkout, set its `PYTHONPATH`, or own the product SQLite store.
+
+The release hook invokes the installed runtime through a stable launcher and
+uses user-level config/data paths. It must fail closed when the launcher,
+plugin/runtime version, runtime config, or explicit workspace-to-scope binding
+is invalid. The release installation, upgrade, rollback and uninstall contract
+is defined in [the user-side deployment review](plans/agent-self-service-collaboration-user-side-deployment-review.md).
+
 The first implementation is a small Python module with a SQLite shared context. Agents use the public `CoordinationProtocol` interface directly in-process or through the canonical `python -m zagentic_opn.activation_runner` JSON-Call, while SQLite, event projection, and scorecard formatting remain implementation details.
 
 The task-agnostic activation alias is resolved by the ZAgenticOPN-owned

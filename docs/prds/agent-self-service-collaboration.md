@@ -31,8 +31,15 @@ Stage exit evidence:
 
 Deferred decisions:
   自动发现、自动唤醒、生产级认证与 ACL、HA、灾难恢复、完整 Dashboard、
-  离线多主协调、自动 merge/release、团队治理和通用个人知识库。
+  离线多主协调、公开部署与多用户发布、自动 merge/release、团队治理和通用
+  个人知识库。
 ```
+
+Owner-only adoption boundary：当前同设备单项目纵向切片可以通过用户侧正式发布物
+交付给产品 owner 做 private dogfood。该交付要求独立安装的 runtime、host-level
+Agent integration、用户级配置与 shared context；消费项目不得直接 import 或通过
+`PYTHONPATH` 提供 ZAgenticOPN 源码。它不代表生命周期自动晋级，也不授权公开发布、
+多用户支持、跨设备或多项目能力。
 
 ## 问题
 
@@ -131,6 +138,7 @@ Agent 负责查询 shared context、判断 eligibility、选择和 claim 一个 
 - 通用 Agent Memory 或完整个人知识库；
 - 自动跨项目规划；
 - 自动 merge、push、release；
+- 公开部署、多用户发布和对外支持；
 - 完整团队治理和组织级 RBAC；
 - 生产级安全、HA、备份恢复与运行 SLO；
 - 复活或继续开发 ZAgenticLoop。

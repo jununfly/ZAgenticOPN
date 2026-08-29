@@ -6,7 +6,7 @@
 
 来源：[Feature 1 Experience Version 对齐契约](../designs/agent-self-service-collaboration-experience-version-alignment.md)
 
-生命周期分类：`stage-critical`。本 Spec 冻结首个 Experience Version 的产品语义和外部验收；开源 comparison gate 已完成，Human 已授权实现同设备单项目最小纵向切片。部署、发布和生产级运行能力仍不在本阶段范围内。
+生命周期分类：`stage-critical`。本 Spec 冻结首个 Experience Version 的产品语义和外部验收；开源 comparison gate 已完成，Human 已授权实现同设备单项目最小纵向切片。产品 owner 的 owner-only 用户侧正式发布路径属于当前纵向切片的交付准备；公开部署、多用户发布和生产级运行能力仍不在本阶段范围内。
 
 ## Problem Statement
 
@@ -115,7 +115,8 @@ Experience Version 只保留 private collaboration context、shared coordination
 
 ### Lifecycle and adoption
 
-- This Spec freezes the Experience Version contract. The comparison gate is complete and Human has authorized implementation of the narrow local vertical slice; deployment, release and production-grade operation remain deferred.
+- This Spec freezes the Experience Version contract. The comparison gate is complete and Human has authorized implementation of the narrow local vertical slice. The product owner may receive that slice through an owner-only user-side release artifact; public deployment, multi-user support and production-grade operation remain deferred.
+- The owner-only release must install a versioned runtime and matching host integration outside consuming project worktrees. A consuming project supplies only its task workspace and Git artifact; it must not import ZAgenticOPN source or provide the product runtime through `PYTHONPATH`.
 - Candidate comparison uses fixed revisions and primary evidence, marks capabilities `native`, `adapted`, `absent` or `unknown`, and keeps product semantics separate from unit-capability reuse.
 - The next technical activity is the minimum coordination seam and its C1–C4 black-box fixtures. The implementation must keep C5–C8, automatic discovery, recovery and production operations outside the first slice unless new evidence changes the stage decision.
 
@@ -137,7 +138,7 @@ Experience Version 只保留 private collaboration context、shared coordination
 
 ## Out of Scope
 
-- Deployment, release or production operation of the product runtime.
+- Public deployment, multi-user release, external support or production operation of the product runtime.
 - Agent automatic discovery, polling, notifications, device wake-up or background execution.
 - Generic Agent Memory, a personal knowledge base, full conversation synchronization or large-file storage in shared context.
 - Automatic planning across projects, automatic merge, push, release, retry, preemption, claim TTL or crash recovery.
@@ -150,4 +151,4 @@ Experience Version 只保留 private collaboration context、shared coordination
 - This Spec is the normalized result of the accepted Q1–Q6 alignment decisions. The alignment document remains the decision record; this Spec is the executable product input for comparison and later prototype planning.
 - The first task is intentionally a real cross-repository skill/document maintenance task. Its acceptance is the improved skill source, validated technical report projection and canonical Git artifact, not a new ZAgenticOPN runtime.
 -方案 A remains the baseline. A reduction in Human context transport and stitching is the primary value hypothesis; Agent latency is secondary.
-- The current lifecycle stage is Experience Version. C-route comparison is complete and implementation is authorized for the same-device, single-project slice only.
+- The current lifecycle stage is Experience Version. C-route comparison is complete and implementation is authorized for the same-device, single-project slice only. The delivery form for the product owner is a user-side formal release; this does not authorize cross-device, multi-project or public deployment.

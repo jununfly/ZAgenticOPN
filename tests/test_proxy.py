@@ -38,6 +38,15 @@ class AgentIntegrationProxyBlackBoxTests(unittest.TestCase):
         self.temp_dir = tempfile.TemporaryDirectory()
         self.database = Path(self.temp_dir.name) / "shared.sqlite3"
         self.runtime_config = Path(self.temp_dir.name) / "runtime.json"
+        self.runtime_launcher = Path(self.temp_dir.name) / "runtime-launcher.py"
+        self.runtime_launcher.write_text(
+            "#!/usr/bin/env python3\n"
+            "import os, subprocess, sys\n"
+            f"env = dict(os.environ, PYTHONPATH={str(self.root)!r})\n"
+            "raise SystemExit(subprocess.run([sys.executable, '-m', 'zagentic_opn', *sys.argv[1:]], env=env).returncode)\n",
+            encoding="utf-8",
+        )
+        self.runtime_launcher.chmod(0o755)
         self.protocol = CoordinationProtocol(self.database)
         self._old_runtime_config = os.environ.get("ZAGENTICOPN_RUNTIME_CONFIG")
         os.environ["ZAGENTICOPN_RUNTIME_CONFIG"] = str(self.runtime_config)
@@ -174,6 +183,7 @@ class AgentIntegrationProxyBlackBoxTests(unittest.TestCase):
             env={
                 **os.environ,
                 "ZAGENTICOPN_RUNTIME_CONFIG": str(self.runtime_config),
+                "ZAGENTICOPN_RUNTIME_LAUNCHER": str(self.runtime_launcher),
                 "ZAGENTICOPN_SCOPE": self.scope,
                 "ZAGENTICOPN_AGENT_ID": self.agent.agent_id,
                 "ZAGENTICOPN_DEVICE_ID": self.agent.device_id,
@@ -218,6 +228,7 @@ class AgentIntegrationProxyBlackBoxTests(unittest.TestCase):
         environment.update(
             {
                 "ZAGENTICOPN_SOURCE_ROOT": str(self.root),
+                "ZAGENTICOPN_RUNTIME_LAUNCHER": str(self.runtime_launcher),
                 "ZAGENTICOPN_RUNTIME_CONFIG": str(workspace_config),
                 "ZAGENTICOPN_SCOPE": self.scope,
                 "ZAGENTICOPN_AGENT_ID": self.agent.agent_id,
@@ -270,6 +281,7 @@ class AgentIntegrationProxyBlackBoxTests(unittest.TestCase):
         environment.update(
             {
                 "ZAGENTICOPN_SOURCE_ROOT": str(self.root),
+                "ZAGENTICOPN_RUNTIME_LAUNCHER": str(self.runtime_launcher),
                 "ZAGENTICOPN_RUNTIME_CONFIG": str(self.runtime_config),
                 "ZAGENTICOPN_AGENT_ID": self.agent.agent_id,
                 "ZAGENTICOPN_DEVICE_ID": self.agent.device_id,
@@ -312,6 +324,7 @@ class AgentIntegrationProxyBlackBoxTests(unittest.TestCase):
         environment.update(
             {
                 "ZAGENTICOPN_SOURCE_ROOT": str(self.root),
+                "ZAGENTICOPN_RUNTIME_LAUNCHER": str(self.runtime_launcher),
                 "ZAGENTICOPN_RUNTIME_CONFIG": str(self.runtime_config),
                 "ZAGENTICOPN_AGENT_ID": self.agent.agent_id,
                 "ZAGENTICOPN_DEVICE_ID": self.agent.device_id,

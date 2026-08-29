@@ -1243,12 +1243,85 @@
       "status": "in_progress",
       "mode": "exploit",
       "parent": "1-2-1",
-      "children": [],
+      "children": [
+        "1-2-1-5-1",
+        "1-2-1-5-2"
+      ],
       "decisions": [
         {
           "q": "同设备多 Agent 个人正式使用准备的范围是什么？",
           "answer": "围绕现有同设备、多 Agent、单项目最小闭环，补齐产品 owner 日常重度使用所需的可用性、稳定性、可回滚发布和持续观察；Human 以真实日常工作使用，不再扩展跨设备、多项目或自动化能力。",
           "note": "分类：stage-critical，服务当前个人使用目标；产物必须来自真实使用和 canonical Git facts。private dogfood 不等于公开生产发布，不自动改变 active Spec 的 Experience Version 阶段；认证、HA、灾难恢复、自动发现、完整 Dashboard 和团队治理继续 Deferred。"
+        },
+        {
+          "q": "个人 private dogfood 的交付形态是什么？",
+          "answer": "必须按正式产品发布到用户侧：由版本化 release artifact 安装独立 runtime 与 host-level WorkBuddy plugin；activation、shared context、事件和配置使用用户侧产品路径；消费项目只作为任务 workspace 和 Git artifact，不得跨项目直接调用 ZAgenticOPN 源码。",
+          "note": "这是对既有 private dogfood 边界的补充收敛，不是公开发布或跨设备/多项目授权。正式部署设计评审见 docs/plans/agent-self-service-collaboration-user-side-deployment-review.md；实现前必须通过 clean-room install、版本匹配、升级/回滚和三次真实任务 activation 验收，并同步 active Spec 的边界表述。"
+        },
+        {
+          "q": "RC 之后如何进入真实用户侧？",
+          "answer": "先以 clean commit 构建不带 dirty 标记的 release candidate，再完成真实 WorkBuddy host 的用户级 plugin registration、owner canary 和正式版本切换；通过前不进入日常重度使用。",
+          "note": "当前临时 clean-room fixture 只证明 release bundle、installed launcher、配置/数据隔离和 rollback 语义；真实 host path、用户级注册动作、签名/分发外壳和正式数据保留仍需现场验收。"
+        }
+      ],
+      "notes": "当前目标已明确：private dogfood 必须按正式产品发布物安装到用户侧，不允许跨项目直接调用 ZAgenticOPN 源码。施工焦点为 1-2-1-5-1 用户侧正式发布物与安装升级回滚设计；完成后才进入 release candidate 实现与 clean-room 验收。公开发布、跨设备、多项目、自动化和生产级能力继续 Deferred。"
+    },
+    "1-2-1-5-1": {
+      "id": "1-2-1-5-1",
+      "label": "用户侧正式发布物与安装升级回滚设计",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1-5",
+      "children": [
+        "1-2-1-5-1-1"
+      ],
+      "decisions": [
+        {
+          "q": "用户侧正式部署采用什么产品形态？",
+          "answer": "采用版本化、不可变的用户侧 release artifact：独立 runtime、稳定 launcher、版本匹配的 host-level WorkBuddy plugin、用户级 config/data/backup 目录和 install manifest；通过 current 指针原子切换版本，消费项目不安装、不 import、也不通过 PYTHONPATH 提供产品 runtime。",
+          "note": "推荐设计已形成评审文档 docs/plans/agent-self-service-collaboration-user-side-deployment-review.md。首版仍按同设备、单项目、多 Agent、owner-only private dogfood；不做 daemon、远程服务、跨设备、多项目、公共发布或自动更新。具体 self-contained executable/隔离 Python 环境、macOS 外层分发形式和 host plugin 注册 API 留给 clean-room spike 与 Human 确认。"
+        },
+        {
+          "q": "macOS release candidate 如何验证脱离源码树的正式部署链路？",
+          "answer": "首个 RC 使用 Python stdlib zipapp 作为版本化 runtime 载体：release bundle 包含 runtime、stable launcher、匹配的 WorkBuddy host integration、manifest 和 user-level installer；hook 只调用已安装 launcher，不 import 源码、不设置 PYTHONPATH。zipapp 只是当前 clean-room 验证载体，最终 self-contained executable 与外层分发形式仍待 Human 评审。",
+          "note": "当前本机 macOS arm64、系统 Python 3.9.6，仓库尚无 package/release 配置。RC 验收目标是 0 次 source-tree coupling、clean user root install、host plugin payload registration、activation receipt、版本指针切换和回滚；不引入 daemon、远程服务或跨设备能力。"
+        }
+      ],
+      "notes": "设计评审已完成并通过机械校验，当前 Decision=revise。owner-only 用户侧正式 release 边界已同步 active Spec、README、WorkBuddy integration 和 coordination 文档；剩余 blocking 为 release artifact 尚未构建。下一步是 macOS clean-room release candidate、host plugin 用户级注册、版本匹配、升级/回滚和三次真实任务 activation 验收。"
+    },
+    "1-2-1-5-1-1": {
+      "id": "1-2-1-5-1-1",
+      "label": "macOS RC 发布物构建与 clean-room 安装验收",
+      "status": "completed",
+      "mode": "exploit",
+      "parent": "1-2-1-5-1",
+      "children": [],
+      "decisions": [
+        {
+          "q": "macOS RC clean-room 验收结果是什么？",
+          "answer": "0.1.0-rc.2 已从当前工作树构建为 macos-arm64 zipapp release bundle，安装到临时用户产品目录后 doctor 通过；配置、publish、activation 和 scorecard 均由 installed launcher 完成，临时消费项目在清除 PYTHONPATH 与 ZAGENTICOPN_SOURCE_ROOT 后经用户级 WorkBuddy plugin 成功得到 claimed handoff；安装 rc.1/rc.2 后回滚到 rc.1，doctor 与 launcher version 均通过。",
+          "note": "自动化测试 30/30 通过，覆盖 source-independent hook、clean-room install、plugin/runtime 版本配对和 rollback。RC manifest 明确 source_tree_dirty=true，且 host plugin registration 只在临时目录验证；因此本节点的 RC fixture 验收证据成立，但不能宣称正式发布完成。"
+        }
+      ],
+      "notes": "RC fixture 验收完成：0.1.0-rc.2 bundle 构建、临时用户目录 install/doctor/config、清除 PYTHONPATH 的 installed activation、scorecard 和 rc.1 rollback 均通过；自动化测试 30/30 通过。source_tree_dirty=true 且真实 WorkBuddy host registration 尚未验证，正式发布不在本节点宣称。下一步转 1-2-1-5-2。"
+    },
+    "1-2-1-5-2": {
+      "id": "1-2-1-5-2",
+      "label": "真实 WorkBuddy 用户级安装与 owner canary",
+      "status": "in_progress",
+      "mode": "exploit",
+      "parent": "1-2-1-5",
+      "children": [],
+      "decisions": [
+        {
+          "q": "真实 WorkBuddy 用户级插件如何注册？",
+          "answer": "通过 host 官方 CLI 的用户级路径注册 release 自带的 directory marketplace：先将 host-integration 目录作为不可变 release marketplace 加入用户 host，再以 --scope user 安装匹配插件；host registry 的 installPath 必须解析到用户侧 versions/<release-id>，不能指向仓库 checkout，也不能手写 host registry。",
+          "note": "已通过 WorkBuddy app 内置 codebuddy CLI 的临时 CODEBUDDY_CONFIG_DIR 探针确认 add/install/list 流程。正式 installer 将校验 host CLI、传入对应配置目录，并在版本化 release 目录执行 marketplace 注册；不执行真实用户配置切换，直到 clean RC 产生。"
+        },
+        {
+          "q": "版本化 marketplace 升级时如何避免重复 hook？",
+          "answer": "每个 release 保留自己的不可变 marketplace 以支持回滚，但 host user scope 同时只能启用当前 release 的 ZAgenticOPN plugin；安装或 rollback 新 pair 成功后，通过官方 host CLI disable 其它 zagenticopn-release-* plugin，不卸载其 marketplace。",
+          "note": "directory marketplace 的 source path 必须保留用于回滚；只禁用旧 plugin 可避免重复 UserPromptSubmit hook，也不破坏已安装 release。doctor 要验证当前 plugin enabled 且 host CLI 可读。"
         }
       ],
       "notes": ""
@@ -1256,7 +1329,7 @@
   },
   "metadata": {
     "created": "2026-08-20 16:22:45",
-    "updated": "2026-08-29 11:45:11",
+    "updated": "2026-08-29 14:00:19",
     "md_file": "docs/plans/agent-self-service-collaboration-roadmap.md"
   }
 }
